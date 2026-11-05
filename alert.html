@@ -210,7 +210,7 @@
 
       const urlParams = new URLSearchParams(window.location.search);
       const CONFIG = {
-        participantID: urlParams.get('participantID') || '582063',
+        participantID: urlParams.get('participantID') || null,
         teamID: urlParams.get('teamID') || null,
         mode: (urlParams.get('mode') || 'participant').toLowerCase(),
         theme: (urlParams.get('theme') || 'clair').toLowerCase(),
@@ -219,7 +219,7 @@
         durationMs: (parseInt(urlParams.get('duration'), 10) || 6) * 1000,
         pollIntervalSeconds: parseInt(urlParams.get('refresh'), 10) || 15,
         defaultRate: parseFloat(urlParams.get('rate')) || 1.38,
-        isDemo: urlParams.get('demo') === '1' || urlParams.get('test') === '1',
+        isDemo: urlParams.get('demo') === '1' || urlParams.get('test') === '1' || !urlParams.get('participantID'),
       };
 
       const elements = {
@@ -233,8 +233,9 @@
         elements.wrapper.classList.add('theme-dark');
       }
 
-      // File d'attente des alertes pour ne jamais rater de don
+      // File d'attente des alertes et déduplication stricte
       const alertQueue = [];
+      const processedEventIds = new Set();
       let isPlaying = false;
       let lastSeenDonationId = null;
       let exchangeRate = CONFIG.defaultRate;
@@ -324,6 +325,16 @@
       }
 
       function queueDonation(donation) {
+        if (!donation) return;
+
+        // Déduplication : empêche les doubles déclenchements (ex: BroadcastChannel + localStorage simultanés)
+        const dedupKey = (donation.donationID || '') + '_' + (donation.amount || '') + '_' + (donation.displayName || '');
+        if (processedEventIds.has(dedupKey)) {
+          return;
+        }
+        processedEventIds.add(dedupKey);
+        setTimeout(() => processedEventIds.delete(dedupKey), 8000);
+
         alertQueue.push(donation);
         processQueue();
       }

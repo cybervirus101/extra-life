@@ -27,15 +27,15 @@
   }
 
   const CONFIG = {
-    participantID: urlParams.get('participantID') || '582063',
+    participantID: urlParams.get('participantID') || null,
     teamID: urlParams.get('teamID') || null,
-    mode: (urlParams.get('mode') || 'participant').toLowerCase(), // 'participant', 'team', 'alternance'
-    alternanceIntervalMs: (parseInt(urlParams.get('interval'), 10) || 12) * 1000,
+    mode: (urlParams.get('mode') || 'alternance').toLowerCase(), // 'alternance' (défaut), 'participant', 'team'
+    alternanceIntervalMs: (parseInt(urlParams.get('interval'), 10) || 20) * 1000, // 20 secondes par défaut
     showMilestones: urlParams.get('milestones') !== 'false' && urlParams.get('milestones') !== '0',
     forcedRate: parseFloat(urlParams.get('rate')) || null,
     forcedGoal: parseFloat(urlParams.get('goal')) || null,
     pollIntervalSeconds: parseInt(urlParams.get('refresh'), 10) || 15,
-    isDemo: urlParams.get('demo') === 'true' || urlParams.get('demo') === '1',
+    isDemo: urlParams.get('demo') === 'true' || urlParams.get('demo') === '1' || !urlParams.get('participantID'),
     theme: (urlParams.get('theme') || 'clair').toLowerCase(), // 'clair' (défaut) ou 'sombre'
     logoMode: (urlParams.get('logo') || 'auto').toLowerCase(), // 'auto', 'horizontal', 'vertical'
     layoutMode: (urlParams.get('layout') || 'auto').toLowerCase(), // 'auto', 'vertical', 'horizontal'
@@ -906,10 +906,17 @@
   // --------------------------------------------------------------------------
 
   function setupSimulatorListener() {
+    const processedSimIds = new Set();
+
     function handleTestDonation(eventData) {
       if (!eventData || eventData.type !== 'TEST_DONATION') return;
+      const dedupKey = (eventData.donationID || '') + '_' + (eventData.amount || '') + '_' + (eventData.displayName || '');
+      if (processedSimIds.has(dedupKey)) return;
+      processedSimIds.add(dedupKey);
+      setTimeout(() => processedSimIds.delete(dedupKey), 8000);
+
       const testItem = {
-        donationID: 'test_' + Date.now(),
+        donationID: eventData.donationID || ('test_' + Date.now()),
         displayName: resolveDonorDisplayName(eventData.displayName || 'Donateur Test Solaire'),
         amount: parseFloat(eventData.amount) || 25,
         message: eventData.message || 'Bravo pour votre stream au profit d\'Enfant Soleil ! ☀️',

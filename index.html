@@ -248,7 +248,7 @@
     /* Grille d'options */
     .options-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
       gap: 16px;
       margin-top: 14px;
     }
@@ -273,13 +273,53 @@
     .option-select {
       width: 100%;
       font-family: inherit;
-      font-size: 15px;
+      font-size: 14.5px;
       font-weight: 700;
-      padding: 8px 12px;
+      padding: 9px 12px;
       border-radius: 8px;
       border: 2px solid #DDD;
       background: #FAFAFA;
       color: var(--es-noir-velours);
+    }
+
+    /* Stepper d'incrément/décrément */
+    .stepper-group {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #FAFAFA;
+      border: 2px solid #DDD;
+      border-radius: 8px;
+      padding: 4px;
+    }
+
+    .btn-stepper {
+      background: var(--es-jaune-soleil);
+      color: var(--es-noir-velours);
+      border: none;
+      border-radius: 6px;
+      width: 38px;
+      height: 34px;
+      font-size: 20px;
+      font-weight: 900;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s ease;
+      user-select: none;
+    }
+
+    .btn-stepper:hover {
+      background: #e6bc00;
+      transform: scale(1.05);
+    }
+
+    .stepper-display {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--es-noir-velours);
+      text-align: center;
     }
 
     /* Liens OBS prêts */
@@ -288,39 +328,52 @@
       border: 2px solid var(--es-jaune-soleil);
       border-radius: 14px;
       padding: 18px;
-      margin-bottom: 14px;
+      margin-bottom: 18px;
     }
 
     .obs-card-header {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+      flex-direction: column;
+      gap: 4px;
       margin-bottom: 10px;
     }
 
-    .obs-card-header h4 {
+    .obs-card-title {
       font-size: 16px;
       font-weight: 800;
+      color: var(--es-noir-velours);
     }
 
-    .obs-dims {
-      font-size: 13px;
+    .obs-dims-badge {
+      display: inline-block;
+      font-size: 12.5px;
       font-weight: 700;
       color: var(--es-rouge-sante);
-      background: rgba(241, 80, 41, 0.1);
-      padding: 2px 8px;
+      background: rgba(241, 80, 41, 0.08);
+      border: 1px solid rgba(241, 80, 41, 0.2);
+      padding: 4px 10px;
       border-radius: 6px;
+      width: fit-content;
+      margin-top: 2px;
+    }
+
+    .obs-formats-detail {
+      font-size: 12px;
+      color: #666;
+      margin-top: 4px;
+      line-height: 1.4;
     }
 
     .url-row {
       display: flex;
       gap: 10px;
+      margin-top: 10px;
     }
 
     .url-input {
       flex: 1;
       font-family: monospace;
-      font-size: 14px;
+      font-size: 13.5px;
       padding: 10px 14px;
       border: 1px solid #CCC;
       border-radius: 10px;
@@ -382,17 +435,18 @@
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: 16px;
+      gap: 20px;
       margin-top: 14px;
       background: #FFFFFF;
-      padding: 16px;
+      padding: 18px;
       border-radius: 12px;
       border: 2px solid #E5E0D5;
     }
 
     .twitch-canvas {
-      border: 2px solid #DDD;
+      border: 1px solid #DDD;
       border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
       max-width: 100%;
       height: auto;
     }
@@ -439,11 +493,11 @@
         <span>Votre page Extra Life</span>
       </div>
       <p style="margin-bottom: 12px; font-size: 14px; color: #555;">
-        Entrez votre <strong>ID de participant</strong> (ex: <code>582063</code>) ou collez le lien direct de votre page Extra Life :
+        Entrez votre <strong>ID de participant</strong> ou collez le lien direct de votre page Extra Life :
       </p>
 
       <div class="input-group">
-        <input type="text" id="input-participant" class="input-field" placeholder="Ex: 582063 ou https://www.extra-life.org/participant/582063" value="582063">
+        <input type="text" id="input-participant" class="input-field" placeholder="Ex: 582063 ou https://www.extra-life.org/participant/582063" value="">
         <button id="btn-detect" class="btn btn-primary">🔍 Charger mes infos</button>
       </div>
 
@@ -451,15 +505,18 @@
       <div id="profile-card" class="profile-card">
         <img id="profile-avatar" class="profile-avatar" src="https://via.placeholder.com/60" alt="Avatar">
         <div class="profile-info">
-          <h3 id="profile-name">cybervirus_101</h3>
+          <h3 id="profile-name">Streamer</h3>
           <div class="profile-badges">
-            <span id="badge-total" class="badge badge-gold">Total : 89.41 $ USD</span>
-            <span id="badge-goal" class="badge">Objectif : 143 $ USD</span>
+            <span id="badge-total" class="badge badge-gold">Total : -- $ USD</span>
+            <span id="badge-goal" class="badge">Objectif : -- $ USD</span>
             <span id="badge-team" class="badge badge-red">Solo</span>
             <span id="badge-milestones" class="badge">0 jalon</span>
           </div>
         </div>
       </div>
+      <p id="prompt-notice" style="font-size: 13px; color: #777; margin-top: 8px;">
+        💡 <em>Entrez votre identifiant ci-dessus pour pré-remplir automatiquement tous vos liens personnalisés.</em>
+      </p>
     </section>
 
     <!-- Étape 2 : Options d'affichage -->
@@ -471,7 +528,7 @@
 
       <div class="options-grid">
         <div class="option-box">
-          <label for="select-mode">Mode de collecte</label>
+          <label for="select-mode">Mode d'affichage</label>
           <select id="select-mode" class="option-select">
             <option value="alternance" selected>☀️ Alternance douce (Solo + Équipe)</option>
             <option value="participant">Solo uniquement (Mon objectif)</option>
@@ -490,19 +547,20 @@
         <div class="option-box">
           <label for="select-layout">Disposition dans OBS</label>
           <select id="select-layout" class="option-select">
-            <option value="auto" selected>Automatique (selon taille OBS)</option>
-            <option value="horizontal">Bannière horizontale (Haut/Bas)</option>
+            <option value="auto" selected>Automatique (selon dimensions OBS)</option>
+            <option value="horizontal">Bannière horizontale (Haut / Bas)</option>
             <option value="vertical">Colonne latérale (Verticale)</option>
           </select>
         </div>
 
         <div class="option-box">
-          <label for="input-interval">Vitesse d'alternance</label>
-          <select id="input-interval" class="option-select">
-            <option value="12" selected>Toutes les 12 secondes</option>
-            <option value="15">Toutes les 15 secondes</option>
-            <option value="20">Toutes les 20 secondes</option>
-          </select>
+          <label>Vitesse d'alternance</label>
+          <div class="stepper-group">
+            <button type="button" class="btn-stepper" id="btn-interval-minus" title="Diminuer">−</button>
+            <div class="stepper-display"><span id="interval-display">20</span> sec</div>
+            <button type="button" class="btn-stepper" id="btn-interval-plus" title="Augmenter">+</button>
+          </div>
+          <input type="hidden" id="input-interval" value="20">
         </div>
       </div>
     </section>
@@ -520,8 +578,15 @@
       <!-- Source 1 : Overlay Barre -->
       <div class="obs-card">
         <div class="obs-card-header">
-          <h4>📊 1. Overlay Barre de progression & Dons récents</h4>
-          <span class="obs-dims">1920 x 140 px (ou 850 x 240 px)</span>
+          <h4 class="obs-card-title">📊 1. Overlay Barre de progression & Dons récents</h4>
+          <span class="obs-dims-badge">
+            📐 Limites : Min <strong>360 x 65 px</strong> | Max <strong>1920 x 150 px</strong>
+          </span>
+          <div class="obs-formats-detail">
+            • <strong>Bannière horizontale :</strong> 1050 à 1920 px (H: 135-150 px) — <em>Recommandé : 1920 x 140 px</em><br>
+            • <strong>Format 2 étages :</strong> 760 à 1050 px (H: 220-270 px) — <em>Recommandé : 850 x 240 px</em><br>
+            • <strong>Colonne latérale :</strong> 360 à 480 px (H: 550-800 px) — <em>Recommandé : 420 x 700 px</em>
+          </div>
         </div>
         <div class="url-row">
           <input type="text" id="url-overlay" class="url-input" readonly>
@@ -533,8 +598,13 @@
       <!-- Source 2 : Alertes -->
       <div class="obs-card">
         <div class="obs-card-header">
-          <h4>🔔 2. Alerte Pop-up de Don (Audio & Visuel)</h4>
-          <span class="obs-dims">800 x 400 px (Centré à l'écran)</span>
+          <h4 class="obs-card-title">🔔 2. Alerte Pop-up de Don (Audio & Visuel)</h4>
+          <span class="obs-dims-badge">
+            📐 Limites : Min <strong>500 x 250 px</strong> | Max <strong>1920 x 1080 px</strong> (Plein écran transparent)
+          </span>
+          <div class="obs-formats-detail">
+            • <em>Recommandé : 800 x 400 px centré sur votre scène</em> (avec case « Contrôler le son via OBS » cochée si désiré).
+          </div>
         </div>
         <div class="url-row">
           <input type="text" id="url-alert" class="url-input" readonly>
@@ -570,13 +640,13 @@
       </div>
 
       <!-- Option Image de bannière Twitch -->
-      <h4 style="font-size: 15px; margin-top: 24px; margin-bottom: 6px;">🎨 Option B : Image officielle de panneau Twitch (Format 320 px)</h4>
-      <p style="font-size: 13.5px; color: #555;">Pour ceux qui aiment avoir une image au-dessus de leur texte, voici la bannière officielle conforme :</p>
+      <h4 style="font-size: 15px; margin-top: 24px; margin-bottom: 6px;">🎨 Option B : Image officielle de panneau Twitch (320 x 120 px, proportions préservées)</h4>
+      <p style="font-size: 13.5px; color: #555;">Pour ceux qui préfèrent une image au-dessus de leur texte, voici la bannière officielle nette et non déformée :</p>
       
       <div class="twitch-banner-preview">
-        <canvas id="canvas-twitch" width="320" height="110" class="twitch-canvas"></canvas>
+        <canvas id="canvas-twitch" width="320" height="120" class="twitch-canvas"></canvas>
         <div>
-          <button id="btn-download-banner" class="btn btn-primary" onclick="downloadBanner()">📥 Télécharger l'image (320x110)</button>
+          <button id="btn-download-banner" class="btn btn-primary" onclick="downloadBanner()">📥 Télécharger l'image (320x120)</button>
           <p style="font-size: 12.5px; color: #666; margin-top: 8px;">
             Lien à mettre dans le champ <em>« L'image redirige vers »</em> :<br>
             <code id="twitch-redirect-link" style="font-weight: 700; color: var(--es-rouge-sante);">https://www.extra-life.org/participant/...</code>
@@ -585,17 +655,26 @@
       </div>
 
       <!-- Commandes de Bots -->
-      <h4 style="font-size: 15px; margin-top: 24px; margin-bottom: 6px;">🤖 Commandes de Chatbot prêtes à copier (Nightbot / StreamElements)</h4>
-      <div style="margin-top: 10px; display: flex; flex-direction: column; gap: 8px;">
-        <div style="display: flex; gap: 10px; align-items: center; background: #FFF; padding: 10px; border-radius: 8px; border: 1px solid #DDD;">
-          <code style="font-weight: 800; width: 80px;">!don</code>
+      <h4 style="font-size: 15px; margin-top: 24px; margin-bottom: 6px;">🤖 Commandes de Chatbot prêtes à copier</h4>
+      <p style="font-size: 13px; color: #666; margin-bottom: 10px;">
+        💡 <em>Note sur <code>$(user)</code> : cette variable insère automatiquement le nom du spectateur qui tape la commande. Elle fonctionne nativement sur <strong>Nightbot</strong>, <strong>StreamElements</strong>, <strong>Streamlabs Cloudbot</strong> et <strong>Wizebot</strong>.</em>
+      </p>
+
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <div style="display: flex; gap: 10px; align-items: center; background: #FFF; padding: 10px 14px; border-radius: 8px; border: 1px solid #DDD;">
+          <code style="font-weight: 800; width: 90px; color: var(--es-rouge-sante);">!don</code>
           <input type="text" id="cmd-don" class="url-input" readonly>
           <button class="btn btn-secondary" onclick="copyInput('cmd-don')">Copier</button>
         </div>
-        <div style="display: flex; gap: 10px; align-items: center; background: #FFF; padding: 10px; border-radius: 8px; border: 1px solid #DDD;">
-          <code style="font-weight: 800; width: 80px;">!soleil</code>
-          <input type="text" id="cmd-soleil" class="url-input" value="☀️ $(user) envoie un grand rayon de chaleur et d'ondes positives sur tout le chat pour Opération Enfant Soleil ! 🌻✨" readonly>
+        <div style="display: flex; gap: 10px; align-items: center; background: #FFF; padding: 10px 14px; border-radius: 8px; border: 1px solid #DDD;">
+          <code style="font-weight: 800; width: 90px; color: var(--es-rouge-sante);">!soleil</code>
+          <input type="text" id="cmd-soleil" class="url-input" value="☀️ $(user) envoie un grand rayon de chaleur et d'ondes positives sur tout le chat pour soutenir Opération Enfant Soleil ! 🌻✨" readonly>
           <button class="btn btn-secondary" onclick="copyInput('cmd-soleil')">Copier</button>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center; background: #FFF; padding: 10px 14px; border-radius: 8px; border: 1px solid #DDD;">
+          <code style="font-weight: 800; width: 90px; color: var(--es-rouge-sante);">!equipe</code>
+          <input type="text" id="cmd-equipe" class="url-input" readonly>
+          <button class="btn btn-secondary" onclick="copyInput('cmd-equipe')">Copier</button>
         </div>
       </div>
 
@@ -609,17 +688,7 @@
     (function () {
       'use strict';
 
-      let detectedParticipant = {
-        participantID: '582063',
-        displayName: 'cybervirus_101',
-        sumDonations: 89.41,
-        fundraisingGoal: 143.0,
-        avatarImageURL: '',
-        teamID: null,
-        teamName: null,
-        numMilestones: 0,
-        donateUrl: 'https://www.extra-life.org/participant/582063',
-      };
+      let detectedParticipant = null;
 
       const elements = {
         inputParticipant: document.getElementById('input-participant'),
@@ -631,10 +700,14 @@
         badgeGoal: document.getElementById('badge-goal'),
         badgeTeam: document.getElementById('badge-team'),
         badgeMilestones: document.getElementById('badge-milestones'),
+        promptNotice: document.getElementById('prompt-notice'),
         selectMode: document.getElementById('select-mode'),
         selectTheme: document.getElementById('select-theme'),
         selectLayout: document.getElementById('select-layout'),
-        selectInterval: document.getElementById('input-interval'),
+        inputInterval: document.getElementById('input-interval'),
+        intervalDisplay: document.getElementById('interval-display'),
+        btnIntervalMinus: document.getElementById('btn-interval-minus'),
+        btnIntervalPlus: document.getElementById('btn-interval-plus'),
         urlOverlay: document.getElementById('url-overlay'),
         urlAlert: document.getElementById('url-alert'),
         linkPreviewOverlay: document.getElementById('link-preview-overlay'),
@@ -643,9 +716,27 @@
         twitchMarkdown: document.getElementById('twitch-markdown'),
         twitchRedirectLink: document.getElementById('twitch-redirect-link'),
         cmdDon: document.getElementById('cmd-don'),
+        cmdEquipe: document.getElementById('cmd-equipe'),
         canvasTwitch: document.getElementById('canvas-twitch'),
         toast: document.getElementById('toast'),
       };
+
+      // Gestion des boutons incrémentaux pour l'intervalle d'alternance
+      let currentInterval = 20;
+      function setIntervalValue(val) {
+        currentInterval = Math.max(5, Math.min(60, val));
+        elements.inputInterval.value = currentInterval;
+        elements.intervalDisplay.textContent = currentInterval;
+        updateGeneratedUrls();
+      }
+
+      elements.btnIntervalMinus.addEventListener('click', () => {
+        setIntervalValue(currentInterval - 5);
+      });
+
+      elements.btnIntervalPlus.addEventListener('click', () => {
+        setIntervalValue(currentInterval + 5);
+      });
 
       // Extraction de l'ID à partir d'un nombre ou d'une URL
       function extractId(input) {
@@ -689,6 +780,7 @@
 
       // Détection automatique des infos du streamer
       async function detectStreamerInfo(id) {
+        if (!id) return;
         elements.btnDetect.disabled = true;
         elements.btnDetect.textContent = '⏳ Recherche...';
 
@@ -710,11 +802,11 @@
             renderProfile();
             showToast('Informations Extra Life chargées avec succès ! ☀️');
           } else {
-            showToast('Participant introuvable sur Extra Life');
+            showToast('Participant introuvable sur Extra Life (vérifiez l’ID)');
           }
         } catch (err) {
           console.warn('Erreur chargement participant:', err);
-          showToast('Impossible de contacter l’API Extra Life (vérifiez l’ID)');
+          showToast('Impossible de contacter l’API Extra Life');
         } finally {
           elements.btnDetect.disabled = false;
           elements.btnDetect.textContent = '🔍 Charger mes infos';
@@ -723,7 +815,15 @@
       }
 
       function renderProfile() {
+        if (!detectedParticipant) {
+          elements.profileCard.style.display = 'none';
+          if (elements.promptNotice) elements.promptNotice.style.display = 'block';
+          return;
+        }
+
         elements.profileCard.style.display = 'flex';
+        if (elements.promptNotice) elements.promptNotice.style.display = 'none';
+
         elements.profileName.textContent = detectedParticipant.displayName;
         elements.profileAvatar.src = detectedParticipant.avatarImageURL || 'https://via.placeholder.com/60/FAF7F0/252625?text=ES';
         elements.badgeTotal.textContent = `Total : ${detectedParticipant.sumDonations.toFixed(2)} $ USD`;
@@ -743,11 +843,11 @@
       // Mise à jour dynamique des URLs OBS
       function updateGeneratedUrls() {
         const baseUrl = window.location.origin + window.location.pathname.replace(/\/index\.html$/i, '').replace(/\/$/, '');
-        const id = detectedParticipant.participantID || '582063';
+        const id = detectedParticipant ? detectedParticipant.participantID : (extractId(elements.inputParticipant.value) || 'VOTRE_ID');
         const mode = elements.selectMode.value;
         const theme = elements.selectTheme.value;
         const layout = elements.selectLayout.value;
-        const interval = elements.selectInterval.value;
+        const interval = currentInterval;
 
         // URL Overlay
         const overlayParams = new URLSearchParams({
@@ -755,13 +855,13 @@
           mode: mode,
           theme: theme,
         });
-        if (detectedParticipant.teamID) {
+        if (detectedParticipant && detectedParticipant.teamID) {
           overlayParams.set('teamID', detectedParticipant.teamID);
         }
         if (layout !== 'auto') {
           overlayParams.set('layout', layout);
         }
-        if (mode === 'alternance') {
+        if (mode === 'alternance' && interval !== 20) {
           overlayParams.set('interval', interval);
         }
 
@@ -774,7 +874,7 @@
           participantID: id,
           theme: theme,
         });
-        if (mode === 'team' && detectedParticipant.teamID) {
+        if (mode === 'team' && detectedParticipant && detectedParticipant.teamID) {
           alertParams.set('mode', 'team');
           alertParams.set('teamID', detectedParticipant.teamID);
         }
@@ -783,7 +883,7 @@
         elements.urlAlert.value = alertFullUrl;
         elements.linkPreviewAlert.href = alertFullUrl;
 
-        // Mise à jour Panneau Markdown
+        // Liens Twitch
         const donateLink = `https://www.extra-life.org/participant/${id}`;
         elements.twitchRedirectLink.textContent = donateLink;
 
@@ -794,18 +894,23 @@ Durant ce live, nous amassons des dons pour soutenir le développement d'une pé
 💛 **Chaque don fait une différence directe :**
 👉 [CLIQUEZ ICI POUR FAIRE UN DON](${donateLink})
 
-*(Reçu fiscal officiel émis instantanément par courriel)*`;
+*(Reçu fiscal officiel canadien émis instantanément par courriel pour chaque don)*`;
 
         elements.twitchMarkdown.textContent = markdownText;
 
-        // Commande Bot !don
-        elements.cmdDon.value = `💛 Soutenez les enfants malades du Québec avec Opération Enfant Soleil ! Faites un don ici 👉 ${donateLink}`;
+        // Commandes Bots
+        elements.cmdDon.value = `💛 Soutenez les enfants malades du Québec avec Opération Enfant Soleil ! Don sécurisé avec reçu fiscal ici 👉 ${donateLink}`;
+        if (detectedParticipant && detectedParticipant.teamID) {
+          elements.cmdEquipe.value = `👥 Suivez et soutenez notre équipe Extra Life « ${detectedParticipant.teamName} » ici 👉 https://www.extra-life.org/team/${detectedParticipant.teamID}`;
+        } else {
+          elements.cmdEquipe.value = `👥 Découvrez notre campagne collective pour Opération Enfant Soleil ! Don ici 👉 ${donateLink}`;
+        }
 
-        // Redessiner la bannière Twitch 320x110
+        // Redessiner la bannière Twitch sans déformation
         drawTwitchBanner(theme);
       }
 
-      // Génération de la bannière Twitch 320x110 sur le Canvas
+      // Dessin de la bannière Twitch 320x120 avec respect strict des proportions du logo
       function drawTwitchBanner(theme) {
         const canvas = elements.canvasTwitch;
         const ctx = canvas.getContext('2d');
@@ -815,24 +920,40 @@ Durant ce live, nous amassons des dons pour soutenir le développement d'une pé
         ctx.fillStyle = isDark ? '#252625' : '#FAF7F0';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        // Bordure jaune soleil officielle
+        // Bordure Jaune Soleil
         ctx.strokeStyle = '#FFD000';
-        ctx.lineWidth = 6;
+        ctx.lineWidth = 5;
         ctx.strokeRect(0, 0, canvas.width, canvas.height);
 
-        // Logo ou Texte partenaire
+        // Chargement du logo officiel
         const img = new Image();
         img.src = 'assets/logo-enfant-soleil-horizontal.png';
         img.onload = function () {
-          // Fond blanc de sécurité pour le logo
+          // Encadré blanc de sécurité pour le logo (Zone de dégagement officielle)
           ctx.fillStyle = '#FFFFFF';
-          ctx.roundRect(20, 14, 280, 48, 8);
+          ctx.beginPath();
+          ctx.roundRect(14, 10, 292, 54, 8);
           ctx.fill();
 
-          // Dessin du logo centré
-          ctx.drawImage(img, 30, 18, 260, 40);
+          // Calcul des proportions sans aucune déformation
+          // Le logo horizontal fait 1024 x 433 (ratio ~2.365)
+          const naturalRatio = img.naturalWidth / img.naturalHeight;
+          const maxLogoW = 260;
+          const maxLogoH = 44;
 
-          // Texte d'action
+          let targetW = maxLogoW;
+          let targetH = targetW / naturalRatio;
+          if (targetH > maxLogoH) {
+            targetH = maxLogoH;
+            targetW = targetH * naturalRatio;
+          }
+
+          const posX = 14 + (292 - targetW) / 2;
+          const posY = 10 + (54 - targetH) / 2;
+
+          ctx.drawImage(img, posX, posY, targetW, targetH);
+
+          // Texte d'action clair et lisible
           ctx.fillStyle = isDark ? '#FFD000' : '#F15029';
           ctx.font = 'bold 15px Montserrat, sans-serif';
           ctx.textAlign = 'center';
@@ -840,7 +961,7 @@ Durant ce live, nous amassons des dons pour soutenir le développement d'une pé
 
           ctx.fillStyle = isDark ? '#FAF7F0' : '#252625';
           ctx.font = '600 11px Montserrat, sans-serif';
-          ctx.fillText('Cliquez ici pour soutenir les enfants malades', 160, 102);
+          ctx.fillText('Cliquez ici pour soutenir les enfants malades', 160, 106);
         };
       }
 
@@ -875,10 +996,12 @@ Durant ce live, nous amassons des dons pour soutenir le développement d'une pé
         });
       };
 
-      // Simulateur de don test
+      // Simulateur de don test sans déclenchement en double
       elements.btnTestDonation.addEventListener('click', () => {
+        const uniqueTestId = 'test_' + Date.now();
         const testPayload = {
           type: 'TEST_DONATION',
+          donationID: uniqueTestId,
           displayName: 'Donateur Test Solaire',
           amount: 25,
           message: 'Bravo pour votre live au profit d\'Enfant Soleil ! ☀️',
@@ -889,31 +1012,38 @@ Durant ce live, nous amassons des dons pour soutenir le développement d'une pé
             const bus = new BroadcastChannel('extra_life_overlay_bus');
             bus.postMessage(testPayload);
           } catch (e) {}
+        } else {
+          try {
+            localStorage.setItem('oes_test_donation_trigger', JSON.stringify({
+              ...testPayload,
+              _time: Date.now(),
+            }));
+          } catch (e) {}
         }
 
-        try {
-          localStorage.setItem('oes_test_donation_trigger', JSON.stringify({
-            ...testPayload,
-            _time: Date.now(),
-          }));
-        } catch (e) {}
-
-        showToast('Don test envoyé à l\'overlay et aux alertes ! 🚀');
+        showToast('Don test envoyé (alerte unique déclenchée) ! 🚀');
       });
 
       // Événements de changement
       elements.btnDetect.addEventListener('click', () => {
         const rawId = extractId(elements.inputParticipant.value);
-        if (rawId) detectStreamerInfo(rawId);
+        if (rawId) {
+          detectStreamerInfo(rawId);
+        } else {
+          showToast('Veuillez entrer un ID de participant ou lien Extra Life.');
+        }
+      });
+
+      elements.inputParticipant.addEventListener('input', () => {
+        updateGeneratedUrls();
       });
 
       elements.selectMode.addEventListener('change', updateGeneratedUrls);
       elements.selectTheme.addEventListener('change', updateGeneratedUrls);
       elements.selectLayout.addEventListener('change', updateGeneratedUrls);
-      elements.selectInterval.addEventListener('change', updateGeneratedUrls);
 
-      // Initialisation
-      detectStreamerInfo('582063');
+      // Initialisation avec champs neutres
+      updateGeneratedUrls();
     })();
   </script>
 </body>
