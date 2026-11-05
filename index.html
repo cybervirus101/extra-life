@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Générateur d'Overlay & Kit Streamer — Au profit d'Enfant Soleil</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --es-jaune-soleil: #FFD000;
+      --es-rouge-sante: #F15029;
+      --es-blanc-chaud: #FAF7F0;
+      --es-noir-velours: #252625;
+      --es-orange: #F5AC1C;
+      --es-corail: #EF6E63;
+      --font-main: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #F3EFE6;
+      color: var(--es-noir-velours);
+      font-family: var(--font-main);
+      line-height: 1.5;
+      padding: 30px 20px 80px 20px;
+    }
+
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    /* En-tête officiel */
+    .header {
+      background: var(--es-blanc-chaud);
+      border-radius: var(--radius);
+      border: 4px solid var(--es-jaune-soleil);
+      padding: 30px;
+      text-align: center;
+      margin-bottom: 30px;
+      box-shadow: 0 8px 30px rgba(37, 38, 37, 0.08);
+    }
+
+    .logo-wrapper {
+      display: inline-block;
+      background: #FFFFFF;
+      padding: 10px 24px;
+      border-radius: 12px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+    }
+
+    .logo-wrapper img {
+      height: 48px;
+      width: auto;
+      display: block;
+    }
+
+    .header h1 {
+      font-size: 26px;
+      font-weight: 900;
+      color: var(--es-noir-velours);
+      margin-bottom: 8px;
+    }
+
+    .header p {
+      font-size: 16px;
+      color: #555;
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    /* Cartes d'étapes */
+    .step-card {
+      background: var(--es-blanc-chaud);
+      border-radius: var(--radius);
+      border: 3px solid rgba(255, 208, 0, 0.5);
+      padding: 26px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 20px rgba(37, 38, 37, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    .step-card:hover {
+      border-color: var(--es-jaune-soleil);
+      box-shadow: 0 6px 24px rgba(255, 208, 0, 0.25);
+    }
+
+    .step-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--es-noir-velours);
+      margin-bottom: 16px;
+    }
+
+    .step-number {
+      background: var(--es-rouge-sante);
+      color: #FFFFFF;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+
+    /* Formulaire & Recherche */
+    .input-group {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .input-field {
+      flex: 1;
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 600;
+      padding: 12px 18px;
+      border: 2px solid #D8D2C5;
+      border-radius: 12px;
+      background: #FFFFFF;
+      color: var(--es-noir-velours);
+      transition: border 0.2s ease;
+    }
+
+    .input-field:focus {
+      outline: none;
+      border-color: var(--es-rouge-sante);
+    }
+
+    .btn {
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 800;
+      padding: 12px 22px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--es-rouge-sante);
+      color: #FFFFFF;
+      box-shadow: 0 4px 14px rgba(241, 80, 41, 0.35);
+    }
+
+    .btn-primary:hover {
+      background: #d63f19;
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: var(--es-jaune-soleil);
+      color: var(--es-noir-velours);
+      box-shadow: 0 4px 14px rgba(255, 208, 0, 0.35);
+    }
+
+    .btn-secondary:hover {
+      background: #e6bc00;
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--es-noir-velours);
+      color: var(--es-noir-velours);
+    }
+
+    .btn-outline:hover {
+      background: var(--es-noir-velours);
+      color: #FFFFFF;
+    }
+
+    /* Carte de profil détectée */
+    .profile-card {
+      display: none;
+      background: #FFFFFF;
+      border: 2px solid #E5E0D5;
+      border-radius: 14px;
+      padding: 16px;
+      margin-top: 16px;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .profile-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 3px solid var(--es-jaune-soleil);
+      object-fit: cover;
+    }
+
+    .profile-info h3 {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--es-noir-velours);
+    }
+
+    .profile-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: #EEE9DC;
+      color: #444;
+    }
+
+    .badge-gold {
+      background: var(--es-jaune-soleil);
+      color: var(--es-noir-velours);
+    }
+
+    .badge-red {
+      background: var(--es-rouge-sante);
+      color: #FFFFFF;
+    }
+
+    /* Grille d'options */
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-top: 14px;
+    }
+
+    .option-box {
+      background: #FFFFFF;
+      border: 2px solid #E5E0D5;
+      border-radius: 12px;
+      padding: 14px;
+    }
+
+    .option-box label {
+      display: block;
+      font-size: 13px;
+      font-weight: 800;
+      color: #666;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .option-select {
+      width: 100%;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 2px solid #DDD;
+      background: #FAFAFA;
+      color: var(--es-noir-velours);
+    }
+
+    /* Liens OBS prêts */
+    .obs-card {
+      background: #FFFFFF;
+      border: 2px solid var(--es-jaune-soleil);
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+
+    .obs-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .obs-card-header h4 {
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .obs-dims {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--es-rouge-sante);
+      background: rgba(241, 80, 41, 0.1);
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+
+    .url-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .url-input {
+      flex: 1;
+      font-family: monospace;
+      font-size: 14px;
+      padding: 10px 14px;
+      border: 1px solid #CCC;
+      border-radius: 10px;
+      background: #F9F9F9;
+      color: #333;
+    }
+
+    /* Simulateur */
+    .simulator-box {
+      background: rgba(255, 208, 0, 0.15);
+      border: 2px dashed var(--es-orange);
+      border-radius: 14px;
+      padding: 18px;
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .simulator-info {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--es-noir-velours);
+    }
+
+    .simulator-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    /* Bloc de code Markdown */
+    .code-block {
+      position: relative;
+      background: #252625;
+      color: #FAF7F0;
+      font-family: 'Consolas', monospace;
+      font-size: 13.5px;
+      padding: 18px;
+      border-radius: 12px;
+      white-space: pre-wrap;
+      word-break: break-word;
+      max-height: 250px;
+      overflow-y: auto;
+      margin-top: 10px;
+    }
+
+    .btn-copy-code {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 6px 14px;
+      font-size: 12px;
+    }
+
+    /* Aperçu de la bannière Twitch */
+    .twitch-banner-preview {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
+      margin-top: 14px;
+      background: #FFFFFF;
+      padding: 16px;
+      border-radius: 12px;
+      border: 2px solid #E5E0D5;
+    }
+
+    .twitch-canvas {
+      border: 2px solid #DDD;
+      border-radius: 8px;
+      max-width: 100%;
+      height: auto;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--es-noir-velours);
+      color: var(--es-jaune-soleil);
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 800;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      display: none;
+      z-index: 9999;
+      animation: toastIn 0.3s ease;
+    }
+
+    @keyframes toastIn {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- En-tête -->
+    <header class="header">
+      <div class="logo-wrapper">
+        <img src="assets/logo-enfant-soleil-horizontal.png" alt="Au profit de enfant soleil">
+      </div>
+      <h1>Kit Streamer Extra Life — Opération Enfant Soleil</h1>
+      <p>Configurez votre overlay OBS, vos alertes en direct et vos panneaux Twitch en 30 secondes sans aucune installation.</p>
+    </header>
+
+    <!-- Étape 1 : Saisie de l'ID Extra Life -->
+    <section class="step-card">
+      <div class="step-title">
+        <span class="step-number">1</span>
+        <span>Votre page Extra Life</span>
+      </div>
+      <p style="margin-bottom: 12px; font-size: 14px; color: #555;">
+        Entrez votre <strong>ID de participant</strong> (ex: <code>582063</code>) ou collez le lien direct de votre page Extra Life :
+      </p>
+
+      <div class="input-group">
+        <input type="text" id="input-participant" class="input-field" placeholder="Ex: 582063 ou https://www.extra-life.org/participant/582063" value="582063">
+        <button id="btn-detect" class="btn btn-primary">🔍 Charger mes infos</button>
+      </div>
+
+      <!-- Carte d'informations auto-détectées -->
+      <div id="profile-card" class="profile-card">
+        <img id="profile-avatar" class="profile-avatar" src="https://via.placeholder.com/60" alt="Avatar">
+        <div class="profile-info">
+          <h3 id="profile-name">cybervirus_101</h3>
+          <div class="profile-badges">
+            <span id="badge-total" class="badge badge-gold">Total : 89.41 $ USD</span>
+            <span id="badge-goal" class="badge">Objectif : 143 $ USD</span>
+            <span id="badge-team" class="badge badge-red">Solo</span>
+            <span id="badge-milestones" class="badge">0 jalon</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Étape 2 : Options d'affichage -->
+    <section class="step-card">
+      <div class="step-title">
+        <span class="step-number">2</span>
+        <span>Personnalisation de l'affichage</span>
+      </div>
+
+      <div class="options-grid">
+        <div class="option-box">
+          <label for="select-mode">Mode de collecte</label>
+          <select id="select-mode" class="option-select">
+            <option value="alternance" selected>☀️ Alternance douce (Solo + Équipe)</option>
+            <option value="participant">Solo uniquement (Mon objectif)</option>
+            <option value="team">Équipe uniquement (Cagnotte globale)</option>
+          </select>
+        </div>
+
+        <div class="option-box">
+          <label for="select-theme">Thème visuel officiel</label>
+          <select id="select-theme" class="option-select">
+            <option value="clair" selected>Blanc chaud (#FAF7F0)</option>
+            <option value="sombre">Noir velours (#252625)</option>
+          </select>
+        </div>
+
+        <div class="option-box">
+          <label for="select-layout">Disposition dans OBS</label>
+          <select id="select-layout" class="option-select">
+            <option value="auto" selected>Automatique (selon taille OBS)</option>
+            <option value="horizontal">Bannière horizontale (Haut/Bas)</option>
+            <option value="vertical">Colonne latérale (Verticale)</option>
+          </select>
+        </div>
+
+        <div class="option-box">
+          <label for="input-interval">Vitesse d'alternance</label>
+          <select id="input-interval" class="option-select">
+            <option value="12" selected>Toutes les 12 secondes</option>
+            <option value="15">Toutes les 15 secondes</option>
+            <option value="20">Toutes les 20 secondes</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- Étape 3 : Liens OBS Studio prêts à l'emploi -->
+    <section class="step-card">
+      <div class="step-title">
+        <span class="step-number">3</span>
+        <span>Vos liens pour OBS Studio / Streamlabs</span>
+      </div>
+      <p style="margin-bottom: 16px; font-size: 14px; color: #555;">
+        Dans OBS, ajoutez une <strong>Source Navigateur</strong> (Browser Source) et collez le lien :
+      </p>
+
+      <!-- Source 1 : Overlay Barre -->
+      <div class="obs-card">
+        <div class="obs-card-header">
+          <h4>📊 1. Overlay Barre de progression & Dons récents</h4>
+          <span class="obs-dims">1920 x 140 px (ou 850 x 240 px)</span>
+        </div>
+        <div class="url-row">
+          <input type="text" id="url-overlay" class="url-input" readonly>
+          <button class="btn btn-secondary" onclick="copyInput('url-overlay')">📋 Copier</button>
+          <a id="link-preview-overlay" href="#" target="_blank" class="btn btn-outline">👁️ Aperçu</a>
+        </div>
+      </div>
+
+      <!-- Source 2 : Alertes -->
+      <div class="obs-card">
+        <div class="obs-card-header">
+          <h4>🔔 2. Alerte Pop-up de Don (Audio & Visuel)</h4>
+          <span class="obs-dims">800 x 400 px (Centré à l'écran)</span>
+        </div>
+        <div class="url-row">
+          <input type="text" id="url-alert" class="url-input" readonly>
+          <button class="btn btn-secondary" onclick="copyInput('url-alert')">📋 Copier</button>
+          <a id="link-preview-alert" href="#" target="_blank" class="btn btn-outline">👁️ Aperçu</a>
+        </div>
+      </div>
+
+      <!-- Simulateur de test OBS -->
+      <div class="simulator-box">
+        <div class="simulator-info">
+          🧪 <strong>Simulateur de don en direct :</strong> Testez votre cadrage et le son dans OBS sans attendre un vrai don !
+        </div>
+        <div class="simulator-actions">
+          <button id="btn-test-donation" class="btn btn-primary">🚀 Envoyer un don test (25 $)</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Étape 4 : Kit Twitch (Liens & Panneaux) -->
+    <section class="step-card">
+      <div class="step-title">
+        <span class="step-number">4</span>
+        <span>Panneau Twitch & Commandes de Chatbot</span>
+      </div>
+
+      <!-- Option 100% Liens & Markdown -->
+      <h4 style="font-size: 15px; margin-bottom: 6px;">📝 Option A : Panneau Twitch 100% Texte & Liens (Sans téléchargement)</h4>
+      <p style="font-size: 13.5px; color: #555;">Collez ce texte directement dans un nouveau panneau sous votre stream :</p>
+      <div style="position: relative;">
+        <pre id="twitch-markdown" class="code-block"></pre>
+        <button class="btn btn-secondary btn-copy-code" onclick="copyTwitchMarkdown()">📋 Copier le Markdown</button>
+      </div>
+
+      <!-- Option Image de bannière Twitch -->
+      <h4 style="font-size: 15px; margin-top: 24px; margin-bottom: 6px;">🎨 Option B : Image officielle de panneau Twitch (Format 320 px)</h4>
+      <p style="font-size: 13.5px; color: #555;">Pour ceux qui aiment avoir une image au-dessus de leur texte, voici la bannière officielle conforme :</p>
+      
+      <div class="twitch-banner-preview">
+        <canvas id="canvas-twitch" width="320" height="110" class="twitch-canvas"></canvas>
+        <div>
+          <button id="btn-download-banner" class="btn btn-primary" onclick="downloadBanner()">📥 Télécharger l'image (320x110)</button>
+          <p style="font-size: 12.5px; color: #666; margin-top: 8px;">
+            Lien à mettre dans le champ <em>« L'image redirige vers »</em> :<br>
+            <code id="twitch-redirect-link" style="font-weight: 700; color: var(--es-rouge-sante);">https://www.extra-life.org/participant/...</code>
+          </p>
+        </div>
+      </div>
+
+      <!-- Commandes de Bots -->
+      <h4 style="font-size: 15px; margin-top: 24px; margin-bottom: 6px;">🤖 Commandes de Chatbot prêtes à copier (Nightbot / StreamElements)</h4>
+      <div style="margin-top: 10px; display: flex; flex-direction: column; gap: 8px;">
+        <div style="display: flex; gap: 10px; align-items: center; background: #FFF; padding: 10px; border-radius: 8px; border: 1px solid #DDD;">
+          <code style="font-weight: 800; width: 80px;">!don</code>
+          <input type="text" id="cmd-don" class="url-input" readonly>
+          <button class="btn btn-secondary" onclick="copyInput('cmd-don')">Copier</button>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center; background: #FFF; padding: 10px; border-radius: 8px; border: 1px solid #DDD;">
+          <code style="font-weight: 800; width: 80px;">!soleil</code>
+          <input type="text" id="cmd-soleil" class="url-input" value="☀️ $(user) envoie un grand rayon de chaleur et d'ondes positives sur tout le chat pour Opération Enfant Soleil ! 🌻✨" readonly>
+          <button class="btn btn-secondary" onclick="copyInput('cmd-soleil')">Copier</button>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div id="toast" class="toast">Texte copié dans le presse-papier ! ✨</div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      let detectedParticipant = {
+        participantID: '582063',
+        displayName: 'cybervirus_101',
+        sumDonations: 89.41,
+        fundraisingGoal: 143.0,
+        avatarImageURL: '',
+        teamID: null,
+        teamName: null,
+        numMilestones: 0,
+        donateUrl: 'https://www.extra-life.org/participant/582063',
+      };
+
+      const elements = {
+        inputParticipant: document.getElementById('input-participant'),
+        btnDetect: document.getElementById('btn-detect'),
+        profileCard: document.getElementById('profile-card'),
+        profileAvatar: document.getElementById('profile-avatar'),
+        profileName: document.getElementById('profile-name'),
+        badgeTotal: document.getElementById('badge-total'),
+        badgeGoal: document.getElementById('badge-goal'),
+        badgeTeam: document.getElementById('badge-team'),
+        badgeMilestones: document.getElementById('badge-milestones'),
+        selectMode: document.getElementById('select-mode'),
+        selectTheme: document.getElementById('select-theme'),
+        selectLayout: document.getElementById('select-layout'),
+        selectInterval: document.getElementById('input-interval'),
+        urlOverlay: document.getElementById('url-overlay'),
+        urlAlert: document.getElementById('url-alert'),
+        linkPreviewOverlay: document.getElementById('link-preview-overlay'),
+        linkPreviewAlert: document.getElementById('link-preview-alert'),
+        btnTestDonation: document.getElementById('btn-test-donation'),
+        twitchMarkdown: document.getElementById('twitch-markdown'),
+        twitchRedirectLink: document.getElementById('twitch-redirect-link'),
+        cmdDon: document.getElementById('cmd-don'),
+        canvasTwitch: document.getElementById('canvas-twitch'),
+        toast: document.getElementById('toast'),
+      };
+
+      // Extraction de l'ID à partir d'un nombre ou d'une URL
+      function extractId(input) {
+        if (!input) return '';
+        const trimmed = input.trim();
+        const match = trimmed.match(/(?:participantID=|\/participant\/)(\d+)/i) || trimmed.match(/^(\d+)$/);
+        return match ? match[1] : trimmed;
+      }
+
+      // Requête JSONP résiliente
+      function fetchJSONP(url) {
+        return new Promise((resolve, reject) => {
+          const cbName = 'cfg_cb_' + Math.random().toString(36).substring(2, 9);
+          const script = document.createElement('script');
+          const sep = url.includes('?') ? '&' : '?';
+          script.src = `${url}${sep}callback=${cbName}`;
+          const timer = setTimeout(() => {
+            cleanup();
+            reject(new Error('Timeout JSONP'));
+          }, 8000);
+          function cleanup() {
+            clearTimeout(timer);
+            delete window[cbName];
+            if (script.parentNode) script.remove();
+          }
+          window[cbName] = (data) => { cleanup(); resolve(data); };
+          script.onerror = () => { cleanup(); reject(new Error('Erreur JSONP')); };
+          document.head.appendChild(script);
+        });
+      }
+
+      async function fetchWithFallback(url) {
+        try {
+          const res = await fetch(url);
+          if (res.ok) return await res.json();
+          throw new Error('Fetch failed');
+        } catch {
+          return await fetchJSONP(url);
+        }
+      }
+
+      // Détection automatique des infos du streamer
+      async function detectStreamerInfo(id) {
+        elements.btnDetect.disabled = true;
+        elements.btnDetect.textContent = '⏳ Recherche...';
+
+        try {
+          const data = await fetchWithFallback(`https://dd.extra-life.org/api/participants/${id}`);
+          if (data && typeof data.fundraisingGoal !== 'undefined') {
+            detectedParticipant = {
+              participantID: id,
+              displayName: data.displayName || 'Streamer',
+              sumDonations: data.sumDonations || 0,
+              fundraisingGoal: data.fundraisingGoal || 1000,
+              avatarImageURL: data.avatarImageURL || '',
+              teamID: data.teamID || null,
+              teamName: data.teamName || null,
+              numMilestones: data.numMilestones || 0,
+              donateUrl: (data.links && data.links.donate) ? data.links.donate : `https://www.extra-life.org/participant/${id}`,
+            };
+
+            renderProfile();
+            showToast('Informations Extra Life chargées avec succès ! ☀️');
+          } else {
+            showToast('Participant introuvable sur Extra Life');
+          }
+        } catch (err) {
+          console.warn('Erreur chargement participant:', err);
+          showToast('Impossible de contacter l’API Extra Life (vérifiez l’ID)');
+        } finally {
+          elements.btnDetect.disabled = false;
+          elements.btnDetect.textContent = '🔍 Charger mes infos';
+          updateGeneratedUrls();
+        }
+      }
+
+      function renderProfile() {
+        elements.profileCard.style.display = 'flex';
+        elements.profileName.textContent = detectedParticipant.displayName;
+        elements.profileAvatar.src = detectedParticipant.avatarImageURL || 'https://via.placeholder.com/60/FAF7F0/252625?text=ES';
+        elements.badgeTotal.textContent = `Total : ${detectedParticipant.sumDonations.toFixed(2)} $ USD`;
+        elements.badgeGoal.textContent = `Objectif : ${detectedParticipant.fundraisingGoal.toFixed(0)} $ USD`;
+
+        if (detectedParticipant.teamID && detectedParticipant.teamName) {
+          elements.badgeTeam.textContent = `Équipe : ${detectedParticipant.teamName}`;
+          elements.badgeTeam.className = 'badge badge-gold';
+        } else {
+          elements.badgeTeam.textContent = 'Participant Solo';
+          elements.badgeTeam.className = 'badge';
+        }
+
+        elements.badgeMilestones.textContent = `${detectedParticipant.numMilestones} défi(s) / jalons`;
+      }
+
+      // Mise à jour dynamique des URLs OBS
+      function updateGeneratedUrls() {
+        const baseUrl = window.location.origin + window.location.pathname.replace(/\/index\.html$/i, '').replace(/\/$/, '');
+        const id = detectedParticipant.participantID || '582063';
+        const mode = elements.selectMode.value;
+        const theme = elements.selectTheme.value;
+        const layout = elements.selectLayout.value;
+        const interval = elements.selectInterval.value;
+
+        // URL Overlay
+        const overlayParams = new URLSearchParams({
+          participantID: id,
+          mode: mode,
+          theme: theme,
+        });
+        if (detectedParticipant.teamID) {
+          overlayParams.set('teamID', detectedParticipant.teamID);
+        }
+        if (layout !== 'auto') {
+          overlayParams.set('layout', layout);
+        }
+        if (mode === 'alternance') {
+          overlayParams.set('interval', interval);
+        }
+
+        const overlayFullUrl = `${baseUrl}/overlay.html?${overlayParams.toString()}`;
+        elements.urlOverlay.value = overlayFullUrl;
+        elements.linkPreviewOverlay.href = overlayFullUrl;
+
+        // URL Alertes
+        const alertParams = new URLSearchParams({
+          participantID: id,
+          theme: theme,
+        });
+        if (mode === 'team' && detectedParticipant.teamID) {
+          alertParams.set('mode', 'team');
+          alertParams.set('teamID', detectedParticipant.teamID);
+        }
+
+        const alertFullUrl = `${baseUrl}/alert.html?${alertParams.toString()}`;
+        elements.urlAlert.value = alertFullUrl;
+        elements.linkPreviewAlert.href = alertFullUrl;
+
+        // Mise à jour Panneau Markdown
+        const donateLink = `https://www.extra-life.org/participant/${id}`;
+        elements.twitchRedirectLink.textContent = donateLink;
+
+        const markdownText = `### ☀️ Au profit d'Opération Enfant Soleil (Extra Life)
+
+Durant ce live, nous amassons des dons pour soutenir le développement d'une pédiatrie de qualité et des soins adaptés pour tous les enfants malades du Québec.
+
+💛 **Chaque don fait une différence directe :**
+👉 [CLIQUEZ ICI POUR FAIRE UN DON](${donateLink})
+
+*(Reçu fiscal officiel émis instantanément par courriel)*`;
+
+        elements.twitchMarkdown.textContent = markdownText;
+
+        // Commande Bot !don
+        elements.cmdDon.value = `💛 Soutenez les enfants malades du Québec avec Opération Enfant Soleil ! Faites un don ici 👉 ${donateLink}`;
+
+        // Redessiner la bannière Twitch 320x110
+        drawTwitchBanner(theme);
+      }
+
+      // Génération de la bannière Twitch 320x110 sur le Canvas
+      function drawTwitchBanner(theme) {
+        const canvas = elements.canvasTwitch;
+        const ctx = canvas.getContext('2d');
+        const isDark = (theme === 'sombre');
+
+        // Fond
+        ctx.fillStyle = isDark ? '#252625' : '#FAF7F0';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Bordure jaune soleil officielle
+        ctx.strokeStyle = '#FFD000';
+        ctx.lineWidth = 6;
+        ctx.strokeRect(0, 0, canvas.width, canvas.height);
+
+        // Logo ou Texte partenaire
+        const img = new Image();
+        img.src = 'assets/logo-enfant-soleil-horizontal.png';
+        img.onload = function () {
+          // Fond blanc de sécurité pour le logo
+          ctx.fillStyle = '#FFFFFF';
+          ctx.roundRect(20, 14, 280, 48, 8);
+          ctx.fill();
+
+          // Dessin du logo centré
+          ctx.drawImage(img, 30, 18, 260, 40);
+
+          // Texte d'action
+          ctx.fillStyle = isDark ? '#FFD000' : '#F15029';
+          ctx.font = 'bold 15px Montserrat, sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText('💛 FAIRE UN DON EN DIRECT', 160, 88);
+
+          ctx.fillStyle = isDark ? '#FAF7F0' : '#252625';
+          ctx.font = '600 11px Montserrat, sans-serif';
+          ctx.fillText('Cliquez ici pour soutenir les enfants malades', 160, 102);
+        };
+      }
+
+      // Téléchargement de la bannière
+      window.downloadBanner = function () {
+        const link = document.createElement('a');
+        link.download = `panneau-twitch-enfant-soleil-${elements.selectTheme.value}.png`;
+        link.href = elements.canvasTwitch.toDataURL('image/png');
+        link.click();
+      };
+
+      // Toast de confirmation
+      function showToast(msg) {
+        elements.toast.textContent = msg;
+        elements.toast.style.display = 'block';
+        setTimeout(() => {
+          elements.toast.style.display = 'none';
+        }, 3000);
+      }
+
+      window.copyInput = function (inputId) {
+        const input = document.getElementById(inputId);
+        input.select();
+        navigator.clipboard.writeText(input.value).then(() => {
+          showToast('Copié dans le presse-papier ! 📋');
+        });
+      };
+
+      window.copyTwitchMarkdown = function () {
+        navigator.clipboard.writeText(elements.twitchMarkdown.textContent).then(() => {
+          showToast('Markdown copié pour Twitch ! 📋');
+        });
+      };
+
+      // Simulateur de don test
+      elements.btnTestDonation.addEventListener('click', () => {
+        const testPayload = {
+          type: 'TEST_DONATION',
+          displayName: 'Donateur Test Solaire',
+          amount: 25,
+          message: 'Bravo pour votre live au profit d\'Enfant Soleil ! ☀️',
+        };
+
+        if (typeof BroadcastChannel !== 'undefined') {
+          try {
+            const bus = new BroadcastChannel('extra_life_overlay_bus');
+            bus.postMessage(testPayload);
+          } catch (e) {}
+        }
+
+        try {
+          localStorage.setItem('oes_test_donation_trigger', JSON.stringify({
+            ...testPayload,
+            _time: Date.now(),
+          }));
+        } catch (e) {}
+
+        showToast('Don test envoyé à l\'overlay et aux alertes ! 🚀');
+      });
+
+      // Événements de changement
+      elements.btnDetect.addEventListener('click', () => {
+        const rawId = extractId(elements.inputParticipant.value);
+        if (rawId) detectStreamerInfo(rawId);
+      });
+
+      elements.selectMode.addEventListener('change', updateGeneratedUrls);
+      elements.selectTheme.addEventListener('change', updateGeneratedUrls);
+      elements.selectLayout.addEventListener('change', updateGeneratedUrls);
+      elements.selectInterval.addEventListener('change', updateGeneratedUrls);
+
+      // Initialisation
+      detectStreamerInfo('582063');
+    })();
+  </script>
+</body>
+</html>

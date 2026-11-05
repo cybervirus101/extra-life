@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alerte de Don - Au profit d'Enfant Soleil</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --es-jaune-soleil: #FFD000;
+      --es-rouge-sante: #F15029;
+      --es-blanc-chaud: #FAF7F0;
+      --es-noir-velours: #252625;
+      --es-orange: #F5AC1C;
+      --font-main: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: transparent;
+      font-family: var(--font-main);
+      overflow: hidden;
+      user-select: none;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Conteneur de l'alerte */
+    .alert-wrapper {
+      position: relative;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 640px;
+      width: 90%;
+      background: rgba(250, 247, 240, 0.98);
+      border: 5px solid var(--es-jaune-soleil);
+      border-radius: 24px;
+      padding: 24px 30px;
+      box-shadow: 0 10px 40px rgba(37, 38, 37, 0.35), 0 0 35px rgba(255, 208, 0, 0.6);
+      color: var(--es-noir-velours);
+      transform-origin: center;
+    }
+
+    .alert-wrapper.theme-dark {
+      background: var(--es-noir-velours);
+      color: var(--es-blanc-chaud);
+      border-color: var(--es-jaune-soleil);
+      box-shadow: 0 10px 45px rgba(0, 0, 0, 0.8), 0 0 35px rgba(255, 208, 0, 0.5);
+    }
+
+    /* Rayonnement solaire d'arrière-plan */
+    .sunburst-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 500px;
+      height: 500px;
+      margin-left: -250px;
+      margin-top: -250px;
+      background: radial-gradient(circle, rgba(255, 208, 0, 0.45) 0%, rgba(241, 80, 41, 0.15) 50%, transparent 70%);
+      border-radius: 50%;
+      z-index: -1;
+      pointer-events: none;
+      animation: spin 12s linear infinite;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* Logo partenaire avec zone de dégagement */
+    .logo-container {
+      background: var(--es-blanc-chaud);
+      border-radius: 12px;
+      padding: 6px 16px;
+      margin-bottom: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .alert-logo {
+      height: 38px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .alert-badge {
+      display: inline-block;
+      background: var(--es-rouge-sante);
+      color: #FFFFFF;
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 8px;
+      box-shadow: 0 2px 8px rgba(241, 80, 41, 0.4);
+    }
+
+    .donor-name {
+      font-size: 28px;
+      font-weight: 900;
+      line-height: 1.2;
+      color: var(--es-noir-velours);
+      margin-bottom: 4px;
+      word-break: break-word;
+    }
+
+    .theme-dark .donor-name {
+      color: #FFFFFF;
+    }
+
+    .donor-amount {
+      font-size: 38px;
+      font-weight: 900;
+      color: var(--es-rouge-sante);
+      line-height: 1.1;
+      margin-bottom: 12px;
+      text-shadow: 0 2px 10px rgba(241, 80, 41, 0.25);
+    }
+
+    .donor-message {
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 1.4;
+      background: rgba(255, 208, 0, 0.15);
+      border-left: 4px solid var(--es-jaune-soleil);
+      padding: 10px 16px;
+      border-radius: 0 10px 10px 0;
+      max-width: 100%;
+      word-break: break-word;
+      font-style: italic;
+    }
+
+    .theme-dark .donor-message {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--es-blanc-chaud);
+    }
+
+    /* Animations d'entrée / sortie */
+    .animate-pop-in {
+      animation: alertPopIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    .animate-pop-out {
+      animation: alertPopOut 0.5s ease-in forwards;
+    }
+
+    @keyframes alertPopIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.6) translateY(-40px);
+      }
+      70% {
+        opacity: 1;
+        transform: scale(1.05) translateY(5px);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    @keyframes alertPopOut {
+      0% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0.85) translateY(30px);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="alert-wrapper" class="alert-wrapper">
+    <div class="sunburst-glow"></div>
+
+    <div class="logo-container">
+      <img src="assets/logo-enfant-soleil-horizontal.png" alt="Au profit de enfant soleil" class="alert-logo">
+    </div>
+
+    <div class="alert-badge">☀️ Nouveau don reçu !</div>
+    <div id="donor-name" class="donor-name">Alexandre C.</div>
+    <div id="donor-amount" class="donor-amount">50 $ CAD</div>
+    <div id="donor-message" class="donor-message" style="display: none;"></div>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const CONFIG = {
+        participantID: urlParams.get('participantID') || '582063',
+        teamID: urlParams.get('teamID') || null,
+        mode: (urlParams.get('mode') || 'participant').toLowerCase(),
+        theme: (urlParams.get('theme') || 'clair').toLowerCase(),
+        sound: urlParams.get('sound') !== 'false' && urlParams.get('sound') !== '0',
+        volume: parseFloat(urlParams.get('volume')) || 0.7,
+        durationMs: (parseInt(urlParams.get('duration'), 10) || 6) * 1000,
+        pollIntervalSeconds: parseInt(urlParams.get('refresh'), 10) || 15,
+        defaultRate: parseFloat(urlParams.get('rate')) || 1.38,
+        isDemo: urlParams.get('demo') === '1' || urlParams.get('test') === '1',
+      };
+
+      const elements = {
+        wrapper: document.getElementById('alert-wrapper'),
+        donorName: document.getElementById('donor-name'),
+        donorAmount: document.getElementById('donor-amount'),
+        donorMessage: document.getElementById('donor-message'),
+      };
+
+      if (CONFIG.theme === 'sombre' || CONFIG.theme === 'dark') {
+        elements.wrapper.classList.add('theme-dark');
+      }
+
+      // File d'attente des alertes pour ne jamais rater de don
+      const alertQueue = [];
+      let isPlaying = false;
+      let lastSeenDonationId = null;
+      let exchangeRate = CONFIG.defaultRate;
+
+      // Web Audio API : Jingle carillon doux solaire
+      function playChime() {
+        if (!CONFIG.sound) return;
+        try {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (!AudioContext) return;
+          const ctx = new AudioContext();
+
+          // Notes harmonieuses de célébration (C5, E5, G5, C6)
+          const notes = [523.25, 659.25, 783.99, 1046.50];
+          notes.forEach((freq, index) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(freq, ctx.currentTime + index * 0.12);
+
+            const startTime = ctx.currentTime + index * 0.12;
+            const duration = 0.8;
+
+            gain.gain.setValueAtTime(0, startTime);
+            gain.gain.linearRampToValueAtTime(CONFIG.volume * 0.4, startTime + 0.03);
+            gain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
+
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+
+            osc.start(startTime);
+            osc.stop(startTime + duration);
+          });
+        } catch (e) {
+          console.warn('[Alerte Audio] Erreur:', e);
+        }
+      }
+
+      function showAlert(donation) {
+        if (!donation) return;
+
+        // Calcul CAD
+        const usd = Number(donation.amount) || 0;
+        let cad = usd * exchangeRate;
+        const rounded = Math.round(cad);
+        if (Math.abs(cad - rounded) <= 0.08) cad = rounded;
+
+        const cadFormatted = cad.toLocaleString('fr-CA', {
+          minimumFractionDigits: cad % 1 === 0 ? 0 : 2,
+          maximumFractionDigits: 2,
+        });
+
+        elements.donorName.textContent = donation.displayName || 'Donateur anonyme';
+        elements.donorAmount.textContent = `${cadFormatted} $ CAD`;
+
+        if (donation.message && donation.message.trim()) {
+          elements.donorMessage.textContent = `« ${donation.message.trim()} »`;
+          elements.donorMessage.style.display = 'block';
+        } else {
+          elements.donorMessage.style.display = 'none';
+        }
+
+        elements.wrapper.style.display = 'flex';
+        elements.wrapper.classList.remove('animate-pop-out');
+        elements.wrapper.classList.add('animate-pop-in');
+
+        playChime();
+
+        setTimeout(() => {
+          elements.wrapper.classList.remove('animate-pop-in');
+          elements.wrapper.classList.add('animate-pop-out');
+
+          setTimeout(() => {
+            elements.wrapper.style.display = 'none';
+            isPlaying = false;
+            processQueue();
+          }, 500);
+        }, CONFIG.durationMs);
+      }
+
+      function processQueue() {
+        if (isPlaying || alertQueue.length === 0) return;
+        isPlaying = true;
+        const next = alertQueue.shift();
+        showAlert(next);
+      }
+
+      function queueDonation(donation) {
+        alertQueue.push(donation);
+        processQueue();
+      }
+
+      // Écouteur pour tester depuis le configurateur
+      function setupSimulator() {
+        if (typeof BroadcastChannel !== 'undefined') {
+          try {
+            const bus = new BroadcastChannel('extra_life_overlay_bus');
+            bus.onmessage = (e) => {
+              if (e.data && e.data.type === 'TEST_DONATION') {
+                queueDonation({
+                  displayName: e.data.displayName || 'Testeur Solaire',
+                  amount: parseFloat(e.data.amount) || 25,
+                  message: e.data.message || 'Bravo pour votre live au profit d\'Enfant Soleil ! ☀️'
+                });
+              }
+            };
+          } catch (err) {}
+        }
+
+        window.addEventListener('storage', (e) => {
+          if (e.key === 'oes_test_donation_trigger' && e.newValue) {
+            try {
+              const data = JSON.parse(e.newValue);
+              if (data && data.type === 'TEST_DONATION') {
+                queueDonation({
+                  displayName: data.displayName || 'Testeur Solaire',
+                  amount: parseFloat(data.amount) || 25,
+                  message: data.message || 'Bravo pour votre live ! ☀️'
+                });
+              }
+            } catch (err) {}
+          }
+        });
+      }
+
+      // Requête JSONP résiliente
+      function fetchJSONP(url) {
+        return new Promise((resolve, reject) => {
+          const cbName = 'dd_alert_cb_' + Math.random().toString(36).substring(2, 9);
+          const script = document.createElement('script');
+          const sep = url.includes('?') ? '&' : '?';
+          script.src = `${url}${sep}callback=${cbName}`;
+          const timer = setTimeout(() => {
+            cleanup();
+            reject(new Error('JSONP Timeout'));
+          }, 10000);
+          function cleanup() {
+            clearTimeout(timer);
+            delete window[cbName];
+            if (script.parentNode) script.remove();
+          }
+          window[cbName] = (data) => { cleanup(); resolve(data); };
+          script.onerror = () => { cleanup(); reject(new Error('JSONP Error')); };
+          document.head.appendChild(script);
+        });
+      }
+
+      async function fetchWithFallback(url) {
+        const noCache = `${url}${url.includes('?') ? '&' : '?'}_t=${Date.now()}`;
+        try {
+          const res = await fetch(noCache, { cache: 'no-store' });
+          if (res.ok) return await res.json();
+          throw new Error('Fetch failed');
+        } catch {
+          return await fetchJSONP(noCache);
+        }
+      }
+
+      async function checkNewDonations() {
+        try {
+          const endpoint = (CONFIG.mode === 'team' && CONFIG.teamID)
+            ? `https://dd.extra-life.org/api/teams/${CONFIG.teamID}/donations?limit=10`
+            : `https://dd.extra-life.org/api/participants/${CONFIG.participantID}/donations?limit=10`;
+
+          const donations = await fetchWithFallback(endpoint);
+          if (Array.isArray(donations) && donations.length > 0) {
+            if (lastSeenDonationId === null) {
+              lastSeenDonationId = donations[0].donationID;
+            } else {
+              // Vérifie les nouveaux dons arrivés depuis
+              const newDons = [];
+              for (const d of donations) {
+                if (d.donationID === lastSeenDonationId) break;
+                newDons.push(d);
+              }
+              if (newDons.length > 0) {
+                lastSeenDonationId = donations[0].donationID;
+                // Déclencher les alertes dans l'ordre chronologique (du plus ancien au plus récent)
+                newDons.reverse().forEach(d => queueDonation(d));
+              }
+            }
+          }
+        } catch (e) {
+          console.warn('[Alertes] Échec récupération:', e.message);
+        }
+      }
+
+      // Initialisation
+      setupSimulator();
+      if (CONFIG.isDemo) {
+        setTimeout(() => {
+          queueDonation({
+            displayName: 'Alexandre G.',
+            amount: 50,
+            message: 'Bravo pour votre stream pour les enfants ! ☀️'
+          });
+        }, 1500);
+      } else {
+        checkNewDonations();
+        setInterval(checkNewDonations, CONFIG.pollIntervalSeconds * 1000);
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Overlay Extra Life - Au profit d'Enfant Soleil</title>
+  <link rel="stylesheet" href="style.css?v=2026.18">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <!-- Polices selon le guide de marque : Century Gothic / Tahoma / Arial -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Conteneur principal adaptatif pour OBS Studio -->
+  <main id="overlay-container" class="overlay-container theme-light">
+
+    <!-- 1. En-tête : Logo Officiel Partenaire « Au profit de enfant soleil » -->
+    <!-- Respect strict de la zone de dégagement (hauteur du « l ») et interdiction de déformation -->
+    <header class="branding-section" aria-label="Partenariat officiel Enfant Soleil">
+      <div class="logo-clear-zone">
+        <img 
+          id="brand-logo"
+          class="official-logo" 
+          src="assets/logo-enfant-soleil-horizontal.png" 
+          alt="Au profit de enfant soleil"
+          loading="eager"
+        >
+      </div>
+    </header>
+
+    <!-- 2. Barre de progression & Objectif de la campagne -->
+    <section class="progress-section" aria-label="Objectif de collecte">
+      <div class="progress-labels">
+        <div class="progress-raised">
+          <span id="label-raised-heading" class="label-heading">Total amassé</span>
+          <span id="amount-raised-text" class="amount-highlight">Chargement...</span>
+        </div>
+        <div id="milestone-badge" class="milestone-pill" style="display: none;">
+          <span class="milestone-icon">🎯</span>
+          <span id="milestone-text" class="milestone-text">Prochain jalon...</span>
+        </div>
+        <div class="progress-goal">
+          <span id="label-goal-heading" class="label-heading">Objectif</span>
+          <span id="amount-goal-text" class="amount-sub">...</span>
+        </div>
+      </div>
+
+      <div class="progress-track" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+        <div id="progress-bar-fill" class="progress-fill" style="width: 0%;">
+          <span class="progress-shine"></span>
+        </div>
+        <div id="progress-percent-container" class="progress-percent-pin" style="--progress-pct: 0%;">
+          <span id="progress-percent">0%</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 & 4. Bloc des boîtes proportionnelles : Dernier don & Dons récents -->
+    <div class="proportional-row">
+
+      <!-- Boîte Proportionnelle 1 : Dernier Don -->
+      <section class="info-box box-latest-donor" aria-label="Dernier donateur">
+        <div class="box-header">
+          <span class="box-tag">Dernier don</span>
+          <span id="latest-donor-time" class="box-meta">--</span>
+        </div>
+        <div class="box-body">
+          <div class="donor-line">
+            <span id="latest-donor-name" class="donor-name">En attente...</span>
+          </div>
+          <div class="amount-line">
+            <span id="latest-donor-amount" class="donor-amount">--</span>
+          </div>
+          <div id="latest-donor-message-line" class="message-line marquee-line" style="display: none;"></div>
+        </div>
+      </section>
+
+      <!-- Boîte Proportionnelle 2 : Dons Récents (Carrousel / Défilement) -->
+      <section class="info-box box-recent-feed" aria-label="Dons récents">
+        <div class="box-header">
+          <span class="box-tag">Dons récents</span>
+        </div>
+        <div class="box-body">
+          <div class="feed-carousel-container">
+            <div id="feed-slider" class="feed-slider">
+              <div class="feed-item active">
+                <div class="donor-line">
+                  <span class="feed-donor">Merci pour votre générosité !</span>
+                </div>
+                <div class="amount-line">
+                  <span class="feed-amount">Pour nos petits soleils</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+  </main>
+
+  <!-- Script DonorDrive & Conversion dynamique CAD/USD -->
+  <script src="script.js?v=2026.18"></script>
+</body>
+</html>

@@ -1,0 +1,1420 @@
+/* ==========================================================================
+   STYLE OVERLAY STREAMING - AU PROFIT D'ENFANT SOLEIL (EXTRA LIFE)
+   Guide de marque officiel Enfant Soleil (Février 2025)
+   ========================================================================== */
+
+:root {
+  /* --- PALETTE PRINCIPALE DU GUIDE DE MARQUE --- */
+  --es-jaune-soleil: #FFD000;      /* Pantone 109C / C0 M17 Y100 K0 */
+  --es-rouge-sante: #F15029;       /* Pantone 2028C / C0 M84 Y95 K0 */
+
+  /* --- PALETTE UTILITAIRE DU GUIDE DE MARQUE --- */
+  --es-blanc-chaud: #FAF7F0;       /* Pantone 9100C / C1 M2 Y4 K0 */
+  --es-noir-velours: #252625;      /* Pantone Black 7C / C71 M64 Y65 K70 */
+
+  /* --- PALETTE COMPLÉMENTAIRE DU GUIDE DE MARQUE --- */
+  --es-orange: #F5AC1C;           /* Pantone 130C */
+  --es-tangerine: #F58227;        /* Pantone 6019C */
+  --es-corail: #EF6E63;           /* Pantone 2346C */
+  --es-jaune-etoile: #F7EB24;     /* Pantone 102C */
+  --es-jaune-matin: #FAF39B;      /* Pantone 601C */
+
+  /* --- TYPOGRAPHIE OFFICIELLE & RECOMMANDÉE WEB --- */
+  /* Utilisation de Montserrat (Grotesk géométrique identique à ES Klarheit Grotesk du guide) pour une lisibilité maximale */
+  --font-heading: 'Montserrat', 'Century Gothic', -apple-system, BlinkMacSystemFont, Tahoma, sans-serif;
+  --font-body: 'Montserrat', -apple-system, BlinkMacSystemFont, Arial, 'Century Gothic', sans-serif;
+
+  /* Rayon de courbure & Ombres */
+  --radius-outer: 20px;
+  --radius-inner: 12px;
+  --box-shadow-soft: 0 6px 24px rgba(37, 38, 37, 0.18);
+}
+
+/* Reset pour Source Navigateur OBS */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: transparent;
+  color: var(--es-noir-velours);
+  font-family: var(--font-body);
+  overflow: hidden;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ==========================================================================
+   CONTENEUR PRINCIPAL (ADAPTATIF / RESPONSIVE)
+   ========================================================================== */
+
+.overlay-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(8px, 1vw, 12px);
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  border-radius: var(--radius-outer);
+  padding: 2px 8px; /* Marge à droite de 8px, exactement égale à celle entre les segments de dons */
+  min-height: 135px; /* Hauteur préservée sans grandir l'outil */
+  transition: all 0.3s ease;
+}
+
+/* --- THÈME 1 : BLANC CHAUD (RECOMMANDÉ SELON GUIDE DE MARQUE PAGE 19) --- */
+.overlay-container.theme-light {
+  background: rgba(250, 247, 240, 0.96); /* Blanc chaud adouci */
+  border: 5px solid var(--es-jaune-soleil); /* Tour de l'outil nettement épaissi */
+  box-shadow: 0 4px 24px rgba(37, 38, 37, 0.22), 0 0 20px rgba(255, 208, 0, 0.45);
+  color: var(--es-noir-velours);
+}
+
+/* --- THÈME 2 : NOIR VELOURS #252625 (100% OPAQUE SELON GUIDE DE MARQUE) --- */
+.overlay-container.theme-dark {
+  background: var(--es-noir-velours) !important; /* Noir velours #252625 opaque */
+  border: 5px solid var(--es-jaune-soleil); /* Tour de l'outil nettement épaissi */
+  box-shadow: 0 4px 28px rgba(0, 0, 0, 0.65), 0 0 20px rgba(255, 208, 0, 0.45);
+  color: var(--es-blanc-chaud);
+}
+
+.theme-dark .logo-clear-zone {
+  background: var(--es-blanc-chaud); /* Zone vierge blanc chaud selon Guide p.19-20 */
+  border-radius: 14px;
+  padding: 6px 14px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.theme-dark.layout-vertical .branding-section {
+  width: 100% !important;
+  margin: 2px 0 0 0 !important;
+}
+
+.theme-dark.layout-vertical .logo-clear-zone {
+  border-radius: 14px 14px 12px 12px !important;
+  padding: 8px 12px !important;
+}
+
+@media (max-width: 760px) {
+  .theme-dark .branding-section {
+    width: 100% !important;
+    margin: 2px 0 0 0 !important;
+  }
+  .theme-dark .logo-clear-zone {
+    border-radius: 14px 14px 12px 12px !important;
+    padding: 8px 12px !important;
+  }
+}
+
+/* ==========================================================================
+   1. BRANDING & LOGO OFFICIEL ENFANT SOLEIL
+   LOGO MAXIMISÉ DANS TOUS LES AFFICHAGES
+   Zone de dégagement obligatoire X (hauteur du « l ») selon Guide de marque p. 8
+   ========================================================================== */
+
+.branding-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  min-width: 0;
+  padding: 0 2px;
+  margin-right: 8px;
+}
+
+.logo-clear-zone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  padding: 0;
+  border: none;
+}
+
+.official-logo {
+  display: block;
+  width: auto;
+  height: 125px; /* LOGO MAXIMISÉ DANS LE FORMAT LARGE */
+  max-height: 135px;
+  max-width: 420px;
+  object-fit: contain;
+  filter: none !important;
+}
+
+/* ==========================================================================
+   2. SECTION BARRE DE PROGRESSION & OBJECTIF
+   Pourcentage intégré dans la jauge | Affichage exclusif en CAD
+   ========================================================================== */
+
+.progress-section {
+  flex: 1 1 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.progress-labels {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
+}
+
+.progress-raised, .progress-goal {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.progress-goal {
+  align-items: flex-end;
+  text-align: right;
+}
+
+.label-heading {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--es-noir-velours);
+  opacity: 0.95;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.theme-dark .label-heading {
+  color: var(--es-blanc-chaud);
+  opacity: 0.9;
+}
+
+.amount-highlight {
+  font-family: var(--font-heading);
+  font-size: clamp(20px, 1.7vw, 32px); /* MONTANT TOTAL AMASSÉ : Adaptatif pour ne jamais chevaucher en version étroite */
+  font-weight: 900;
+  color: var(--es-rouge-sante);
+  line-height: 1.15;
+  white-space: nowrap;
+}
+
+.amount-sub {
+  font-family: var(--font-heading);
+  font-size: clamp(16px, 1.35vw, 24px); /* Objectif grand et lisible sans déborder */
+  font-weight: 800;
+  color: var(--es-noir-velours);
+  line-height: 1.15;
+  white-space: nowrap;
+}
+
+.theme-dark .amount-sub {
+  color: var(--es-blanc-chaud);
+}
+
+.cur-cad {
+  font-weight: 900;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+/* La devise USD est retirée au profit du CAD unique */
+.cur-usd {
+  display: none !important;
+}
+
+/* Piste & Remplissage (Jaune soleil vers Tangerine) */
+.progress-track {
+  width: 100%;
+  height: 30px;
+  background: rgba(37, 38, 37, 0.12);
+  border: 2px solid rgba(37, 38, 37, 0.25);
+  border-radius: 15px;
+  overflow: visible; /* Permet à l'épingle sur le bout de la barre de dépasser sans coupure */
+  position: relative;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.theme-dark .progress-track {
+  background: #181918;
+  border: 2px solid rgba(255, 208, 0, 0.6);
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--es-jaune-soleil) 0%, var(--es-tangerine) 60%, var(--es-rouge-sante) 100%);
+  border-radius: 13px;
+  position: relative;
+  overflow: hidden;
+  transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 0 10px rgba(255, 208, 0, 0.5);
+}
+
+/* ÉPINGLE DU POURCENTAGE POSITIONNÉE EXACTEMENT SUR LE BOUT DE LA BARRE */
+.progress-percent-pin {
+  position: absolute;
+  top: 50%;
+  left: clamp(24px, var(--progress-pct, 0%), calc(100% - 24px));
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  pointer-events: none;
+  transition: left 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#progress-percent {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 900;
+  color: #FFFFFF;
+  background: var(--es-noir-velours);
+  border: 2.5px solid var(--es-jaune-soleil);
+  padding: 2px 10px;
+  border-radius: 12px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4), 0 0 8px rgba(255, 208, 0, 0.6);
+  line-height: 1.15;
+  white-space: nowrap;
+}
+
+.theme-dark #progress-percent {
+  background: #181918;
+  color: var(--es-jaune-soleil);
+  border-color: var(--es-jaune-soleil);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.7), 0 0 8px rgba(255, 208, 0, 0.7);
+}
+
+.progress-shine {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.5) 50%,
+    transparent 100%
+  );
+  animation: shine-sweep 3s infinite linear;
+}
+
+@keyframes shine-sweep {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+/* ==========================================================================
+   3 & 4. BOÎTES PROPORTIONNELLES : DERNIER DON & DONS RÉCENTS
+   Ruban de message défilant (Marquee), grand format, zéro chevauchement
+   ========================================================================== */
+
+.proportional-row {
+  display: flex;
+  flex: 2 1 440px;
+  gap: 8px;
+  align-items: stretch;
+  align-self: stretch; /* Occupe toute la hauteur pour donner de l'espace aux textes sans grandir l'outil */
+  min-width: 0;
+}
+
+.info-box {
+  /* Égalité stricte des deux boîtes (flex 1 1 0) */
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background: #FFFFFF;
+  border: 3px solid var(--es-jaune-soleil); /* Bordure de segment épaissie */
+  border-radius: var(--radius-inner);
+  padding: 3px 8px 3px 8px; /* Marge interne optimisée pour donner un maximum d'espace au message */
+  box-shadow: 0 3px 10px rgba(37, 38, 37, 0.08);
+  transition: all 0.2s ease;
+  min-height: 110px;
+  height: 100%;
+  box-sizing: border-box;
+  overflow: visible; /* Ne coupe jamais le texte verticalement */
+}
+
+.theme-dark .info-box {
+  background: #1e1f1e !important; /* Opaque sombre velours */
+  border-color: var(--es-jaune-soleil) !important;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.45) !important;
+}
+
+/* --- ANIMATION EN DIRECT LORS D'UN NOUVEAU DON --- */
+.box-latest-donor.has-new-donation {
+  animation: donation-pop-glow 1.4s ease-in-out 3;
+}
+
+@keyframes donation-pop-glow {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 3px 10px rgba(37, 38, 37, 0.08);
+    border-color: var(--es-jaune-soleil);
+  }
+  30% {
+    transform: scale(1.025);
+    box-shadow: 0 0 25px rgba(241, 80, 41, 0.5), 0 0 12px rgba(255, 208, 0, 0.7);
+    border-color: var(--es-rouge-sante);
+  }
+  70% {
+    transform: scale(1.01);
+    box-shadow: 0 0 15px rgba(255, 208, 0, 0.6);
+    border-color: var(--es-jaune-soleil);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 3px 10px rgba(37, 38, 37, 0.08);
+    border-color: var(--es-jaune-soleil);
+  }
+}
+
+.theme-dark .box-latest-donor.has-new-donation {
+  animation: donation-pop-glow-dark 1.4s ease-in-out 3;
+}
+
+@keyframes donation-pop-glow-dark {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.45);
+    border-color: var(--es-jaune-soleil);
+  }
+  30% {
+    transform: scale(1.025);
+    box-shadow: 0 0 30px rgba(255, 208, 0, 0.6), 0 0 15px rgba(241, 80, 41, 0.6);
+    border-color: var(--es-rouge-sante);
+  }
+  70% {
+    transform: scale(1.01);
+    box-shadow: 0 0 15px rgba(255, 208, 0, 0.5);
+    border-color: var(--es-jaune-soleil);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.45);
+    border-color: var(--es-jaune-soleil);
+  }
+}
+
+.theme-dark .box-header {
+  border-bottom: 2px dashed rgba(255, 208, 0, 0.5) !important;
+}
+
+.theme-dark .box-tag {
+  color: var(--es-jaune-soleil) !important;
+}
+
+.box-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2px;
+  border-bottom: 2px dashed rgba(241, 80, 41, 0.35);
+  padding-bottom: 2px;
+  flex-shrink: 0;
+  height: 22px;
+  gap: 4px;
+}
+
+.box-tag {
+  flex-shrink: 0;
+  font-family: var(--font-heading);
+  font-size: 17px; /* Titre maximisé et très percutant */
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--es-rouge-sante);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.box-meta {
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+  color: var(--es-noir-velours);
+  opacity: 0.85;
+  font-weight: 700;
+  line-height: 1;
+  text-align: right;
+}
+
+.theme-dark .box-meta {
+  color: var(--es-blanc-chaud);
+  opacity: 0.85;
+}
+
+.feed-pulse {
+  display: none !important;
+}
+
+.box-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex: 1 1 auto;
+  height: 100%;
+  min-height: 86px;
+  gap: 1px;
+  overflow: visible; /* Aucun rognage vertical des lignes */
+  width: 100%;
+  min-width: 0;
+}
+
+.donor-line {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  overflow-x: hidden;
+  overflow-y: visible;
+  text-overflow: ellipsis;
+  line-height: 1.15;
+  min-height: 25px;
+  width: 100%;
+}
+
+.donor-name, .feed-donor {
+  font-family: var(--font-heading);
+  font-size: 25.5px; /* Nom du donateur grand et maximisé */
+  font-weight: 900;
+  color: var(--es-noir-velours);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  line-height: 1.15;
+}
+
+.theme-dark .donor-name,
+.theme-dark .feed-donor {
+  color: var(--es-blanc-chaud);
+}
+
+.amount-line {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  overflow-x: hidden;
+  overflow-y: visible;
+  text-overflow: ellipsis;
+  line-height: 1.15;
+  min-height: 24px;
+  width: 100%;
+}
+
+.donor-amount, .feed-amount {
+  font-family: var(--font-heading);
+  font-size: 22.5px; /* Montant bien grand et percutant */
+  font-weight: 900;
+  color: var(--es-rouge-sante);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  line-height: 1.15;
+}
+
+/* Les devises dans les boîtes de dons restent en ligne (USD masqué) */
+.info-box .cur-cad {
+  font-weight: 900;
+  display: inline;
+}
+
+.info-box .cur-usd {
+  display: none !important;
+}
+
+/* --- RUBAN DE MESSAGE DÉFILANT (MARQUEE) GRAND FORMAT --- */
+.message-line {
+  flex: 0 0 auto;
+  width: 100%;
+  min-width: 0;
+  min-height: 24px;
+  overflow-x: hidden;
+  overflow-y: visible;
+  white-space: nowrap;
+  position: relative;
+  display: block;
+  margin-top: 1px;
+  line-height: 1.18;
+}
+
+.marquee-track {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  white-space: nowrap;
+  animation: marquee-scroll 20s linear infinite;
+  will-change: transform;
+}
+
+@keyframes marquee-scroll {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.feed-message {
+  font-size: 19.5px; /* Message grand et confortable sans déborder */
+  font-weight: 700;
+  font-style: italic;
+  color: var(--es-noir-velours);
+  opacity: 0.95;
+  display: inline-block;
+  white-space: nowrap;
+  line-height: 1.18;
+  vertical-align: middle;
+}
+
+/* Si le message loge dans la boîte, il reste fixe et statique */
+.feed-message.static-message {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  text-align: left;
+}
+
+.theme-dark .feed-message {
+  color: var(--es-blanc-chaud);
+  opacity: 0.95;
+}
+
+.marquee-bullet {
+  color: var(--es-rouge-sante);
+  font-size: 13px;
+  display: inline-block;
+  user-select: none;
+  line-height: 1;
+}
+
+/* Carrousel animé des dons récents */
+.feed-carousel-container {
+  overflow: visible;
+  width: 100%;
+  position: relative;
+  height: 100%;
+  min-height: 86px;
+  flex: 1 1 auto;
+}
+
+.feed-slider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 86px;
+}
+
+.feed-item {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: auto;
+  min-height: 86px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1px;
+  opacity: 0;
+  visibility: hidden; /* Empêche formellement tout texte inactif de se superposer */
+  transform: translateY(4px);
+  transition: opacity 0.35s ease, transform 0.35s ease, visibility 0.35s ease;
+  pointer-events: none;
+}
+
+.feed-item.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* ==========================================================================
+   ADAPTABILITÉ D'ÉCRAN (RESPONSIVE POUR OBS STUDIO)
+   ========================================================================== */
+
+/* ==========================================================================
+   ADAPTABILITÉ D'ÉCRAN (RESPONSIVE POUR OBS STUDIO)
+   ========================================================================== */
+
+/* Mode 2 étages de segments (Étage 1: Logo + Progression | Étage 2: Boîtes de dons) */
+@media (max-width: 1050px) and (min-width: 761px) {
+  .overlay-container:not(.layout-vertical) {
+    flex-wrap: wrap;
+    gap: 6px !important;
+    padding: 3px 8px 3px 8px !important;
+  }
+
+  /* Étage 1 : Logo MAXIMISÉ & Barre de progression côte-à-côte */
+  .overlay-container:not(.layout-vertical) .branding-section {
+    flex: 0 0 auto;
+    padding: 0;
+    margin-right: 8px !important;
+  }
+
+  .overlay-container:not(.layout-vertical) .official-logo {
+    height: 125px !important; /* Logo MAXIMISÉ en mode 2 étages */
+    max-height: 135px !important;
+    max-width: 400px !important;
+  }
+
+  .overlay-container:not(.layout-vertical) .progress-section {
+    flex: 1 1 380px;
+    min-width: 0;
+    gap: 4px !important;
+  }
+
+  .overlay-container:not(.layout-vertical) .progress-labels {
+    gap: 8px !important;
+    min-width: 0 !important;
+  }
+
+  .overlay-container:not(.layout-vertical) .progress-raised,
+  .overlay-container:not(.layout-vertical) .progress-goal {
+    min-width: 0 !important;
+    flex: 1 1 auto !important;
+  }
+
+  .overlay-container:not(.layout-vertical) .label-heading {
+    font-size: 16px !important;
+    font-weight: 800 !important;
+    white-space: nowrap !important;
+  }
+
+  .overlay-container:not(.layout-vertical) .amount-highlight {
+    font-size: 34px !important;
+    font-weight: 900 !important;
+    white-space: nowrap !important;
+  }
+
+  .overlay-container:not(.layout-vertical) .amount-sub {
+    font-size: 26px !important;
+    font-weight: 800 !important;
+    white-space: nowrap !important;
+  }
+
+  .overlay-container:not(.layout-vertical) .progress-track {
+    height: 30px !important;
+  }
+
+  /* Étage 2 : Boîtes de dons sur toute la largeur avec haute lisibilité */
+  .overlay-container:not(.layout-vertical) .proportional-row {
+    flex: 1 1 100%;
+    order: 3;
+    gap: 8px !important;
+    min-width: 0;
+    align-self: stretch !important;
+  }
+
+  .overlay-container:not(.layout-vertical) .info-box {
+    min-height: 110px !important;
+    height: auto !important;
+    padding: 3px 8px 3px 8px !important;
+    justify-content: flex-start !important;
+    overflow: visible !important; /* Aucun rognage vertical */
+  }
+
+  .overlay-container:not(.layout-vertical) .box-header {
+    height: 22px !important;
+    margin-bottom: 2px !important;
+    padding-bottom: 2px !important;
+    gap: 4px !important;
+  }
+
+  .overlay-container:not(.layout-vertical) .box-tag {
+    flex-shrink: 0 !important;
+    font-size: 17px !important;
+    font-weight: 900 !important;
+  }
+
+  .overlay-container:not(.layout-vertical) .box-meta {
+    flex: 0 1 auto !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    font-size: 14.5px !important;
+    font-weight: 700 !important;
+  }
+
+  .overlay-container:not(.layout-vertical) .box-body {
+    height: auto !important;
+    min-height: 86px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    gap: 1px !important;
+    overflow: visible !important;
+    width: 100% !important;
+  }
+
+  .overlay-container:not(.layout-vertical) .donor-line {
+    height: auto !important;
+    min-height: 25px !important;
+    line-height: 1.15 !important;
+    white-space: nowrap !important;
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
+    text-overflow: ellipsis !important;
+    padding: 0 !important;
+  }
+
+  .overlay-container:not(.layout-vertical) .amount-line {
+    height: auto !important;
+    min-height: 23px !important;
+    line-height: 1.15 !important;
+    white-space: nowrap !important;
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
+    text-overflow: ellipsis !important;
+    padding: 0 !important;
+  }
+
+  .overlay-container:not(.layout-vertical) .message-line {
+    height: auto !important;
+    min-height: 24px !important;
+    line-height: 1.18 !important;
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
+    white-space: nowrap !important;
+    position: relative !important;
+    margin-top: 1px !important;
+    padding: 0 !important;
+  }
+
+  .overlay-container:not(.layout-vertical) .donor-name,
+  .overlay-container:not(.layout-vertical) .feed-donor {
+    font-size: 25.5px !important;
+    font-weight: 900 !important;
+    line-height: 1.15 !important;
+  }
+
+  .overlay-container:not(.layout-vertical) .donor-amount,
+  .overlay-container:not(.layout-vertical) .feed-amount {
+    font-size: 22.5px !important;
+    font-weight: 900 !important;
+    line-height: 1.15 !important;
+  }
+
+  .overlay-container:not(.layout-vertical) .feed-message {
+    font-size: 19.5px !important;
+    font-weight: 700 !important;
+    font-style: italic !important;
+    line-height: 1.18 !important;
+  }
+
+  .overlay-container:not(.layout-vertical) .feed-carousel-container,
+  .overlay-container:not(.layout-vertical) .feed-slider {
+    height: auto !important;
+    min-height: 86px !important;
+    overflow: visible !important;
+  }
+
+  .overlay-container:not(.layout-vertical) .feed-item {
+    justify-content: flex-start !important;
+    min-height: 86px !important;
+    gap: 1px !important;
+  }
+}
+
+/* ==========================================================================
+   MODE VERTICAL / PORTRAIT (BOÎTIER OBS, COLONNE, FORMAT TRÈS ÉTROIT)
+   Logo maximisé sur toute la largeur des segments, hauteur libre.
+   ========================================================================== */
+
+/* 1. Déclenchement automatique (largeur <= 760px ou orientation portrait) */
+@media (max-width: 760px), (orientation: portrait) and (max-width: 960px) {
+  .overlay-container {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    padding: 0 8px 10px 8px !important; /* Marge uniforme de 8px exactement égale à l'espace entre segments */
+    gap: 10px !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: auto !important;
+    overflow: visible !important;
+  }
+
+  /* Segment 1 : Logo MAXIMISÉ à la largeur totale de l'outil (dégagement X intégré dans l'artboard) */
+  .branding-section {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    flex: 0 0 auto !important;
+    box-sizing: border-box !important;
+  }
+
+  .logo-clear-zone {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .official-logo {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: 420px !important; /* Logo MAXIMISÉ sans bridage */
+    object-fit: contain !important;
+    display: block !important;
+    box-sizing: border-box !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Segment 2 : Barre de progression & Objectif */
+  .progress-section {
+    width: 100% !important;
+    flex: 0 0 auto !important;
+    min-width: 0 !important;
+    gap: 4px !important;
+    padding-bottom: 2px !important;
+    overflow: visible !important;
+  }
+
+  .progress-labels {
+    width: 100% !important;
+    gap: 6px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: flex-end !important;
+    min-width: 0 !important;
+    margin-bottom: 2px !important;
+    overflow: visible !important;
+  }
+
+  .progress-labels .label-heading {
+    font-size: 15px !important;
+    font-weight: 800 !important;
+    line-height: 1.25 !important;
+    white-space: nowrap !important;
+  }
+
+  .progress-raised, .progress-goal {
+    min-width: 0 !important;
+    flex: 1 1 auto !important;
+    overflow: visible !important;
+  }
+
+  .amount-highlight .cur-cad {
+    font-size: 24px !important; /* Adapté pour tenir sans déborder dans le format étroit */
+    font-weight: 900 !important;
+    line-height: 1.25 !important;
+    white-space: nowrap !important;
+    padding: 0 !important;
+    display: block !important;
+  }
+
+  .amount-sub .cur-cad {
+    font-size: 18px !important;
+    font-weight: 800 !important;
+    line-height: 1.25 !important;
+    white-space: nowrap !important;
+    padding: 0 !important;
+    display: block !important;
+  }
+
+  .progress-track {
+    height: 30px !important;
+    border-radius: 15px !important;
+  }
+
+  /* Segment 3 : Les 2 boîtes de dons empilées */
+  .proportional-row {
+    display: flex !important;
+    flex-direction: column !important; /* Empilement vertical */
+    gap: 8px !important; /* Espacement de 8px identique aux marges de l'outil */
+    width: 100% !important;
+    min-width: 0 !important;
+    flex: 0 0 auto !important;
+    overflow: visible !important;
+  }
+
+  .info-box {
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    padding: 4px 8px 4px 8px !important; /* Marge interne optimisée pour donner de l'espace au texte */
+    height: auto !important;
+    min-height: 115px !important;
+    max-height: none !important;
+    justify-content: flex-start !important;
+    overflow: visible !important; /* Ne rogne jamais les textes */
+  }
+
+  .box-header {
+    height: 22px !important;
+    margin-bottom: 2px !important;
+    padding-bottom: 2px !important;
+    gap: 4px !important;
+  }
+
+  .box-tag {
+    flex-shrink: 0 !important;
+    font-size: 17px !important;
+    font-weight: 900 !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+  }
+
+  .box-meta {
+    flex: 0 1 auto !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    font-size: 14.5px !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+  }
+
+  .box-body {
+    height: auto !important;
+    min-height: 86px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    gap: 1px !important;
+    overflow: visible !important; /* Zéro coupure verticale */
+    width: 100% !important;
+  }
+
+  .donor-line {
+    height: auto !important;
+    min-height: 25px !important;
+    line-height: 1.15 !important;
+    white-space: nowrap !important;
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
+    text-overflow: ellipsis !important;
+    padding: 0 !important;
+    margin-bottom: 0px !important;
+  }
+
+  .amount-line {
+    height: auto !important;
+    min-height: 23px !important;
+    line-height: 1.15 !important;
+    white-space: nowrap !important;
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
+    text-overflow: ellipsis !important;
+    padding: 0 !important;
+    margin-bottom: 0px !important;
+  }
+
+  .message-line {
+    height: auto !important;
+    min-height: 24px !important;
+    line-height: 1.18 !important;
+    white-space: nowrap !important;
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
+    position: relative !important;
+    margin-top: 1px !important;
+    padding: 0 !important;
+    margin-bottom: 0px !important;
+  }
+
+  .donor-name, .feed-donor {
+    font-size: 25.5px !important;
+    font-weight: 900 !important;
+    line-height: 1.15 !important;
+  }
+
+  .donor-amount, .feed-amount {
+    font-size: 22.5px !important;
+    font-weight: 900 !important;
+    line-height: 1.15 !important;
+  }
+
+  .feed-message {
+    font-size: 19.5px !important;
+    font-weight: 700 !important;
+    font-style: italic !important;
+    line-height: 1.18 !important;
+  }
+
+  .info-box .cur-usd {
+    display: none !important;
+  }
+
+  .feed-carousel-container,
+  .feed-slider {
+    height: auto !important;
+    min-height: 86px !important;
+    overflow: visible !important;
+  }
+
+  .feed-item {
+    justify-content: flex-start !important;
+    min-height: 86px !important;
+    height: auto !important;
+    gap: 1px !important;
+  }
+}
+
+/* 2. Déclenchement explicite par classe JavaScript .layout-vertical */
+.overlay-container.layout-vertical {
+  flex-direction: column !important;
+  align-items: stretch !important;
+  padding: 0 8px 10px 8px !important; /* Marge uniforme de 8px */
+  gap: 10px !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  min-height: auto !important;
+  overflow: visible !important;
+}
+
+.overlay-container.layout-vertical .branding-section {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  flex: 0 0 auto !important;
+  box-sizing: border-box !important;
+}
+
+.overlay-container.layout-vertical .logo-clear-zone {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+}
+
+.overlay-container.layout-vertical .official-logo {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  max-height: 420px !important; /* Logo MAXIMISÉ */
+  object-fit: contain !important;
+  display: block !important;
+  box-sizing: border-box !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.overlay-container.layout-vertical .progress-section {
+  width: 100% !important;
+  flex: 0 0 auto !important;
+  min-width: 0 !important;
+  gap: 4px !important;
+  padding-bottom: 2px !important;
+  overflow: visible !important;
+}
+
+.overlay-container.layout-vertical .progress-labels {
+  width: 100% !important;
+  gap: 6px !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: flex-end !important;
+  min-width: 0 !important;
+  margin-bottom: 2px !important;
+  overflow: visible !important;
+}
+
+.overlay-container.layout-vertical .progress-labels .label-heading {
+  font-size: 15px !important;
+  font-weight: 800 !important;
+  line-height: 1.25 !important;
+  white-space: nowrap !important;
+}
+
+.overlay-container.layout-vertical .progress-raised,
+.overlay-container.layout-vertical .progress-goal {
+  min-width: 0 !important;
+  flex: 1 1 auto !important;
+  overflow: visible !important;
+}
+
+.overlay-container.layout-vertical .amount-highlight .cur-cad {
+  font-size: 24px !important;
+  font-weight: 900 !important;
+  line-height: 1.25 !important;
+  white-space: nowrap !important;
+  padding: 0 !important;
+  display: block !important;
+}
+
+.overlay-container.layout-vertical .amount-sub .cur-cad {
+  font-size: 18px !important;
+  font-weight: 800 !important;
+  line-height: 1.25 !important;
+  white-space: nowrap !important;
+  padding: 0 !important;
+  display: block !important;
+}
+  padding: 0 !important;
+  display: block !important;
+}
+
+.overlay-container.layout-vertical .progress-track {
+  height: 30px !important;
+  border-radius: 15px !important;
+}
+
+/* Empilement vertical des boîtes proportionnelles */
+.overlay-container.layout-vertical .proportional-row {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important; /* Espacement de 8px identique aux marges */
+  width: 100% !important;
+  min-width: 0 !important;
+  flex: 0 0 auto !important;
+  overflow: visible !important;
+}
+
+.overlay-container.layout-vertical .info-box {
+  width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+  padding: 4px 8px 4px 8px !important; /* Espacement intérieur compact pour donner de l'espace au texte */
+  height: auto !important;
+  min-height: 115px !important;
+  max-height: none !important;
+  justify-content: flex-start !important;
+  overflow: visible !important; /* Zéro coupure de texte */
+}
+
+.overlay-container.layout-vertical .box-header {
+  height: 22px !important;
+  margin-bottom: 2px !important;
+  padding-bottom: 2px !important;
+  gap: 4px !important;
+}
+
+.overlay-container.layout-vertical .box-tag {
+  flex-shrink: 0 !important;
+  font-size: 17px !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+
+.overlay-container.layout-vertical .box-meta {
+  flex: 0 1 auto !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  font-size: 14.5px !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+}
+
+.overlay-container.layout-vertical .box-body {
+  height: auto !important;
+  min-height: 86px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  gap: 1px !important;
+  overflow: visible !important;
+  width: 100% !important;
+}
+
+.overlay-container.layout-vertical .donor-line {
+  height: auto !important;
+  min-height: 25px !important;
+  line-height: 1.15 !important;
+  white-space: nowrap !important;
+  overflow-x: hidden !important;
+  overflow-y: visible !important;
+  text-overflow: ellipsis !important;
+  padding: 0 !important;
+  margin-bottom: 0px !important;
+}
+
+.overlay-container.layout-vertical .amount-line {
+  height: auto !important;
+  min-height: 23px !important;
+  line-height: 1.15 !important;
+  white-space: nowrap !important;
+  overflow-x: hidden !important;
+  overflow-y: visible !important;
+  text-overflow: ellipsis !important;
+  padding: 0 !important;
+  margin-bottom: 0px !important;
+}
+
+.overlay-container.layout-vertical .message-line {
+  height: auto !important;
+  min-height: 24px !important;
+  line-height: 1.18 !important;
+  white-space: nowrap !important;
+  overflow-x: hidden !important;
+  overflow-y: visible !important;
+  position: relative !important;
+  margin-top: 1px !important;
+  padding: 0 !important;
+  margin-bottom: 0px !important;
+}
+
+.overlay-container.layout-vertical .donor-name,
+.overlay-container.layout-vertical .feed-donor {
+  font-size: 25.5px !important;
+  font-weight: 900 !important;
+  line-height: 1.15 !important;
+}
+
+.overlay-container.layout-vertical .donor-amount,
+.overlay-container.layout-vertical .feed-amount {
+  font-size: 22.5px !important;
+  font-weight: 900 !important;
+  line-height: 1.15 !important;
+}
+
+.overlay-container.layout-vertical .feed-message {
+  font-size: 19.5px !important;
+  font-weight: 700 !important;
+  font-style: italic !important;
+  line-height: 1.18 !important;
+}
+
+.overlay-container.layout-vertical .info-box .cur-usd {
+  display: none !important;
+}
+
+.overlay-container.layout-vertical .feed-carousel-container,
+.overlay-container.layout-vertical .feed-slider {
+  height: auto !important;
+  min-height: 86px !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+.overlay-container.layout-vertical .feed-item {
+  justify-content: flex-start !important;
+  min-height: 86px !important;
+  height: auto !important;
+  gap: 1px !important;
+}
+
+/* Mode Bannière extra-mince (ex: 1920x70) */
+@media (max-height: 80px) and (min-width: 641px) {
+  .overlay-container {
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    padding: 3px 8px; /* Marge droite de 8px égale à l'espace entre les boîtes */
+  }
+
+  .official-logo {
+    height: 46px;
+  }
+
+  .progress-track {
+    height: 10px;
+  }
+
+  .info-box {
+    min-height: 50px;
+    padding: 3px 8px 4px 8px;
+  }
+
+  .feed-carousel-container {
+    height: auto;
+    min-height: 34px;
+  }
+
+  .donor-line, .amount-line, .message-line {
+    height: auto;
+    min-height: 12px;
+    line-height: 1.2;
+  }
+
+  .donor-name, .feed-donor {
+    font-size: 10.5px;
+    line-height: 1.2;
+  }
+
+  .donor-amount, .feed-amount {
+    font-size: 10px;
+    line-height: 1.2;
+  }
+
+  .feed-message {
+    font-size: 9px;
+    line-height: 1.2;
+  }
+}
+
+/* ==========================================================================
+   ANIMATIONS & JALONS (MILESTONES & ALTERNANCE DOUCE)
+   ========================================================================== */
+
+.milestone-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--es-jaune-soleil);
+  color: var(--es-noir-velours);
+  font-size: 12px;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 320px;
+  animation: milestone-pulse 3s infinite ease-in-out;
+  transition: all 0.3s ease;
+}
+
+.theme-dark .milestone-pill {
+  background: var(--es-jaune-soleil);
+  color: var(--es-noir-velours);
+  border: 1px solid var(--es-blanc-chaud);
+}
+
+@keyframes milestone-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+}
+
+.fade-transition {
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.fade-out {
+  opacity: 0 !important;
+  transform: translateY(-3px) !important;
+}
+
+.fade-in {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
