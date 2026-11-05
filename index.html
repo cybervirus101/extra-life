@@ -699,15 +699,6 @@
       <!-- Option Image de bannière Twitch -->
       <h4 style="font-size: 15px; margin-top: 24px; margin-bottom: 6px;">🎨 Option B : Image officielle de panneau Twitch</h4>
       <p style="font-size: 13.5px; color: #555;">Pour ceux qui préfèrent une image au-dessus de leur texte, voici la bannière officielle :</p>
-
-      <div style="display: flex; gap: 12px; margin-top: 10px; margin-bottom: 12px; flex-wrap: wrap;">
-        <label style="display: inline-flex; align-items: center; gap: 6px; font-weight: 700; font-size: 13px; cursor: pointer; background: #FFF; padding: 7px 14px; border-radius: 8px; border: 1.5px solid #DDD;">
-          <input type="radio" name="twitch-banner-style" value="classic" checked> 🏷️ Bannière classique (Appel aux dons)
-        </label>
-        <label style="display: inline-flex; align-items: center; gap: 6px; font-weight: 700; font-size: 13px; cursor: pointer; background: #FFF; padding: 7px 14px; border-radius: 8px; border: 1.5px solid #DDD;">
-          <input type="radio" name="twitch-banner-style" value="progress"> 📊 Bannière dynamique avec % accompli
-        </label>
-      </div>
       
       <div class="twitch-banner-preview">
         <canvas id="canvas-twitch" width="320" height="210" class="twitch-canvas"></canvas>
@@ -1037,19 +1028,18 @@ Durant ce live, nous amassons des dons pour soutenir le développement d'une pé
           elements.cmdEquipe.value = `👥 Découvrez notre campagne collective pour Opération Enfant Soleil ! Don ici 👉 ${donateLink}`;
         }
 
-        // Redessiner la bannière Twitch selon le style sélectionné
+        // Redessiner la bannière Twitch sans déformation
         drawTwitchBanner(theme);
       }
 
-      // Dessin de la bannière Twitch (Classique 320x210 ou Dynamique avec % 320x240)
+      // Dessin de la bannière Twitch 320x210 avec logo maximisé au maximum dans les normes
       function drawTwitchBanner(theme) {
         const canvas = elements.canvasTwitch;
         const ctx = canvas.getContext('2d');
         const isDark = (theme === 'sombre');
-        const style = document.querySelector('input[name="twitch-banner-style"]:checked')?.value || 'classic';
-        const isProgress = (style === 'progress');
 
-        canvas.height = isProgress ? 240 : 210;
+        canvas.width = 320;
+        canvas.height = 210;
 
         // Fond
         ctx.fillStyle = isDark ? '#252625' : '#FAF7F0';
@@ -1064,126 +1054,50 @@ Durant ce live, nous amassons des dons pour soutenir le développement d'une pé
         const img = new Image();
         img.src = 'assets/logo-enfant-soleil-horizontal.png';
         img.onload = function () {
-          if (isProgress) {
-            // Style B : Bannière dynamique avec progression et %
-            const boxX = 10;
-            const boxY = 10;
-            const boxW = 300;
-            const boxH = 100;
+          // Encadré blanc de sécurité pour le logo (Zone de dégagement officielle de marque)
+          const boxX = 10;
+          const boxY = 10;
+          const boxW = 300;
+          const boxH = 144;
 
-            ctx.fillStyle = '#FFFFFF';
-            ctx.beginPath();
-            ctx.roundRect(boxX, boxY, boxW, boxH, 10);
-            ctx.fill();
+          ctx.fillStyle = '#FFFFFF';
+          ctx.beginPath();
+          ctx.roundRect(boxX, boxY, boxW, boxH, 10);
+          ctx.fill();
 
-            const naturalRatio = img.naturalWidth / img.naturalHeight;
-            const maxLogoW = 265;
-            const maxLogoH = 80;
-            let targetW = maxLogoW;
-            let targetH = targetW / naturalRatio;
-            if (targetH > maxLogoH) {
-              targetH = maxLogoH;
-              targetW = targetH * naturalRatio;
-            }
-            const posX = boxX + (boxW - targetW) / 2;
-            const posY = boxY + (boxH - targetH) / 2;
-            ctx.drawImage(img, posX, posY, targetW, targetH);
+          // Calcul des proportions sans aucune déformation (ratio naturel 2.365)
+          const naturalRatio = img.naturalWidth / img.naturalHeight;
+          const maxLogoW = 274;
+          const maxLogoH = 118;
 
-            // Données de progression
-            const sum = detectedParticipant ? (Number(detectedParticipant.sumDonations) || 0) : 0;
-            const goal = detectedParticipant ? (Number(detectedParticipant.fundraisingGoal) || 1000) : 1000;
-            const pct = goal > 0 ? Math.round((sum / goal) * 100) : 0;
-
-            // Barre de progression
-            const barX = 16;
-            const barY = 122;
-            const barW = 288;
-            const barH = 22;
-
-            // Fond de la jauge
-            ctx.fillStyle = isDark ? 'rgba(255, 255, 255, 0.15)' : '#E8E2D5';
-            ctx.beginPath();
-            ctx.roundRect(barX, barY, barW, barH, 11);
-            ctx.fill();
-
-            // Remplissage avec dégradé solaire officiel
-            const fillRatio = Math.max(0, Math.min(1, pct / 100));
-            const fillW = Math.max(fillRatio > 0 ? 14 : 0, fillRatio * barW);
-            if (fillW > 0) {
-              const grad = ctx.createLinearGradient(barX, 0, barX + fillW, 0);
-              grad.addColorStop(0, '#FFD000');
-              grad.addColorStop(1, '#F15029');
-              ctx.fillStyle = grad;
-              ctx.beginPath();
-              ctx.roundRect(barX, barY, fillW, barH, 11);
-              ctx.fill();
-            }
-
-            // Statistique principale : %
-            ctx.fillStyle = isDark ? '#FFD000' : '#F15029';
-            ctx.font = '900 15px Montserrat, sans-serif';
-            ctx.textAlign = 'center';
-            ctx.fillText(`🔥 ${pct} % DE L'OBJECTIF ATTEINT !`, 160, 166);
-
-            // Montants récoltés / Objectif
-            ctx.fillStyle = isDark ? '#FAF7F0' : '#252625';
-            ctx.font = 'bold 13px Montserrat, sans-serif';
-            const sumStr = sum.toLocaleString('fr-CA', { maximumFractionDigits: 0 });
-            const goalStr = goal.toLocaleString('fr-CA', { maximumFractionDigits: 0 });
-            ctx.fillText(`${sumStr} $ / ${goalStr} $ USD`, 160, 188);
-
-            // Appel au don
-            ctx.fillStyle = isDark ? '#FFD000' : '#F15029';
-            ctx.font = 'bold 12px Montserrat, sans-serif';
-            ctx.fillText('💛 Cliquez ici pour faire grimper la jauge !', 160, 214);
-
-          } else {
-            // Style A : Bannière classique
-            const boxX = 10;
-            const boxY = 10;
-            const boxW = 300;
-            const boxH = 144;
-
-            ctx.fillStyle = '#FFFFFF';
-            ctx.beginPath();
-            ctx.roundRect(boxX, boxY, boxW, boxH, 10);
-            ctx.fill();
-
-            const naturalRatio = img.naturalWidth / img.naturalHeight;
-            const maxLogoW = 274;
-            const maxLogoH = 118;
-            let targetW = maxLogoW;
-            let targetH = targetW / naturalRatio;
-            if (targetH > maxLogoH) {
-              targetH = maxLogoH;
-              targetW = targetH * naturalRatio;
-            }
-            const posX = boxX + (boxW - targetW) / 2;
-            const posY = boxY + (boxH - targetH) / 2;
-            ctx.drawImage(img, posX, posY, targetW, targetH);
-
-            ctx.fillStyle = isDark ? '#FFD000' : '#F15029';
-            ctx.font = 'bold 15px Montserrat, sans-serif';
-            ctx.textAlign = 'center';
-            ctx.fillText('💛 FAIRE UN DON EN DIRECT', 160, 176);
-
-            ctx.fillStyle = isDark ? '#FAF7F0' : '#252625';
-            ctx.font = '600 11.5px Montserrat, sans-serif';
-            ctx.fillText('Cliquez ici pour soutenir les enfants malades', 160, 195);
+          let targetW = maxLogoW;
+          let targetH = targetW / naturalRatio;
+          if (targetH > maxLogoH) {
+            targetH = maxLogoH;
+            targetW = targetH * naturalRatio;
           }
+
+          const posX = boxX + (boxW - targetW) / 2;
+          const posY = boxY + (boxH - targetH) / 2;
+
+          ctx.drawImage(img, posX, posY, targetW, targetH);
+
+          // Texte d'action clair et lisible
+          ctx.fillStyle = isDark ? '#FFD000' : '#F15029';
+          ctx.font = 'bold 15px Montserrat, sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText('💛 FAIRE UN DON EN DIRECT', 160, 176);
+
+          ctx.fillStyle = isDark ? '#FAF7F0' : '#252625';
+          ctx.font = '600 11.5px Montserrat, sans-serif';
+          ctx.fillText('Cliquez ici pour soutenir les enfants malades', 160, 195);
         };
       }
 
       // Téléchargement de la bannière
       window.downloadBanner = function () {
-        const style = document.querySelector('input[name="twitch-banner-style"]:checked')?.value || 'classic';
-        const isProgress = (style === 'progress');
-        const pct = (detectedParticipant && detectedParticipant.fundraisingGoal > 0)
-          ? Math.round((detectedParticipant.sumDonations / detectedParticipant.fundraisingGoal) * 100)
-          : 0;
-        const nameSuffix = isProgress ? `progression-${pct}pct` : 'officiel';
         const link = document.createElement('a');
-        link.download = `panneau-twitch-enfant-soleil-${nameSuffix}-${elements.selectTheme.value}.png`;
+        link.download = `panneau-twitch-enfant-soleil-${elements.selectTheme.value}.png`;
         link.href = elements.canvasTwitch.toDataURL('image/png');
         link.click();
       };
@@ -1370,12 +1284,6 @@ Durant ce live, nous amassons des dons pour soutenir le développement d'une pé
       elements.selectLayout.addEventListener('change', () => {
         updateGeneratedUrls();
         updateOptionMemory();
-      });
-
-      document.querySelectorAll('input[name="twitch-banner-style"]').forEach(radio => {
-        radio.addEventListener('change', () => {
-          drawTwitchBanner(elements.selectTheme.value);
-        });
       });
 
       // Initialisation : restaure le profil s'il était déjà mémorisé, sinon initialise à vide
