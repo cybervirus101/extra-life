@@ -30,11 +30,11 @@
       color: var(--es-noir-velours);
       font-family: var(--font-main);
       line-height: 1.5;
-      padding: 30px 20px 80px 20px;
+      padding: 30px 24px 80px 24px;
     }
 
     .container {
-      max-width: 980px;
+      max-width: 1240px;
       margin: 0 auto;
     }
 
@@ -537,18 +537,17 @@
         </div>
 
         <div class="option-box">
-          <label for="select-theme">Thème visuel officiel</label>
+          <label for="select-theme">Thème visuel</label>
           <select id="select-theme" class="option-select">
-            <option value="clair" selected>Blanc chaud (#FAF7F0)</option>
-            <option value="sombre">Noir velours (#252625)</option>
+            <option value="clair" selected>Thème clair</option>
+            <option value="sombre">Thème sombre</option>
           </select>
         </div>
 
         <div class="option-box">
           <label for="select-layout">Disposition dans OBS</label>
           <select id="select-layout" class="option-select">
-            <option value="auto" selected>Automatique (selon dimensions OBS)</option>
-            <option value="horizontal">Bannière horizontale (Haut / Bas)</option>
+            <option value="horizontal" selected>Bannière horizontale (Haut / Bas)</option>
             <option value="two-tier">Format 2 étages (Moyen / Pause)</option>
             <option value="vertical">Colonne latérale (Verticale)</option>
           </select>
@@ -637,17 +636,17 @@
       <p style="font-size: 13.5px; color: #555;">Collez ce texte directement dans un nouveau panneau sous votre stream :</p>
       <div style="position: relative;">
         <pre id="twitch-markdown" class="code-block"></pre>
-        <button class="btn btn-secondary btn-copy-code" onclick="copyTwitchMarkdown()">📋 Copier le Markdown</button>
+        <button class="btn btn-secondary btn-copy-code" onclick="copyTwitchMarkdown()">📋 Copier</button>
       </div>
 
       <!-- Option Image de bannière Twitch -->
-      <h4 style="font-size: 15px; margin-top: 24px; margin-bottom: 6px;">🎨 Option B : Image officielle de panneau Twitch (320 x 120 px, proportions préservées)</h4>
+      <h4 style="font-size: 15px; margin-top: 24px; margin-bottom: 6px;">🎨 Option B : Image officielle de panneau Twitch (320 x 135 px, logo maximisé)</h4>
       <p style="font-size: 13.5px; color: #555;">Pour ceux qui préfèrent une image au-dessus de leur texte, voici la bannière officielle nette et non déformée :</p>
       
       <div class="twitch-banner-preview">
-        <canvas id="canvas-twitch" width="320" height="120" class="twitch-canvas"></canvas>
+        <canvas id="canvas-twitch" width="320" height="135" class="twitch-canvas"></canvas>
         <div>
-          <button id="btn-download-banner" class="btn btn-primary" onclick="downloadBanner()">📥 Télécharger l'image (320x120)</button>
+          <button id="btn-download-banner" class="btn btn-primary" onclick="downloadBanner()">📥 Télécharger l'image (320x135)</button>
           <p style="font-size: 12.5px; color: #666; margin-top: 8px;">
             Lien à mettre dans le champ <em>« L'image redirige vers »</em> :<br>
             <code id="twitch-redirect-link" style="font-weight: 700; color: var(--es-rouge-sante);">https://www.extra-life.org/participant/...</code>
@@ -658,7 +657,7 @@
       <!-- Commandes de Bots -->
       <h4 style="font-size: 15px; margin-top: 24px; margin-bottom: 6px;">🤖 Commandes de Chatbot prêtes à copier</h4>
       <p style="font-size: 13px; color: #666; margin-bottom: 10px;">
-        💡 <em>Note sur <code>$(user)</code> : cette variable insère automatiquement le nom du spectateur qui tape la commande. Elle fonctionne nativement sur <strong>Nightbot</strong>, <strong>StreamElements</strong>, <strong>Streamlabs Cloudbot</strong> et <strong>Wizebot</strong>.</em>
+        💡 <em>Note sur <code>$(user)</code> : cette variable insère automatiquement le nom du spectateur qui tape la commande. Elle fonctionne nativement sur <strong>Nightbot</strong>, <strong>StreamElements</strong>, <strong>Streamlabs Cloudbot</strong>, <strong>Wizebot</strong>, <strong>Firebot</strong> et <strong>Fossabot</strong>.</em>
       </p>
 
       <div style="display: flex; flex-direction: column; gap: 10px;">
@@ -741,12 +740,20 @@
         setIntervalValue(currentInterval + 5);
       });
 
-      // Extraction de l'ID à partir d'un nombre ou d'une URL
+      // Extraction intelligente de l'ID ou slug (supporte vanity URLs, liens Extra Life ou identifiant seul)
       function extractId(input) {
         if (!input) return '';
         const trimmed = input.trim();
-        const match = trimmed.match(/(?:participantID=|\/participant\/)(\d+)/i) || trimmed.match(/^(\d+)$/);
-        return match ? match[1] : trimmed;
+        // Cas 1 : URL avec paramètre ?participantID=582063
+        const idParam = trimmed.match(/participantID=(\d+)/i);
+        if (idParam) return idParam[1];
+        // Cas 2 : URL de type /participants/cybervirus_101 ou /participant/582063
+        const slugMatch = trimmed.match(/participants?\/([a-zA-Z0-9_\-]+)/i);
+        if (slugMatch) return slugMatch[1];
+        // Cas 3 : Identifiant numérique ou pseudo direct
+        const directMatch = trimmed.match(/^([a-zA-Z0-9_\-]+)$/);
+        if (directMatch) return directMatch[1];
+        return trimmed;
       }
 
       // Requête JSONP résiliente
@@ -781,17 +788,18 @@
         }
       }
 
-      // Détection automatique des infos du streamer
-      async function detectStreamerInfo(id) {
-        if (!id) return;
+      // Détection automatique des infos du streamer (ID numérique ou pseudo vanity)
+      async function detectStreamerInfo(idOrSlug) {
+        if (!idOrSlug) return;
         elements.btnDetect.disabled = true;
         elements.btnDetect.textContent = '⏳ Recherche...';
 
         try {
-          const data = await fetchWithFallback(`https://dd.extra-life.org/api/participants/${id}`);
+          const data = await fetchWithFallback(`https://dd.extra-life.org/api/participants/${idOrSlug}`);
           if (data && typeof data.fundraisingGoal !== 'undefined') {
+            const numericId = String(data.participantID || idOrSlug);
             detectedParticipant = {
-              participantID: id,
+              participantID: numericId,
               displayName: data.displayName || 'Streamer',
               sumDonations: data.sumDonations || 0,
               fundraisingGoal: data.fundraisingGoal || 1000,
@@ -799,13 +807,13 @@
               teamID: data.teamID || null,
               teamName: data.teamName || null,
               numMilestones: data.numMilestones || 0,
-              donateUrl: (data.links && data.links.donate) ? data.links.donate : `https://www.extra-life.org/participant/${id}`,
+              donateUrl: (data.links && data.links.donate) ? data.links.donate : `https://www.extra-life.org/participant/${numericId}`,
             };
 
             renderProfile();
             showToast('Informations Extra Life chargées avec succès ! ☀️');
           } else {
-            showToast('Participant introuvable sur Extra Life (vérifiez l’ID)');
+            showToast('Participant introuvable sur Extra Life (vérifiez le lien ou l’ID)');
           }
         } catch (err) {
           console.warn('Erreur chargement participant:', err);
@@ -933,7 +941,7 @@ Durant ce live, nous amassons des dons pour soutenir le développement d'une pé
         drawTwitchBanner(theme);
       }
 
-      // Dessin de la bannière Twitch 320x120 avec respect strict des proportions du logo
+      // Dessin de la bannière Twitch 320x135 avec logo maximisé et proportions strictes
       function drawTwitchBanner(theme) {
         const canvas = elements.canvasTwitch;
         const ctx = canvas.getContext('2d');
@@ -952,17 +960,21 @@ Durant ce live, nous amassons des dons pour soutenir le développement d'une pé
         const img = new Image();
         img.src = 'assets/logo-enfant-soleil-horizontal.png';
         img.onload = function () {
-          // Encadré blanc de sécurité pour le logo (Zone de dégagement officielle)
+          // Encadré blanc de sécurité pour le logo (Zone de dégagement officielle agrandie)
+          const boxX = 12;
+          const boxY = 10;
+          const boxW = 296;
+          const boxH = 74;
+
           ctx.fillStyle = '#FFFFFF';
           ctx.beginPath();
-          ctx.roundRect(14, 10, 292, 54, 8);
+          ctx.roundRect(boxX, boxY, boxW, boxH, 10);
           ctx.fill();
 
-          // Calcul des proportions sans aucune déformation
-          // Le logo horizontal fait 1024 x 433 (ratio ~2.365)
+          // Calcul des proportions sans aucune déformation (ratio naturel 2.365)
           const naturalRatio = img.naturalWidth / img.naturalHeight;
-          const maxLogoW = 260;
-          const maxLogoH = 44;
+          const maxLogoW = 270;
+          const maxLogoH = 64;
 
           let targetW = maxLogoW;
           let targetH = targetW / naturalRatio;
@@ -971,8 +983,8 @@ Durant ce live, nous amassons des dons pour soutenir le développement d'une pé
             targetW = targetH * naturalRatio;
           }
 
-          const posX = 14 + (292 - targetW) / 2;
-          const posY = 10 + (54 - targetH) / 2;
+          const posX = boxX + (boxW - targetW) / 2;
+          const posY = boxY + (boxH - targetH) / 2;
 
           ctx.drawImage(img, posX, posY, targetW, targetH);
 
@@ -980,11 +992,11 @@ Durant ce live, nous amassons des dons pour soutenir le développement d'une pé
           ctx.fillStyle = isDark ? '#FFD000' : '#F15029';
           ctx.font = 'bold 15px Montserrat, sans-serif';
           ctx.textAlign = 'center';
-          ctx.fillText('💛 FAIRE UN DON EN DIRECT', 160, 88);
+          ctx.fillText('💛 FAIRE UN DON EN DIRECT', 160, 105);
 
           ctx.fillStyle = isDark ? '#FAF7F0' : '#252625';
           ctx.font = '600 11px Montserrat, sans-serif';
-          ctx.fillText('Cliquez ici pour soutenir les enfants malades', 160, 106);
+          ctx.fillText('Cliquez ici pour soutenir les enfants malades', 160, 122);
         };
       }
 
