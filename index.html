@@ -549,6 +549,7 @@
           <select id="select-layout" class="option-select">
             <option value="auto" selected>Automatique (selon dimensions OBS)</option>
             <option value="horizontal">Bannière horizontale (Haut / Bas)</option>
+            <option value="two-tier">Format 2 étages (Moyen / Pause)</option>
             <option value="vertical">Colonne latérale (Verticale)</option>
           </select>
         </div>
@@ -579,10 +580,10 @@
       <div class="obs-card">
         <div class="obs-card-header">
           <h4 class="obs-card-title">📊 1. Overlay Barre de progression & Dons récents</h4>
-          <span class="obs-dims-badge">
+          <span id="obs-dims-badge" class="obs-dims-badge">
             📐 Limites : Min <strong>360 x 65 px</strong> | Max <strong>1920 x 150 px</strong>
           </span>
-          <div class="obs-formats-detail">
+          <div id="obs-formats-detail" class="obs-formats-detail">
             • <strong>Bannière horizontale :</strong> 1050 à 1920 px (H: 135-150 px) — <em>Recommandé : 1920 x 140 px</em><br>
             • <strong>Format 2 étages :</strong> 760 à 1050 px (H: 220-270 px) — <em>Recommandé : 850 x 240 px</em><br>
             • <strong>Colonne latérale :</strong> 360 à 480 px (H: 550-800 px) — <em>Recommandé : 420 x 700 px</em>
@@ -718,6 +719,8 @@
         cmdDon: document.getElementById('cmd-don'),
         cmdEquipe: document.getElementById('cmd-equipe'),
         canvasTwitch: document.getElementById('canvas-twitch'),
+        obsDimsBadge: document.getElementById('obs-dims-badge'),
+        obsFormatsDetail: document.getElementById('obs-formats-detail'),
         toast: document.getElementById('toast'),
       };
 
@@ -882,6 +885,26 @@
         const alertFullUrl = `${baseUrl}/alert.html?${alertParams.toString()}`;
         elements.urlAlert.value = alertFullUrl;
         elements.linkPreviewAlert.href = alertFullUrl;
+
+        // Mise à jour dynamique des recommandations d'affichage selon la disposition choisie
+        if (elements.obsDimsBadge && elements.obsFormatsDetail) {
+          if (layout === 'horizontal') {
+            elements.obsDimsBadge.innerHTML = '📐 Limites : Min <strong>1050 x 135 px</strong> | Max <strong>1920 x 150 px</strong>';
+            elements.obsFormatsDetail.innerHTML = '✨ <strong>Taille recommandée dans OBS : 1920 x 140 px</strong> (ou 1280 x 140 px)<br><em>Idéal pour placer en bandeau étendu en haut ou en bas de votre écran de jeu.</em>';
+          } else if (layout === 'two-tier') {
+            elements.obsDimsBadge.innerHTML = '📐 Limites : Min <strong>760 x 220 px</strong> | Max <strong>1050 x 270 px</strong>';
+            elements.obsFormatsDetail.innerHTML = '✨ <strong>Taille recommandée dans OBS : 850 x 240 px</strong><br><em>Idéal pour les scènes d\'attente/pause ou au-dessus d\'une webcam.</em>';
+          } else if (layout === 'vertical') {
+            elements.obsDimsBadge.innerHTML = '📐 Limites : Min <strong>360 x 550 px</strong> | Max <strong>480 x 800 px</strong>';
+            elements.obsFormatsDetail.innerHTML = '✨ <strong>Taille recommandée dans OBS : 420 x 700 px</strong><br><em>Idéal pour placer dans une barre latérale ou à côté de la webcam.</em>';
+          } else {
+            // Mode automatique
+            elements.obsDimsBadge.innerHTML = '📐 Limites : Min <strong>360 x 65 px</strong> | Max <strong>1920 x 150 px</strong>';
+            elements.obsFormatsDetail.innerHTML = '• <strong>Bannière horizontale :</strong> 1050 à 1920 px (H: 135-150 px) — <em>Recommandé : 1920 x 140 px</em><br>' +
+              '• <strong>Format 2 étages :</strong> 760 à 1050 px (H: 220-270 px) — <em>Recommandé : 850 x 240 px</em><br>' +
+              '• <strong>Colonne latérale :</strong> 360 à 480 px (H: 550-800 px) — <em>Recommandé : 420 x 700 px</em>';
+          }
+        }
 
         // Liens Twitch
         const donateLink = `https://www.extra-life.org/participant/${id}`;
