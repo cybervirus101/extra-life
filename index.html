@@ -655,20 +655,25 @@
             📐 Limites : Min <strong>500 x 250 px</strong> | Max <strong>1920 x 1080 px</strong> (Plein écran transparent)
           </span>
           <div class="obs-formats-detail">
-            ✨ <strong>Recommandé : 800 x 400 px centré sur votre scène</strong> (avec case « Contrôler le son via OBS » cochée si désiré)
+            ✨ <strong>Recommandé : 800 x 400 px centré sur votre scène</strong><br>
+            🔊 <strong>Son dans OBS :</strong> Laissez la case <em>« Contrôler le son via OBS »</em> <u>décochée</u> pour entendre le carillon directement dans vos écouteurs. (Si vous la cochez, assurez-vous d'activer <em>« Monitoring audio »</em> dans les propriétés audio avancées du mixeur OBS).
           </div>
         </div>
-        <div class="url-row">
+        <div class="url-row" style="flex-wrap: wrap;">
           <input type="text" id="url-alert" class="url-input" readonly>
           <button class="btn btn-secondary" onclick="copyInput('url-alert')">📋 Copier</button>
+          <button type="button" class="btn btn-outline" id="btn-copy-test-alert" title="Copier un lien qui déclenche automatiquement un test à l'ouverture dans OBS">🧪 Lien TEST OBS</button>
           <a id="link-preview-alert" href="#" target="_blank" class="btn btn-outline">👁️ Aperçu</a>
         </div>
       </div>
 
       <!-- Simulateur de test OBS -->
       <div class="simulator-box">
-        <div class="simulator-info">
-          🧪 <strong>Simulateur de don en direct :</strong> Testez votre cadrage et le son dans OBS sans attendre un vrai don !
+        <div class="simulator-info" style="flex: 1 1 360px;">
+          🧪 <strong>Simulateur de don en direct :</strong> Testez votre cadrage et le carillon sonore instantanément dans votre navigateur ET dans OBS Studio !<br>
+          <span style="font-size: 12.5px; font-weight: 500; color: #555;">
+            💡 <em>Dans OBS : vous pouvez aussi faire un <strong>clic droit sur la source &gt; Interagir</strong> et cliquer dans la fenêtre pour tester le son à tout moment.</em>
+          </span>
         </div>
         <div class="simulator-actions">
           <button id="btn-test-donation" class="btn btn-primary">🚀 Envoyer un don test (25 $)</button>
@@ -763,6 +768,7 @@
         btnIntervalPlus: document.getElementById('btn-interval-plus'),
         urlOverlay: document.getElementById('url-overlay'),
         urlAlert: document.getElementById('url-alert'),
+        btnCopyTestAlert: document.getElementById('btn-copy-test-alert'),
         linkPreviewOverlay: document.getElementById('link-preview-overlay'),
         linkPreviewAlert: document.getElementById('link-preview-alert'),
         btnTestDonation: document.getElementById('btn-test-donation'),
@@ -963,6 +969,15 @@
         elements.urlAlert.value = alertFullUrl;
         elements.linkPreviewAlert.href = alertFullUrl;
 
+        if (elements.btnCopyTestAlert) {
+          elements.btnCopyTestAlert.onclick = () => {
+            const testUrl = `${alertFullUrl}&test=1`;
+            navigator.clipboard.writeText(testUrl).then(() => {
+              showToast('Lien de TEST copié ! Il s\'animera dès l\'ouverture dans OBS. 🧪');
+            });
+          };
+        }
+
         // Mise à jour dynamique des recommandations d'affichage selon la disposition choisie
         if (elements.obsDimsBadge && elements.obsFormatsDetail) {
           if (layout === 'horizontal') {
@@ -1111,21 +1126,34 @@ Durant ce live, nous amassons des dons pour soutenir le développement d'une pé
           message: 'Bravo pour votre live au profit d\'Enfant Soleil ! ☀️',
         };
 
+        // 1. BroadcastChannel local (pour l'onglet d'aperçu dans le même navigateur)
         if (typeof BroadcastChannel !== 'undefined') {
           try {
             const bus = new BroadcastChannel('extra_life_overlay_bus');
             bus.postMessage(testPayload);
           } catch (e) {}
-        } else {
-          try {
-            localStorage.setItem('oes_test_donation_trigger', JSON.stringify({
-              ...testPayload,
-              _time: Date.now(),
-            }));
-          } catch (e) {}
         }
 
-        showToast('Don test envoyé (alerte unique déclenchée) ! 🚀');
+        // 2. LocalStorage (pour les fenêtres locales)
+        try {
+          localStorage.setItem('oes_test_donation_trigger', JSON.stringify({
+            ...testPayload,
+            _time: Date.now(),
+          }));
+        } catch (e) {}
+
+        // 3. Pont temps réel direct vers OBS Studio via SSE ntfy.sh
+        const targetId = detectedParticipant ? detectedParticipant.participantID : (extractId(elements.inputParticipant.value) || 'VOTRE_ID');
+        if (targetId && targetId !== 'VOTRE_ID') {
+          const cleanId = String(targetId).replace(/[^a-zA-Z0-9_-]/g, '');
+          fetch(`https://ntfy.sh/oes_alert_${cleanId}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(testPayload),
+          }).catch(() => {});
+        }
+
+        showToast('Don test envoyé en direct vers OBS et votre aperçu ! 🚀');
       });
 
       // Sauvegarde et gestion de la mémoire locale du streamer

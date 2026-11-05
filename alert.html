@@ -244,12 +244,29 @@
       let exchangeRate = CONFIG.defaultRate;
 
       // Web Audio API : Jingle carillon doux solaire
+      let audioCtx = null;
+      function getAudioContext() {
+        try {
+          if (!audioCtx) {
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            if (AudioContext) {
+              audioCtx = new AudioContext();
+            }
+          }
+          if (audioCtx && audioCtx.state === 'suspended') {
+            audioCtx.resume();
+          }
+        } catch (e) {
+          console.warn('[AudioContext] Initialisation:', e);
+        }
+        return audioCtx;
+      }
+
       function playChime() {
         if (!CONFIG.sound) return;
         try {
-          const AudioContext = window.AudioContext || window.webkitAudioContext;
-          if (!AudioContext) return;
-          const ctx = new AudioContext();
+          const ctx = getAudioContext();
+          if (!ctx) return;
 
           // Notes harmonieuses de célébration (C5, E5, G5, C6)
           const notes = [523.25, 659.25, 783.99, 1046.50];
@@ -342,8 +359,9 @@
         processQueue();
       }
 
-      // Écouteur pour tester depuis le configurateur
+      // Écouteur pour tester depuis le configurateur (BroadcastChannel + LocalStorage + SSE ntfy.sh + Interagir dans OBS)
       function setupSimulator() {
+        // 1. BroadcastChannel (Onglets du même navigateur)
         if (typeof BroadcastChannel !== 'undefined') {
           try {
             const bus = new BroadcastChannel('extra_life_overlay_bus');
@@ -359,6 +377,7 @@
           } catch (err) {}
         }
 
+        // 2. LocalStorage (Fenêtres du même navigateur)
         window.addEventListener('storage', (e) => {
           if (e.key === 'oes_test_donation_trigger' && e.newValue) {
             try {
@@ -371,6 +390,51 @@
                 });
               }
             } catch (err) {}
+          }
+        });
+
+        // 3. Pont temps réel direct vers OBS Studio via SSE ntfy.sh (permet au bouton du site de déclencher OBS !)
+        if (typeof EventSource !== 'undefined' && CONFIG.participantID) {
+          try {
+            const cleanId = String(CONFIG.participantID).replace(/[^a-zA-Z0-9_-]/g, '');
+            const sse = new EventSource(`https://ntfy.sh/oes_alert_${cleanId}/sse`);
+            sse.onmessage = (event) => {
+              try {
+                const data = JSON.parse(event.data);
+                if (data && data.event === 'message' && data.message) {
+                  const payload = JSON.parse(data.message);
+                  if (payload && payload.type === 'TEST_DONATION') {
+                    queueDonation({
+                      displayName: payload.displayName || 'Donateur Test Solaire',
+                      amount: parseFloat(payload.amount) || 25,
+                      message: payload.message || 'Test reçu en direct dans OBS Studio ! ☀️'
+                    });
+                  }
+                }
+              } catch (err) {}
+            };
+            sse.onerror = () => { /* ignorer silencieusement si déconnecté */ };
+          } catch (err) {}
+        }
+
+        // 4. Déclenchement direct par interaction dans OBS (Clic droit sur source > Interagir > Clic ou barre d'espace)
+        window.addEventListener('click', () => {
+          getAudioContext();
+          queueDonation({
+            displayName: 'Testeur OBS Direct',
+            amount: 25,
+            message: 'Alerte et son validés avec succès dans OBS Studio ! ☀️'
+          });
+        });
+
+        window.addEventListener('keydown', (e) => {
+          if (e.code === 'Space' || e.key === 't' || e.key === 'T' || e.key === 'Enter') {
+            getAudioContext();
+            queueDonation({
+              displayName: 'Testeur Clavier OBS',
+              amount: 25,
+              message: 'Son et cadrage validés dans OBS ! ☀️'
+            });
           }
         });
       }
