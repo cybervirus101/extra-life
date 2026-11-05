@@ -528,6 +528,15 @@
 
       <div class="options-grid">
         <div class="option-box">
+          <label for="select-layout">Disposition dans OBS</label>
+          <select id="select-layout" class="option-select">
+            <option value="horizontal" selected>Bannière horizontale (Haut / Bas)</option>
+            <option value="two-tier">Format 2 étages (Moyen / Pause)</option>
+            <option value="vertical">Colonne latérale (Verticale)</option>
+          </select>
+        </div>
+
+        <div class="option-box">
           <label for="select-mode">Mode d'affichage</label>
           <select id="select-mode" class="option-select">
             <option value="alternance" selected>☀️ Alternance douce (Solo + Équipe)</option>
@@ -541,15 +550,6 @@
           <select id="select-theme" class="option-select">
             <option value="clair" selected>Thème clair</option>
             <option value="sombre">Thème sombre</option>
-          </select>
-        </div>
-
-        <div class="option-box">
-          <label for="select-layout">Disposition dans OBS</label>
-          <select id="select-layout" class="option-select">
-            <option value="horizontal" selected>Bannière horizontale (Haut / Bas)</option>
-            <option value="two-tier">Format 2 étages (Moyen / Pause)</option>
-            <option value="vertical">Colonne latérale (Verticale)</option>
           </select>
         </div>
 
@@ -603,7 +603,7 @@
             📐 Limites : Min <strong>500 x 250 px</strong> | Max <strong>1920 x 1080 px</strong> (Plein écran transparent)
           </span>
           <div class="obs-formats-detail">
-            • <em>Recommandé : 800 x 400 px centré sur votre scène</em> (avec case « Contrôler le son via OBS » cochée si désiré).
+            ✨ <strong>Recommandé : 800 x 400 px centré sur votre scène</strong> (avec case « Contrôler le son via OBS » cochée si désiré)
           </div>
         </div>
         <div class="url-row">
@@ -640,13 +640,13 @@
       </div>
 
       <!-- Option Image de bannière Twitch -->
-      <h4 style="font-size: 15px; margin-top: 24px; margin-bottom: 6px;">🎨 Option B : Image officielle de panneau Twitch (320 x 135 px, logo maximisé)</h4>
+      <h4 style="font-size: 15px; margin-top: 24px; margin-bottom: 6px;">🎨 Option B : Image officielle de panneau Twitch</h4>
       <p style="font-size: 13.5px; color: #555;">Pour ceux qui préfèrent une image au-dessus de leur texte, voici la bannière officielle nette et non déformée :</p>
       
       <div class="twitch-banner-preview">
-        <canvas id="canvas-twitch" width="320" height="135" class="twitch-canvas"></canvas>
+        <canvas id="canvas-twitch" width="320" height="210" class="twitch-canvas"></canvas>
         <div>
-          <button id="btn-download-banner" class="btn btn-primary" onclick="downloadBanner()">📥 Télécharger l'image (320x135)</button>
+          <button id="btn-download-banner" class="btn btn-primary" onclick="downloadBanner()">📥 Télécharger l'image</button>
           <p style="font-size: 12.5px; color: #666; margin-top: 8px;">
             Lien à mettre dans le champ <em>« L'image redirige vers »</em> :<br>
             <code id="twitch-redirect-link" style="font-weight: 700; color: var(--es-rouge-sante);">https://www.extra-life.org/participant/...</code>
@@ -901,7 +901,7 @@
             elements.obsFormatsDetail.innerHTML = '✨ <strong>Taille recommandée dans OBS : 1920 x 140 px</strong> (ou 1280 x 140 px)<br><em>Idéal pour placer en bandeau étendu en haut ou en bas de votre écran de jeu.</em>';
           } else if (layout === 'two-tier') {
             elements.obsDimsBadge.innerHTML = '📐 Limites : Min <strong>760 x 220 px</strong> | Max <strong>1050 x 270 px</strong>';
-            elements.obsFormatsDetail.innerHTML = '✨ <strong>Taille recommandée dans OBS : 850 x 240 px</strong><br><em>Idéal pour les scènes d\'attente/pause ou au-dessus d\'une webcam.</em>';
+            elements.obsFormatsDetail.innerHTML = '✨ <strong>Taille recommandée dans OBS : 850 x 240 px</strong>';
           } else if (layout === 'vertical') {
             elements.obsDimsBadge.innerHTML = '📐 Limites : Min <strong>360 x 550 px</strong> | Max <strong>480 x 800 px</strong>';
             elements.obsFormatsDetail.innerHTML = '✨ <strong>Taille recommandée dans OBS : 420 x 700 px</strong><br><em>Idéal pour placer dans une barre latérale ou à côté de la webcam.</em>';
@@ -941,7 +941,7 @@ Durant ce live, nous amassons des dons pour soutenir le développement d'une pé
         drawTwitchBanner(theme);
       }
 
-      // Dessin de la bannière Twitch 320x135 avec logo maximisé et proportions strictes
+      // Dessin de la bannière Twitch 320x210 avec logo maximisé au maximum dans les normes
       function drawTwitchBanner(theme) {
         const canvas = elements.canvasTwitch;
         const ctx = canvas.getContext('2d');
@@ -951,7 +951,7 @@ Durant ce live, nous amassons des dons pour soutenir le développement d'une pé
         ctx.fillStyle = isDark ? '#252625' : '#FAF7F0';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        // Bordure Jaune Soleil
+        // Bordure Jaune Soleil officielle (5px)
         ctx.strokeStyle = '#FFD000';
         ctx.lineWidth = 5;
         ctx.strokeRect(0, 0, canvas.width, canvas.height);
@@ -960,11 +960,11 @@ Durant ce live, nous amassons des dons pour soutenir le développement d'une pé
         const img = new Image();
         img.src = 'assets/logo-enfant-soleil-horizontal.png';
         img.onload = function () {
-          // Encadré blanc de sécurité pour le logo (Zone de dégagement officielle agrandie)
-          const boxX = 12;
+          // Encadré blanc de sécurité pour le logo (Zone de dégagement officielle de marque)
+          const boxX = 10;
           const boxY = 10;
-          const boxW = 296;
-          const boxH = 74;
+          const boxW = 300;
+          const boxH = 144;
 
           ctx.fillStyle = '#FFFFFF';
           ctx.beginPath();
@@ -973,8 +973,8 @@ Durant ce live, nous amassons des dons pour soutenir le développement d'une pé
 
           // Calcul des proportions sans aucune déformation (ratio naturel 2.365)
           const naturalRatio = img.naturalWidth / img.naturalHeight;
-          const maxLogoW = 270;
-          const maxLogoH = 64;
+          const maxLogoW = 274;
+          const maxLogoH = 118;
 
           let targetW = maxLogoW;
           let targetH = targetW / naturalRatio;
@@ -992,11 +992,11 @@ Durant ce live, nous amassons des dons pour soutenir le développement d'une pé
           ctx.fillStyle = isDark ? '#FFD000' : '#F15029';
           ctx.font = 'bold 15px Montserrat, sans-serif';
           ctx.textAlign = 'center';
-          ctx.fillText('💛 FAIRE UN DON EN DIRECT', 160, 105);
+          ctx.fillText('💛 FAIRE UN DON EN DIRECT', 160, 176);
 
           ctx.fillStyle = isDark ? '#FAF7F0' : '#252625';
-          ctx.font = '600 11px Montserrat, sans-serif';
-          ctx.fillText('Cliquez ici pour soutenir les enfants malades', 160, 122);
+          ctx.font = '600 11.5px Montserrat, sans-serif';
+          ctx.fillText('Cliquez ici pour soutenir les enfants malades', 160, 195);
         };
       }
 
