@@ -35,20 +35,20 @@
       justify-content: center;
     }
 
-    /* Conteneur de l'alerte */
+    /* Conteneur de l'alerte agrandi */
     .alert-wrapper {
       position: relative;
       display: none;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      max-width: 680px;
-      width: 94%;
+      max-width: 780px;
+      width: 95%;
       background: rgba(250, 247, 240, 0.98);
       border: 5px solid var(--es-jaune-soleil);
-      border-radius: 24px;
-      padding: 16px 24px 20px 24px;
-      box-shadow: 0 10px 40px rgba(37, 38, 37, 0.35), 0 0 35px rgba(255, 208, 0, 0.6);
+      border-radius: 26px;
+      padding: 20px 30px 24px 30px;
+      box-shadow: 0 12px 48px rgba(37, 38, 37, 0.4), 0 0 45px rgba(255, 208, 0, 0.65);
       color: var(--es-noir-velours);
       transform-origin: center;
     }
@@ -57,7 +57,7 @@
       background: var(--es-noir-velours);
       color: var(--es-blanc-chaud);
       border-color: var(--es-jaune-soleil);
-      box-shadow: 0 10px 45px rgba(0, 0, 0, 0.8), 0 0 35px rgba(255, 208, 0, 0.5);
+      box-shadow: 0 12px 50px rgba(0, 0, 0, 0.85), 0 0 45px rgba(255, 208, 0, 0.55);
     }
 
     /* Rayonnement solaire d'arrière-plan */
@@ -65,11 +65,11 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 500px;
-      height: 500px;
-      margin-left: -250px;
-      margin-top: -250px;
-      background: radial-gradient(circle, rgba(255, 208, 0, 0.45) 0%, rgba(241, 80, 41, 0.15) 50%, transparent 70%);
+      width: 600px;
+      height: 600px;
+      margin-left: -300px;
+      margin-top: -300px;
+      background: radial-gradient(circle, rgba(255, 208, 0, 0.5) 0%, rgba(241, 80, 41, 0.18) 50%, transparent 70%);
       border-radius: 50%;
       z-index: -1;
       pointer-events: none;
@@ -81,20 +81,21 @@
       to { transform: rotate(360deg); }
     }
 
-    /* Logo partenaire officiel maximisé avec zone de dégagement */
+    /* Logo partenaire officiel très grandement maximisé avec zone de dégagement */
     .logo-container {
       background: #FFFFFF;
-      border-radius: 14px;
-      padding: 6px 20px;
-      margin-bottom: 8px;
+      border-radius: 18px;
+      padding: 10px 32px;
+      margin-bottom: 12px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      border: 2px solid rgba(255, 208, 0, 0.3);
     }
 
     .alert-logo {
-      height: 60px;
+      height: 95px;
       width: auto;
       max-width: 100%;
       object-fit: contain;
@@ -105,18 +106,18 @@
       display: inline-block;
       background: var(--es-rouge-sante);
       color: #FFFFFF;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 1.2px;
-      padding: 4px 14px;
+      padding: 5px 16px;
       border-radius: 20px;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
       box-shadow: 0 2px 8px rgba(241, 80, 41, 0.4);
     }
 
     .donor-name {
-      font-size: 28px;
+      font-size: 32px;
       font-weight: 900;
       line-height: 1.2;
       color: var(--es-noir-velours);
@@ -129,7 +130,7 @@
     }
 
     .donor-amount {
-      font-size: 38px;
+      font-size: 44px;
       font-weight: 900;
       color: var(--es-rouge-sante);
       line-height: 1.1;
@@ -138,12 +139,12 @@
     }
 
     .donor-message {
-      font-size: 16px;
+      font-size: 17px;
       font-weight: 600;
       line-height: 1.4;
       background: rgba(255, 208, 0, 0.15);
       border-left: 4px solid var(--es-jaune-soleil);
-      padding: 10px 16px;
+      padding: 10px 18px;
       border-radius: 0 10px 10px 0;
       max-width: 100%;
       word-break: break-word;
