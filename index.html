@@ -9,22 +9,22 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root {
-      /* Couleurs officielles Extra Life & CMN */
-      --el-navy-deep: #08101C;
-      --el-navy-bg: #0B1626;
-      --el-navy-card: #13233A;
-      --el-navy-card-border: rgba(28, 158, 214, 0.3);
-      --el-navy-input: #0D1B2D;
-      --el-bleu-cmn: #0E7CA2;
-      --el-cyan: #1C9ED6;
-      --el-cyan-light: #5BC3F0;
-      --el-cyan-glow: rgba(28, 158, 214, 0.4);
+      /* Couleurs officielles Extra Life & CMN - Palette lumineuse et aérée */
+      --el-navy-deep: #11233B;
+      --el-navy-bg: #142844;
+      --el-navy-card: #1F3C64;
+      --el-navy-card-border: rgba(56, 189, 248, 0.45);
+      --el-navy-input: #172F4F;
+      --el-bleu-cmn: #1389B2;
+      --el-cyan: #22B2F2;
+      --el-cyan-light: #70D3FF;
+      --el-cyan-glow: rgba(34, 178, 242, 0.45);
       --el-vert-manette: #62AF0F;
-      --el-vert-hover: #50930B;
-      --el-jaune-cmn: #FFCB05;
+      --el-vert-hover: #52970B;
+      --el-jaune-cmn: #FFD000;
       --el-text-main: #FFFFFF;
-      --el-text-sub: #A8C7E0;
-      --el-text-dim: #6E8DA8;
+      --el-text-sub: #D3E7F8;
+      --el-text-dim: #99C3E6;
 
       /* Enfant Soleil (Palette partenaire) */
       --es-jaune-soleil: #FFD000;
@@ -45,7 +45,10 @@
       font-family: var(--font-main);
       line-height: 1.5;
       padding: 30px 24px 80px 24px;
-      background-image: radial-gradient(circle at 50% 0%, rgba(28, 158, 214, 0.12) 0%, transparent 60%);
+      background-image: 
+        radial-gradient(circle at 50% -10%, rgba(34, 178, 242, 0.22) 0%, transparent 55%),
+        linear-gradient(180deg, #182E4D 0%, #11233A 100%);
+      background-attachment: fixed;
     }
 
     .container {
@@ -55,13 +58,13 @@
 
     /* En-tête officiel Extra Life */
     .header {
-      background: linear-gradient(180deg, #16263F 0%, #0F1D30 100%);
+      background: linear-gradient(180deg, #244570 0%, #1A3456 100%);
       border-radius: var(--radius);
       border: 3px solid var(--el-cyan);
       padding: 32px 24px;
       text-align: center;
       margin-bottom: 30px;
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7), 0 0 30px rgba(28, 158, 214, 0.25);
+      box-shadow: 0 12px 40px rgba(10, 25, 47, 0.4), 0 0 35px rgba(34, 178, 242, 0.3);
     }
 
     .header-logos {
@@ -340,19 +343,19 @@
       font-weight: 700;
       padding: 9px 12px;
       border-radius: 8px;
-      border: 2px solid rgba(28, 158, 214, 0.4);
-      background: #091322;
+      border: 2px solid rgba(56, 189, 248, 0.45);
+      background: #172F4F;
       color: #FFFFFF;
     }
 
     .option-select optgroup {
-      background: #091322;
-      color: var(--el-cyan);
+      background: #172F4F;
+      color: var(--el-cyan-light);
       font-weight: 800;
     }
 
     .option-select option {
-      background: #091322;
+      background: #172F4F;
       color: #FFFFFF;
       font-weight: 600;
     }
@@ -362,8 +365,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: #091322;
-      border: 2px solid rgba(28, 158, 214, 0.4);
+      background: #172F4F;
+      border: 2px solid rgba(56, 189, 248, 0.45);
       border-radius: 8px;
       padding: 4px;
       gap: 6px;
@@ -499,15 +502,15 @@
       font-family: monospace;
       font-size: 13.5px;
       padding: 10px 14px;
-      border: 1px solid rgba(28, 158, 214, 0.4);
+      border: 1.5px solid rgba(56, 189, 248, 0.5);
       border-radius: 10px;
-      background: #08101C;
-      color: #70C9FF;
+      background: #11233B;
+      color: #88DBFF;
     }
 
     /* Simulateur */
     .simulator-box {
-      background: rgba(28, 158, 214, 0.12);
+      background: rgba(34, 178, 242, 0.16);
       border: 2px dashed var(--el-cyan);
       border-radius: 14px;
       padding: 18px;
@@ -533,9 +536,9 @@
     /* Bloc de texte Markdown */
     .code-block {
       position: relative;
-      background: #08101C;
-      color: #E1F0FA;
-      border: 2px solid rgba(28, 158, 214, 0.35);
+      background: #11233B;
+      color: #F0F7FD;
+      border: 2px solid rgba(56, 189, 248, 0.45);
       font-family: inherit;
       font-size: 14px;
       line-height: 1.6;
@@ -546,7 +549,7 @@
       max-height: 250px;
       overflow-y: auto;
       margin-top: 10px;
-      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.5);
+      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.35);
     }
 
     .btn-copy-code {
@@ -582,14 +585,14 @@
       position: fixed;
       bottom: 24px;
       right: 24px;
-      background: #0C1829;
+      background: #172F4F;
       color: var(--el-cyan-light);
       border: 2px solid var(--el-cyan);
       padding: 12px 24px;
       border-radius: 10px;
       font-size: 14px;
       font-weight: 800;
-      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.7), 0 0 15px rgba(28, 158, 214, 0.5);
+      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5), 0 0 15px rgba(34, 178, 242, 0.4);
       display: none;
       z-index: 9999;
       animation: toastIn 0.3s ease;
