@@ -455,6 +455,138 @@
       color: var(--el-text-sub);
     }
 
+    /* Boîte de palette de thème personnalisé */
+    .custom-palette-box {
+      margin-top: 20px;
+      background: var(--el-navy-input);
+      border: 2px solid var(--el-cyan);
+      border-radius: 14px;
+      padding: 18px 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      animation: fadeIn 0.3s ease;
+    }
+
+    .custom-palette-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .custom-palette-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-palette-reset {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: var(--el-text-sub);
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-palette-reset:hover {
+      border-color: var(--el-cyan);
+      color: #FFFFFF;
+      background: rgba(28, 158, 214, 0.2);
+    }
+
+    .custom-palette-desc {
+      font-size: 13px;
+      color: var(--el-text-sub);
+      margin-bottom: 16px;
+      line-height: 1.4;
+    }
+
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+    }
+
+    .color-picker-item {
+      background: rgba(10, 20, 36, 0.6);
+      border: 1px solid rgba(28, 158, 214, 0.3);
+      border-radius: 10px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .color-picker-item label {
+      font-size: 13px;
+      font-weight: 700;
+      color: #FFFFFF;
+    }
+
+    .color-picker-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .color-input {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      width: 44px;
+      height: 38px;
+      background: transparent;
+      border: 2px solid var(--el-navy-card-border);
+      border-radius: 8px;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .color-input::-webkit-color-swatch-wrapper {
+      padding: 2px;
+    }
+
+    .color-input::-webkit-color-swatch {
+      border: none;
+      border-radius: 6px;
+    }
+
+    .hex-input {
+      flex: 1;
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 8px 10px;
+      background: var(--el-navy-bg);
+      border: 1.5px solid var(--el-navy-card-border);
+      border-radius: 8px;
+      color: #FFFFFF;
+      text-transform: uppercase;
+    }
+
+    .hex-input:focus {
+      outline: none;
+      border-color: var(--el-cyan);
+    }
+
+    .color-role-hint {
+      font-size: 11.5px;
+      color: var(--el-text-dim);
+      line-height: 1.3;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     /* Liens OBS prêts */
     .obs-card {
       background: var(--el-navy-input);
@@ -633,13 +765,9 @@
     <header class="header">
       <div class="header-logos">
         <img class="hero-logo-el" src="assets/logo-extra-life-white.svg" alt="Extra Life">
-        <div class="partner-pill">
-          <span class="partner-label">Au profit officiel de</span>
-          <img class="partner-logo-oes" src="assets/logo-enfant-soleil-horizontal.png" alt="Opération Enfant Soleil">
-        </div>
       </div>
       <h1>🎮 Kit Streamer Extra Life</h1>
-      <p>Configurez votre overlay OBS, vos alertes en direct et vos panneaux Twitch au profit d'Opération Enfant Soleil en 30 secondes sans aucune installation.</p>
+      <p>Configurez votre overlay OBS, vos alertes en direct et vos panneaux Twitch en 30 secondes sans aucune installation.</p>
     </header>
 
     <!-- Étape 1 : Saisie de l'ID Extra Life -->
@@ -723,6 +851,9 @@
               <option value="clair">☀️ Enfant Soleil — Thème clair (Jaune & Blanc)</option>
               <option value="sombre">🌙 Enfant Soleil — Thème sombre (Noir velours)</option>
             </optgroup>
+            <optgroup label="🎨 Thème Personnalisé">
+              <option value="personnalise">🎨 Thème personnalisé (Palette sur mesure)</option>
+            </optgroup>
           </select>
         </div>
 
@@ -735,6 +866,63 @@
               <span class="stepper-unit">sec</span>
             </div>
             <button type="button" class="btn-stepper" id="btn-interval-plus" title="Augmenter (+5s)">+</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panneau de personnalisation des couleurs -->
+      <div id="custom-theme-panel" class="custom-palette-box" style="display: none;">
+        <div class="custom-palette-header">
+          <span class="custom-palette-title">🎨 Palette de couleurs personnalisée (Panneaux & Overlay)</span>
+          <button type="button" id="btn-reset-custom-theme" class="btn-palette-reset" title="Réinitialiser aux couleurs par défaut">↺ Réinitialiser</button>
+        </div>
+        <p class="custom-palette-desc">Choisissez les couleurs de vos panneaux Twitch et overlays pour correspondre à votre identité de chaîne. Vos réglages sont automatiquement mémorisés.</p>
+        
+        <div class="palette-grid">
+          <div class="color-picker-item">
+            <label for="color-custom-bg">1. Fond principal</label>
+            <div class="color-picker-wrapper">
+              <input type="color" id="color-custom-bg" class="color-input" value="#0F172A">
+              <input type="text" id="hex-custom-bg" class="hex-input" value="#0F172A" maxlength="7">
+            </div>
+            <span class="color-role-hint">Arrière-plan du panneau et de l'overlay</span>
+          </div>
+
+          <div class="color-picker-item">
+            <label for="color-custom-card">2. Cadres & Boîtes</label>
+            <div class="color-picker-wrapper">
+              <input type="color" id="color-custom-card" class="color-input" value="#1E293B">
+              <input type="text" id="hex-custom-card" class="hex-input" value="#1E293B" maxlength="7">
+            </div>
+            <span class="color-role-hint">Encadré du logo & boîtes de données</span>
+          </div>
+
+          <div class="color-picker-item">
+            <label for="color-custom-accent">3. Bordures & Accent</label>
+            <div class="color-picker-wrapper">
+              <input type="color" id="color-custom-accent" class="color-input" value="#38BDF8">
+              <input type="text" id="hex-custom-accent" class="hex-input" value="#38BDF8" maxlength="7">
+            </div>
+            <span class="color-role-hint">Contour extérieur, reflets & jauge de don</span>
+          </div>
+
+          <div class="color-picker-item">
+            <label for="color-custom-text">4. Texte & Bouton</label>
+            <div class="color-picker-wrapper">
+              <input type="color" id="color-custom-text" class="color-input" value="#F8FAFC">
+              <input type="text" id="hex-custom-text" class="hex-input" value="#F8FAFC" maxlength="7">
+            </div>
+            <span class="color-role-hint">Titres, libellés et bouton d'action</span>
+          </div>
+
+          <div class="color-picker-item">
+            <label for="select-custom-logo">5. Logo du panneau</label>
+            <select id="select-custom-logo" class="option-select" style="padding: 8px 12px; font-size: 13px;">
+              <option value="el-white" selected>Extra Life (Blanc - Recommandé)</option>
+              <option value="el-color">Extra Life (Couleur officielle)</option>
+              <option value="oes">Opération Enfant Soleil</option>
+            </select>
+            <span class="color-role-hint">Logo affiché au centre de la bannière</span>
           </div>
         </div>
       </div>
@@ -851,9 +1039,9 @@
           <button class="btn btn-secondary" onclick="copyInput('cmd-don')">Copier</button>
         </div>
         <div style="display: flex; gap: 10px; align-items: center; background: var(--el-navy-input); padding: 10px 14px; border-radius: 10px; border: 1.5px solid var(--el-navy-card-border);">
-          <code style="font-weight: 800; width: 90px; color: var(--el-cyan); font-size: 15px;">!soleil</code>
-          <input type="text" id="cmd-soleil" class="url-input" value="☀️ $(user) envoie un grand rayon de chaleur et d'ondes positives sur tout le chat pour soutenir Opération Enfant Soleil ! 🌻✨" readonly>
-          <button class="btn btn-secondary" onclick="copyInput('cmd-soleil')">Copier</button>
+          <code id="cmd-event-label" style="font-weight: 800; width: 90px; color: var(--el-cyan); font-size: 15px;">!extralife</code>
+          <input type="text" id="cmd-event" class="url-input" value="🎮 $(user) soutient la campagne caritative Extra Life pour les enfants malades ! Jouons ensemble pour guérir ! 💖🎮" readonly>
+          <button class="btn btn-secondary" onclick="copyInput('cmd-event')">Copier</button>
         </div>
         <div style="display: flex; gap: 10px; align-items: center; background: var(--el-navy-input); padding: 10px 14px; border-radius: 10px; border: 1.5px solid var(--el-navy-card-border);">
           <code style="font-weight: 800; width: 90px; color: var(--el-cyan); font-size: 15px;">!equipe</code>
@@ -902,10 +1090,23 @@
         twitchRedirectLink: document.getElementById('twitch-redirect-link'),
         cmdDon: document.getElementById('cmd-don'),
         cmdEquipe: document.getElementById('cmd-equipe'),
+        cmdEvent: document.getElementById('cmd-event'),
+        cmdEventLabel: document.getElementById('cmd-event-label'),
         canvasTwitch: document.getElementById('canvas-twitch'),
         obsRecVal: document.getElementById('obs-rec-val'),
         obsDimsLimits: document.getElementById('obs-dims-limits'),
         obsFormatsDetail: document.getElementById('obs-formats-detail'),
+        customThemePanel: document.getElementById('custom-theme-panel'),
+        btnResetCustomTheme: document.getElementById('btn-reset-custom-theme'),
+        colorCustomBg: document.getElementById('color-custom-bg'),
+        hexCustomBg: document.getElementById('hex-custom-bg'),
+        colorCustomCard: document.getElementById('color-custom-card'),
+        hexCustomCard: document.getElementById('hex-custom-card'),
+        colorCustomAccent: document.getElementById('color-custom-accent'),
+        hexCustomAccent: document.getElementById('hex-custom-accent'),
+        colorCustomText: document.getElementById('color-custom-text'),
+        hexCustomText: document.getElementById('hex-custom-text'),
+        selectCustomLogo: document.getElementById('select-custom-logo'),
         toast: document.getElementById('toast'),
       };
 
@@ -1053,6 +1254,67 @@
         elements.badgeMilestones.textContent = `${detectedParticipant.numMilestones} défi(s) / jalons`;
       }
 
+      const DEFAULT_CUSTOM_PALETTE = {
+        bg: '#0F172A',
+        card: '#1E293B',
+        accent: '#38BDF8',
+        text: '#F8FAFC',
+        logo: 'el-white',
+      };
+
+      let customPalette = { ...DEFAULT_CUSTOM_PALETTE };
+
+      function isColorDark(hex) {
+        if (!hex || typeof hex !== 'string') return true;
+        let c = hex.replace('#', '');
+        if (c.length === 3) c = c.split('').map(x => x + x).join('');
+        if (c.length !== 6) return true;
+        const r = parseInt(c.substr(0, 2), 16) || 0;
+        const g = parseInt(c.substr(2, 2), 16) || 0;
+        const b = parseInt(c.substr(4, 2), 16) || 0;
+        return (0.299 * r + 0.587 * g + 0.114 * b) < 140;
+      }
+
+      function loadCustomPaletteMemory() {
+        try {
+          const saved = localStorage.getItem('oes_custom_palette');
+          if (saved) {
+            const parsed = JSON.parse(saved);
+            customPalette = { ...DEFAULT_CUSTOM_PALETTE, ...parsed };
+          }
+        } catch (e) {}
+        applyCustomPaletteToInputs();
+      }
+
+      function saveCustomPaletteMemory() {
+        try {
+          localStorage.setItem('oes_custom_palette', JSON.stringify(customPalette));
+        } catch (e) {}
+      }
+
+      function applyCustomPaletteToInputs() {
+        if (elements.colorCustomBg) elements.colorCustomBg.value = customPalette.bg;
+        if (elements.hexCustomBg) elements.hexCustomBg.value = customPalette.bg.toUpperCase();
+
+        if (elements.colorCustomCard) elements.colorCustomCard.value = customPalette.card;
+        if (elements.hexCustomCard) elements.hexCustomCard.value = customPalette.card.toUpperCase();
+
+        if (elements.colorCustomAccent) elements.colorCustomAccent.value = customPalette.accent;
+        if (elements.hexCustomAccent) elements.hexCustomAccent.value = customPalette.accent.toUpperCase();
+
+        if (elements.colorCustomText) elements.colorCustomText.value = customPalette.text;
+        if (elements.hexCustomText) elements.hexCustomText.value = customPalette.text.toUpperCase();
+
+        if (elements.selectCustomLogo) elements.selectCustomLogo.value = customPalette.logo || 'el-white';
+      }
+
+      function updateThemePanelVisibility() {
+        const isCustom = elements.selectTheme.value === 'personnalise';
+        if (elements.customThemePanel) {
+          elements.customThemePanel.style.display = isCustom ? 'block' : 'none';
+        }
+      }
+
       // Mise à jour dynamique des URLs OBS
       function updateGeneratedUrls() {
         const baseUrl = window.location.origin + window.location.pathname.replace(/\/index\.html$/i, '').replace(/\/$/, '');
@@ -1077,6 +1339,13 @@
         if (mode === 'alternance' && interval !== 20) {
           overlayParams.set('interval', interval);
         }
+        if (theme === 'personnalise') {
+          overlayParams.set('cBg', customPalette.bg);
+          overlayParams.set('cCard', customPalette.card);
+          overlayParams.set('cAccent', customPalette.accent);
+          overlayParams.set('cText', customPalette.text);
+          if (customPalette.logo) overlayParams.set('cLogo', customPalette.logo);
+        }
 
         const overlayFullUrl = `${baseUrl}/overlay.html?${overlayParams.toString()}`;
         elements.urlOverlay.value = overlayFullUrl;
@@ -1090,6 +1359,13 @@
         if (mode === 'team' && detectedParticipant && detectedParticipant.teamID) {
           alertParams.set('mode', 'team');
           alertParams.set('teamID', detectedParticipant.teamID);
+        }
+        if (theme === 'personnalise') {
+          alertParams.set('cBg', customPalette.bg);
+          alertParams.set('cCard', customPalette.card);
+          alertParams.set('cAccent', customPalette.accent);
+          alertParams.set('cText', customPalette.text);
+          if (customPalette.logo) alertParams.set('cLogo', customPalette.logo);
         }
 
         const alertFullUrl = `${baseUrl}/alert.html?${alertParams.toString()}`;
@@ -1132,7 +1408,10 @@
           progressSnippet = `\n\n📊 **Progression de la campagne :** ${sum.toFixed(0)} $ / ${goal.toFixed(0)} $ USD (**${pct} %** de l'objectif atteint !)\n`;
         }
 
-        const markdownText = `### ☀️ Au profit d'Opération Enfant Soleil (Extra Life)
+        const isEnfantSoleilTheme = (theme === 'clair' || theme === 'sombre');
+        let markdownText = '';
+        if (isEnfantSoleilTheme) {
+          markdownText = `### ☀️ Campagne au profit d'Opération Enfant Soleil (Extra Life)
 
 Durant ce live, nous amassons des dons pour soutenir le développement d'une pédiatrie de qualité et des soins adaptés pour tous les enfants malades du Québec.${progressSnippet}
 💛 **Chaque don fait une différence directe :**
@@ -1140,15 +1419,38 @@ Durant ce live, nous amassons des dons pour soutenir le développement d'une pé
 
 *(Reçu fiscal officiel canadien émis instantanément par courriel pour chaque don)*`;
 
-        elements.twitchMarkdown.textContent = markdownText;
-
-        // Commandes Bots
-        elements.cmdDon.value = `💛 Soutenez les enfants malades du Québec avec Opération Enfant Soleil ! Don sécurisé avec reçu fiscal ici 👉 ${donateLink}`;
-        if (detectedParticipant && detectedParticipant.teamID) {
-          elements.cmdEquipe.value = `👥 Suivez et soutenez notre équipe Extra Life « ${detectedParticipant.teamName} » ici 👉 https://www.extra-life.org/team/${detectedParticipant.teamID}`;
+          elements.cmdDon.value = `💛 Soutenez les enfants malades du Québec avec Opération Enfant Soleil ! Don sécurisé avec reçu fiscal ici 👉 ${donateLink}`;
+          if (elements.cmdEvent) {
+            elements.cmdEvent.value = `☀️ $(user) envoie un grand rayon de chaleur et d'ondes positives sur tout le chat pour soutenir Opération Enfant Soleil ! 🌻✨`;
+            if (elements.cmdEventLabel) elements.cmdEventLabel.textContent = '!soleil';
+          }
+          if (detectedParticipant && detectedParticipant.teamID) {
+            elements.cmdEquipe.value = `👥 Suivez et soutenez notre équipe « ${detectedParticipant.teamName} » pour Opération Enfant Soleil ici 👉 https://www.extra-life.org/team/${detectedParticipant.teamID}`;
+          } else {
+            elements.cmdEquipe.value = `👥 Découvrez notre campagne collective pour Opération Enfant Soleil ! Don ici 👉 ${donateLink}`;
+          }
         } else {
-          elements.cmdEquipe.value = `👥 Découvrez notre campagne collective pour Opération Enfant Soleil ! Don ici 👉 ${donateLink}`;
+          markdownText = `### 🎮 Campagne caritative Extra Life
+
+Durant ce live, nous amassons des dons pour Extra Life afin de soutenir les soins pédiatriques et les hôpitaux pour enfants.${progressSnippet}
+💖 **Chaque don fait une différence directe :**
+👉 [CLIQUEZ ICI POUR FAIRE UN DON](${donateLink})
+
+*(Reçu fiscal officiel émis instantanément par courriel pour chaque don)*`;
+
+          elements.cmdDon.value = `🎮 Soutenez notre campagne caritative Extra Life ! Don sécurisé avec reçu fiscal ici 👉 ${donateLink}`;
+          if (elements.cmdEvent) {
+            elements.cmdEvent.value = `🎮 $(user) soutient la campagne caritative Extra Life pour les enfants malades ! Jouons ensemble pour guérir ! 💖🎮`;
+            if (elements.cmdEventLabel) elements.cmdEventLabel.textContent = '!extralife';
+          }
+          if (detectedParticipant && detectedParticipant.teamID) {
+            elements.cmdEquipe.value = `👥 Suivez et soutenez notre équipe Extra Life « ${detectedParticipant.teamName} » ici 👉 https://www.extra-life.org/team/${detectedParticipant.teamID}`;
+          } else {
+            elements.cmdEquipe.value = `👥 Découvrez notre campagne collective Extra Life ! Don ici 👉 ${donateLink}`;
+          }
         }
+
+        elements.twitchMarkdown.textContent = markdownText;
 
         // Redessiner la bannière Twitch sans déformation
         drawTwitchBanner(theme);
@@ -1158,14 +1460,24 @@ Durant ce live, nous amassons des dons pour soutenir le développement d'une pé
       function drawTwitchBanner(theme) {
         const canvas = elements.canvasTwitch;
         const ctx = canvas.getContext('2d');
-        const isExtraLife = theme.startsWith('extralife');
-        const isDark = (theme === 'sombre' || theme === 'extralife-sombre' || theme.includes('sombre') || theme.includes('dark'));
+        const isCustom = (theme === 'personnalise');
+        const isExtraLife = theme.startsWith('extralife') || isCustom;
+        const isDark = isCustom 
+          ? isColorDark(customPalette.bg)
+          : (theme === 'sombre' || theme === 'extralife-sombre' || theme.includes('sombre') || theme.includes('dark'));
 
         canvas.width = 320;
         canvas.height = 210;
 
         // Fond & Bordure officielle
-        if (isExtraLife) {
+        if (isCustom) {
+          ctx.fillStyle = customPalette.bg;
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+          ctx.strokeStyle = customPalette.accent;
+          ctx.lineWidth = 5;
+          ctx.strokeRect(0, 0, canvas.width, canvas.height);
+        } else if (isExtraLife) {
           ctx.fillStyle = isDark ? '#0C1829' : '#F4F9FD';
           ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -1181,9 +1493,20 @@ Durant ce live, nous amassons des dons pour soutenir le développement d'une pé
           ctx.strokeRect(0, 0, canvas.width, canvas.height);
         }
 
-        // Chargement du logo officiel (Extra Life pour les thèmes Extra Life, Enfant Soleil pour les thèmes classiques)
+        // Chargement du logo officiel
         const img = new Image();
-        if (isExtraLife) {
+        if (isCustom) {
+          if (customPalette.logo === 'oes') {
+            img.src = 'assets/logo-enfant-soleil-horizontal.png';
+          } else if (customPalette.logo === 'el-color') {
+            img.src = 'assets/logo-extra-life-color.svg';
+          } else if (customPalette.logo === 'el-white') {
+            img.src = 'assets/logo-extra-life-white.svg';
+          } else {
+            const cardDark = isColorDark(customPalette.card);
+            img.src = cardDark ? 'assets/logo-extra-life-white.svg' : 'assets/logo-extra-life-color.svg';
+          }
+        } else if (isExtraLife) {
           img.src = isDark ? 'assets/logo-extra-life-white.svg' : 'assets/logo-extra-life-color.svg';
         } else {
           img.src = 'assets/logo-enfant-soleil-horizontal.png';
@@ -1196,7 +1519,9 @@ Durant ce live, nous amassons des dons pour soutenir le développement d'une pé
           const boxW = 300;
           const boxH = 144;
 
-          if (isExtraLife) {
+          if (isCustom) {
+            ctx.fillStyle = customPalette.card;
+          } else if (isExtraLife) {
             ctx.fillStyle = isDark ? '#0E1B2D' : '#FFFFFF';
           } else {
             ctx.fillStyle = '#FFFFFF';
@@ -1205,7 +1530,11 @@ Durant ce live, nous amassons des dons pour soutenir le développement d'une pé
           ctx.roundRect(boxX, boxY, boxW, boxH, 10);
           ctx.fill();
 
-          if (isExtraLife) {
+          if (isCustom) {
+            ctx.strokeStyle = customPalette.accent;
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+          } else if (isExtraLife) {
             ctx.strokeStyle = isDark ? 'rgba(28, 158, 214, 0.45)' : 'rgba(14, 124, 162, 0.35)';
             ctx.lineWidth = 1.5;
             ctx.stroke();
@@ -1213,8 +1542,9 @@ Durant ce live, nous amassons des dons pour soutenir le développement d'une pé
 
           // Calcul des proportions sans aucune déformation
           const naturalRatio = (img.naturalWidth && img.naturalHeight) ? (img.naturalWidth / img.naturalHeight) : 2.5;
-          const maxLogoW = isExtraLife ? 260 : 274;
-          const maxLogoH = isExtraLife ? 90 : 118;
+          const isOESLogo = (isCustom && customPalette.logo === 'oes') || (!isCustom && !isExtraLife);
+          const maxLogoW = isOESLogo ? 274 : 260;
+          const maxLogoH = isOESLogo ? 118 : 90;
 
           let targetW = maxLogoW;
           let targetH = targetW / naturalRatio;
@@ -1229,7 +1559,12 @@ Durant ce live, nous amassons des dons pour soutenir le développement d'une pé
           ctx.drawImage(img, posX, posY, targetW, targetH);
 
           // Texte d'action clair et lisible sans texte parasite
-          if (isExtraLife) {
+          if (isCustom) {
+            ctx.fillStyle = customPalette.text;
+            ctx.font = 'bold 16px Montserrat, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('🎮 FAIRE UN DON SUR EXTRA LIFE', 160, 184);
+          } else if (isExtraLife) {
             ctx.fillStyle = isDark ? '#1C9ED6' : '#0E7CA2';
             ctx.font = 'bold 16px Montserrat, sans-serif';
             ctx.textAlign = 'center';
@@ -1427,6 +1762,7 @@ Durant ce live, nous amassons des dons pour soutenir le développement d'une pé
         updateOptionMemory();
       });
       elements.selectTheme.addEventListener('change', () => {
+        updateThemePanelVisibility();
         updateGeneratedUrls();
         updateOptionMemory();
       });
@@ -1435,11 +1771,64 @@ Durant ce live, nous amassons des dons pour soutenir le développement d'une pé
         updateOptionMemory();
       });
 
+      // Liaison bidirectionnelle des palettes de couleurs personnalisées
+      function bindColorPair(colorInput, hexInput, key) {
+        if (!colorInput || !hexInput) return;
+        colorInput.addEventListener('input', () => {
+          hexInput.value = colorInput.value.toUpperCase();
+          customPalette[key] = colorInput.value;
+          saveCustomPaletteMemory();
+          updateGeneratedUrls();
+        });
+        hexInput.addEventListener('input', () => {
+          let val = hexInput.value.trim();
+          if (!val.startsWith('#')) val = '#' + val;
+          if (/^#[0-9A-Fa-f]{6}$/.test(val)) {
+            colorInput.value = val;
+            customPalette[key] = val;
+            saveCustomPaletteMemory();
+            updateGeneratedUrls();
+          }
+        });
+        hexInput.addEventListener('blur', () => {
+          hexInput.value = customPalette[key].toUpperCase();
+        });
+      }
+
+      bindColorPair(elements.colorCustomBg, elements.hexCustomBg, 'bg');
+      bindColorPair(elements.colorCustomCard, elements.hexCustomCard, 'card');
+      bindColorPair(elements.colorCustomAccent, elements.hexCustomAccent, 'accent');
+      bindColorPair(elements.colorCustomText, elements.hexCustomText, 'text');
+
+      if (elements.selectCustomLogo) {
+        elements.selectCustomLogo.addEventListener('change', () => {
+          customPalette.logo = elements.selectCustomLogo.value;
+          saveCustomPaletteMemory();
+          updateGeneratedUrls();
+        });
+      }
+
+      if (elements.btnResetCustomTheme) {
+        elements.btnResetCustomTheme.addEventListener('click', () => {
+          customPalette = { ...DEFAULT_CUSTOM_PALETTE };
+          applyCustomPaletteToInputs();
+          saveCustomPaletteMemory();
+          updateGeneratedUrls();
+          showToast('Palette réinitialisée aux couleurs par défaut ! ↺');
+        });
+      }
+
+      // Initialisation des données et mémoires
+      loadCustomPaletteMemory();
+      updateThemePanelVisibility();
+
       // Initialisation : restaure le profil s'il était déjà mémorisé, sinon initialise avec 582063 par défaut
       const hadSaved = restoreSavedStreamer();
       if (!hadSaved) {
         elements.inputParticipant.value = '582063';
         detectStreamerInfo('582063');
+      } else {
+        updateThemePanelVisibility();
       }
     })();
   </script>

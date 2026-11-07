@@ -1773,3 +1773,84 @@ body {
   max-width: 260px;
 }
 
+/* ==========================================================================
+   THÈME PERSONNALISÉ (SUR MESURE STREAMER)
+   ========================================================================== */
+
+.overlay-container.theme-custom {
+  background: var(--custom-bg, #0F172A) !important;
+  border: 5px solid var(--custom-accent, #38BDF8) !important;
+  box-shadow: 0 4px 28px rgba(0, 0, 0, 0.7), 0 0 25px var(--custom-accent, #38BDF8) !important;
+  color: var(--custom-text, #F8FAFC) !important;
+}
+
+.overlay-container.theme-custom .label-heading,
+.overlay-container.theme-custom .amount-sub {
+  color: var(--custom-text, #F8FAFC) !important;
+}
+
+.overlay-container.theme-custom .amount-highlight {
+  color: var(--custom-accent, #38BDF8) !important;
+  text-shadow: 0 0 12px var(--custom-accent, #38BDF8) !important;
+}
+
+.overlay-container.theme-custom .progress-track {
+  background: rgba(0, 0, 0, 0.4) !important;
+  border: 2px solid var(--custom-accent, #38BDF8) !important;
+}
+
+.overlay-container.theme-custom .progress-fill {
+  background: linear-gradient(90deg, var(--custom-accent, #38BDF8) 0%, #62AF0F 100%) !important;
+  box-shadow: 0 0 12px var(--custom-accent, #38BDF8) !important;
+}
+
+.overlay-container.theme-custom #progress-percent {
+  background: var(--custom-card, #1E293B) !important;
+  color: var(--custom-accent, #38BDF8) !important;
+  border-color: var(--custom-accent, #38BDF8) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.7) !important;
+}
+
+.overlay-container.theme-custom .info-box {
+  background: var(--custom-card, #1E293B) !important;
+  border-color: var(--custom-accent, #38BDF8) !important;
+  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.5) !important;
+}
+
+.overlay-container.theme-custom .box-header {
+  border-bottom: 2px dashed var(--custom-accent, #38BDF8) !important;
+}
+
+.overlay-container.theme-custom .box-tag {
+  color: var(--custom-accent, #38BDF8) !important;
+}
+
+.overlay-container.theme-custom .donor-name,
+.overlay-container.theme-custom .feed-donor {
+  color: var(--custom-text, #F8FAFC) !important;
+}
+
+.overlay-container.theme-custom .donor-amount,
+.overlay-container.theme-custom .feed-amount {
+  color: var(--custom-accent, #38BDF8) !important;
+}
+
+.overlay-container.theme-custom .milestone-pill {
+  background: var(--custom-card, #1E293B) !important;
+  border-color: var(--custom-accent, #38BDF8) !important;
+  color: var(--custom-accent, #38BDF8) !important;
+}
+
+.overlay-container.theme-custom .logo-clear-zone {
+  background: transparent !important;
+  border: none !important;
+  padding: 4px 8px !important;
+}
+
+.overlay-container.theme-custom .official-logo {
+  max-height: 85px;
+  height: auto;
+  max-width: 260px;
+}
+
+

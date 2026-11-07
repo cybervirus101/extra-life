@@ -143,6 +143,42 @@
       color: #FAF7F0;
     }
 
+    /* Thème personnalisé */
+    .alert-wrapper.theme-custom {
+      background: var(--custom-card, #1E293B) !important;
+      border: 4px solid var(--custom-accent, #38BDF8) !important;
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.85), 0 0 35px var(--custom-accent, #38BDF8) !important;
+    }
+
+    .alert-wrapper.theme-custom .sunburst-glow {
+      background: radial-gradient(circle, var(--custom-accent, #38BDF8) 0%, transparent 70%) !important;
+    }
+
+    .alert-wrapper.theme-custom .logo-container {
+      background: transparent !important;
+      border: none !important;
+    }
+
+    .alert-wrapper.theme-custom .alert-badge {
+      background: var(--custom-accent, #38BDF8) !important;
+      color: #FFFFFF !important;
+    }
+
+    .alert-wrapper.theme-custom .donor-name {
+      color: var(--custom-text, #F8FAFC) !important;
+    }
+
+    .alert-wrapper.theme-custom .donor-amount {
+      color: var(--custom-accent, #38BDF8) !important;
+      text-shadow: 0 2px 14px var(--custom-accent, #38BDF8) !important;
+    }
+
+    .alert-wrapper.theme-custom .donor-message {
+      background: rgba(0, 0, 0, 0.35) !important;
+      color: var(--custom-text, #F8FAFC) !important;
+      border-left: 4px solid var(--custom-accent, #38BDF8) !important;
+    }
+
     /* Rayonnement solaire d'arrière-plan */
     .sunburst-glow {
       position: absolute;
@@ -281,7 +317,7 @@
     <div class="sunburst-glow"></div>
 
     <div class="logo-container">
-      <img src="assets/logo-enfant-soleil-horizontal.png" alt="Au profit de enfant soleil" class="alert-logo">
+      <img src="assets/logo-enfant-soleil-horizontal.png" alt="Logo officiel" class="alert-logo">
     </div>
 
     <div class="alert-badge">☀️ Nouveau don reçu !</div>
@@ -315,22 +351,74 @@
         donorMessage: document.getElementById('donor-message'),
       };
 
-      const isExtraLife = CONFIG.theme.includes('extralife');
-      const isDark = CONFIG.theme === 'sombre' || CONFIG.theme === 'dark' || CONFIG.theme.includes('sombre');
-
-      if (isDark) {
-        elements.wrapper.classList.add('theme-dark');
+      function isColorDark(hex) {
+        if (!hex || typeof hex !== 'string') return true;
+        let c = hex.replace('#', '');
+        if (c.length === 3) c = c.split('').map(x => x + x).join('');
+        if (c.length !== 6) return true;
+        const r = parseInt(c.substr(0, 2), 16) || 0;
+        const g = parseInt(c.substr(2, 2), 16) || 0;
+        const b = parseInt(c.substr(4, 2), 16) || 0;
+        return (0.299 * r + 0.587 * g + 0.114 * b) < 140;
       }
-      if (isExtraLife) {
-        elements.wrapper.classList.add('theme-extralife');
+
+      const isCustom = CONFIG.theme === 'personnalise' || CONFIG.theme === 'custom';
+      const isExtraLife = CONFIG.theme.includes('extralife') || isCustom;
+      let isDark = CONFIG.theme === 'sombre' || CONFIG.theme === 'dark' || CONFIG.theme.includes('sombre');
+
+      if (isCustom) {
+        const cBg = urlParams.get('cBg') || '#0F172A';
+        const cCard = urlParams.get('cCard') || '#1E293B';
+        const cAccent = urlParams.get('cAccent') || '#38BDF8';
+        const cText = urlParams.get('cText') || '#F8FAFC';
+        const cLogo = urlParams.get('cLogo') || 'el-auto';
+
+        elements.wrapper.style.setProperty('--custom-bg', cBg);
+        elements.wrapper.style.setProperty('--custom-card', cCard);
+        elements.wrapper.style.setProperty('--custom-accent', cAccent);
+        elements.wrapper.style.setProperty('--custom-text', cText);
+        elements.wrapper.classList.add('theme-custom');
+
+        isDark = isColorDark(cCard);
+        if (isDark) {
+          elements.wrapper.classList.add('theme-dark');
+        }
+
         const badge = elements.wrapper.querySelector('.alert-badge');
         if (badge) {
-          badge.textContent = '🎮 Nouveau don Extra Life !';
+          badge.textContent = '🎮 Nouveau don reçu !';
         }
         const logo = elements.wrapper.querySelector('.alert-logo');
         if (logo) {
-          logo.src = isDark ? 'assets/logo-extra-life-white.svg' : 'assets/logo-extra-life-color.svg';
-          logo.alt = 'Extra Life — Au profit d\'Enfant Soleil';
+          if (cLogo === 'oes') {
+            logo.src = 'assets/logo-enfant-soleil-horizontal.png';
+            logo.alt = 'Opération Enfant Soleil';
+          } else if (cLogo === 'el-color') {
+            logo.src = 'assets/logo-extra-life-color.svg';
+            logo.alt = 'Extra Life';
+          } else if (cLogo === 'el-white') {
+            logo.src = 'assets/logo-extra-life-white.svg';
+            logo.alt = 'Extra Life';
+          } else {
+            logo.src = isDark ? 'assets/logo-extra-life-white.svg' : 'assets/logo-extra-life-color.svg';
+            logo.alt = 'Extra Life';
+          }
+        }
+      } else {
+        if (isDark) {
+          elements.wrapper.classList.add('theme-dark');
+        }
+        if (isExtraLife) {
+          elements.wrapper.classList.add('theme-extralife');
+          const badge = elements.wrapper.querySelector('.alert-badge');
+          if (badge) {
+            badge.textContent = '🎮 Nouveau don Extra Life !';
+          }
+          const logo = elements.wrapper.querySelector('.alert-logo');
+          if (logo) {
+            logo.src = isDark ? 'assets/logo-extra-life-white.svg' : 'assets/logo-extra-life-color.svg';
+            logo.alt = 'Extra Life';
+          }
         }
       }
 

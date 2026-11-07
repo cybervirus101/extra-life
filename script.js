@@ -1191,9 +1191,21 @@
     const isVertical = (layout === 'vertical');
     const isTwoTier = (layout === 'two-tier');
 
-    // Application du thème (clair, sombre, extralife-clair, extralife-sombre)
-    const isExtraLife = CONFIG.theme.includes('extralife');
-    const isDark = CONFIG.theme === 'sombre' || CONFIG.theme === 'dark' || CONFIG.theme.includes('sombre');
+    function isColorDark(hex) {
+      if (!hex || typeof hex !== 'string') return true;
+      let c = hex.replace('#', '');
+      if (c.length === 3) c = c.split('').map(x => x + x).join('');
+      if (c.length !== 6) return true;
+      const r = parseInt(c.substr(0, 2), 16) || 0;
+      const g = parseInt(c.substr(2, 2), 16) || 0;
+      const b = parseInt(c.substr(4, 2), 16) || 0;
+      return (0.299 * r + 0.587 * g + 0.114 * b) < 140;
+    }
+
+    // Application du thème (clair, sombre, extralife-clair, extralife-sombre, personnalise)
+    const isCustom = CONFIG.theme === 'personnalise' || CONFIG.theme === 'custom';
+    const isExtraLife = CONFIG.theme.includes('extralife') || isCustom;
+    let isDark = CONFIG.theme === 'sombre' || CONFIG.theme === 'dark' || CONFIG.theme.includes('sombre');
 
     // Application de la classe de layout
     if (elements.container) {
@@ -1206,33 +1218,68 @@
         elements.container.classList.add('layout-horizontal');
       }
 
-      elements.container.classList.remove('theme-light', 'theme-dark', 'theme-extralife');
-      if (isDark) {
-        elements.container.classList.add('theme-dark');
-      } else {
-        elements.container.classList.add('theme-light');
-      }
-      if (isExtraLife) {
-        elements.container.classList.add('theme-extralife');
-      }
-    }
+      elements.container.classList.remove('theme-light', 'theme-dark', 'theme-extralife', 'theme-custom');
 
-    // Gestion du logo officiel (Extra Life pour les thèmes Extra Life, Enfant Soleil pour les thèmes Enfant Soleil)
-    if (elements.brandLogo) {
-      if (isExtraLife) {
-        elements.brandLogo.src = isDark ? 'assets/logo-extra-life-white.svg' : 'assets/logo-extra-life-color.svg';
-        elements.brandLogo.alt = 'Extra Life — Au profit d\'Enfant Soleil';
-      } else {
-        if (CONFIG.logoMode === 'horizontal') {
-          elements.brandLogo.src = 'assets/logo-enfant-soleil-horizontal.png';
-        } else if (CONFIG.logoMode === 'vertical') {
-          elements.brandLogo.src = 'assets/logo-enfant-soleil-vertical.png';
-        } else if (isVertical) {
-          elements.brandLogo.src = 'assets/logo-enfant-soleil-vertical.png';
-        } else {
-          elements.brandLogo.src = 'assets/logo-enfant-soleil-horizontal.png';
+      if (isCustom) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const cBg = urlParams.get('cBg') || '#0F172A';
+        const cCard = urlParams.get('cCard') || '#1E293B';
+        const cAccent = urlParams.get('cAccent') || '#38BDF8';
+        const cText = urlParams.get('cText') || '#F8FAFC';
+        const cLogo = urlParams.get('cLogo') || 'el-auto';
+
+        isDark = isColorDark(cBg);
+
+        elements.container.classList.add(isDark ? 'theme-dark' : 'theme-light');
+        elements.container.classList.add('theme-custom');
+
+        elements.container.style.setProperty('--custom-bg', cBg);
+        elements.container.style.setProperty('--custom-card', cCard);
+        elements.container.style.setProperty('--custom-accent', cAccent);
+        elements.container.style.setProperty('--custom-text', cText);
+
+        if (elements.brandLogo) {
+          if (cLogo === 'oes') {
+            elements.brandLogo.src = 'assets/logo-enfant-soleil-horizontal.png';
+            elements.brandLogo.alt = 'Opération Enfant Soleil';
+          } else if (cLogo === 'el-color') {
+            elements.brandLogo.src = 'assets/logo-extra-life-color.svg';
+            elements.brandLogo.alt = 'Extra Life';
+          } else if (cLogo === 'el-white') {
+            elements.brandLogo.src = 'assets/logo-extra-life-white.svg';
+            elements.brandLogo.alt = 'Extra Life';
+          } else {
+            elements.brandLogo.src = isDark ? 'assets/logo-extra-life-white.svg' : 'assets/logo-extra-life-color.svg';
+            elements.brandLogo.alt = 'Extra Life';
+          }
         }
-        elements.brandLogo.alt = 'Au profit de enfant soleil';
+      } else {
+        if (isDark) {
+          elements.container.classList.add('theme-dark');
+        } else {
+          elements.container.classList.add('theme-light');
+        }
+        if (isExtraLife) {
+          elements.container.classList.add('theme-extralife');
+        }
+
+        if (elements.brandLogo) {
+          if (isExtraLife) {
+            elements.brandLogo.src = isDark ? 'assets/logo-extra-life-white.svg' : 'assets/logo-extra-life-color.svg';
+            elements.brandLogo.alt = 'Extra Life';
+          } else {
+            if (CONFIG.logoMode === 'horizontal') {
+              elements.brandLogo.src = 'assets/logo-enfant-soleil-horizontal.png';
+            } else if (CONFIG.logoMode === 'vertical') {
+              elements.brandLogo.src = 'assets/logo-enfant-soleil-vertical.png';
+            } else if (isVertical) {
+              elements.brandLogo.src = 'assets/logo-enfant-soleil-vertical.png';
+            } else {
+              elements.brandLogo.src = 'assets/logo-enfant-soleil-horizontal.png';
+            }
+            elements.brandLogo.alt = 'Opération Enfant Soleil';
+          }
+        }
       }
     }
   }
