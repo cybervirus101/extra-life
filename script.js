@@ -1191,6 +1191,10 @@
     const isVertical = (layout === 'vertical');
     const isTwoTier = (layout === 'two-tier');
 
+    // Application du thème (clair, sombre, extralife-clair, extralife-sombre)
+    const isExtraLife = CONFIG.theme.includes('extralife');
+    const isDark = CONFIG.theme === 'sombre' || CONFIG.theme === 'dark' || CONFIG.theme.includes('sombre');
+
     // Application de la classe de layout
     if (elements.container) {
       elements.container.classList.remove('layout-vertical', 'layout-two-tier', 'layout-horizontal');
@@ -1201,10 +1205,6 @@
       } else {
         elements.container.classList.add('layout-horizontal');
       }
-
-      // Application du thème (clair, sombre, extralife-clair, extralife-sombre)
-      const isExtraLife = CONFIG.theme.includes('extralife');
-      const isDark = CONFIG.theme === 'sombre' || CONFIG.theme === 'dark' || CONFIG.theme.includes('sombre');
 
       elements.container.classList.remove('theme-light', 'theme-dark', 'theme-extralife');
       if (isDark) {
