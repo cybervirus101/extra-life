@@ -629,7 +629,7 @@
       </p>
 
       <div class="input-group">
-        <input type="text" id="input-participant" class="input-field" placeholder="Ex: 582063 ou https://www.extra-life.org/participant/582063" value="">
+        <input type="text" id="input-participant" class="input-field" placeholder="Ex: 582063 ou https://www.extra-life.org/participant/582063" value="582063">
         <button id="btn-detect" class="btn btn-primary">🔍 Charger mes infos</button>
       </div>
 
@@ -1422,10 +1422,11 @@ Durant ce live, nous amassons des dons pour soutenir le développement d'une pé
         updateOptionMemory();
       });
 
-      // Initialisation : restaure le profil s'il était déjà mémorisé, sinon initialise à vide
+      // Initialisation : restaure le profil s'il était déjà mémorisé, sinon initialise avec 582063 par défaut
       const hadSaved = restoreSavedStreamer();
       if (!hadSaved) {
-        updateGeneratedUrls();
+        elements.inputParticipant.value = '582063';
+        detectStreamerInfo('582063');
       }
     })();
   </script>

@@ -26,16 +26,23 @@
     return overrides;
   }
 
+  const rawParticipantId = urlParams.get('participantID');
+  const isPlaceholderId = !rawParticipantId ||
+    rawParticipantId === 'VOTRE_ID' ||
+    rawParticipantId === 'null' ||
+    rawParticipantId === 'undefined' ||
+    rawParticipantId.trim() === '';
+
   const CONFIG = {
-    participantID: urlParams.get('participantID') || null,
-    teamID: urlParams.get('teamID') || null,
+    participantID: isPlaceholderId ? null : rawParticipantId.trim(),
+    teamID: (urlParams.get('teamID') && urlParams.get('teamID') !== 'null' && urlParams.get('teamID') !== 'VOTRE_ID') ? urlParams.get('teamID').trim() : null,
     mode: (urlParams.get('mode') || 'alternance').toLowerCase(), // 'alternance' (défaut), 'participant', 'team'
     alternanceIntervalMs: (parseInt(urlParams.get('interval'), 10) || 20) * 1000, // 20 secondes par défaut
     showMilestones: urlParams.get('milestones') !== 'false' && urlParams.get('milestones') !== '0',
     forcedRate: parseFloat(urlParams.get('rate')) || null,
     forcedGoal: parseFloat(urlParams.get('goal')) || null,
     pollIntervalSeconds: parseInt(urlParams.get('refresh'), 10) || 15,
-    isDemo: urlParams.get('demo') === 'true' || urlParams.get('demo') === '1' || !urlParams.get('participantID'),
+    isDemo: urlParams.get('demo') === 'true' || urlParams.get('demo') === '1' || isPlaceholderId,
     theme: (urlParams.get('theme') || 'extralife-sombre').toLowerCase(), // 'extralife-sombre' (défaut prioritaire), 'extralife-clair', 'clair', 'sombre'
     logoMode: (urlParams.get('logo') || 'auto').toLowerCase(), // 'auto', 'horizontal', 'vertical'
     layoutMode: (urlParams.get('layout') || 'auto').toLowerCase(), // 'auto', 'vertical', 'horizontal'
@@ -47,7 +54,7 @@
   };
 
   // Rétrocompatibilité : conservation de l'alias de démonstration initial
-  if (CONFIG.participantID === '582063' && !urlParams.get('overrides')) {
+  if ((CONFIG.participantID === '582063' || CONFIG.isDemo) && !urlParams.get('overrides')) {
     CONFIG.donorNameOverrides['Maxime Champeau'] = 'katastrofyk';
   }
 
@@ -626,7 +633,29 @@
   }
 
   function updateUI(donationsChanged = true) {
-    if (!state.participant && !state.team) return;
+    // Si aucune donnée active, tentative de restauration depuis le cache ou les données de démo
+    if (!state.participant && !state.team) {
+      if (CONFIG.isDemo) {
+        state.participant = getDemoParticipant();
+        if (CONFIG.mode === 'alternance' || CONFIG.mode === 'team') {
+          state.team = getDemoTeam();
+        }
+      } else {
+        try {
+          const cachedPart = safeStorage.getItem(STORAGE_KEYS.lastParticipantData);
+          const cachedTeam = safeStorage.getItem(STORAGE_KEYS.lastTeamData);
+          if (cachedPart) state.participant = JSON.parse(cachedPart);
+          if (cachedTeam) state.team = JSON.parse(cachedTeam);
+        } catch (e) {}
+      }
+
+      if (!state.participant && !state.team) {
+        state.participant = getDemoParticipant();
+        if (CONFIG.mode === 'alternance' || CONFIG.mode === 'team') {
+          state.team = getDemoTeam();
+        }
+      }
+    }
 
     // 1. Mise à jour de la barre et des compteurs
     updateProgressDisplay();
@@ -650,8 +679,8 @@
       }
     } else {
       if (elements.latestDonorName) elements.latestDonorName.textContent = 'En attente du premier don';
-      if (elements.latestDonorAmount) elements.latestDonorAmount.textContent = '--';
-      if (elements.latestDonorTime) elements.latestDonorTime.textContent = '';
+      if (elements.latestDonorAmount) elements.latestDonorAmount.innerHTML = '<span class="cur-cad">Soyez le premier ! 🎮</span>';
+      if (elements.latestDonorTime) elements.latestDonorTime.textContent = 'Campagne active';
       if (elements.latestDonorMessageLine) {
         elements.latestDonorMessageLine.innerHTML = '';
         elements.latestDonorMessageLine.style.display = 'none';
@@ -736,7 +765,7 @@
             <span class="feed-donor">Merci pour votre soutien !</span>
           </div>
           <div class="amount-line">
-            <span class="feed-amount">Tous unis pour Enfant Soleil ☀️</span>
+            <span class="feed-amount">Tous unis pour Extra Life 🎮</span>
           </div>
         </div>
       `;
@@ -835,32 +864,32 @@
 
   function getDemoParticipant() {
     return {
-      displayName: "Streamer Enfant Soleil",
-      sumDonations: 765.0,
-      fundraisingGoal: 1000.0,
-      numDonations: 14,
+      displayName: "cybervirus_101",
+      sumDonations: 107.16,
+      fundraisingGoal: 142.0,
+      numDonations: 7,
       eventName: "Extra Life 2026",
       participantID: 582063,
-      teamID: 67890,
-      teamName: "Les Soleils du Québec",
+      teamID: 75345,
+      teamName: "Les alliés du soleil",
     };
   }
 
   function getDemoTeam() {
     return {
-      name: "Les Soleils du Québec",
-      sumDonations: 3840.0,
-      fundraisingGoal: 5000.0,
-      numDonations: 42,
-      teamID: 67890,
+      name: "Les alliés du soleil",
+      sumDonations: 107.16,
+      fundraisingGoal: 500.0,
+      numDonations: 7,
+      teamID: 75345,
     };
   }
 
   function getDemoMilestones() {
     return [
-      { milestoneID: 1, fundraisingGoal: 500, description: "Défi piment fort en live", isComplete: true },
-      { milestoneID: 2, fundraisingGoal: 850, description: "Stream 12h non-stop", isComplete: false },
-      { milestoneID: 3, fundraisingGoal: 1000, description: "Chanson avec perruque", isComplete: false },
+      { milestoneID: 1, fundraisingGoal: 50, description: "Stream découverte", isComplete: true },
+      { milestoneID: 2, fundraisingGoal: 142, description: "Objectif Extra Life 2026", isComplete: false },
+      { milestoneID: 3, fundraisingGoal: 250, description: "Live spécial 12h", isComplete: false },
     ];
   }
 
@@ -868,34 +897,32 @@
     const now = new Date();
     return [
       {
-        displayName: "cybervirus_101",
-        amount: 20.0,
-        createdDateUTC: new Date(now - 12 * 60 * 1000).toISOString(),
+        donationID: "demo_1",
+        displayName: "billy_camaros",
+        amount: 10.70,
+        createdDateUTC: new Date(now - 15 * 60 * 1000).toISOString(),
         message: "Pour les enfants 🚸"
       },
       {
-        displayName: "Alexandre G.",
-        amount: 50.0,
-        createdDateUTC: new Date(now - 25 * 60 * 1000).toISOString(),
-        message: "Bravo pour cette belle initiative pour les enfants !"
+        donationID: "demo_2",
+        displayName: "Maxime Champeau",
+        amount: 20.0,
+        createdDateUTC: new Date(now - 45 * 60 * 1000).toISOString(),
+        message: "Bravo pour le live au profit d'Enfant Soleil !"
       },
       {
+        donationID: "demo_3",
         displayName: null, // Anonyme
-        amount: 25.0,
-        createdDateUTC: new Date(now - 45 * 60 * 1000).toISOString(),
+        amount: 15.0,
+        createdDateUTC: new Date(now - 120 * 60 * 1000).toISOString(),
         message: "Bon stream à tous !"
       },
       {
-        displayName: "Julie & Marc",
-        amount: 100.0,
-        createdDateUTC: new Date(now - 180 * 60 * 1000).toISOString(),
+        donationID: "demo_4",
+        displayName: "Alexandre C.",
+        amount: 25.0,
+        createdDateUTC: new Date(now - 240 * 60 * 1000).toISOString(),
         message: "Pour les petits guerriers d'Opération Enfant Soleil ☀️"
-      },
-      {
-        displayName: "Maxime T.",
-        amount: 20.0,
-        createdDateUTC: new Date(now - 300 * 60 * 1000).toISOString(),
-        message: ""
       }
     ];
   }
@@ -954,32 +981,44 @@
 
   async function refreshData() {
     try {
-      // 1. Prépare les requêtes en fonction du mode choisi
-      const promises = [fetchDonations()];
+      const isTeamMode = (CONFIG.mode === 'team');
 
-      if (CONFIG.mode === 'team') {
-        promises.push(fetchTeam());
-      } else {
-        promises.push(fetchParticipant());
-        if (CONFIG.showMilestones) {
-          promises.push(fetchMilestones());
-        }
-        if (CONFIG.mode === 'alternance' && CONFIG.teamID) {
-          promises.push(fetchTeam(CONFIG.teamID));
-        }
-      }
+      // 1. Préparation des requêtes indépendantes avec capture d'erreur locale
+      const pDonations = fetchDonations().catch(err => {
+        console.warn('[Overlay] Dons non récupérés via API:', err.message);
+        return null;
+      });
 
-      const results = await Promise.allSettled(promises);
-      const donationsRes = results[0].status === 'fulfilled' ? results[0].value : [];
-      let mainDataRes = results[1] && results[1].status === 'fulfilled' ? results[1].value : null;
+      const pParticipant = (!isTeamMode && CONFIG.participantID)
+        ? fetchParticipant(CONFIG.participantID).catch(err => {
+            console.warn('[Overlay] Participant non récupéré via API:', err.message);
+            return null;
+          })
+        : (isTeamMode ? Promise.resolve(null) : Promise.resolve(CONFIG.isDemo ? getDemoParticipant() : null));
 
-      if (CONFIG.mode === 'team') {
-        state.team = mainDataRes;
-      } else {
-        state.participant = mainDataRes;
+      const targetTeamId = isTeamMode ? (CONFIG.teamID || null) : CONFIG.teamID;
+      const pTeam = ((isTeamMode && targetTeamId) || (CONFIG.mode === 'alternance' && targetTeamId))
+        ? fetchTeam(targetTeamId).catch(err => {
+            console.warn('[Overlay] Équipe non récupérée via API:', err.message);
+            return null;
+          })
+        : Promise.resolve(null);
 
-        // Si le participant appartient à une équipe et qu'on est en alternance, auto-associer l'équipe
-        if (state.participant && state.participant.teamID && !CONFIG.teamID) {
+      const pMilestones = (CONFIG.showMilestones && !isTeamMode && CONFIG.participantID)
+        ? fetchMilestones(CONFIG.participantID).catch(() => [])
+        : Promise.resolve(CONFIG.isDemo ? getDemoMilestones() : []);
+
+      const [donationsRes, partRes, teamRes, milesRes] = await Promise.all([
+        pDonations,
+        pParticipant,
+        pTeam,
+        pMilestones
+      ]);
+
+      // 2. Gestion du participant & auto-association de son équipe
+      if (partRes) {
+        state.participant = partRes;
+        if (state.participant.teamID && !CONFIG.teamID) {
           CONFIG.teamID = state.participant.teamID;
           if (CONFIG.mode === 'alternance' && !state.team) {
             fetchTeam(state.participant.teamID).then(teamData => {
@@ -987,19 +1026,58 @@
                 state.team = teamData;
                 updateUI(false);
               }
-            });
+            }).catch(() => {});
           }
+        }
+      } else if (!state.participant) {
+        try {
+          const cachedPart = safeStorage.getItem(STORAGE_KEYS.lastParticipantData);
+          if (cachedPart) state.participant = JSON.parse(cachedPart);
+        } catch (e) {}
+      }
+
+      // 3. Gestion de l'équipe
+      if (teamRes) {
+        state.team = teamRes;
+      } else if (!state.team && (isTeamMode || CONFIG.mode === 'alternance')) {
+        try {
+          const cachedTeam = safeStorage.getItem(STORAGE_KEYS.lastTeamData);
+          if (cachedTeam) state.team = JSON.parse(cachedTeam);
+        } catch (e) {}
+      }
+
+      // 4. Jalons
+      if (Array.isArray(milesRes) && milesRes.length > 0) {
+        state.milestones = milesRes;
+      } else if (!state.milestones || state.milestones.length === 0) {
+        try {
+          const cachedMiles = safeStorage.getItem(STORAGE_KEYS.lastMilestonesData);
+          if (cachedMiles) state.milestones = JSON.parse(cachedMiles);
+        } catch (e) {}
+      }
+
+      // 5. Filet de sécurité ultime si aucune connexion et aucun cache (mode démo de secours)
+      if (!state.participant && !state.team) {
+        console.warn('[Overlay] Aucune donnée API ni cache, utilisation des données démo de secours');
+        state.participant = getDemoParticipant();
+        if (CONFIG.mode === 'alternance' || CONFIG.mode === 'team') {
+          state.team = getDemoTeam();
         }
       }
 
-      if (results[2] && results[2].status === 'fulfilled') {
-        state.milestones = results[2].value || [];
+      // 6. Traitement des dons
+      let rawDonations = donationsRes;
+      if (!rawDonations && (!state.donations || state.donations.length === 0)) {
+        try {
+          const cachedDons = safeStorage.getItem(STORAGE_KEYS.lastDonationsData);
+          if (cachedDons) rawDonations = JSON.parse(cachedDons);
+        } catch (e) {}
       }
-      if (results[3] && results[3].status === 'fulfilled') {
-        state.team = results[3].value;
+      if (!rawDonations && CONFIG.isDemo) {
+        rawDonations = getDemoDonations();
       }
 
-      const processedDonations = processDonations(donationsRes);
+      const processedDonations = processDonations(rawDonations || state.donations || []);
       const isFirstLoad = state.donations.length === 0 && state.lastSeenDonationId === null;
       const latestDonation = processedDonations.length > 0 ? processedDonations[0] : null;
       const latestId = latestDonation ? latestDonation.donationID : null;
@@ -1019,30 +1097,14 @@
 
       updateUI(hasDonationsChanged);
     } catch (err) {
-      console.warn('[Overlay] Erreur réseau, maintien des données précédentes:', err.message);
-
-      // Résilience hors-ligne : charge la dernière sauvegarde si mémoire vide
+      console.warn('[Overlay] Erreur générale lors du rafraîchissement:', err.message);
       if (!state.participant && !state.team) {
-        try {
-          const cachedPart = safeStorage.getItem(STORAGE_KEYS.lastParticipantData);
-          const cachedTeam = safeStorage.getItem(STORAGE_KEYS.lastTeamData);
-          const cachedDons = safeStorage.getItem(STORAGE_KEYS.lastDonationsData);
-          const cachedMiles = safeStorage.getItem(STORAGE_KEYS.lastMilestonesData);
-
-          if (cachedPart) state.participant = JSON.parse(cachedPart);
-          if (cachedTeam) state.team = JSON.parse(cachedTeam);
-          if (cachedMiles) state.milestones = JSON.parse(cachedMiles);
-          if (cachedDons) {
-            state.donations = processDonations(JSON.parse(cachedDons));
-            if (state.donations.length > 0) {
-              state.lastSeenDonationId = state.donations[0].donationID;
-            }
-          }
-          updateUI(true);
-        } catch (e) {
-          console.error('[Overlay] Erreur lecture cache:', e);
+        state.participant = getDemoParticipant();
+        if (CONFIG.mode === 'alternance' || CONFIG.mode === 'team') {
+          state.team = getDemoTeam();
         }
       }
+      updateUI(true);
     }
   }
 
@@ -1128,6 +1190,30 @@
     applyThemeAndLogo();
     setupSimulatorListener();
 
+    // Rendu synchrone immédiat (0 ms) avec données locales ou démo pour éliminer tout temps de chargement visible
+    try {
+      const cachedPart = safeStorage.getItem(STORAGE_KEYS.lastParticipantData);
+      const cachedTeam = safeStorage.getItem(STORAGE_KEYS.lastTeamData);
+      const cachedDons = safeStorage.getItem(STORAGE_KEYS.lastDonationsData);
+      const cachedMiles = safeStorage.getItem(STORAGE_KEYS.lastMilestonesData);
+
+      if (cachedPart) state.participant = JSON.parse(cachedPart);
+      if (cachedTeam) state.team = JSON.parse(cachedTeam);
+      if (cachedMiles) state.milestones = JSON.parse(cachedMiles);
+      if (cachedDons) state.donations = processDonations(JSON.parse(cachedDons));
+    } catch (e) {}
+
+    if (!state.participant && !state.team && (CONFIG.isDemo || !CONFIG.participantID)) {
+      state.participant = getDemoParticipant();
+      if (CONFIG.mode === 'alternance' || CONFIG.mode === 'team') {
+        state.team = getDemoTeam();
+      }
+      state.donations = processDonations(getDemoDonations());
+    }
+
+    // Affiche immédiatement l'interface avec les données de départ
+    updateUI(true);
+
     window.addEventListener('resize', () => {
       applyThemeAndLogo();
       evaluateActiveCarouselMessage();
@@ -1136,7 +1222,7 @@
       }
     });
 
-    // 1. Première récupération immédiate des données
+    // 1. Première récupération immédiate des données réelles
     refreshData();
 
     // 2. Récupération du taux de change en parallèle
