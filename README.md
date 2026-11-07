@@ -1,22 +1,22 @@
-# ☀️ Kit Streamer & Overlay — Au profit d'Opération Enfant Soleil (Extra Life)
+# 🎮 Kit Streamer Extra Life — Overlays & Alertes OBS
 
-Boîte à outils complète pour streamers Twitch et YouTube afin d'afficher leurs résultats de dons en direct dans OBS Studio et Streamlabs, **100% conforme aux normes officielles du Guide de marque Enfant Soleil (Février 2025)**.
+Boîte à outils complète pour streamers Twitch et YouTube afin d'afficher leurs résultats de dons en direct dans OBS Studio et Streamlabs, au profit d'**Opération Enfant Soleil (Extra Life)**.
 
 ---
 
 ## 🌟 Fonctionnalités Principales
 
 1. **Zéro-Code & Auto-Détection** :
-   - Le streamer saisit uniquement son **ID Extra Life** (ou colle son lien) sur le configurateur web (`index.html`).
+   - Le streamer saisit uniquement son **ID Extra Life** (ou colle son lien) sur le configurateur web : `https://cybervirus101.github.io/extra-life/`
    - L'outil interroge automatiquement l'API DonorDrive pour auto-compléter son pseudo, avatar, objectif, cagnotte d'équipe et défis/jalons officiels.
 
 2. **3 Modes de Collecte au choix** :
    - **Solo** : Affiche uniquement la jauge et l'objectif individuel du streamer.
    - **Équipe** : Affiche la cagnotte globale de l'équipe (`teamID`).
-   - **Alternance douce (Recommandé)** : Bascule fluide toutes les 12-15 secondes entre l'objectif personnel et l'objectif global de l'équipe avec animation douce.
+   - **Alternance douce (Recommandé)** : Bascule fluide toutes les 12-20 secondes entre l'objectif personnel et l'objectif global de l'équipe avec animation douce.
 
 3. **Source Alerte de Don Indépendante (`alert.html`)** :
-   - Pop-up lumineux festif avec rayonnement solaire et logo partenaire.
+   - Pop-up lumineux festif avec rayonnement solaire / néon gamer et logo officiel.
    - Jingle carillon doux généré automatiquement via Web Audio API (aucun risque de fichier manquant).
    - Positionnable n'importe où dans OBS indépendamment de la barre.
    - Gestion de file d'attente (aucun don superposé ou manqué lors d'afflux de dons).
@@ -29,8 +29,8 @@ Boîte à outils complète pour streamers Twitch et YouTube afin d'afficher leur
 
 6. **Kit Twitch 100% Liens & Panneaux** :
    - Texte Markdown prêt à coller dans Twitch avec les liens de don insérés.
-   - Générateur de bannière d'en-tête Twitch 320x110 conforme à la charte Enfant Soleil.
-   - Commandes pour chatbots (`!don`, `!equipe`, `!soleil`).
+   - Générateur de bannière d'en-tête Twitch 320x210 conforme aux normes.
+   - Commandes pour chatbots (`!don`, `!equipe`).
 
 ---
 
@@ -39,7 +39,7 @@ Boîte à outils complète pour streamers Twitch et YouTube afin d'afficher leur
 ### Méthode Web (Recommandée — Zéro installation)
 
 1. Ouvrez le configurateur web :  
-   👉 `https://[ton-utilisateur].github.io/overlay-enfant-soleil/`
+   👉 **`https://cybervirus101.github.io/extra-life/`**
 2. Entrez votre ID de participant Extra Life et personnalisez vos options.
 3. Copiez les liens générés et collez-les dans OBS en ajoutant des **Sources Navigateur (Browser Source)** :
 
