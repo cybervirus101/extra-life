@@ -36,7 +36,7 @@
     forcedGoal: parseFloat(urlParams.get('goal')) || null,
     pollIntervalSeconds: parseInt(urlParams.get('refresh'), 10) || 15,
     isDemo: urlParams.get('demo') === 'true' || urlParams.get('demo') === '1' || !urlParams.get('participantID'),
-    theme: (urlParams.get('theme') || 'clair').toLowerCase(), // 'clair' (défaut) ou 'sombre'
+    theme: (urlParams.get('theme') || 'extralife-sombre').toLowerCase(), // 'extralife-sombre' (défaut prioritaire), 'extralife-clair', 'clair', 'sombre'
     logoMode: (urlParams.get('logo') || 'auto').toLowerCase(), // 'auto', 'horizontal', 'vertical'
     layoutMode: (urlParams.get('layout') || 'auto').toLowerCase(), // 'auto', 'vertical', 'horizontal'
     carouselIntervalMs: 8000, // 8 secondes pour laisser défiler les messages confortablement
@@ -1098,16 +1098,22 @@
       }
     }
 
-    // Gestion du logo officiel (horizontal ou vertical selon ratio ou paramètre d'URL)
+    // Gestion du logo officiel (Extra Life pour les thèmes Extra Life, Enfant Soleil pour les thèmes Enfant Soleil)
     if (elements.brandLogo) {
-      if (CONFIG.logoMode === 'horizontal') {
-        elements.brandLogo.src = 'assets/logo-enfant-soleil-horizontal.png';
-      } else if (CONFIG.logoMode === 'vertical') {
-        elements.brandLogo.src = 'assets/logo-enfant-soleil-vertical.png';
-      } else if (isVertical) {
-        elements.brandLogo.src = 'assets/logo-enfant-soleil-vertical.png';
+      if (isExtraLife) {
+        elements.brandLogo.src = isDark ? 'assets/logo-extra-life-white.svg' : 'assets/logo-extra-life-color.svg';
+        elements.brandLogo.alt = 'Extra Life — Au profit d\'Enfant Soleil';
       } else {
-        elements.brandLogo.src = 'assets/logo-enfant-soleil-horizontal.png';
+        if (CONFIG.logoMode === 'horizontal') {
+          elements.brandLogo.src = 'assets/logo-enfant-soleil-horizontal.png';
+        } else if (CONFIG.logoMode === 'vertical') {
+          elements.brandLogo.src = 'assets/logo-enfant-soleil-vertical.png';
+        } else if (isVertical) {
+          elements.brandLogo.src = 'assets/logo-enfant-soleil-vertical.png';
+        } else {
+          elements.brandLogo.src = 'assets/logo-enfant-soleil-horizontal.png';
+        }
+        elements.brandLogo.alt = 'Au profit de enfant soleil';
       }
     }
   }

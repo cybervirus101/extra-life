@@ -73,7 +73,16 @@
     }
 
     .alert-wrapper.theme-extralife .logo-container {
+      background: #FFFFFF;
       border-color: rgba(28, 158, 214, 0.4);
+      padding: 10px 28px;
+    }
+
+    .alert-wrapper.theme-extralife .alert-logo {
+      height: 72px;
+      max-width: 260px;
+      width: auto;
+      object-fit: contain;
     }
 
     .alert-wrapper.theme-extralife .alert-badge {
@@ -108,9 +117,10 @@
     }
 
     .alert-wrapper.theme-extralife.theme-dark .logo-container {
-      background: #FFFFFF;
-      border-color: rgba(28, 158, 214, 0.6);
-      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.3);
+      background: transparent;
+      border: 2px solid rgba(28, 158, 214, 0.4);
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
+      padding: 10px 28px;
     }
 
     .alert-wrapper.theme-extralife.theme-dark .alert-badge {
@@ -289,7 +299,7 @@
         participantID: urlParams.get('participantID') || null,
         teamID: urlParams.get('teamID') || null,
         mode: (urlParams.get('mode') || 'participant').toLowerCase(),
-        theme: (urlParams.get('theme') || 'clair').toLowerCase(),
+        theme: (urlParams.get('theme') || 'extralife-sombre').toLowerCase(),
         sound: urlParams.get('sound') !== 'false' && urlParams.get('sound') !== '0',
         volume: parseFloat(urlParams.get('volume')) || 0.7,
         durationMs: (parseInt(urlParams.get('duration'), 10) || 6) * 1000,
@@ -316,6 +326,11 @@
         const badge = elements.wrapper.querySelector('.alert-badge');
         if (badge) {
           badge.textContent = '🎮 Nouveau don Extra Life !';
+        }
+        const logo = elements.wrapper.querySelector('.alert-logo');
+        if (logo) {
+          logo.src = isDark ? 'assets/logo-extra-life-white.svg' : 'assets/logo-extra-life-color.svg';
+          logo.alt = 'Extra Life — Au profit d\'Enfant Soleil';
         }
       }
 

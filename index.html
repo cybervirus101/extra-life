@@ -9,12 +9,26 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root {
+      /* Couleurs officielles Extra Life & CMN */
+      --el-navy-deep: #08101C;
+      --el-navy-bg: #0B1626;
+      --el-navy-card: #13233A;
+      --el-navy-card-border: rgba(28, 158, 214, 0.3);
+      --el-navy-input: #0D1B2D;
+      --el-bleu-cmn: #0E7CA2;
+      --el-cyan: #1C9ED6;
+      --el-cyan-light: #5BC3F0;
+      --el-cyan-glow: rgba(28, 158, 214, 0.4);
+      --el-vert-manette: #62AF0F;
+      --el-vert-hover: #50930B;
+      --el-jaune-cmn: #FFCB05;
+      --el-text-main: #FFFFFF;
+      --el-text-sub: #A8C7E0;
+      --el-text-dim: #6E8DA8;
+
+      /* Enfant Soleil (Palette partenaire) */
       --es-jaune-soleil: #FFD000;
       --es-rouge-sante: #F15029;
-      --es-blanc-chaud: #FAF7F0;
-      --es-noir-velours: #252625;
-      --es-orange: #F5AC1C;
-      --es-corail: #EF6E63;
       --font-main: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
       --radius: 16px;
     }
@@ -26,11 +40,12 @@
     }
 
     body {
-      background: #F3EFE6;
-      color: var(--es-noir-velours);
+      background: var(--el-navy-bg);
+      color: var(--el-text-main);
       font-family: var(--font-main);
       line-height: 1.5;
       padding: 30px 24px 80px 24px;
+      background-image: radial-gradient(circle at 50% 0%, rgba(28, 158, 214, 0.12) 0%, transparent 60%);
     }
 
     .container {
@@ -38,62 +53,89 @@
       margin: 0 auto;
     }
 
-    /* En-tête officiel */
+    /* En-tête officiel Extra Life */
     .header {
-      background: var(--es-blanc-chaud);
+      background: linear-gradient(180deg, #16263F 0%, #0F1D30 100%);
       border-radius: var(--radius);
-      border: 4px solid var(--es-jaune-soleil);
-      padding: 30px;
+      border: 3px solid var(--el-cyan);
+      padding: 32px 24px;
       text-align: center;
       margin-bottom: 30px;
-      box-shadow: 0 8px 30px rgba(37, 38, 37, 0.08);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7), 0 0 30px rgba(28, 158, 214, 0.25);
     }
 
-    .logo-wrapper {
-      display: inline-block;
-      background: #FFFFFF;
-      padding: 18px 40px;
-      border-radius: 18px;
-      margin-bottom: 20px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-      border: 2px solid rgba(255, 208, 0, 0.35);
+    .header-logos {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 18px;
     }
 
-    .logo-wrapper img {
-      height: 110px;
+    .hero-logo-el {
+      height: 85px;
       max-width: 100%;
+      width: auto;
+      display: block;
+      filter: drop-shadow(0 4px 14px rgba(28, 158, 214, 0.5));
+    }
+
+    .partner-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #FFFFFF;
+      border: 2px solid var(--es-jaune-soleil);
+      padding: 6px 18px;
+      border-radius: 30px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+    }
+
+    .partner-label {
+      font-size: 13px;
+      font-weight: 800;
+      color: #252625;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .partner-logo-oes {
+      height: 38px;
       width: auto;
       display: block;
     }
 
     .header h1 {
-      font-size: 26px;
+      font-size: 28px;
       font-weight: 900;
-      color: var(--es-noir-velours);
+      color: #FFFFFF;
       margin-bottom: 8px;
+      letter-spacing: 0.5px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
     }
 
     .header p {
       font-size: 16px;
-      color: #555;
-      max-width: 650px;
+      color: var(--el-text-sub);
+      max-width: 680px;
       margin: 0 auto;
     }
 
     /* Cartes d'étapes */
     .step-card {
-      background: var(--es-blanc-chaud);
+      background: var(--el-navy-card);
       border-radius: var(--radius);
-      border: 3px solid rgba(255, 208, 0, 0.5);
+      border: 2px solid var(--el-navy-card-border);
       padding: 26px;
       margin-bottom: 24px;
-      box-shadow: 0 4px 20px rgba(37, 38, 37, 0.05);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
       transition: all 0.3s ease;
     }
 
     .step-card:hover {
-      border-color: var(--es-jaune-soleil);
-      box-shadow: 0 6px 24px rgba(255, 208, 0, 0.25);
+      border-color: var(--el-cyan);
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.6), 0 0 20px rgba(28, 158, 214, 0.2);
     }
 
     .step-title {
@@ -102,15 +144,15 @@
       gap: 12px;
       font-size: 20px;
       font-weight: 800;
-      color: var(--es-noir-velours);
+      color: #FFFFFF;
       margin-bottom: 16px;
     }
 
     .step-number {
-      background: var(--es-rouge-sante);
+      background: linear-gradient(135deg, var(--el-cyan) 0%, var(--el-bleu-cmn) 100%);
       color: #FFFFFF;
-      width: 32px;
-      height: 32px;
+      width: 34px;
+      height: 34px;
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -118,6 +160,13 @@
       font-size: 15px;
       font-weight: 900;
       flex-shrink: 0;
+      box-shadow: 0 2px 10px rgba(28, 158, 214, 0.5);
+    }
+
+    .step-instruction {
+      margin-bottom: 14px;
+      font-size: 14px;
+      color: var(--el-text-sub);
     }
 
     /* Formulaire & Recherche */
@@ -133,16 +182,21 @@
       font-size: 16px;
       font-weight: 600;
       padding: 12px 18px;
-      border: 2px solid #D8D2C5;
+      border: 2px solid rgba(28, 158, 214, 0.4);
       border-radius: 12px;
-      background: #FFFFFF;
-      color: var(--es-noir-velours);
-      transition: border 0.2s ease;
+      background: var(--el-navy-input);
+      color: #FFFFFF;
+      transition: all 0.2s ease;
     }
 
     .input-field:focus {
       outline: none;
-      border-color: var(--es-rouge-sante);
+      border-color: var(--el-cyan);
+      box-shadow: 0 0 0 3px rgba(28, 158, 214, 0.3);
+    }
+
+    .input-field::placeholder {
+      color: var(--el-text-dim);
     }
 
     .btn {
@@ -162,62 +216,66 @@
     }
 
     .btn-primary {
-      background: var(--es-rouge-sante);
+      background: linear-gradient(135deg, var(--el-cyan) 0%, var(--el-bleu-cmn) 100%);
       color: #FFFFFF;
-      box-shadow: 0 4px 14px rgba(241, 80, 41, 0.35);
+      box-shadow: 0 4px 16px rgba(28, 158, 214, 0.4);
     }
 
     .btn-primary:hover {
-      background: #d63f19;
+      background: linear-gradient(135deg, var(--el-cyan-light) 0%, var(--el-cyan) 100%);
       transform: translateY(-2px);
+      box-shadow: 0 6px 22px rgba(28, 158, 214, 0.6);
     }
 
     .btn-secondary {
-      background: var(--es-jaune-soleil);
-      color: var(--es-noir-velours);
-      box-shadow: 0 4px 14px rgba(255, 208, 0, 0.35);
+      background: var(--el-vert-manette);
+      color: #FFFFFF;
+      box-shadow: 0 4px 14px rgba(98, 175, 15, 0.35);
     }
 
     .btn-secondary:hover {
-      background: #e6bc00;
+      background: var(--el-vert-hover);
       transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(98, 175, 15, 0.55);
     }
 
     .btn-outline {
       background: transparent;
-      border: 2px solid var(--es-noir-velours);
-      color: var(--es-noir-velours);
+      border: 2px solid var(--el-cyan);
+      color: var(--el-cyan);
     }
 
     .btn-outline:hover {
-      background: var(--es-noir-velours);
-      color: #FFFFFF;
+      background: var(--el-cyan);
+      color: #0A1424;
+      transform: translateY(-2px);
     }
 
     /* Carte de profil détectée */
     .profile-card {
       display: none;
-      background: #FFFFFF;
-      border: 2px solid #E5E0D5;
+      background: var(--el-navy-input);
+      border: 2px solid var(--el-cyan);
       border-radius: 14px;
       padding: 16px;
       margin-top: 16px;
       gap: 16px;
       align-items: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
     }
 
     .profile-avatar {
       width: 60px;
       height: 60px;
       border-radius: 50%;
-      border: 3px solid var(--es-jaune-soleil);
+      border: 3px solid var(--el-cyan);
       object-fit: cover;
     }
 
     .profile-info h3 {
       font-size: 18px;
       font-weight: 800;
-      color: var(--es-noir-velours);
+      color: #FFFFFF;
     }
 
     .profile-badges {
@@ -233,18 +291,21 @@
       font-weight: 700;
       padding: 3px 10px;
       border-radius: 20px;
-      background: #EEE9DC;
-      color: #444;
+      background: rgba(28, 158, 214, 0.15);
+      color: var(--el-cyan-light);
+      border: 1px solid rgba(28, 158, 214, 0.3);
     }
 
     .badge-gold {
-      background: var(--es-jaune-soleil);
-      color: var(--es-noir-velours);
+      background: rgba(255, 203, 5, 0.2);
+      color: var(--el-jaune-cmn);
+      border-color: rgba(255, 203, 5, 0.4);
     }
 
     .badge-red {
-      background: var(--es-rouge-sante);
-      color: #FFFFFF;
+      background: rgba(98, 175, 15, 0.2);
+      color: #8CDE35;
+      border-color: rgba(98, 175, 15, 0.4);
     }
 
     /* Grille d'options */
@@ -256,8 +317,8 @@
     }
 
     .option-box {
-      background: #FFFFFF;
-      border: 2px solid #E5E0D5;
+      background: var(--el-navy-input);
+      border: 1.5px solid var(--el-navy-card-border);
       border-radius: 12px;
       padding: 14px;
     }
@@ -266,7 +327,7 @@
       display: block;
       font-size: 13px;
       font-weight: 800;
-      color: #666;
+      color: var(--el-text-sub);
       margin-bottom: 8px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
@@ -279,26 +340,38 @@
       font-weight: 700;
       padding: 9px 12px;
       border-radius: 8px;
-      border: 2px solid #DDD;
-      background: #FAFAFA;
-      color: var(--es-noir-velours);
+      border: 2px solid rgba(28, 158, 214, 0.4);
+      background: #091322;
+      color: #FFFFFF;
     }
 
-    /* Stepper d'incrément/décrément avec saisie manuelle */
+    .option-select optgroup {
+      background: #091322;
+      color: var(--el-cyan);
+      font-weight: 800;
+    }
+
+    .option-select option {
+      background: #091322;
+      color: #FFFFFF;
+      font-weight: 600;
+    }
+
+    /* Stepper d'incrément/décrément */
     .stepper-group {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: #FAFAFA;
-      border: 2px solid #DDD;
+      background: #091322;
+      border: 2px solid rgba(28, 158, 214, 0.4);
       border-radius: 8px;
       padding: 4px;
       gap: 6px;
     }
 
     .btn-stepper {
-      background: var(--es-jaune-soleil);
-      color: var(--es-noir-velours);
+      background: var(--el-cyan);
+      color: #FFFFFF;
       border: none;
       border-radius: 6px;
       width: 38px;
@@ -314,7 +387,7 @@
     }
 
     .btn-stepper:hover {
-      background: #e6bc00;
+      background: var(--el-bleu-cmn);
       transform: scale(1.05);
     }
 
@@ -329,14 +402,14 @@
     .stepper-input {
       width: 58px;
       padding: 5px 4px;
-      border: 1px solid #CCC;
+      border: 1px solid rgba(28, 158, 214, 0.5);
       border-radius: 6px;
       text-align: center;
       font-family: inherit;
       font-size: 15px;
       font-weight: 800;
-      color: var(--es-noir-velours);
-      background: #FFFFFF;
+      color: #FFFFFF;
+      background: var(--el-navy-input);
       -moz-appearance: textfield;
     }
 
@@ -348,23 +421,24 @@
 
     .stepper-input:focus {
       outline: none;
-      border-color: var(--es-rouge-sante);
-      box-shadow: 0 0 0 2px rgba(241, 80, 41, 0.2);
+      border-color: var(--el-cyan);
+      box-shadow: 0 0 0 2px rgba(28, 158, 214, 0.3);
     }
 
     .stepper-unit {
       font-size: 13.5px;
       font-weight: 700;
-      color: #666;
+      color: var(--el-text-sub);
     }
 
     /* Liens OBS prêts */
     .obs-card {
-      background: #FFFFFF;
-      border: 2px solid var(--es-jaune-soleil);
+      background: var(--el-navy-input);
+      border: 2px solid var(--el-cyan);
       border-radius: 14px;
       padding: 18px;
       margin-bottom: 18px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
     }
 
     .obs-card-header {
@@ -375,29 +449,43 @@
     }
 
     .obs-card-title {
-      font-size: 16px;
+      font-size: 17px;
       font-weight: 800;
-      color: var(--es-noir-velours);
+      color: #FFFFFF;
     }
 
-    .obs-dims-badge {
+    /* Hiérarchie résolutions : Recommandé en grand et clair, limites discrètes en dessous */
+    .obs-rec-box {
       display: inline-block;
-      font-size: 12.5px;
-      font-weight: 700;
-      color: var(--es-rouge-sante);
-      background: rgba(241, 80, 41, 0.08);
-      border: 1px solid rgba(241, 80, 41, 0.2);
-      padding: 4px 10px;
-      border-radius: 6px;
+      font-size: 14.5px;
+      font-weight: 800;
+      color: #FFFFFF;
+      background: rgba(28, 158, 214, 0.2);
+      border: 1.5px solid var(--el-cyan);
+      padding: 7px 14px;
+      border-radius: 8px;
       width: fit-content;
+      margin: 4px 0 2px 0;
+      box-shadow: 0 0 14px rgba(28, 158, 214, 0.3);
+    }
+
+    .obs-rec-box strong {
+      color: #5BE6FF;
+    }
+
+    .obs-dims-limits {
+      font-size: 12px;
+      color: var(--el-text-dim);
       margin-top: 2px;
+      margin-bottom: 4px;
+      font-style: italic;
     }
 
     .obs-formats-detail {
-      font-size: 12px;
-      color: #666;
+      font-size: 13px;
+      color: var(--el-text-sub);
       margin-top: 4px;
-      line-height: 1.4;
+      line-height: 1.45;
     }
 
     .url-row {
@@ -411,16 +499,16 @@
       font-family: monospace;
       font-size: 13.5px;
       padding: 10px 14px;
-      border: 1px solid #CCC;
+      border: 1px solid rgba(28, 158, 214, 0.4);
       border-radius: 10px;
-      background: #F9F9F9;
-      color: #333;
+      background: #08101C;
+      color: #70C9FF;
     }
 
     /* Simulateur */
     .simulator-box {
-      background: rgba(255, 208, 0, 0.15);
-      border: 2px dashed var(--es-orange);
+      background: rgba(28, 158, 214, 0.12);
+      border: 2px dashed var(--el-cyan);
       border-radius: 14px;
       padding: 18px;
       margin-top: 16px;
@@ -434,7 +522,7 @@
     .simulator-info {
       font-size: 14px;
       font-weight: 700;
-      color: var(--es-noir-velours);
+      color: #FFFFFF;
     }
 
     .simulator-actions {
@@ -442,12 +530,12 @@
       gap: 10px;
     }
 
-    /* Bloc de texte Markdown (fond clair assorti aux autres champs) */
+    /* Bloc de texte Markdown */
     .code-block {
       position: relative;
-      background: #FFFFFF;
-      color: var(--es-noir-velours);
-      border: 2px solid #D8D2C5;
+      background: #08101C;
+      color: #E1F0FA;
+      border: 2px solid rgba(28, 158, 214, 0.35);
       font-family: inherit;
       font-size: 14px;
       line-height: 1.6;
@@ -458,7 +546,7 @@
       max-height: 250px;
       overflow-y: auto;
       margin-top: 10px;
-      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.03);
+      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.5);
     }
 
     .btn-copy-code {
@@ -476,16 +564,16 @@
       align-items: center;
       gap: 20px;
       margin-top: 14px;
-      background: #FFFFFF;
+      background: var(--el-navy-input);
       padding: 18px;
       border-radius: 12px;
-      border: 2px solid #E5E0D5;
+      border: 2px solid var(--el-navy-card-border);
     }
 
     .twitch-canvas {
-      border: 1px solid #DDD;
+      border: 1px solid rgba(28, 158, 214, 0.4);
       border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
       max-width: 100%;
       height: auto;
     }
@@ -494,13 +582,14 @@
       position: fixed;
       bottom: 24px;
       right: 24px;
-      background: var(--es-noir-velours);
-      color: var(--es-jaune-soleil);
+      background: #0C1829;
+      color: var(--el-cyan-light);
+      border: 2px solid var(--el-cyan);
       padding: 12px 24px;
       border-radius: 10px;
       font-size: 14px;
       font-weight: 800;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.7), 0 0 15px rgba(28, 158, 214, 0.5);
       display: none;
       z-index: 9999;
       animation: toastIn 0.3s ease;
@@ -516,10 +605,14 @@
 
   <div class="container">
 
-    <!-- En-tête -->
+    <!-- En-tête officiel Extra Life -->
     <header class="header">
-      <div class="logo-wrapper">
-        <img src="assets/logo-enfant-soleil-horizontal.png" alt="Au profit de enfant soleil">
+      <div class="header-logos">
+        <img class="hero-logo-el" src="assets/logo-extra-life-white.svg" alt="Extra Life">
+        <div class="partner-pill">
+          <span class="partner-label">Au profit officiel de</span>
+          <img class="partner-logo-oes" src="assets/logo-enfant-soleil-horizontal.png" alt="Opération Enfant Soleil">
+        </div>
       </div>
       <h1>🎮 Kit Streamer Extra Life</h1>
       <p>Configurez votre overlay OBS, vos alertes en direct et vos panneaux Twitch au profit d'Opération Enfant Soleil en 30 secondes sans aucune installation.</p>
@@ -598,13 +691,13 @@
         <div class="option-box">
           <label for="select-theme">Thème visuel</label>
           <select id="select-theme" class="option-select">
-            <optgroup label="☀️ Opération Enfant Soleil">
-              <option value="clair" selected>☀️ Enfant Soleil — Thème clair (Jaune & Blanc)</option>
-              <option value="sombre">🌙 Enfant Soleil — Thème sombre (Noir velours)</option>
-            </optgroup>
-            <optgroup label="🎮 Thèmes officiels Extra Life">
+            <optgroup label="🎮 Thèmes officiels Extra Life (Prioritaire)">
+              <option value="extralife-sombre" selected>🕹️ Extra Life — Thème sombre (Bleu nuit & Cyan néon)</option>
               <option value="extralife-clair">🎮 Extra Life — Thème clair (Bleu CMN & Blanc)</option>
-              <option value="extralife-sombre">🕹️ Extra Life — Thème sombre (Bleu nuit & Cyan)</option>
+            </optgroup>
+            <optgroup label="☀️ Thèmes Opération Enfant Soleil">
+              <option value="clair">☀️ Enfant Soleil — Thème clair (Jaune & Blanc)</option>
+              <option value="sombre">🌙 Enfant Soleil — Thème sombre (Noir velours)</option>
             </optgroup>
           </select>
         </div>
@@ -637,13 +730,16 @@
       <div class="obs-card">
         <div class="obs-card-header">
           <h4 class="obs-card-title">📊 1. Overlay Barre de progression & Dons récents</h4>
-          <span id="obs-dims-badge" class="obs-dims-badge">
-            📐 Limites : Min <strong>360 x 65 px</strong> | Max <strong>1920 x 150 px</strong>
-          </span>
+          <div id="obs-rec-box" class="obs-rec-box">
+            ✨ Résolution recommandée dans OBS : <span id="obs-rec-val"><strong>1920 × 140 px</strong></span>
+          </div>
+          <div id="obs-dims-limits" class="obs-dims-limits">
+            📐 <em>Dimensions autorisées : Min 1050 × 135 px • Max 1920 × 150 px</em>
+          </div>
           <div id="obs-formats-detail" class="obs-formats-detail">
-            • <strong>Bannière horizontale :</strong> 1050 à 1920 px (H: 135-150 px) — <em>Recommandé : 1920 x 140 px</em><br>
-            • <strong>Format 2 étages :</strong> 760 à 1050 px (H: 220-270 px) — <em>Recommandé : 850 x 240 px</em><br>
-            • <strong>Colonne latérale :</strong> 360 à 480 px (H: 550-800 px) — <em>Recommandé : 420 x 700 px</em>
+            • <strong>Bannière horizontale :</strong> Recommandé 1920 × 140 px (ou 1280 × 140 px) — <em>Idéal en bandeau haut ou bas</em><br>
+            • <strong>Format 2 étages :</strong> Recommandé 850 × 240 px — <em>Idéal au-dessus de la webcam</em><br>
+            • <strong>Colonne latérale :</strong> Recommandé 420 × 700 px — <em>Idéal pour barre latérale</em>
           </div>
         </div>
         <div class="url-row">
@@ -657,11 +753,13 @@
       <div class="obs-card">
         <div class="obs-card-header">
           <h4 class="obs-card-title">🔔 2. Alerte Pop-up de Don (Audio & Visuel)</h4>
-          <span class="obs-dims-badge">
-            📐 Limites : Min <strong>500 x 250 px</strong> | Max <strong>1920 x 1080 px</strong> (Plein écran transparent)
-          </span>
+          <div class="obs-rec-box">
+            ✨ Résolution recommandée dans OBS : <strong>800 × 400 px</strong> (Centré sur votre scène)
+          </div>
+          <div class="obs-dims-limits">
+            📐 <em>Dimensions autorisées : Min 500 × 250 px • Plein écran transparent jusqu'à 1920 × 1080 px</em>
+          </div>
           <div class="obs-formats-detail">
-            ✨ <strong>Recommandé : 800 x 400 px centré sur votre scène</strong><br>
             🔊 <strong>Son dans OBS :</strong> Laissez la case <em>« Contrôler le son via OBS »</em> <u>décochée</u> pour entendre le carillon directement dans vos écouteurs. (Si vous la cochez, assurez-vous d'activer <em>« Monitoring audio »</em> dans les propriétés audio avancées du mixeur OBS).
           </div>
         </div>
@@ -783,7 +881,8 @@
         cmdDon: document.getElementById('cmd-don'),
         cmdEquipe: document.getElementById('cmd-equipe'),
         canvasTwitch: document.getElementById('canvas-twitch'),
-        obsDimsBadge: document.getElementById('obs-dims-badge'),
+        obsRecVal: document.getElementById('obs-rec-val'),
+        obsDimsLimits: document.getElementById('obs-dims-limits'),
         obsFormatsDetail: document.getElementById('obs-formats-detail'),
         toast: document.getElementById('toast'),
       };
@@ -985,22 +1084,26 @@
         }
 
         // Mise à jour dynamique des recommandations d'affichage selon la disposition choisie
-        if (elements.obsDimsBadge && elements.obsFormatsDetail) {
+        if (elements.obsRecVal && elements.obsDimsLimits && elements.obsFormatsDetail) {
           if (layout === 'horizontal') {
-            elements.obsDimsBadge.innerHTML = '📐 Limites : Min <strong>1050 x 135 px</strong> | Max <strong>1920 x 150 px</strong>';
-            elements.obsFormatsDetail.innerHTML = '✨ <strong>Taille recommandée dans OBS : 1920 x 140 px</strong> (ou 1280 x 140 px)<br><em>Idéal pour placer en bandeau étendu en haut ou en bas de votre écran de jeu.</em>';
+            elements.obsRecVal.innerHTML = '<strong>1920 × 140 px</strong> (ou 1280 × 140 px)';
+            elements.obsDimsLimits.innerHTML = '📐 <em>Dimensions autorisées : Min 1050 × 135 px • Max 1920 × 150 px</em>';
+            elements.obsFormatsDetail.innerHTML = '✨ <strong>Bannière horizontale :</strong> Idéal pour placer en bandeau étendu en haut ou en bas de votre écran de jeu.';
           } else if (layout === 'two-tier') {
-            elements.obsDimsBadge.innerHTML = '📐 Limites : Min <strong>760 x 220 px</strong> | Max <strong>1050 x 270 px</strong>';
-            elements.obsFormatsDetail.innerHTML = '✨ <strong>Taille recommandée dans OBS : 850 x 240 px</strong>';
+            elements.obsRecVal.innerHTML = '<strong>850 × 240 px</strong>';
+            elements.obsDimsLimits.innerHTML = '📐 <em>Dimensions autorisées : Min 760 × 220 px • Max 1050 × 270 px</em>';
+            elements.obsFormatsDetail.innerHTML = '✨ <strong>Format 2 étages :</strong> Idéal au-dessus de la webcam ou dans un coin d\'écran (Étage 1: Logo & Jauge, Étage 2: Dons récents).';
           } else if (layout === 'vertical') {
-            elements.obsDimsBadge.innerHTML = '📐 Limites : Min <strong>360 x 550 px</strong> | Max <strong>480 x 800 px</strong>';
-            elements.obsFormatsDetail.innerHTML = '✨ <strong>Taille recommandée dans OBS : 420 x 700 px</strong><br><em>Idéal pour placer dans une barre latérale ou à côté de la webcam.</em>';
+            elements.obsRecVal.innerHTML = '<strong>420 × 700 px</strong>';
+            elements.obsDimsLimits.innerHTML = '📐 <em>Dimensions autorisées : Min 360 × 550 px • Max 480 × 800 px</em>';
+            elements.obsFormatsDetail.innerHTML = '✨ <strong>Colonne latérale :</strong> Idéal pour placer dans une barre latérale complète ou à côté du chat.';
           } else {
             // Mode automatique
-            elements.obsDimsBadge.innerHTML = '📐 Limites : Min <strong>360 x 65 px</strong> | Max <strong>1920 x 150 px</strong>';
-            elements.obsFormatsDetail.innerHTML = '• <strong>Bannière horizontale :</strong> 1050 à 1920 px (H: 135-150 px) — <em>Recommandé : 1920 x 140 px</em><br>' +
-              '• <strong>Format 2 étages :</strong> 760 à 1050 px (H: 220-270 px) — <em>Recommandé : 850 x 240 px</em><br>' +
-              '• <strong>Colonne latérale :</strong> 360 à 480 px (H: 550-800 px) — <em>Recommandé : 420 x 700 px</em>';
+            elements.obsRecVal.innerHTML = '<strong>1920 × 140 px</strong> (Horizontal), <strong>850 × 240 px</strong> (2 étages), <strong>420 × 700 px</strong> (Vertical)';
+            elements.obsDimsLimits.innerHTML = '📐 <em>Dimensions autorisées globales : Min 360 × 65 px • Max 1920 × 150 px</em>';
+            elements.obsFormatsDetail.innerHTML = '• <strong>Bannière horizontale :</strong> 1920 × 140 px<br>' +
+              '• <strong>Format 2 étages :</strong> 850 × 240 px<br>' +
+              '• <strong>Colonne latérale :</strong> 420 × 700 px';
           }
         }
 
@@ -1065,17 +1168,26 @@ Durant ce live, nous amassons des dons pour soutenir le développement d'une pé
           ctx.strokeRect(0, 0, canvas.width, canvas.height);
         }
 
-        // Chargement du logo officiel
+        // Chargement du logo officiel (Extra Life pour les thèmes Extra Life, Enfant Soleil pour les thèmes classiques)
         const img = new Image();
-        img.src = 'assets/logo-enfant-soleil-horizontal.png';
+        if (isExtraLife) {
+          img.src = isDark ? 'assets/logo-extra-life-white.svg' : 'assets/logo-extra-life-color.svg';
+        } else {
+          img.src = 'assets/logo-enfant-soleil-horizontal.png';
+        }
+
         img.onload = function () {
-          // Encadré blanc de sécurité pour le logo (Zone de dégagement officielle de marque)
+          // Encadré de sécurité pour le logo (Zone de dégagement officielle)
           const boxX = 10;
           const boxY = 10;
           const boxW = 300;
           const boxH = 144;
 
-          ctx.fillStyle = '#FFFFFF';
+          if (isExtraLife) {
+            ctx.fillStyle = isDark ? '#0E1B2D' : '#FFFFFF';
+          } else {
+            ctx.fillStyle = '#FFFFFF';
+          }
           ctx.beginPath();
           ctx.roundRect(boxX, boxY, boxW, boxH, 10);
           ctx.fill();
@@ -1086,10 +1198,10 @@ Durant ce live, nous amassons des dons pour soutenir le développement d'une pé
             ctx.stroke();
           }
 
-          // Calcul des proportions sans aucune déformation (ratio naturel 2.365)
-          const naturalRatio = img.naturalWidth / img.naturalHeight;
-          const maxLogoW = 274;
-          const maxLogoH = 118;
+          // Calcul des proportions sans aucune déformation
+          const naturalRatio = (img.naturalWidth && img.naturalHeight) ? (img.naturalWidth / img.naturalHeight) : 2.5;
+          const maxLogoW = isExtraLife ? 260 : 274;
+          const maxLogoH = isExtraLife ? 90 : 118;
 
           let targetW = maxLogoW;
           let targetH = targetW / naturalRatio;
@@ -1129,7 +1241,7 @@ Durant ce live, nous amassons des dons pour soutenir le développement d'une pé
       // Téléchargement de la bannière
       window.downloadBanner = function () {
         const link = document.createElement('a');
-        link.download = `panneau-twitch-enfant-soleil-${elements.selectTheme.value}.png`;
+        link.download = `panneau-twitch-extralife-${elements.selectTheme.value}.png`;
         link.href = elements.canvasTwitch.toDataURL('image/png');
         link.click();
       };
@@ -1163,9 +1275,9 @@ Durant ce live, nous amassons des dons pour soutenir le développement d'une pé
         const testPayload = {
           type: 'TEST_DONATION',
           donationID: uniqueTestId,
-          displayName: 'Donateur Test Solaire',
+          displayName: 'Donateur Extra Life',
           amount: 25,
-          message: 'Bravo pour votre live au profit d\'Enfant Soleil ! ☀️',
+          message: 'Bravo pour votre live de jeux vidéo au profit des enfants malades ! 🎮',
         };
 
         // 1. BroadcastChannel local (pour l'onglet d'aperçu dans le même navigateur)

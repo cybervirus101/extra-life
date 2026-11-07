@@ -1756,7 +1756,20 @@ body {
 }
 
 .overlay-container.theme-extralife.theme-dark .logo-clear-zone {
-  background: #FFFFFF !important;
-  border: 1px solid rgba(28, 158, 214, 0.4) !important;
+  background: transparent !important;
+  border: none !important;
+  padding: 4px 8px !important;
+}
+
+.overlay-container.theme-extralife.theme-light .logo-clear-zone {
+  background: transparent !important;
+  border: none !important;
+  padding: 4px 8px !important;
+}
+
+.overlay-container.theme-extralife .official-logo {
+  max-height: 85px;
+  height: auto;
+  max-width: 260px;
 }
 
