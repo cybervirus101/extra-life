@@ -652,68 +652,266 @@ body {
    ADAPTABILITÉ D'ÉCRAN (RESPONSIVE POUR OBS STUDIO)
    ========================================================================== */
 
-/* Mode 2 étages de segments (Étage 1: Logo + Progression | Étage 2: Boîtes de dons) */
+/* ==========================================================================
+   FORMAT 2 ÉTAGES (MOYEN / CARRÉ — RECOMMANDÉ : 850 x 240 px)
+   Déclenché soit par la classe explicite .layout-two-tier (?layout=two-tier)
+   soit automatiquement par la media query pour écrans de 761px à 1050px.
+   Étage 1 : Logo officiel + Section Progression
+   Étage 2 : Boîtes de dons sur 100% de la largeur (Dernier don + Dons récents)
+   ========================================================================== */
+
+.overlay-container.layout-two-tier {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  gap: 6px !important;
+  padding: 4px 10px !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-height: 200px !important;
+  height: auto !important;
+}
+
+/* Étage 1 : Logo horizontal & Section progression */
+.overlay-container.layout-two-tier .branding-section {
+  flex: 0 0 auto !important;
+  padding: 0 !important;
+  margin: 0 10px 0 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  max-height: 100px !important;
+}
+
+.overlay-container.layout-two-tier .logo-clear-zone {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+}
+
+.overlay-container.layout-two-tier .official-logo {
+  height: 95px !important;
+  max-height: 100px !important;
+  max-width: 270px !important;
+  width: auto !important;
+  object-fit: contain !important;
+}
+
+.overlay-container.layout-two-tier .progress-section {
+  flex: 1 1 360px !important;
+  min-width: 0 !important;
+  gap: 4px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+}
+
+.overlay-container.layout-two-tier .progress-labels {
+  gap: 8px !important;
+  min-width: 0 !important;
+  display: flex !important;
+  align-items: flex-end !important;
+  justify-content: space-between !important;
+}
+
+.overlay-container.layout-two-tier .progress-raised,
+.overlay-container.layout-two-tier .progress-goal {
+  min-width: 0 !important;
+  flex: 1 1 auto !important;
+}
+
+.overlay-container.layout-two-tier .label-heading {
+  font-size: 15px !important;
+  font-weight: 800 !important;
+  white-space: nowrap !important;
+}
+
+.overlay-container.layout-two-tier .amount-highlight {
+  font-size: 30px !important;
+  font-weight: 900 !important;
+  white-space: nowrap !important;
+}
+
+.overlay-container.layout-two-tier .amount-sub {
+  font-size: 24px !important;
+  font-weight: 800 !important;
+  white-space: nowrap !important;
+}
+
+.overlay-container.layout-two-tier .progress-track {
+  height: 28px !important;
+}
+
+/* Étage 2 : Boîtes de dons sur toute la largeur (50% / 50%) */
+.overlay-container.layout-two-tier .proportional-row {
+  flex: 1 1 100% !important;
+  width: 100% !important;
+  order: 3 !important;
+  gap: 8px !important;
+  min-width: 0 !important;
+  align-self: stretch !important;
+  display: flex !important;
+}
+
+.overlay-container.layout-two-tier .info-box {
+  flex: 1 1 0 !important;
+  min-width: 0 !important;
+  min-height: 96px !important;
+  height: auto !important;
+  padding: 4px 8px !important;
+  justify-content: flex-start !important;
+  overflow: visible !important;
+}
+
+.overlay-container.layout-two-tier .box-header {
+  height: 22px !important;
+  margin-bottom: 2px !important;
+  padding-bottom: 2px !important;
+  gap: 4px !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+.overlay-container.layout-two-tier .box-tag {
+  flex-shrink: 0 !important;
+  font-size: 16px !important;
+  font-weight: 900 !important;
+}
+
+.overlay-container.layout-two-tier .box-meta {
+  flex: 0 1 auto !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  font-size: 13.5px !important;
+  font-weight: 700 !important;
+}
+
+.overlay-container.layout-two-tier .box-body {
+  height: auto !important;
+  min-height: 70px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  gap: 1px !important;
+  overflow: visible !important;
+  width: 100% !important;
+}
+
+.overlay-container.layout-two-tier .donor-line {
+  min-height: 24px !important;
+  line-height: 1.15 !important;
+}
+
+.overlay-container.layout-two-tier .amount-line {
+  min-height: 22px !important;
+  line-height: 1.15 !important;
+}
+
+.overlay-container.layout-two-tier .message-line {
+  min-height: 22px !important;
+  line-height: 1.18 !important;
+}
+
+.overlay-container.layout-two-tier .donor-name,
+.overlay-container.layout-two-tier .feed-donor {
+  font-size: 23px !important;
+  font-weight: 900 !important;
+  line-height: 1.15 !important;
+}
+
+.overlay-container.layout-two-tier .donor-amount,
+.overlay-container.layout-two-tier .feed-amount {
+  font-size: 20px !important;
+  font-weight: 900 !important;
+  line-height: 1.15 !important;
+}
+
+.overlay-container.layout-two-tier .feed-message {
+  font-size: 17px !important;
+  font-weight: 700 !important;
+  font-style: italic !important;
+  line-height: 1.18 !important;
+}
+
+.overlay-container.layout-two-tier .feed-carousel-container,
+.overlay-container.layout-two-tier .feed-slider {
+  height: auto !important;
+  min-height: 70px !important;
+  overflow: visible !important;
+}
+
+.overlay-container.layout-two-tier .feed-item {
+  justify-content: flex-start !important;
+  min-height: 70px !important;
+  gap: 1px !important;
+}
+
+/* Adaptabilité automatique pour largeurs de 761px à 1050px */
 @media (max-width: 1050px) and (min-width: 761px) {
-  .overlay-container:not(.layout-vertical) {
+  .overlay-container:not(.layout-vertical):not(.layout-horizontal) {
     flex-wrap: wrap;
     gap: 6px !important;
-    padding: 3px 8px 3px 8px !important;
+    padding: 4px 10px !important;
   }
 
-  /* Étage 1 : Logo MAXIMISÉ & Barre de progression côte-à-côte */
-  .overlay-container:not(.layout-vertical) .branding-section {
+  .overlay-container:not(.layout-vertical):not(.layout-horizontal) .branding-section {
     flex: 0 0 auto;
     padding: 0;
-    margin-right: 8px !important;
+    margin-right: 10px !important;
+    max-height: 100px !important;
   }
 
-  .overlay-container:not(.layout-vertical) .official-logo {
-    height: 125px !important; /* Logo MAXIMISÉ en mode 2 étages */
-    max-height: 135px !important;
-    max-width: 400px !important;
+  .overlay-container:not(.layout-vertical):not(.layout-horizontal) .official-logo {
+    height: 95px !important;
+    max-height: 100px !important;
+    max-width: 270px !important;
   }
 
-  .overlay-container:not(.layout-vertical) .progress-section {
-    flex: 1 1 380px;
+  .overlay-container:not(.layout-vertical):not(.layout-horizontal) .progress-section {
+    flex: 1 1 360px;
     min-width: 0;
     gap: 4px !important;
   }
 
-  .overlay-container:not(.layout-vertical) .progress-labels {
+  .overlay-container:not(.layout-vertical):not(.layout-horizontal) .progress-labels {
     gap: 8px !important;
     min-width: 0 !important;
   }
 
-  .overlay-container:not(.layout-vertical) .progress-raised,
-  .overlay-container:not(.layout-vertical) .progress-goal {
+  .overlay-container:not(.layout-vertical):not(.layout-horizontal) .progress-raised,
+  .overlay-container:not(.layout-vertical):not(.layout-horizontal) .progress-goal {
     min-width: 0 !important;
     flex: 1 1 auto !important;
   }
 
-  .overlay-container:not(.layout-vertical) .label-heading {
-    font-size: 16px !important;
+  .overlay-container:not(.layout-vertical):not(.layout-horizontal) .label-heading {
+    font-size: 15px !important;
     font-weight: 800 !important;
     white-space: nowrap !important;
   }
 
-  .overlay-container:not(.layout-vertical) .amount-highlight {
-    font-size: 34px !important;
+  .overlay-container:not(.layout-vertical):not(.layout-horizontal) .amount-highlight {
+    font-size: 30px !important;
     font-weight: 900 !important;
     white-space: nowrap !important;
   }
 
-  .overlay-container:not(.layout-vertical) .amount-sub {
-    font-size: 26px !important;
+  .overlay-container:not(.layout-vertical):not(.layout-horizontal) .amount-sub {
+    font-size: 24px !important;
     font-weight: 800 !important;
     white-space: nowrap !important;
   }
 
-  .overlay-container:not(.layout-vertical) .progress-track {
-    height: 30px !important;
+  .overlay-container:not(.layout-vertical):not(.layout-horizontal) .progress-track {
+    height: 28px !important;
   }
 
-  /* Étage 2 : Boîtes de dons sur toute la largeur avec haute lisibilité */
-  .overlay-container:not(.layout-vertical) .proportional-row {
+  .overlay-container:not(.layout-vertical):not(.layout-horizontal) .proportional-row {
     flex: 1 1 100%;
     order: 3;
     gap: 8px !important;
@@ -721,40 +919,40 @@ body {
     align-self: stretch !important;
   }
 
-  .overlay-container:not(.layout-vertical) .info-box {
-    min-height: 110px !important;
+  .overlay-container:not(.layout-vertical):not(.layout-horizontal) .info-box {
+    min-height: 96px !important;
     height: auto !important;
-    padding: 3px 8px 3px 8px !important;
+    padding: 4px 8px !important;
     justify-content: flex-start !important;
-    overflow: visible !important; /* Aucun rognage vertical */
+    overflow: visible !important;
   }
 
-  .overlay-container:not(.layout-vertical) .box-header {
+  .overlay-container:not(.layout-vertical):not(.layout-horizontal) .box-header {
     height: 22px !important;
     margin-bottom: 2px !important;
     padding-bottom: 2px !important;
     gap: 4px !important;
   }
 
-  .overlay-container:not(.layout-vertical) .box-tag {
+  .overlay-container:not(.layout-vertical):not(.layout-horizontal) .box-tag {
     flex-shrink: 0 !important;
-    font-size: 17px !important;
+    font-size: 16px !important;
     font-weight: 900 !important;
   }
 
-  .overlay-container:not(.layout-vertical) .box-meta {
+  .overlay-container:not(.layout-vertical):not(.layout-horizontal) .box-meta {
     flex: 0 1 auto !important;
     min-width: 0 !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
     white-space: nowrap !important;
-    font-size: 14.5px !important;
+    font-size: 13.5px !important;
     font-weight: 700 !important;
   }
 
-  .overlay-container:not(.layout-vertical) .box-body {
+  .overlay-container:not(.layout-vertical):not(.layout-horizontal) .box-body {
     height: auto !important;
-    min-height: 86px !important;
+    min-height: 70px !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: flex-start !important;
@@ -763,31 +961,28 @@ body {
     width: 100% !important;
   }
 
-  .overlay-container:not(.layout-vertical) .donor-line {
-    height: auto !important;
-    min-height: 25px !important;
-    line-height: 1.15 !important;
-    white-space: nowrap !important;
-    overflow-x: hidden !important;
-    overflow-y: visible !important;
-    text-overflow: ellipsis !important;
-    padding: 0 !important;
-  }
-
-  .overlay-container:not(.layout-vertical) .amount-line {
-    height: auto !important;
-    min-height: 23px !important;
-    line-height: 1.15 !important;
-    white-space: nowrap !important;
-    overflow-x: hidden !important;
-    overflow-y: visible !important;
-    text-overflow: ellipsis !important;
-    padding: 0 !important;
-  }
-
-  .overlay-container:not(.layout-vertical) .message-line {
-    height: auto !important;
+  .overlay-container:not(.layout-vertical):not(.layout-horizontal) .donor-line {
     min-height: 24px !important;
+    line-height: 1.15 !important;
+    white-space: nowrap !important;
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
+    text-overflow: ellipsis !important;
+    padding: 0 !important;
+  }
+
+  .overlay-container:not(.layout-vertical):not(.layout-horizontal) .amount-line {
+    min-height: 22px !important;
+    line-height: 1.15 !important;
+    white-space: nowrap !important;
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
+    text-overflow: ellipsis !important;
+    padding: 0 !important;
+  }
+
+  .overlay-container:not(.layout-vertical):not(.layout-horizontal) .message-line {
+    min-height: 22px !important;
     line-height: 1.18 !important;
     overflow-x: hidden !important;
     overflow-y: visible !important;
@@ -797,37 +992,37 @@ body {
     padding: 0 !important;
   }
 
-  .overlay-container:not(.layout-vertical) .donor-name,
-  .overlay-container:not(.layout-vertical) .feed-donor {
-    font-size: 25.5px !important;
+  .overlay-container:not(.layout-vertical):not(.layout-horizontal) .donor-name,
+  .overlay-container:not(.layout-vertical):not(.layout-horizontal) .feed-donor {
+    font-size: 23px !important;
     font-weight: 900 !important;
     line-height: 1.15 !important;
   }
 
-  .overlay-container:not(.layout-vertical) .donor-amount,
-  .overlay-container:not(.layout-vertical) .feed-amount {
-    font-size: 22.5px !important;
+  .overlay-container:not(.layout-vertical):not(.layout-horizontal) .donor-amount,
+  .overlay-container:not(.layout-vertical):not(.layout-horizontal) .feed-amount {
+    font-size: 20px !important;
     font-weight: 900 !important;
     line-height: 1.15 !important;
   }
 
-  .overlay-container:not(.layout-vertical) .feed-message {
-    font-size: 19.5px !important;
+  .overlay-container:not(.layout-vertical):not(.layout-horizontal) .feed-message {
+    font-size: 17px !important;
     font-weight: 700 !important;
     font-style: italic !important;
     line-height: 1.18 !important;
   }
 
-  .overlay-container:not(.layout-vertical) .feed-carousel-container,
-  .overlay-container:not(.layout-vertical) .feed-slider {
+  .overlay-container:not(.layout-vertical):not(.layout-horizontal) .feed-carousel-container,
+  .overlay-container:not(.layout-vertical):not(.layout-horizontal) .feed-slider {
     height: auto !important;
-    min-height: 86px !important;
+    min-height: 70px !important;
     overflow: visible !important;
   }
 
-  .overlay-container:not(.layout-vertical) .feed-item {
+  .overlay-container:not(.layout-vertical):not(.layout-horizontal) .feed-item {
     justify-content: flex-start !important;
-    min-height: 86px !important;
+    min-height: 70px !important;
     gap: 1px !important;
   }
 }

@@ -1051,22 +1051,36 @@
   // --------------------------------------------------------------------------
 
   function applyThemeAndLogo() {
-    // Détection du mode vertical (forcé ou automatique si largeur <= 760px ou ratio portrait)
-    let isVertical = false;
-    if (CONFIG.layoutMode === 'vertical') {
-      isVertical = true;
-    } else if (CONFIG.layoutMode === 'horizontal') {
-      isVertical = false;
-    } else {
-      isVertical = window.innerWidth <= 760 || window.innerHeight > window.innerWidth;
+    // Détection du mode de disposition (forcé par URL ou auto-détecté selon les dimensions de la fenêtre OBS)
+    let layout = CONFIG.layoutMode;
+    if (layout === 'twotier' || layout === 'two_tier' || layout === '2-tier' || layout === '2_tier' || layout === '2etage' || layout === '2etages' || layout === '2étage' || layout === '2étages') {
+      layout = 'two-tier';
     }
+
+    if (layout === 'auto') {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      if (w <= 760 || (h > w)) {
+        layout = 'vertical';
+      } else if (w <= 1050 && h >= 180) {
+        layout = 'two-tier';
+      } else {
+        layout = 'horizontal';
+      }
+    }
+
+    const isVertical = (layout === 'vertical');
+    const isTwoTier = (layout === 'two-tier');
 
     // Application de la classe de layout
     if (elements.container) {
+      elements.container.classList.remove('layout-vertical', 'layout-two-tier', 'layout-horizontal');
       if (isVertical) {
         elements.container.classList.add('layout-vertical');
+      } else if (isTwoTier) {
+        elements.container.classList.add('layout-two-tier');
       } else {
-        elements.container.classList.remove('layout-vertical');
+        elements.container.classList.add('layout-horizontal');
       }
 
       // Application du thème (clair ou sombre)
