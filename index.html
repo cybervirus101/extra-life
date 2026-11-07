@@ -86,10 +86,10 @@
       align-items: center;
       gap: 10px;
       background: #FFFFFF;
-      border: 2px solid var(--es-jaune-soleil);
+      border: 2px solid var(--el-cyan);
       padding: 6px 18px;
       border-radius: 30px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(28, 158, 214, 0.25);
     }
 
     .partner-label {
@@ -624,7 +624,7 @@
         <span class="step-number">1</span>
         <span>Votre page Extra Life</span>
       </div>
-      <p style="margin-bottom: 12px; font-size: 14px; color: #555;">
+      <p class="step-instruction">
         Entrez votre <strong>ID de participant</strong> ou collez le lien direct de votre page Extra Life :
       </p>
 
@@ -647,17 +647,17 @@
         </div>
       </div>
 
-      <!-- Bandeau de confirmation de mémorisation -->
-      <div id="saved-notice" style="display: none; align-items: center; justify-content: space-between; font-size: 13px; color: #444; background: #FFF9E6; border: 1.5px solid var(--es-jaune-soleil); padding: 9px 14px; border-radius: 10px; margin-top: 12px; gap: 10px; flex-wrap: wrap;">
-        <span style="display: flex; align-items: center; gap: 6px;">
+      <!-- Bandeau de confirmation de mémorisation aux couleurs Extra Life -->
+      <div id="saved-notice" style="display: none; align-items: center; justify-content: space-between; font-size: 13.5px; color: #E0F2FE; background: rgba(28, 158, 214, 0.15); border: 1.5px solid var(--el-cyan); padding: 10px 16px; border-radius: 12px; margin-top: 14px; gap: 10px; flex-wrap: wrap;">
+        <span style="display: flex; align-items: center; gap: 8px;">
           💾 <strong>Profil mémorisé sur ce navigateur</strong> (rechargé automatiquement pour vos prochains lives)
         </span>
-        <button id="btn-forget" type="button" style="background: transparent; border: 1px solid rgba(241, 80, 41, 0.4); color: var(--es-rouge-sante); cursor: pointer; font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 6px; transition: all 0.2s ease;">
+        <button id="btn-forget" type="button" style="background: transparent; border: 1px solid rgba(28, 158, 214, 0.5); color: #5BC3F0; cursor: pointer; font-size: 12px; font-weight: 700; padding: 5px 12px; border-radius: 8px; transition: all 0.2s ease;">
           🗑️ Oublier / Réinitialiser
         </button>
       </div>
 
-      <p id="prompt-notice" style="font-size: 13px; color: #777; margin-top: 8px;">
+      <p id="prompt-notice" style="font-size: 13px; color: var(--el-text-dim); margin-top: 10px;">
         💡 <em>Entrez votre identifiant ci-dessus pour pré-remplir automatiquement tous vos liens personnalisés.</em>
       </p>
     </section>
@@ -722,7 +722,7 @@
         <span class="step-number">3</span>
         <span>Vos liens pour OBS Studio / Streamlabs</span>
       </div>
-      <p style="margin-bottom: 16px; font-size: 14px; color: #555;">
+      <p class="step-instruction">
         Dans OBS, ajoutez une <strong>Source Navigateur</strong> (Browser Source) et collez le lien :
       </p>
 
@@ -775,7 +775,7 @@
       <div class="simulator-box">
         <div class="simulator-info" style="flex: 1 1 360px;">
           🧪 <strong>Simulateur de don en direct :</strong> Testez votre cadrage et le carillon sonore instantanément dans votre navigateur ET dans OBS Studio !<br>
-          <span style="font-size: 12.5px; font-weight: 500; color: #555;">
+          <span style="font-size: 12.5px; font-weight: 500; color: var(--el-text-sub);">
             💡 <em>Dans OBS : vous pouvez aussi faire un <strong>clic droit sur la source &gt; Interagir</strong> et cliquer dans la fenêtre pour tester le son à tout moment.</em>
           </span>
         </div>
@@ -793,47 +793,47 @@
       </div>
 
       <!-- Option 100% Liens & Markdown -->
-      <h4 style="font-size: 15px; margin-bottom: 6px;">📝 Option A : Panneau Twitch 100% Texte & Liens (Sans téléchargement)</h4>
-      <p style="font-size: 13.5px; color: #555;">Collez ce texte directement dans un nouveau panneau sous votre stream :</p>
+      <h4 style="font-size: 15px; margin-bottom: 6px; color: #FFFFFF;">📝 Option A : Panneau Twitch 100% Texte & Liens (Sans téléchargement)</h4>
+      <p class="step-instruction">Collez ce texte directement dans un nouveau panneau sous votre stream :</p>
       <div style="position: relative;">
         <pre id="twitch-markdown" class="code-block"></pre>
         <button class="btn btn-secondary btn-copy-code" onclick="copyTwitchMarkdown()">📋 Copier</button>
       </div>
 
       <!-- Option Image de bannière Twitch -->
-      <h4 style="font-size: 15px; margin-top: 24px; margin-bottom: 6px;">🎨 Option B : Image officielle de panneau Twitch</h4>
-      <p style="font-size: 13.5px; color: #555;">Pour ceux qui préfèrent une image au-dessus de leur texte, voici la bannière officielle :</p>
+      <h4 style="font-size: 15px; margin-top: 24px; margin-bottom: 6px; color: #FFFFFF;">🎨 Option B : Image officielle de panneau Twitch</h4>
+      <p class="step-instruction">Pour ceux qui préfèrent une image au-dessus de leur texte, voici la bannière officielle :</p>
       
       <div class="twitch-banner-preview">
         <canvas id="canvas-twitch" width="320" height="210" class="twitch-canvas"></canvas>
         <div>
           <button id="btn-download-banner" class="btn btn-primary" onclick="downloadBanner()">📥 Télécharger l'image</button>
-          <p style="font-size: 12.5px; color: #666; margin-top: 8px;">
+          <p style="font-size: 12.5px; color: var(--el-text-sub); margin-top: 8px;">
             Lien à mettre dans le champ <em>« L'image redirige vers »</em> :<br>
-            <code id="twitch-redirect-link" style="font-weight: 700; color: var(--es-rouge-sante);">https://www.extra-life.org/participant/...</code>
+            <code id="twitch-redirect-link" style="font-weight: 700; color: var(--el-cyan);">https://www.extra-life.org/participant/...</code>
           </p>
         </div>
       </div>
 
       <!-- Commandes de Bots -->
-      <h4 style="font-size: 15px; margin-top: 24px; margin-bottom: 6px;">🤖 Commandes de Chatbot prêtes à copier</h4>
-      <p style="font-size: 13px; color: #666; margin-bottom: 10px;">
+      <h4 style="font-size: 15px; margin-top: 24px; margin-bottom: 6px; color: #FFFFFF;">🤖 Commandes de Chatbot prêtes à copier</h4>
+      <p style="font-size: 13px; color: var(--el-text-sub); margin-bottom: 10px;">
         💡 <em>Note sur <code>$(user)</code> : cette variable insère automatiquement le nom du spectateur qui tape la commande. Elle fonctionne nativement sur <strong>Nightbot</strong>, <strong>StreamElements</strong>, <strong>Streamlabs Cloudbot</strong>, <strong>Wizebot</strong>, <strong>Firebot</strong> et <strong>Fossabot</strong>.</em>
       </p>
 
       <div style="display: flex; flex-direction: column; gap: 10px;">
-        <div style="display: flex; gap: 10px; align-items: center; background: #FFF; padding: 10px 14px; border-radius: 8px; border: 1px solid #DDD;">
-          <code style="font-weight: 800; width: 90px; color: var(--es-rouge-sante);">!don</code>
+        <div style="display: flex; gap: 10px; align-items: center; background: var(--el-navy-input); padding: 10px 14px; border-radius: 10px; border: 1.5px solid var(--el-navy-card-border);">
+          <code style="font-weight: 800; width: 90px; color: var(--el-cyan); font-size: 15px;">!don</code>
           <input type="text" id="cmd-don" class="url-input" readonly>
           <button class="btn btn-secondary" onclick="copyInput('cmd-don')">Copier</button>
         </div>
-        <div style="display: flex; gap: 10px; align-items: center; background: #FFF; padding: 10px 14px; border-radius: 8px; border: 1px solid #DDD;">
-          <code style="font-weight: 800; width: 90px; color: var(--es-rouge-sante);">!soleil</code>
+        <div style="display: flex; gap: 10px; align-items: center; background: var(--el-navy-input); padding: 10px 14px; border-radius: 10px; border: 1.5px solid var(--el-navy-card-border);">
+          <code style="font-weight: 800; width: 90px; color: var(--el-cyan); font-size: 15px;">!soleil</code>
           <input type="text" id="cmd-soleil" class="url-input" value="☀️ $(user) envoie un grand rayon de chaleur et d'ondes positives sur tout le chat pour soutenir Opération Enfant Soleil ! 🌻✨" readonly>
           <button class="btn btn-secondary" onclick="copyInput('cmd-soleil')">Copier</button>
         </div>
-        <div style="display: flex; gap: 10px; align-items: center; background: #FFF; padding: 10px 14px; border-radius: 8px; border: 1px solid #DDD;">
-          <code style="font-weight: 800; width: 90px; color: var(--es-rouge-sante);">!equipe</code>
+        <div style="display: flex; gap: 10px; align-items: center; background: var(--el-navy-input); padding: 10px 14px; border-radius: 10px; border: 1.5px solid var(--el-navy-card-border);">
+          <code style="font-weight: 800; width: 90px; color: var(--el-cyan); font-size: 15px;">!equipe</code>
           <input type="text" id="cmd-equipe" class="url-input" readonly>
           <button class="btn btn-secondary" onclick="copyInput('cmd-equipe')">Copier</button>
         </div>
@@ -1016,7 +1016,7 @@
         if (elements.promptNotice) elements.promptNotice.style.display = 'none';
 
         elements.profileName.textContent = detectedParticipant.displayName;
-        elements.profileAvatar.src = detectedParticipant.avatarImageURL || 'https://via.placeholder.com/60/FAF7F0/252625?text=ES';
+        elements.profileAvatar.src = detectedParticipant.avatarImageURL || 'https://via.placeholder.com/60/0C1829/1C9ED6?text=EL';
         elements.badgeTotal.textContent = `Total : ${detectedParticipant.sumDonations.toFixed(2)} $ USD`;
         elements.badgeGoal.textContent = `Objectif : ${detectedParticipant.fundraisingGoal.toFixed(0)} $ USD`;
 
@@ -1215,25 +1215,17 @@ Durant ce live, nous amassons des dons pour soutenir le développement d'une pé
 
           ctx.drawImage(img, posX, posY, targetW, targetH);
 
-          // Texte d'action clair et lisible
+          // Texte d'action clair et lisible sans texte parasite
           if (isExtraLife) {
             ctx.fillStyle = isDark ? '#1C9ED6' : '#0E7CA2';
-            ctx.font = 'bold 15px Montserrat, sans-serif';
+            ctx.font = 'bold 16px Montserrat, sans-serif';
             ctx.textAlign = 'center';
-            ctx.fillText('🎮 FAIRE UN DON SUR EXTRA LIFE', 160, 176);
-
-            ctx.fillStyle = isDark ? '#E0F2FE' : '#172338';
-            ctx.font = '600 11.5px Montserrat, sans-serif';
-            ctx.fillText('Pour Opération Enfant Soleil & les enfants malades', 160, 195);
+            ctx.fillText('🎮 FAIRE UN DON SUR EXTRA LIFE', 160, 184);
           } else {
             ctx.fillStyle = isDark ? '#FFD000' : '#F15029';
-            ctx.font = 'bold 15px Montserrat, sans-serif';
+            ctx.font = 'bold 16px Montserrat, sans-serif';
             ctx.textAlign = 'center';
-            ctx.fillText('💛 FAIRE UN DON EN DIRECT', 160, 176);
-
-            ctx.fillStyle = isDark ? '#FAF7F0' : '#252625';
-            ctx.font = '600 11.5px Montserrat, sans-serif';
-            ctx.fillText('Cliquez ici pour soutenir les enfants malades', 160, 195);
+            ctx.fillText('💛 FAIRE UN DON EN DIRECT', 160, 184);
           }
         };
       }
