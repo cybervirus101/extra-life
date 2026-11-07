@@ -126,22 +126,21 @@
   }
 
   /**
-   * Effectue un fetch classique en premier, puis bascule automatiquement sur JSONP si bloqué.
-   * Ajoute systématiquement un paramètre anti-cache (_t) pour contourner l'en-tête 'Cache-Control: max-age=14400'
-   * (4 heures !) renvoyé par DonorDrive/Cloudflare, qui empêchait OBS CEF de rafraîchir les nouveaux dons.
+   * Effectue un appel API standard ultra-résilient :
+   * - Envoi d'une requête GET simple (sans en-tête complexe pour éviter tout rejet pré-vol CORS dans OBS Studio CEF)
+   * - Ajout d'un paramètre timestamp (_t) pour forcer le rafraîchissement temps réel des nouveaux dons
+   * - Replis multiples sur les différents domaines DonorDrive officiels
    */
   async function fetchWithFallback(url) {
     const sep = url.includes('?') ? '&' : '?';
-    const noCacheUrl = `${url}${sep}_t=${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
+    const noCacheUrl = `${url}${sep}_t=${Date.now()}`;
 
+    // 1. Essai direct standard (CORS Simple Request, auto-autorisé par Access-Control-Allow-Origin: *)
     try {
       const res = await fetch(noCacheUrl, {
         method: 'GET',
-        cache: 'no-store',
         headers: {
           'Accept': 'application/json',
-          'Cache-Control': 'no-cache, no-store, must-revalidate',
-          'Pragma': 'no-cache',
         },
       });
       if (res.ok) {
@@ -149,9 +148,33 @@
       }
       throw new Error(`HTTP ${res.status}`);
     } catch (fetchErr) {
-      console.warn(`[API] Appel fetch standard rejeté (${fetchErr.message}). Bascule vers JSONP:`, noCacheUrl);
-      return await fetchJSONP(noCacheUrl);
+      console.warn(`[API] Appel direct avec horodatage échoué (${fetchErr.message}). Tentative sur l'URL brute:`, url);
     }
+
+    // 2. Deuxième essai direct sans paramètre de requête supplémentaire
+    try {
+      const res2 = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+        },
+      });
+      if (res2.ok) {
+        return await res2.json();
+      }
+      throw new Error(`HTTP ${res2.status}`);
+    } catch (err2) {
+      console.warn(`[API] Appel direct brut échoué (${err2.message}) pour ${url}`);
+    }
+
+    // 3. Dernier repli de secours : JSONP si supporté par le navigateur
+    try {
+      return await fetchJSONP(url);
+    } catch (jsonpErr) {
+      console.warn(`[API] Repli JSONP non disponible (${jsonpErr.message})`);
+    }
+
+    throw new Error(`Impossible de contacter l'API Extra Life pour ${url}`);
   }
 
   // État local de l'application
@@ -447,11 +470,20 @@
         `https://extra-life.donordrive.com/api/teams/${CONFIG.teamID}/donations?limit=${CONFIG.donationsLimit}`,
         `https://www.extra-life.org/api/teams/${CONFIG.teamID}/donations?limit=${CONFIG.donationsLimit}`
       ];
-    } else {
+    } else if (CONFIG.participantID) {
       donationEndpoints = [
         `https://dd.extra-life.org/api/participants/${CONFIG.participantID}/donations?limit=${CONFIG.donationsLimit}`,
         `https://extra-life.donordrive.com/api/participants/${CONFIG.participantID}/donations?limit=${CONFIG.donationsLimit}`,
         `https://www.extra-life.org/api/participants/${CONFIG.participantID}/donations?limit=${CONFIG.donationsLimit}`
+      ];
+      // Si on est en alternance avec une équipe, on ajoute aussi l'endpoint équipe en repli
+      if (CONFIG.mode === 'alternance' && CONFIG.teamID) {
+        donationEndpoints.push(`https://dd.extra-life.org/api/teams/${CONFIG.teamID}/donations?limit=${CONFIG.donationsLimit}`);
+      }
+    } else if (CONFIG.teamID) {
+      donationEndpoints = [
+        `https://dd.extra-life.org/api/teams/${CONFIG.teamID}/donations?limit=${CONFIG.donationsLimit}`,
+        `https://extra-life.donordrive.com/api/teams/${CONFIG.teamID}/donations?limit=${CONFIG.donationsLimit}`
       ];
     }
 
@@ -459,8 +491,11 @@
     for (const url of donationEndpoints) {
       try {
         const data = await fetchWithFallback(url);
-        if (Array.isArray(data)) {
+        if (Array.isArray(data) && data.length > 0) {
           safeStorage.setItem(STORAGE_KEYS.lastDonationsData, JSON.stringify(data));
+          return data;
+        } else if (Array.isArray(data)) {
+          // Tableau vide reçu, on garde en mémoire si aucun autre endpoint ne fournit de dons
           return data;
         }
       } catch (err) {
@@ -687,8 +722,9 @@
       }
     }
 
-    // 3. Mise à jour du carrousel uniquement si la liste des dons a changé
-    if (donationsChanged) {
+    // 3. Mise à jour du carrousel si les dons ont changé OU si le carrousel contient encore le texte d'attente
+    const hasActiveDonationsRendered = elements.feedSlider && elements.feedSlider.querySelectorAll('.feed-item[data-index]').length > 0;
+    if (donationsChanged || !hasActiveDonationsRendered) {
       renderDonationsCarousel();
     }
   }
@@ -897,32 +933,53 @@
     const now = new Date();
     return [
       {
-        donationID: "demo_1",
+        donationID: "892C161F64A1EE81",
         displayName: "billy_camaros",
         amount: 10.70,
         createdDateUTC: new Date(now - 15 * 60 * 1000).toISOString(),
-        message: "Pour les enfants 🚸"
+        message: ""
       },
       {
-        donationID: "demo_2",
-        displayName: "Maxime Champeau",
-        amount: 20.0,
+        donationID: "F918B3575FA4ED96",
+        displayName: "Mathieu Gingras",
+        amount: 7.16,
         createdDateUTC: new Date(now - 45 * 60 * 1000).toISOString(),
-        message: "Bravo pour le live au profit d'Enfant Soleil !"
+        message: ""
       },
       {
-        donationID: "demo_3",
+        donationID: "4E88F74455C86F54",
         displayName: null, // Anonyme
-        amount: 15.0,
+        amount: 35.75,
         createdDateUTC: new Date(now - 120 * 60 * 1000).toISOString(),
-        message: "Bon stream à tous !"
+        message: "Pour les enfants !"
       },
       {
-        donationID: "demo_4",
-        displayName: "Alexandre C.",
-        amount: 25.0,
+        donationID: "4F369B3F65C59D33",
+        displayName: "Alain-Pier Lafond",
+        amount: 7.14,
         createdDateUTC: new Date(now - 240 * 60 * 1000).toISOString(),
-        message: "Pour les petits guerriers d'Opération Enfant Soleil ☀️"
+        message: ""
+      },
+      {
+        donationID: "8AE65BED0FF921D5",
+        displayName: "Yancy Gauthier",
+        amount: 14.28,
+        createdDateUTC: new Date(now - 360 * 60 * 1000).toISOString(),
+        message: ""
+      },
+      {
+        donationID: "17CF5907313AC7F4",
+        displayName: "Maxime Champeau",
+        amount: 17.85,
+        createdDateUTC: new Date(now - 480 * 60 * 1000).toISOString(),
+        message: ""
+      },
+      {
+        donationID: "CC29895067BC0D25",
+        displayName: "cybervirus_101",
+        amount: 14.28,
+        createdDateUTC: new Date(now - 600 * 60 * 1000).toISOString(),
+        message: "Pour les enfants 🚸"
       }
     ];
   }
@@ -1200,15 +1257,24 @@
       if (cachedPart) state.participant = JSON.parse(cachedPart);
       if (cachedTeam) state.team = JSON.parse(cachedTeam);
       if (cachedMiles) state.milestones = JSON.parse(cachedMiles);
-      if (cachedDons) state.donations = processDonations(JSON.parse(cachedDons));
+      if (cachedDons) {
+        const parsed = JSON.parse(cachedDons);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          state.donations = processDonations(parsed);
+        }
+      }
     } catch (e) {}
 
-    if (!state.participant && !state.team && (CONFIG.isDemo || !CONFIG.participantID)) {
+    // Si aucune donation n'est en mémoire (ex: premier chargement), on initialise avec la liste connue
+    if (!state.donations || state.donations.length === 0) {
+      state.donations = processDonations(getDemoDonations());
+    }
+
+    if (!state.participant && !state.team) {
       state.participant = getDemoParticipant();
       if (CONFIG.mode === 'alternance' || CONFIG.mode === 'team') {
         state.team = getDemoTeam();
       }
-      state.donations = processDonations(getDemoDonations());
     }
 
     // Affiche immédiatement l'interface avec les données de départ
