@@ -790,7 +790,6 @@
         <div class="url-row" style="flex-wrap: wrap;">
           <input type="text" id="url-alert" class="url-input" readonly>
           <button class="btn btn-secondary" onclick="copyInput('url-alert')">📋 Copier</button>
-          <button type="button" class="btn btn-outline" id="btn-copy-test-alert" title="Copier un lien qui déclenche automatiquement un test à l'ouverture dans OBS">🧪 Lien TEST OBS</button>
           <a id="link-preview-alert" href="#" target="_blank" class="btn btn-outline">👁️ Aperçu</a>
         </div>
       </div>
@@ -896,7 +895,6 @@
         btnIntervalPlus: document.getElementById('btn-interval-plus'),
         urlOverlay: document.getElementById('url-overlay'),
         urlAlert: document.getElementById('url-alert'),
-        btnCopyTestAlert: document.getElementById('btn-copy-test-alert'),
         linkPreviewOverlay: document.getElementById('link-preview-overlay'),
         linkPreviewAlert: document.getElementById('link-preview-alert'),
         btnTestDonation: document.getElementById('btn-test-donation'),
@@ -1097,15 +1095,6 @@
         const alertFullUrl = `${baseUrl}/alert.html?${alertParams.toString()}`;
         elements.urlAlert.value = alertFullUrl;
         elements.linkPreviewAlert.href = alertFullUrl;
-
-        if (elements.btnCopyTestAlert) {
-          elements.btnCopyTestAlert.onclick = () => {
-            const testUrl = `${alertFullUrl}&test=1`;
-            navigator.clipboard.writeText(testUrl).then(() => {
-              showToast('Lien de TEST copié ! Il s\'animera dès l\'ouverture dans OBS. 🧪');
-            });
-          };
-        }
 
         // Mise à jour dynamique des recommandations d'affichage selon la disposition choisie
         if (elements.obsRecVal && elements.obsDimsLimits && elements.obsFormatsDetail) {
