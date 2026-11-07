@@ -1613,3 +1613,150 @@ body {
   opacity: 1 !important;
   transform: translateY(0) !important;
 }
+
+/* ==========================================================================
+   5. THÈMES OFFICIELS EXTRA LIFE
+   Couleurs officielles :
+   - Bleu CMN : #0E7CA2
+   - Cyan vibrant : #1C9ED6
+   - Vert manette gamer : #62AF0F
+   - Navy sombre : #0C1829 / #172338
+   - Blanc glacier : #F4F9FD
+   ========================================================================== */
+
+/* --- EXTRA LIFE CLAIR --- */
+.overlay-container.theme-extralife.theme-light {
+  background: rgba(244, 249, 253, 0.97) !important;
+  border: 5px solid #0E7CA2 !important;
+  box-shadow: 0 4px 24px rgba(14, 124, 162, 0.25), 0 0 22px rgba(28, 158, 214, 0.4) !important;
+  color: #0C1829 !important;
+}
+
+.overlay-container.theme-extralife.theme-light .label-heading {
+  color: #0C1829 !important;
+}
+
+.overlay-container.theme-extralife.theme-light .amount-highlight {
+  color: #0E7CA2 !important;
+}
+
+.overlay-container.theme-extralife.theme-light .amount-sub {
+  color: #0C1829 !important;
+}
+
+.overlay-container.theme-extralife.theme-light .progress-track {
+  background: rgba(14, 124, 162, 0.12) !important;
+  border: 2px solid rgba(14, 124, 162, 0.35) !important;
+}
+
+.overlay-container.theme-extralife.theme-light .progress-fill {
+  background: linear-gradient(90deg, #1C9ED6 0%, #0E7CA2 60%, #62AF0F 100%) !important;
+  box-shadow: 0 0 10px rgba(28, 158, 214, 0.5) !important;
+}
+
+.overlay-container.theme-extralife.theme-light #progress-percent {
+  background: #0C1829 !important;
+  color: #FFFFFF !important;
+  border-color: #1C9ED6 !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3), 0 0 8px rgba(28, 158, 214, 0.6) !important;
+}
+
+.overlay-container.theme-extralife.theme-light .info-box {
+  background: #FFFFFF !important;
+  border-color: #1C9ED6 !important;
+  box-shadow: 0 3px 10px rgba(14, 124, 162, 0.12) !important;
+}
+
+.overlay-container.theme-extralife.theme-light .box-header {
+  border-bottom: 2px dashed rgba(14, 124, 162, 0.35) !important;
+}
+
+.overlay-container.theme-extralife.theme-light .box-tag {
+  color: #0E7CA2 !important;
+}
+
+.overlay-container.theme-extralife.theme-light .donor-amount,
+.overlay-container.theme-extralife.theme-light .feed-amount {
+  color: #0E7CA2 !important;
+}
+
+.overlay-container.theme-extralife.theme-light .milestone-pill {
+  background: rgba(14, 124, 162, 0.12) !important;
+  border-color: #1C9ED6 !important;
+  color: #0E7CA2 !important;
+}
+
+/* --- EXTRA LIFE SOMBRE --- */
+.overlay-container.theme-extralife.theme-dark {
+  background: #0C1829 !important;
+  border: 5px solid #1C9ED6 !important;
+  box-shadow: 0 4px 28px rgba(0, 0, 0, 0.8), 0 0 25px rgba(28, 158, 214, 0.6) !important;
+  color: #FFFFFF !important;
+}
+
+.overlay-container.theme-extralife.theme-dark .label-heading {
+  color: #E0F2FE !important;
+}
+
+.overlay-container.theme-extralife.theme-dark .amount-highlight {
+  color: #1C9ED6 !important;
+  text-shadow: 0 0 12px rgba(28, 158, 214, 0.45) !important;
+}
+
+.overlay-container.theme-extralife.theme-dark .amount-sub {
+  color: #FFFFFF !important;
+}
+
+.overlay-container.theme-extralife.theme-dark .progress-track {
+  background: #070e18 !important;
+  border: 2px solid rgba(28, 158, 214, 0.55) !important;
+}
+
+.overlay-container.theme-extralife.theme-dark .progress-fill {
+  background: linear-gradient(90deg, #0E7CA2 0%, #1C9ED6 60%, #62AF0F 100%) !important;
+  box-shadow: 0 0 12px rgba(28, 158, 214, 0.7) !important;
+}
+
+.overlay-container.theme-extralife.theme-dark #progress-percent {
+  background: #070e18 !important;
+  color: #1C9ED6 !important;
+  border-color: #1C9ED6 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.7), 0 0 10px rgba(28, 158, 214, 0.8) !important;
+}
+
+.overlay-container.theme-extralife.theme-dark .info-box {
+  background: #172338 !important;
+  border-color: #1C9ED6 !important;
+  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.55) !important;
+}
+
+.overlay-container.theme-extralife.theme-dark .box-header {
+  border-bottom: 2px dashed rgba(28, 158, 214, 0.5) !important;
+}
+
+.overlay-container.theme-extralife.theme-dark .box-tag {
+  color: #1C9ED6 !important;
+}
+
+.overlay-container.theme-extralife.theme-dark .donor-name,
+.overlay-container.theme-extralife.theme-dark .feed-donor {
+  color: #FFFFFF !important;
+}
+
+.overlay-container.theme-extralife.theme-dark .donor-amount,
+.overlay-container.theme-extralife.theme-dark .feed-amount {
+  color: #62AF0F !important;
+  text-shadow: 0 0 8px rgba(98, 175, 15, 0.4) !important;
+}
+
+.overlay-container.theme-extralife.theme-dark .milestone-pill {
+  background: rgba(28, 158, 214, 0.15) !important;
+  border-color: #1C9ED6 !important;
+  color: #1C9ED6 !important;
+}
+
+.overlay-container.theme-extralife.theme-dark .logo-clear-zone {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(28, 158, 214, 0.4) !important;
+}
+

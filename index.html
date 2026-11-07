@@ -598,8 +598,14 @@
         <div class="option-box">
           <label for="select-theme">Thème visuel</label>
           <select id="select-theme" class="option-select">
-            <option value="clair" selected>Thème clair</option>
-            <option value="sombre">Thème sombre</option>
+            <optgroup label="☀️ Opération Enfant Soleil">
+              <option value="clair" selected>☀️ Enfant Soleil — Thème clair (Jaune & Blanc)</option>
+              <option value="sombre">🌙 Enfant Soleil — Thème sombre (Noir velours)</option>
+            </optgroup>
+            <optgroup label="🎮 Thèmes officiels Extra Life">
+              <option value="extralife-clair">🎮 Extra Life — Thème clair (Bleu CMN & Blanc)</option>
+              <option value="extralife-sombre">🕹️ Extra Life — Thème sombre (Bleu nuit & Cyan)</option>
+            </optgroup>
           </select>
         </div>
 
@@ -1036,19 +1042,28 @@ Durant ce live, nous amassons des dons pour soutenir le développement d'une pé
       function drawTwitchBanner(theme) {
         const canvas = elements.canvasTwitch;
         const ctx = canvas.getContext('2d');
-        const isDark = (theme === 'sombre');
+        const isExtraLife = theme.startsWith('extralife');
+        const isDark = (theme === 'sombre' || theme === 'extralife-sombre' || theme.includes('sombre') || theme.includes('dark'));
 
         canvas.width = 320;
         canvas.height = 210;
 
-        // Fond
-        ctx.fillStyle = isDark ? '#252625' : '#FAF7F0';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        // Fond & Bordure officielle
+        if (isExtraLife) {
+          ctx.fillStyle = isDark ? '#0C1829' : '#F4F9FD';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        // Bordure Jaune Soleil officielle (5px)
-        ctx.strokeStyle = '#FFD000';
-        ctx.lineWidth = 5;
-        ctx.strokeRect(0, 0, canvas.width, canvas.height);
+          ctx.strokeStyle = isDark ? '#1C9ED6' : '#0E7CA2';
+          ctx.lineWidth = 5;
+          ctx.strokeRect(0, 0, canvas.width, canvas.height);
+        } else {
+          ctx.fillStyle = isDark ? '#252625' : '#FAF7F0';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+          ctx.strokeStyle = '#FFD000';
+          ctx.lineWidth = 5;
+          ctx.strokeRect(0, 0, canvas.width, canvas.height);
+        }
 
         // Chargement du logo officiel
         const img = new Image();
@@ -1064,6 +1079,12 @@ Durant ce live, nous amassons des dons pour soutenir le développement d'une pé
           ctx.beginPath();
           ctx.roundRect(boxX, boxY, boxW, boxH, 10);
           ctx.fill();
+
+          if (isExtraLife) {
+            ctx.strokeStyle = isDark ? 'rgba(28, 158, 214, 0.45)' : 'rgba(14, 124, 162, 0.35)';
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+          }
 
           // Calcul des proportions sans aucune déformation (ratio naturel 2.365)
           const naturalRatio = img.naturalWidth / img.naturalHeight;
@@ -1083,14 +1104,25 @@ Durant ce live, nous amassons des dons pour soutenir le développement d'une pé
           ctx.drawImage(img, posX, posY, targetW, targetH);
 
           // Texte d'action clair et lisible
-          ctx.fillStyle = isDark ? '#FFD000' : '#F15029';
-          ctx.font = 'bold 15px Montserrat, sans-serif';
-          ctx.textAlign = 'center';
-          ctx.fillText('💛 FAIRE UN DON EN DIRECT', 160, 176);
+          if (isExtraLife) {
+            ctx.fillStyle = isDark ? '#1C9ED6' : '#0E7CA2';
+            ctx.font = 'bold 15px Montserrat, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('🎮 FAIRE UN DON SUR EXTRA LIFE', 160, 176);
 
-          ctx.fillStyle = isDark ? '#FAF7F0' : '#252625';
-          ctx.font = '600 11.5px Montserrat, sans-serif';
-          ctx.fillText('Cliquez ici pour soutenir les enfants malades', 160, 195);
+            ctx.fillStyle = isDark ? '#E0F2FE' : '#172338';
+            ctx.font = '600 11.5px Montserrat, sans-serif';
+            ctx.fillText('Pour Opération Enfant Soleil & les enfants malades', 160, 195);
+          } else {
+            ctx.fillStyle = isDark ? '#FFD000' : '#F15029';
+            ctx.font = 'bold 15px Montserrat, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('💛 FAIRE UN DON EN DIRECT', 160, 176);
+
+            ctx.fillStyle = isDark ? '#FAF7F0' : '#252625';
+            ctx.font = '600 11.5px Montserrat, sans-serif';
+            ctx.fillText('Cliquez ici pour soutenir les enfants malades', 160, 195);
+          }
         };
       }
 

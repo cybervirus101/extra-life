@@ -1083,13 +1083,18 @@
         elements.container.classList.add('layout-horizontal');
       }
 
-      // Application du thème (clair ou sombre)
-      if (CONFIG.theme === 'sombre' || CONFIG.theme === 'dark') {
-        elements.container.classList.remove('theme-light');
+      // Application du thème (clair, sombre, extralife-clair, extralife-sombre)
+      const isExtraLife = CONFIG.theme.includes('extralife');
+      const isDark = CONFIG.theme === 'sombre' || CONFIG.theme === 'dark' || CONFIG.theme.includes('sombre');
+
+      elements.container.classList.remove('theme-light', 'theme-dark', 'theme-extralife');
+      if (isDark) {
         elements.container.classList.add('theme-dark');
       } else {
-        elements.container.classList.remove('theme-dark');
         elements.container.classList.add('theme-light');
+      }
+      if (isExtraLife) {
+        elements.container.classList.add('theme-extralife');
       }
     }
 

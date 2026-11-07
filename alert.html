@@ -60,6 +60,79 @@
       box-shadow: 0 12px 50px rgba(0, 0, 0, 0.85), 0 0 45px rgba(255, 208, 0, 0.55);
     }
 
+    /* Thèmes officiels Extra Life (Bleu CMN #0E7CA2 / Cyan #1C9ED6 / Vert #62AF0F / Navy #0C1829) */
+    .alert-wrapper.theme-extralife {
+      background: rgba(244, 249, 253, 0.98);
+      border-color: #0E7CA2;
+      box-shadow: 0 12px 48px rgba(14, 124, 162, 0.35), 0 0 45px rgba(28, 158, 214, 0.55);
+      color: #0C1829;
+    }
+
+    .alert-wrapper.theme-extralife .sunburst-glow {
+      background: radial-gradient(circle, rgba(28, 158, 214, 0.45) 0%, rgba(98, 175, 15, 0.2) 50%, transparent 70%);
+    }
+
+    .alert-wrapper.theme-extralife .logo-container {
+      border-color: rgba(28, 158, 214, 0.4);
+    }
+
+    .alert-wrapper.theme-extralife .alert-badge {
+      background: #0E7CA2;
+      box-shadow: 0 2px 8px rgba(14, 124, 162, 0.4);
+    }
+
+    .alert-wrapper.theme-extralife .donor-name {
+      color: #0C1829;
+    }
+
+    .alert-wrapper.theme-extralife .donor-amount {
+      color: #0E7CA2;
+      text-shadow: 0 2px 10px rgba(28, 158, 214, 0.3);
+    }
+
+    .alert-wrapper.theme-extralife .donor-message {
+      background: rgba(28, 158, 214, 0.12);
+      border-left: 4px solid #1C9ED6;
+      color: #0C1829;
+    }
+
+    .alert-wrapper.theme-extralife.theme-dark {
+      background: #0C1829;
+      color: #FFFFFF;
+      border-color: #1C9ED6;
+      box-shadow: 0 12px 50px rgba(0, 0, 0, 0.85), 0 0 45px rgba(28, 158, 214, 0.65);
+    }
+
+    .alert-wrapper.theme-extralife.theme-dark .sunburst-glow {
+      background: radial-gradient(circle, rgba(28, 158, 214, 0.55) 0%, rgba(98, 175, 15, 0.25) 50%, transparent 70%);
+    }
+
+    .alert-wrapper.theme-extralife.theme-dark .logo-container {
+      background: #FFFFFF;
+      border-color: rgba(28, 158, 214, 0.6);
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.3);
+    }
+
+    .alert-wrapper.theme-extralife.theme-dark .alert-badge {
+      background: #62AF0F;
+      box-shadow: 0 2px 10px rgba(98, 175, 15, 0.5);
+    }
+
+    .alert-wrapper.theme-extralife.theme-dark .donor-name {
+      color: #FFFFFF;
+    }
+
+    .alert-wrapper.theme-extralife.theme-dark .donor-amount {
+      color: #1C9ED6;
+      text-shadow: 0 2px 14px rgba(28, 158, 214, 0.5);
+    }
+
+    .alert-wrapper.theme-extralife.theme-dark .donor-message {
+      background: rgba(255, 255, 255, 0.08);
+      border-left: 4px solid #1C9ED6;
+      color: #FAF7F0;
+    }
+
     /* Rayonnement solaire d'arrière-plan */
     .sunburst-glow {
       position: absolute;
@@ -232,8 +305,18 @@
         donorMessage: document.getElementById('donor-message'),
       };
 
-      if (CONFIG.theme === 'sombre' || CONFIG.theme === 'dark') {
+      const isExtraLife = CONFIG.theme.includes('extralife');
+      const isDark = CONFIG.theme === 'sombre' || CONFIG.theme === 'dark' || CONFIG.theme.includes('sombre');
+
+      if (isDark) {
         elements.wrapper.classList.add('theme-dark');
+      }
+      if (isExtraLife) {
+        elements.wrapper.classList.add('theme-extralife');
+        const badge = elements.wrapper.querySelector('.alert-badge');
+        if (badge) {
+          badge.textContent = '🎮 Nouveau don Extra Life !';
+        }
       }
 
       // File d'attente des alertes et déduplication stricte
