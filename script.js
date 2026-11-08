@@ -1270,6 +1270,7 @@
         const cAccent = urlParams.get('cAccent') || '#38BDF8';
         const cText = urlParams.get('cText') || '#F8FAFC';
         const cLogo = urlParams.get('cLogo') || 'el-auto';
+        const cLogoUrl = urlParams.get('cLogoUrl');
 
         isDark = isColorDark(cBg);
 
@@ -1282,7 +1283,15 @@
         elements.container.style.setProperty('--custom-text', cText);
 
         if (elements.brandLogo) {
-          if (cLogo === 'oes') {
+          elements.brandLogo.onerror = function () {
+            if (this.src !== 'assets/logo-extra-life-white.svg') {
+              this.src = 'assets/logo-extra-life-white.svg';
+            }
+          };
+          if (cLogo === 'custom' && cLogoUrl) {
+            elements.brandLogo.src = decodeURIComponent(cLogoUrl);
+            elements.brandLogo.alt = 'Logo personnalisé';
+          } else if (cLogo === 'oes') {
             elements.brandLogo.src = 'assets/logo-enfant-soleil-horizontal.png';
             elements.brandLogo.alt = 'Opération Enfant Soleil';
           } else if (cLogo === 'el-color') {

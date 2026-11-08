@@ -916,13 +916,20 @@
           </div>
 
           <div class="color-picker-item">
-            <label for="select-custom-logo">5. Logo du panneau</label>
+            <label for="select-custom-logo">5. Logo du panneau & overlay</label>
             <select id="select-custom-logo" class="option-select" style="padding: 8px 12px; font-size: 13px;">
               <option value="el-white" selected>Extra Life (Blanc - Recommandé)</option>
               <option value="el-color">Extra Life (Couleur officielle)</option>
               <option value="oes">Opération Enfant Soleil</option>
+              <option value="custom">🌐 Image personnalisée (Lien direct URL)</option>
             </select>
-            <span class="color-role-hint">Logo affiché au centre de la bannière</span>
+            <span class="color-role-hint">Logo affiché au centre de la bannière & overlay</span>
+          </div>
+
+          <div class="color-picker-item" id="custom-logo-url-box" style="display: none;">
+            <label for="input-custom-logo-url">6. Lien d'image personnalisée</label>
+            <input type="url" id="input-custom-logo-url" class="hex-input" style="text-transform: none; font-family: inherit; font-size: 13px;" placeholder="https://exemple.com/mon-logo.png">
+            <span class="color-role-hint">URL directe (PNG transparent ou SVG conseillé)</span>
           </div>
         </div>
       </div>
@@ -1107,6 +1114,8 @@
         colorCustomText: document.getElementById('color-custom-text'),
         hexCustomText: document.getElementById('hex-custom-text'),
         selectCustomLogo: document.getElementById('select-custom-logo'),
+        customLogoUrlBox: document.getElementById('custom-logo-url-box'),
+        inputCustomLogoUrl: document.getElementById('input-custom-logo-url'),
         toast: document.getElementById('toast'),
       };
 
@@ -1260,6 +1269,7 @@
         accent: '#38BDF8',
         text: '#F8FAFC',
         logo: 'el-white',
+        logoUrl: '',
       };
 
       let customPalette = { ...DEFAULT_CUSTOM_PALETTE };
@@ -1292,6 +1302,13 @@
         } catch (e) {}
       }
 
+      function updateCustomLogoVisibility() {
+        if (elements.customLogoUrlBox) {
+          const isCustom = elements.selectCustomLogo && elements.selectCustomLogo.value === 'custom';
+          elements.customLogoUrlBox.style.display = isCustom ? 'flex' : 'none';
+        }
+      }
+
       function applyCustomPaletteToInputs() {
         if (elements.colorCustomBg) elements.colorCustomBg.value = customPalette.bg;
         if (elements.hexCustomBg) elements.hexCustomBg.value = customPalette.bg.toUpperCase();
@@ -1306,6 +1323,8 @@
         if (elements.hexCustomText) elements.hexCustomText.value = customPalette.text.toUpperCase();
 
         if (elements.selectCustomLogo) elements.selectCustomLogo.value = customPalette.logo || 'el-white';
+        if (elements.inputCustomLogoUrl) elements.inputCustomLogoUrl.value = customPalette.logoUrl || '';
+        updateCustomLogoVisibility();
       }
 
       function updateThemePanelVisibility() {
@@ -1345,6 +1364,9 @@
           overlayParams.set('cAccent', customPalette.accent);
           overlayParams.set('cText', customPalette.text);
           if (customPalette.logo) overlayParams.set('cLogo', customPalette.logo);
+          if (customPalette.logo === 'custom' && customPalette.logoUrl) {
+            overlayParams.set('cLogoUrl', customPalette.logoUrl);
+          }
         }
 
         const overlayFullUrl = `${baseUrl}/overlay.html?${overlayParams.toString()}`;
@@ -1366,6 +1388,9 @@
           alertParams.set('cAccent', customPalette.accent);
           alertParams.set('cText', customPalette.text);
           if (customPalette.logo) alertParams.set('cLogo', customPalette.logo);
+          if (customPalette.logo === 'custom' && customPalette.logoUrl) {
+            alertParams.set('cLogoUrl', customPalette.logoUrl);
+          }
         }
 
         const alertFullUrl = `${baseUrl}/alert.html?${alertParams.toString()}`;
@@ -1487,10 +1512,13 @@ Durant ce live, nous amassons des dons pour Extra Life afin de soutenir les soin
           ctx.strokeRect(0, 0, canvas.width, canvas.height);
         }
 
-        // Chargement du logo officiel
+        // Chargement du logo officiel ou personnalisé
         const img = new Image();
         if (isCustom) {
-          if (customPalette.logo === 'oes') {
+          if (customPalette.logo === 'custom' && customPalette.logoUrl) {
+            img.crossOrigin = 'anonymous';
+            img.src = customPalette.logoUrl;
+          } else if (customPalette.logo === 'oes') {
             img.src = 'assets/logo-enfant-soleil-horizontal.png';
           } else if (customPalette.logo === 'el-color') {
             img.src = 'assets/logo-extra-life-color.svg';
@@ -1505,6 +1533,12 @@ Durant ce live, nous amassons des dons pour Extra Life afin de soutenir les soin
         } else {
           img.src = 'assets/logo-enfant-soleil-horizontal.png';
         }
+
+        img.onerror = function () {
+          if (img.src !== 'assets/logo-extra-life-white.svg') {
+            img.src = 'assets/logo-extra-life-white.svg';
+          }
+        };
 
         img.onload = function () {
           // Encadré de sécurité pour le logo (Zone de dégagement officielle)
@@ -1574,10 +1608,15 @@ Durant ce live, nous amassons des dons pour Extra Life afin de soutenir les soin
 
       // Téléchargement de la bannière
       window.downloadBanner = function () {
-        const link = document.createElement('a');
-        link.download = `panneau-twitch-extralife-${elements.selectTheme.value}.png`;
-        link.href = elements.canvasTwitch.toDataURL('image/png');
-        link.click();
+        try {
+          const link = document.createElement('a');
+          link.download = `panneau-twitch-extralife-${elements.selectTheme.value}.png`;
+          link.href = elements.canvasTwitch.toDataURL('image/png');
+          link.click();
+        } catch (err) {
+          console.warn('Export canvas impossible avec image externe sans CORS:', err);
+          showToast('Note: Cette image externe bloque l\'export direct. Le lien fonctionne dans OBS !');
+        }
       };
 
       // Toast de confirmation
@@ -1797,6 +1836,15 @@ Durant ce live, nous amassons des dons pour Extra Life afin de soutenir les soin
       if (elements.selectCustomLogo) {
         elements.selectCustomLogo.addEventListener('change', () => {
           customPalette.logo = elements.selectCustomLogo.value;
+          updateCustomLogoVisibility();
+          saveCustomPaletteMemory();
+          updateGeneratedUrls();
+        });
+      }
+
+      if (elements.inputCustomLogoUrl) {
+        elements.inputCustomLogoUrl.addEventListener('input', () => {
+          customPalette.logoUrl = elements.inputCustomLogoUrl.value.trim();
           saveCustomPaletteMemory();
           updateGeneratedUrls();
         });
