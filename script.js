@@ -788,6 +788,59 @@
     }
   }
 
+  const FEED_EMPTY_MESSAGE = "Le rêve d'un enfant au bout des doigts";
+
+  /**
+   * Affiche le texte de base quand aucun don n'est encore reçu :
+   * « Le rêve d'un enfant au bout des doigts »
+   * Si la largeur disponible est insuffisante -> défilement automatique (Marquee).
+   */
+  function renderFeedEmptyState() {
+    if (!elements.feedSlider) return;
+
+    elements.feedSlider.innerHTML = `
+      <div class="feed-item active feed-empty-state">
+        <div class="feed-empty-line marquee-line">
+          <span class="feed-empty-text static-message">${escapeHTML(FEED_EMPTY_MESSAGE)}</span>
+        </div>
+      </div>
+    `;
+
+    evaluateFeedEmptyStateMarquee();
+  }
+
+  function evaluateFeedEmptyStateMarquee() {
+    if (!elements.feedSlider) return;
+    const emptyLine = elements.feedSlider.querySelector('.feed-empty-line');
+    if (!emptyLine) return;
+
+    requestAnimationFrame(() => {
+      if (!emptyLine) return;
+      const span = emptyLine.querySelector('.feed-empty-text');
+      if (!span) return;
+
+      const availableWidth = emptyLine.clientWidth;
+      const textWidth = span.scrollWidth;
+
+      // Si l'espace manque (débordement réel du texte par rapport à la boîte)
+      if (availableWidth > 0 && textWidth > (availableWidth + 2)) {
+        const clean = escapeHTML(FEED_EMPTY_MESSAGE);
+        const isExtraLife = CONFIG.theme.includes('extralife') || CONFIG.theme === 'personnalise';
+        const bulletIcon = isExtraLife ? '🎮' : '☀️';
+        const unit = `<span class="feed-empty-text">${clean}</span><span class="marquee-bullet" aria-hidden="true">${bulletIcon}</span>`;
+        emptyLine.innerHTML = `
+          <div class="marquee-track">
+            ${unit}${unit}${unit}${unit}
+          </div>
+        `;
+        emptyLine.classList.add('is-marquee');
+      } else {
+        emptyLine.innerHTML = `<span class="feed-empty-text static-message">${escapeHTML(FEED_EMPTY_MESSAGE)}</span>`;
+        emptyLine.classList.remove('is-marquee');
+      }
+    });
+  }
+
   /**
    * Génère les cartes du carrousel de dons récents
    */
@@ -795,16 +848,7 @@
     if (!elements.feedSlider) return;
 
     if (!state.donations || state.donations.length === 0) {
-      elements.feedSlider.innerHTML = `
-        <div class="feed-item active">
-          <div class="donor-line">
-            <span class="feed-donor">Merci pour votre soutien !</span>
-          </div>
-          <div class="amount-line">
-            <span class="feed-amount">Tous unis pour Extra Life 🎮</span>
-          </div>
-        </div>
-      `;
+      renderFeedEmptyState();
       return;
     }
 
@@ -1292,6 +1336,7 @@
 
     // 0. Configuration visuelle & Écouteur simulateur
     applyThemeAndLogo();
+    evaluateFeedEmptyStateMarquee();
     setupSimulatorListener();
 
     // Rendu synchrone immédiat (0 ms) avec données locales ou démo pour éliminer tout temps de chargement visible
@@ -1330,6 +1375,7 @@
     window.addEventListener('resize', () => {
       applyThemeAndLogo();
       evaluateActiveCarouselMessage();
+      evaluateFeedEmptyStateMarquee();
       if (state.donations && state.donations.length > 0 && state.donations[0].message) {
         renderMessageContent(elements.latestDonorMessageLine, state.donations[0].message);
       }
