@@ -533,42 +533,92 @@
     .color-picker-wrapper {
       display: flex;
       align-items: center;
+      gap: 10px;
+    }
+
+    .color-btn-trigger {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       gap: 8px;
-    }
-
-    .color-input {
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      appearance: none;
-      width: 44px;
-      height: 38px;
-      background: transparent;
-      border: 2px solid var(--el-navy-card-border);
-      border-radius: 8px;
+      padding: 7px 14px;
+      flex: 1;
+      min-width: 124px;
+      height: 42px;
+      background: rgba(14, 27, 45, 0.95);
+      border: 1.5px solid var(--el-navy-card-border);
+      border-radius: 9px;
       cursor: pointer;
-      padding: 0;
+      user-select: none;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+      overflow: hidden;
     }
 
-    .color-input::-webkit-color-swatch-wrapper {
-      padding: 2px;
+    .color-btn-trigger:hover {
+      border-color: var(--el-cyan);
+      background: rgba(28, 158, 214, 0.18);
+      box-shadow: 0 0 12px rgba(28, 158, 214, 0.4);
+      transform: translateY(-1px);
     }
 
-    .color-input::-webkit-color-swatch {
-      border: none;
+    .color-btn-trigger:active {
+      transform: translateY(0);
+    }
+
+    .color-btn-swatch {
+      width: 22px;
+      height: 22px;
       border-radius: 6px;
+      border: 1.5px solid rgba(255, 255, 255, 0.5);
+      flex-shrink: 0;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+      transition: background-color 0.15s ease;
+    }
+
+    .color-btn-icon {
+      font-size: 16px;
+      line-height: 1;
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+    }
+
+    .color-btn-label {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #FFFFFF;
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+    }
+
+    /* L'input natif recouvre tout le bouton pour déclencher instantanément le sélecteur natif au clic */
+    .color-btn-trigger .color-input {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+      border: none;
+      padding: 0;
+      margin: 0;
     }
 
     .hex-input {
-      flex: 1;
+      width: 96px;
+      flex-shrink: 0;
+      text-align: center;
       font-family: 'Consolas', 'Monaco', monospace;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
-      padding: 8px 10px;
+      padding: 8px 6px;
       background: var(--el-navy-bg);
       border: 1.5px solid var(--el-navy-card-border);
       border-radius: 8px;
       color: #FFFFFF;
       text-transform: uppercase;
+      transition: border-color 0.2s ease;
     }
 
     .hex-input:focus {
@@ -882,8 +932,13 @@
           <div class="color-picker-item">
             <label for="color-custom-bg">1. Fond principal</label>
             <div class="color-picker-wrapper">
-              <input type="color" id="color-custom-bg" class="color-input" value="#0F172A">
-              <input type="text" id="hex-custom-bg" class="hex-input" value="#0F172A" maxlength="7">
+              <label class="color-btn-trigger" for="color-custom-bg" title="Cliquer pour ouvrir la palette de couleurs">
+                <span class="color-btn-swatch" id="swatch-custom-bg" style="background-color: #0F172A;"></span>
+                <span class="color-btn-icon">🎨</span>
+                <span class="color-btn-label">Palette</span>
+                <input type="color" id="color-custom-bg" class="color-input" value="#0F172A">
+              </label>
+              <input type="text" id="hex-custom-bg" class="hex-input" value="#0F172A" maxlength="7" title="Code hexadécimal de la couleur">
             </div>
             <span class="color-role-hint">Arrière-plan du panneau et de l'overlay</span>
           </div>
@@ -891,8 +946,13 @@
           <div class="color-picker-item">
             <label for="color-custom-card">2. Cadres & Boîtes</label>
             <div class="color-picker-wrapper">
-              <input type="color" id="color-custom-card" class="color-input" value="#1E293B">
-              <input type="text" id="hex-custom-card" class="hex-input" value="#1E293B" maxlength="7">
+              <label class="color-btn-trigger" for="color-custom-card" title="Cliquer pour ouvrir la palette de couleurs">
+                <span class="color-btn-swatch" id="swatch-custom-card" style="background-color: #1E293B;"></span>
+                <span class="color-btn-icon">🎨</span>
+                <span class="color-btn-label">Palette</span>
+                <input type="color" id="color-custom-card" class="color-input" value="#1E293B">
+              </label>
+              <input type="text" id="hex-custom-card" class="hex-input" value="#1E293B" maxlength="7" title="Code hexadécimal de la couleur">
             </div>
             <span class="color-role-hint">Encadré du logo & boîtes de données</span>
           </div>
@@ -900,8 +960,13 @@
           <div class="color-picker-item">
             <label for="color-custom-accent">3. Bordures & Accent</label>
             <div class="color-picker-wrapper">
-              <input type="color" id="color-custom-accent" class="color-input" value="#38BDF8">
-              <input type="text" id="hex-custom-accent" class="hex-input" value="#38BDF8" maxlength="7">
+              <label class="color-btn-trigger" for="color-custom-accent" title="Cliquer pour ouvrir la palette de couleurs">
+                <span class="color-btn-swatch" id="swatch-custom-accent" style="background-color: #38BDF8;"></span>
+                <span class="color-btn-icon">🎨</span>
+                <span class="color-btn-label">Palette</span>
+                <input type="color" id="color-custom-accent" class="color-input" value="#38BDF8">
+              </label>
+              <input type="text" id="hex-custom-accent" class="hex-input" value="#38BDF8" maxlength="7" title="Code hexadécimal de la couleur">
             </div>
             <span class="color-role-hint">Contour extérieur, reflets & jauge de don</span>
           </div>
@@ -909,8 +974,13 @@
           <div class="color-picker-item">
             <label for="color-custom-text">4. Texte & Bouton</label>
             <div class="color-picker-wrapper">
-              <input type="color" id="color-custom-text" class="color-input" value="#F8FAFC">
-              <input type="text" id="hex-custom-text" class="hex-input" value="#F8FAFC" maxlength="7">
+              <label class="color-btn-trigger" for="color-custom-text" title="Cliquer pour ouvrir la palette de couleurs">
+                <span class="color-btn-swatch" id="swatch-custom-text" style="background-color: #F8FAFC;"></span>
+                <span class="color-btn-icon">🎨</span>
+                <span class="color-btn-label">Palette</span>
+                <input type="color" id="color-custom-text" class="color-input" value="#F8FAFC">
+              </label>
+              <input type="text" id="hex-custom-text" class="hex-input" value="#F8FAFC" maxlength="7" title="Code hexadécimal de la couleur">
             </div>
             <span class="color-role-hint">Titres, libellés et bouton d'action</span>
           </div>
@@ -1108,12 +1178,16 @@
         btnResetCustomTheme: document.getElementById('btn-reset-custom-theme'),
         colorCustomBg: document.getElementById('color-custom-bg'),
         hexCustomBg: document.getElementById('hex-custom-bg'),
+        swatchCustomBg: document.getElementById('swatch-custom-bg'),
         colorCustomCard: document.getElementById('color-custom-card'),
         hexCustomCard: document.getElementById('hex-custom-card'),
+        swatchCustomCard: document.getElementById('swatch-custom-card'),
         colorCustomAccent: document.getElementById('color-custom-accent'),
         hexCustomAccent: document.getElementById('hex-custom-accent'),
+        swatchCustomAccent: document.getElementById('swatch-custom-accent'),
         colorCustomText: document.getElementById('color-custom-text'),
         hexCustomText: document.getElementById('hex-custom-text'),
+        swatchCustomText: document.getElementById('swatch-custom-text'),
         selectCustomLogo: document.getElementById('select-custom-logo'),
         customLogoUrlBox: document.getElementById('custom-logo-url-box'),
         inputCustomLogoUrl: document.getElementById('input-custom-logo-url'),
@@ -1313,15 +1387,19 @@
       function applyCustomPaletteToInputs() {
         if (elements.colorCustomBg) elements.colorCustomBg.value = customPalette.bg;
         if (elements.hexCustomBg) elements.hexCustomBg.value = customPalette.bg.toUpperCase();
+        if (elements.swatchCustomBg) elements.swatchCustomBg.style.backgroundColor = customPalette.bg;
 
         if (elements.colorCustomCard) elements.colorCustomCard.value = customPalette.card;
         if (elements.hexCustomCard) elements.hexCustomCard.value = customPalette.card.toUpperCase();
+        if (elements.swatchCustomCard) elements.swatchCustomCard.style.backgroundColor = customPalette.card;
 
         if (elements.colorCustomAccent) elements.colorCustomAccent.value = customPalette.accent;
         if (elements.hexCustomAccent) elements.hexCustomAccent.value = customPalette.accent.toUpperCase();
+        if (elements.swatchCustomAccent) elements.swatchCustomAccent.style.backgroundColor = customPalette.accent;
 
         if (elements.colorCustomText) elements.colorCustomText.value = customPalette.text;
         if (elements.hexCustomText) elements.hexCustomText.value = customPalette.text.toUpperCase();
+        if (elements.swatchCustomText) elements.swatchCustomText.style.backgroundColor = customPalette.text;
 
         let selectedLogo = customPalette.logo || 'el-color';
         if (selectedLogo === 'el-white') selectedLogo = 'el-dark'; // Rétrocompatibilité transparente
@@ -1810,10 +1888,11 @@ Durant ce live, nous amassons des dons pour Extra Life afin de soutenir les soin
       });
 
       // Liaison bidirectionnelle des palettes de couleurs personnalisées
-      function bindColorPair(colorInput, hexInput, key) {
+      function bindColorPair(colorInput, hexInput, swatchEl, key) {
         if (!colorInput || !hexInput) return;
         colorInput.addEventListener('input', () => {
           hexInput.value = colorInput.value.toUpperCase();
+          if (swatchEl) swatchEl.style.backgroundColor = colorInput.value;
           customPalette[key] = colorInput.value;
           saveCustomPaletteMemory();
           updateGeneratedUrls();
@@ -1823,6 +1902,7 @@ Durant ce live, nous amassons des dons pour Extra Life afin de soutenir les soin
           if (!val.startsWith('#')) val = '#' + val;
           if (/^#[0-9A-Fa-f]{6}$/.test(val)) {
             colorInput.value = val;
+            if (swatchEl) swatchEl.style.backgroundColor = val;
             customPalette[key] = val;
             saveCustomPaletteMemory();
             updateGeneratedUrls();
@@ -1830,13 +1910,14 @@ Durant ce live, nous amassons des dons pour Extra Life afin de soutenir les soin
         });
         hexInput.addEventListener('blur', () => {
           hexInput.value = customPalette[key].toUpperCase();
+          if (swatchEl) swatchEl.style.backgroundColor = customPalette[key];
         });
       }
 
-      bindColorPair(elements.colorCustomBg, elements.hexCustomBg, 'bg');
-      bindColorPair(elements.colorCustomCard, elements.hexCustomCard, 'card');
-      bindColorPair(elements.colorCustomAccent, elements.hexCustomAccent, 'accent');
-      bindColorPair(elements.colorCustomText, elements.hexCustomText, 'text');
+      bindColorPair(elements.colorCustomBg, elements.hexCustomBg, elements.swatchCustomBg, 'bg');
+      bindColorPair(elements.colorCustomCard, elements.hexCustomCard, elements.swatchCustomCard, 'card');
+      bindColorPair(elements.colorCustomAccent, elements.hexCustomAccent, elements.swatchCustomAccent, 'accent');
+      bindColorPair(elements.colorCustomText, elements.hexCustomText, elements.swatchCustomText, 'text');
 
       if (elements.selectCustomLogo) {
         elements.selectCustomLogo.addEventListener('change', () => {
