@@ -541,10 +541,10 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      padding: 7px 14px;
+      gap: 12px;
+      padding: 7px 16px;
       flex: 1;
-      min-width: 124px;
+      min-width: 110px;
       height: 42px;
       background: rgba(14, 27, 45, 0.95);
       border: 1.5px solid var(--el-navy-card-border);
@@ -568,9 +568,9 @@
     }
 
     .color-btn-swatch {
-      width: 22px;
-      height: 22px;
-      border-radius: 6px;
+      width: 26px;
+      height: 26px;
+      border-radius: 7px;
       border: 1.5px solid rgba(255, 255, 255, 0.5);
       flex-shrink: 0;
       box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
@@ -578,17 +578,9 @@
     }
 
     .color-btn-icon {
-      font-size: 16px;
+      font-size: 20px;
       line-height: 1;
       filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
-    }
-
-    .color-btn-label {
-      font-size: 12.5px;
-      font-weight: 700;
-      color: #FFFFFF;
-      letter-spacing: 0.3px;
-      white-space: nowrap;
     }
 
     /* L'input natif recouvre tout le bouton pour déclencher instantanément le sélecteur natif au clic */
@@ -935,7 +927,6 @@
               <label class="color-btn-trigger" for="color-custom-bg" title="Cliquer pour ouvrir la palette de couleurs">
                 <span class="color-btn-swatch" id="swatch-custom-bg" style="background-color: #0F172A;"></span>
                 <span class="color-btn-icon">🎨</span>
-                <span class="color-btn-label">Palette</span>
                 <input type="color" id="color-custom-bg" class="color-input" value="#0F172A">
               </label>
               <input type="text" id="hex-custom-bg" class="hex-input" value="#0F172A" maxlength="7" title="Code hexadécimal de la couleur">
@@ -949,7 +940,6 @@
               <label class="color-btn-trigger" for="color-custom-card" title="Cliquer pour ouvrir la palette de couleurs">
                 <span class="color-btn-swatch" id="swatch-custom-card" style="background-color: #1E293B;"></span>
                 <span class="color-btn-icon">🎨</span>
-                <span class="color-btn-label">Palette</span>
                 <input type="color" id="color-custom-card" class="color-input" value="#1E293B">
               </label>
               <input type="text" id="hex-custom-card" class="hex-input" value="#1E293B" maxlength="7" title="Code hexadécimal de la couleur">
@@ -963,7 +953,6 @@
               <label class="color-btn-trigger" for="color-custom-accent" title="Cliquer pour ouvrir la palette de couleurs">
                 <span class="color-btn-swatch" id="swatch-custom-accent" style="background-color: #38BDF8;"></span>
                 <span class="color-btn-icon">🎨</span>
-                <span class="color-btn-label">Palette</span>
                 <input type="color" id="color-custom-accent" class="color-input" value="#38BDF8">
               </label>
               <input type="text" id="hex-custom-accent" class="hex-input" value="#38BDF8" maxlength="7" title="Code hexadécimal de la couleur">
@@ -977,7 +966,6 @@
               <label class="color-btn-trigger" for="color-custom-text" title="Cliquer pour ouvrir la palette de couleurs">
                 <span class="color-btn-swatch" id="swatch-custom-text" style="background-color: #F8FAFC;"></span>
                 <span class="color-btn-icon">🎨</span>
-                <span class="color-btn-label">Palette</span>
                 <input type="color" id="color-custom-text" class="color-input" value="#F8FAFC">
               </label>
               <input type="text" id="hex-custom-text" class="hex-input" value="#F8FAFC" maxlength="7" title="Code hexadécimal de la couleur">
