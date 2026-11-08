@@ -1400,20 +1400,13 @@
         const donateLink = `https://www.extra-life.org/participant/${id}`;
         elements.twitchRedirectLink.textContent = donateLink;
 
-        let progressSnippet = '';
-        if (detectedParticipant && detectedParticipant.fundraisingGoal > 0) {
-          const sum = Number(detectedParticipant.sumDonations) || 0;
-          const goal = Number(detectedParticipant.fundraisingGoal);
-          const pct = Math.round((sum / goal) * 100);
-          progressSnippet = `\n\n📊 **Progression de la campagne :** ${sum.toFixed(0)} $ / ${goal.toFixed(0)} $ USD (**${pct} %** de l'objectif atteint !)\n`;
-        }
-
         const isEnfantSoleilTheme = (theme === 'clair' || theme === 'sombre');
         let markdownText = '';
         if (isEnfantSoleilTheme) {
           markdownText = `### ☀️ Campagne au profit d'Opération Enfant Soleil (Extra Life)
 
-Durant ce live, nous amassons des dons pour soutenir le développement d'une pédiatrie de qualité et des soins adaptés pour tous les enfants malades du Québec.${progressSnippet}
+Durant ce live, nous amassons des dons pour soutenir le développement d'une pédiatrie de qualité et des soins adaptés pour tous les enfants malades du Québec.
+
 💛 **Chaque don fait une différence directe :**
 👉 [CLIQUEZ ICI POUR FAIRE UN DON](${donateLink})
 
@@ -1432,7 +1425,8 @@ Durant ce live, nous amassons des dons pour soutenir le développement d'une pé
         } else {
           markdownText = `### 🎮 Campagne caritative Extra Life
 
-Durant ce live, nous amassons des dons pour Extra Life afin de soutenir les soins pédiatriques et les hôpitaux pour enfants.${progressSnippet}
+Durant ce live, nous amassons des dons pour Extra Life afin de soutenir les soins pédiatriques et les hôpitaux pour enfants.
+
 💖 **Chaque don fait une différence directe :**
 👉 [CLIQUEZ ICI POUR FAIRE UN DON](${donateLink})
 
