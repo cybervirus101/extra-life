@@ -825,8 +825,7 @@
       // Si l'espace manque (débordement réel du texte par rapport à la boîte)
       if (availableWidth > 0 && textWidth > (availableWidth + 2)) {
         const clean = escapeHTML(FEED_EMPTY_MESSAGE);
-        const isExtraLife = CONFIG.theme.includes('extralife') || CONFIG.theme === 'personnalise';
-        const bulletIcon = isExtraLife ? '🎮' : '☀️';
+        const bulletIcon = '☀️';
         const unit = `<span class="feed-empty-text">${clean}</span><span class="marquee-bullet" aria-hidden="true">${bulletIcon}</span>`;
         emptyLine.innerHTML = `
           <div class="marquee-track">
