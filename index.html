@@ -637,6 +637,35 @@
       border-color: var(--el-cyan);
     }
 
+    .custom-url-input {
+      width: 100%;
+      height: 40px;
+      padding: 8px 12px;
+      font-size: 13.5px;
+      font-family: inherit;
+      background: var(--el-navy-bg);
+      border: 1.5px solid var(--el-navy-card-border);
+      border-radius: 8px;
+      color: #FFFFFF;
+      box-sizing: border-box;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .custom-url-input:focus {
+      border-color: var(--el-cyan);
+      box-shadow: 0 0 10px rgba(28, 158, 214, 0.35);
+    }
+
+    .custom-url-input::placeholder {
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 13px;
+    }
+
+    #custom-logo-url-box {
+      grid-column: 1 / -1;
+    }
+
     .color-role-hint {
       font-size: 11.5px;
       color: var(--el-text-dim);
@@ -1006,8 +1035,8 @@
 
           <div class="color-picker-item" id="custom-logo-url-box" style="display: none;">
             <label for="input-custom-logo-url">6. Lien d'image personnalisée</label>
-            <input type="url" id="input-custom-logo-url" class="hex-input" style="text-transform: none; font-family: inherit; font-size: 13px;" placeholder="https://exemple.com/mon-logo.png">
-            <span class="color-role-hint">URL directe (PNG transparent ou SVG conseillé)</span>
+            <input type="url" id="input-custom-logo-url" class="custom-url-input" placeholder="https://exemple.com/mon-logo.png" title="Collez l'adresse URL directe de votre image (PNG, SVG, WebP...)">
+            <span class="color-role-hint">Lien direct vers votre image (PNG transparent ou SVG conseillé)</span>
           </div>
         </div>
       </div>
