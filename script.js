@@ -1284,24 +1284,27 @@
 
         if (elements.brandLogo) {
           elements.brandLogo.onerror = function () {
-            if (this.src !== 'assets/logo-extra-life-white.svg') {
-              this.src = 'assets/logo-extra-life-white.svg';
+            if (this.src !== 'assets/logo-extra-life-color.svg') {
+              this.src = 'assets/logo-extra-life-color.svg';
             }
           };
           if (cLogo === 'custom' && cLogoUrl) {
             elements.brandLogo.src = decodeURIComponent(cLogoUrl);
             elements.brandLogo.alt = 'Logo personnalisé';
+          } else if (cLogo === 'oes-dark') {
+            elements.brandLogo.src = 'assets/logo-enfant-soleil-dark.png';
+            elements.brandLogo.alt = 'Opération Enfant Soleil';
           } else if (cLogo === 'oes') {
             elements.brandLogo.src = 'assets/logo-enfant-soleil-horizontal.png';
             elements.brandLogo.alt = 'Opération Enfant Soleil';
-          } else if (cLogo === 'el-color') {
+          } else if (cLogo === 'el-dark' || cLogo === 'el-white') {
+            elements.brandLogo.src = 'assets/logo-extra-life-dark.svg';
+            elements.brandLogo.alt = 'Extra Life';
+          } else if (cLogo === 'el-color' || cLogo === 'el-classic') {
             elements.brandLogo.src = 'assets/logo-extra-life-color.svg';
             elements.brandLogo.alt = 'Extra Life';
-          } else if (cLogo === 'el-white') {
-            elements.brandLogo.src = 'assets/logo-extra-life-white.svg';
-            elements.brandLogo.alt = 'Extra Life';
           } else {
-            elements.brandLogo.src = isDark ? 'assets/logo-extra-life-white.svg' : 'assets/logo-extra-life-color.svg';
+            elements.brandLogo.src = isDark ? 'assets/logo-extra-life-color.svg' : 'assets/logo-extra-life-dark.svg';
             elements.brandLogo.alt = 'Extra Life';
           }
         }
@@ -1317,7 +1320,7 @@
 
         if (elements.brandLogo) {
           if (isExtraLife) {
-            elements.brandLogo.src = isDark ? 'assets/logo-extra-life-white.svg' : 'assets/logo-extra-life-color.svg';
+            elements.brandLogo.src = isDark ? 'assets/logo-extra-life-color.svg' : 'assets/logo-extra-life-dark.svg';
             elements.brandLogo.alt = 'Extra Life';
           } else {
             if (CONFIG.logoMode === 'horizontal') {

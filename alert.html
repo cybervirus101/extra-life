@@ -392,24 +392,27 @@
         const logo = elements.wrapper.querySelector('.alert-logo');
         if (logo) {
           logo.onerror = function () {
-            if (this.src !== 'assets/logo-extra-life-white.svg') {
-              this.src = 'assets/logo-extra-life-white.svg';
+            if (this.src !== 'assets/logo-extra-life-color.svg') {
+              this.src = 'assets/logo-extra-life-color.svg';
             }
           };
           if (cLogo === 'custom' && cLogoUrl) {
             logo.src = decodeURIComponent(cLogoUrl);
             logo.alt = 'Logo personnalisé';
+          } else if (cLogo === 'oes-dark') {
+            logo.src = 'assets/logo-enfant-soleil-dark.png';
+            logo.alt = 'Opération Enfant Soleil';
           } else if (cLogo === 'oes') {
             logo.src = 'assets/logo-enfant-soleil-horizontal.png';
             logo.alt = 'Opération Enfant Soleil';
-          } else if (cLogo === 'el-color') {
+          } else if (cLogo === 'el-dark' || cLogo === 'el-white') {
+            logo.src = 'assets/logo-extra-life-dark.svg';
+            logo.alt = 'Extra Life';
+          } else if (cLogo === 'el-color' || cLogo === 'el-classic') {
             logo.src = 'assets/logo-extra-life-color.svg';
             logo.alt = 'Extra Life';
-          } else if (cLogo === 'el-white') {
-            logo.src = 'assets/logo-extra-life-white.svg';
-            logo.alt = 'Extra Life';
           } else {
-            logo.src = isDark ? 'assets/logo-extra-life-white.svg' : 'assets/logo-extra-life-color.svg';
+            logo.src = isDark ? 'assets/logo-extra-life-color.svg' : 'assets/logo-extra-life-dark.svg';
             logo.alt = 'Extra Life';
           }
         }
@@ -425,7 +428,7 @@
           }
           const logo = elements.wrapper.querySelector('.alert-logo');
           if (logo) {
-            logo.src = isDark ? 'assets/logo-extra-life-white.svg' : 'assets/logo-extra-life-color.svg';
+            logo.src = isDark ? 'assets/logo-extra-life-color.svg' : 'assets/logo-extra-life-dark.svg';
             logo.alt = 'Extra Life';
           }
         }

@@ -918,9 +918,10 @@
           <div class="color-picker-item">
             <label for="select-custom-logo">5. Logo du panneau & overlay</label>
             <select id="select-custom-logo" class="option-select" style="padding: 8px 12px; font-size: 13px;">
-              <option value="el-white" selected>Extra Life (Blanc - Recommandé)</option>
-              <option value="el-color">Extra Life (Couleur officielle)</option>
-              <option value="oes">Opération Enfant Soleil</option>
+              <option value="el-color" selected>Extra Life (Couleur classique)</option>
+              <option value="el-dark">Extra Life (Couleur alternative - Sombre)</option>
+              <option value="oes">Opération Enfant Soleil (Couleur classique)</option>
+              <option value="oes-dark">Opération Enfant Soleil (Couleur alternative - Sombre)</option>
               <option value="custom">🌐 Image personnalisée (Lien direct URL)</option>
             </select>
             <span class="color-role-hint">Logo affiché au centre de la bannière & overlay</span>
@@ -1268,7 +1269,7 @@
         card: '#1E293B',
         accent: '#38BDF8',
         text: '#F8FAFC',
-        logo: 'el-white',
+        logo: 'el-color',
         logoUrl: '',
       };
 
@@ -1322,7 +1323,9 @@
         if (elements.colorCustomText) elements.colorCustomText.value = customPalette.text;
         if (elements.hexCustomText) elements.hexCustomText.value = customPalette.text.toUpperCase();
 
-        if (elements.selectCustomLogo) elements.selectCustomLogo.value = customPalette.logo || 'el-white';
+        let selectedLogo = customPalette.logo || 'el-color';
+        if (selectedLogo === 'el-white') selectedLogo = 'el-dark'; // Rétrocompatibilité transparente
+        if (elements.selectCustomLogo) elements.selectCustomLogo.value = selectedLogo;
         if (elements.inputCustomLogoUrl) elements.inputCustomLogoUrl.value = customPalette.logoUrl || '';
         updateCustomLogoVisibility();
       }
@@ -1518,25 +1521,27 @@ Durant ce live, nous amassons des dons pour Extra Life afin de soutenir les soin
           if (customPalette.logo === 'custom' && customPalette.logoUrl) {
             img.crossOrigin = 'anonymous';
             img.src = customPalette.logoUrl;
+          } else if (customPalette.logo === 'oes-dark') {
+            img.src = 'assets/logo-enfant-soleil-dark.png';
           } else if (customPalette.logo === 'oes') {
             img.src = 'assets/logo-enfant-soleil-horizontal.png';
-          } else if (customPalette.logo === 'el-color') {
+          } else if (customPalette.logo === 'el-dark' || customPalette.logo === 'el-white') {
+            img.src = 'assets/logo-extra-life-dark.svg';
+          } else if (customPalette.logo === 'el-color' || customPalette.logo === 'el-classic') {
             img.src = 'assets/logo-extra-life-color.svg';
-          } else if (customPalette.logo === 'el-white') {
-            img.src = 'assets/logo-extra-life-white.svg';
           } else {
             const cardDark = isColorDark(customPalette.card);
-            img.src = cardDark ? 'assets/logo-extra-life-white.svg' : 'assets/logo-extra-life-color.svg';
+            img.src = cardDark ? 'assets/logo-extra-life-color.svg' : 'assets/logo-extra-life-dark.svg';
           }
         } else if (isExtraLife) {
-          img.src = isDark ? 'assets/logo-extra-life-white.svg' : 'assets/logo-extra-life-color.svg';
+          img.src = isDark ? 'assets/logo-extra-life-color.svg' : 'assets/logo-extra-life-dark.svg';
         } else {
           img.src = 'assets/logo-enfant-soleil-horizontal.png';
         }
 
         img.onerror = function () {
-          if (img.src !== 'assets/logo-extra-life-white.svg') {
-            img.src = 'assets/logo-extra-life-white.svg';
+          if (img.src !== 'assets/logo-extra-life-color.svg') {
+            img.src = 'assets/logo-extra-life-color.svg';
           }
         };
 
@@ -1570,7 +1575,7 @@ Durant ce live, nous amassons des dons pour Extra Life afin de soutenir les soin
 
           // Calcul des proportions sans aucune déformation
           const naturalRatio = (img.naturalWidth && img.naturalHeight) ? (img.naturalWidth / img.naturalHeight) : 2.5;
-          const isOESLogo = (isCustom && customPalette.logo === 'oes') || (!isCustom && !isExtraLife);
+          const isOESLogo = (isCustom && (customPalette.logo === 'oes' || customPalette.logo === 'oes-dark')) || (!isCustom && !isExtraLife);
           const maxLogoW = isOESLogo ? 274 : 260;
           const maxLogoH = isOESLogo ? 118 : 90;
 
