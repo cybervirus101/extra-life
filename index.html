@@ -536,7 +536,7 @@
     .color-picker-wrapper {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       width: 100%;
       box-sizing: border-box;
       min-width: 0;
@@ -548,9 +548,10 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      padding: 4px 8px;
+      padding: 0 4px;
       margin: 0;
-      flex: 1 1 auto;
+      flex: 1 1 0;
+      width: 0;
       min-width: 0;
       height: 38px;
       background: rgba(14, 27, 45, 0.95);
@@ -612,13 +613,15 @@
     }
 
     .hex-input {
-      width: 78px;
-      flex-shrink: 0;
+      flex: 1 1 0;
+      width: 0;
+      min-width: 0;
+      height: 38px;
       text-align: center;
       font-family: 'Consolas', 'Monaco', monospace;
-      font-size: 12.5px;
+      font-size: 13px;
       font-weight: 700;
-      padding: 6px 4px;
+      padding: 0 4px;
       margin: 0;
       background: var(--el-navy-bg);
       border: 1.5px solid var(--el-navy-card-border);
