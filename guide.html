@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guide d'inscription Streamer — Les alliés du soleil (Extra Life & Enfant Soleil)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Couleurs officielles Extra Life & CMN */
+      --el-navy-deep: #070E18;
+      --el-navy-bg: #0C1829;
+      --el-navy-card: #132238;
+      --el-navy-card-border: rgba(28, 158, 214, 0.45);
+      --el-navy-input: #0E1A2C;
+      --el-bleu-cmn: #0E7CA2;
+      --el-cyan: #1C9ED6;
+      --el-cyan-light: #70D3FF;
+      --el-cyan-glow: rgba(28, 158, 214, 0.45);
+      --el-vert-manette: #62AF0F;
+      --el-vert-hover: #52970B;
+      --el-jaune-cmn: #FFCB05;
+      --el-text-main: #FFFFFF;
+      --el-text-sub: #D3E7F8;
+      --el-text-dim: #99C3E6;
+
+      /* Enfant Soleil */
+      --es-jaune-soleil: #FFD000;
+      --es-rouge-sante: #F15029;
+      --font-main: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--el-navy-bg);
+      color: var(--el-text-main);
+      font-family: var(--font-main);
+      line-height: 1.6;
+      padding: 24px 20px 80px 20px;
+      background-image: 
+        radial-gradient(circle at 50% -10%, rgba(34, 178, 242, 0.22) 0%, transparent 55%),
+        linear-gradient(180deg, #182E4D 0%, #11233A 100%);
+      background-attachment: fixed;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* Barre de navigation supérieure */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(19, 34, 56, 0.85);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--el-navy-card-border);
+      padding: 12px 20px;
+      border-radius: 14px;
+      margin-bottom: 24px;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      font-size: 15px;
+      color: #FFFFFF;
+      text-decoration: none;
+    }
+
+    .nav-brand img {
+      height: 28px;
+      width: auto;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .nav-link {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--el-text-sub);
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-link:hover {
+      color: #FFFFFF;
+      background: rgba(28, 158, 214, 0.2);
+    }
+
+    .nav-link.active {
+      color: #FFFFFF;
+      background: var(--el-cyan);
+      box-shadow: 0 2px 10px rgba(28, 158, 214, 0.4);
+    }
+
+    /* En-tête */
+    .header {
+      background: linear-gradient(180deg, #244570 0%, #1A3456 100%);
+      border-radius: var(--radius);
+      border: 3px solid var(--el-cyan);
+      padding: 34px 24px;
+      text-align: center;
+      margin-bottom: 30px;
+      box-shadow: 0 12px 40px rgba(10, 25, 47, 0.4), 0 0 35px rgba(34, 178, 242, 0.3);
+    }
+
+    .header-logos {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .hero-logo-el {
+      height: 80px;
+      max-width: 100%;
+      width: auto;
+      filter: drop-shadow(0 4px 14px rgba(28, 158, 214, 0.5));
+    }
+
+    .partner-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #FFFFFF;
+      border: 2px solid var(--el-cyan);
+      padding: 6px 18px;
+      border-radius: 30px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .partner-label {
+      font-size: 13px;
+      font-weight: 800;
+      color: #252625;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .header h1 {
+      font-size: 30px;
+      font-weight: 900;
+      color: #FFFFFF;
+      margin-bottom: 10px;
+      letter-spacing: 0.5px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .header p {
+      font-size: 16px;
+      color: var(--el-text-sub);
+      max-width: 720px;
+      margin: 0 auto 20px auto;
+    }
+
+    .header-cta-group {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    /* Cartes d'étapes */
+    .step-card {
+      background: var(--el-navy-card);
+      border-radius: var(--radius);
+      border: 2px solid var(--el-navy-card-border);
+      padding: 26px;
+      margin-bottom: 24px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .step-card:hover {
+      border-color: var(--el-cyan);
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.6), 0 0 20px rgba(28, 158, 214, 0.2);
+    }
+
+    .step-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .step-badge {
+      background: linear-gradient(135deg, var(--el-cyan) 0%, var(--el-bleu-cmn) 100%);
+      color: #FFFFFF;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 900;
+      flex-shrink: 0;
+      box-shadow: 0 2px 12px rgba(28, 158, 214, 0.5);
+    }
+
+    .step-title {
+      font-size: 21px;
+      font-weight: 800;
+      color: #FFFFFF;
+    }
+
+    .step-body {
+      font-size: 15px;
+      color: var(--el-text-sub);
+    }
+
+    .step-body p {
+      margin-bottom: 12px;
+    }
+
+    /* Boîtes d'action et éléments visuels */
+    .action-box {
+      background: var(--el-navy-input);
+      border: 1.5px solid rgba(28, 158, 214, 0.4);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin: 16px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .action-url {
+      font-family: monospace;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--el-cyan-light);
+      word-break: break-all;
+    }
+
+    .btn {
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 800;
+      padding: 10px 18px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .btn-lg {
+      font-size: 16px;
+      padding: 14px 26px;
+      border-radius: 12px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--el-cyan) 0%, var(--el-bleu-cmn) 100%);
+      color: #FFFFFF;
+      box-shadow: 0 4px 16px rgba(28, 158, 214, 0.4);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, var(--el-cyan-light) 0%, var(--el-cyan) 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 22px rgba(28, 158, 214, 0.6);
+    }
+
+    .btn-secondary {
+      background: var(--el-vert-manette);
+      color: #FFFFFF;
+      box-shadow: 0 4px 14px rgba(98, 175, 15, 0.35);
+    }
+
+    .btn-secondary:hover {
+      background: var(--el-vert-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(98, 175, 15, 0.55);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--el-cyan);
+      color: var(--el-cyan);
+    }
+
+    .btn-outline:hover {
+      background: rgba(28, 158, 214, 0.15);
+      color: #FFFFFF;
+    }
+
+    /* Pastilles et surlignages */
+    .tag {
+      display: inline-block;
+      background: rgba(28, 158, 214, 0.25);
+      color: #FFFFFF;
+      border: 1px solid var(--el-cyan);
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 13.5px;
+    }
+
+    .tag-gold {
+      background: rgba(255, 203, 5, 0.2);
+      border-color: var(--el-jaune-cmn);
+      color: #FFF275;
+    }
+
+    .tag-green {
+      background: rgba(98, 175, 15, 0.25);
+      border-color: var(--el-vert-manette);
+      color: #A3E635;
+    }
+
+    /* Alertes & Encadrés spéciaux */
+    .alert-banner {
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin: 16px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      font-size: 14.5px;
+    }
+
+    .alert-warning {
+      background: rgba(241, 80, 41, 0.15);
+      border: 2px solid var(--es-rouge-sante);
+      color: #FFE4DE;
+    }
+
+    .alert-info {
+      background: rgba(28, 158, 214, 0.15);
+      border: 2px solid var(--el-cyan);
+      color: #E0F2FE;
+    }
+
+    .alert-icon {
+      font-size: 24px;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    /* Grille d'instructions détaillées */
+    .guide-checklist {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 16px 0;
+    }
+
+    .guide-checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: rgba(14, 26, 44, 0.6);
+      padding: 12px 16px;
+      border-radius: 10px;
+      border: 1px solid rgba(28, 158, 214, 0.25);
+    }
+
+    .check-icon {
+      color: var(--el-vert-manette);
+      font-weight: 900;
+      font-size: 18px;
+      line-height: 1.2;
+    }
+
+    /* Accordéon alternatif */
+    details {
+      background: var(--el-navy-input);
+      border: 1px solid rgba(28, 158, 214, 0.3);
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin-top: 14px;
+      cursor: pointer;
+    }
+
+    details summary {
+      font-weight: 700;
+      color: var(--el-cyan-light);
+      outline: none;
+      user-select: none;
+    }
+
+    details p, details ol {
+      margin-top: 12px;
+      font-size: 14px;
+      color: var(--el-text-sub);
+      padding-left: 20px;
+    }
+
+    /* Bloc de code / Discord */
+    .code-preview {
+      background: #091322;
+      border: 1.5px solid var(--el-navy-card-border);
+      border-radius: 12px;
+      padding: 16px;
+      position: relative;
+      margin-top: 16px;
+    }
+
+    .code-preview pre {
+      color: #D3E7F8;
+      font-family: Consolas, Monaco, monospace;
+      font-size: 13.5px;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      word-break: break-word;
+      max-height: 380px;
+      overflow-y: auto;
+    }
+
+    .btn-copy-float {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--el-vert-manette);
+      color: #FFFFFF;
+      padding: 14px 24px;
+      border-radius: 12px;
+      font-weight: 800;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      z-index: 9999;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    @media (max-width: 768px) {
+      .header h1 { font-size: 24px; }
+      .header { padding: 24px 16px; }
+      .action-box { flex-direction: column; align-items: stretch; }
+      .top-nav { flex-direction: column; align-items: stretch; }
+      .nav-links { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- Barre de navigation -->
+    <nav class="top-nav">
+      <a href="index.html" class="nav-brand">
+        <img src="assets/logo-extra-life-icon.svg" alt="Extra Life">
+        <span>Les alliés du soleil</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">🎮 Kit Overlays & Alertes OBS</a>
+        <a href="guide.html" class="nav-link active">📖 Guide d'inscription</a>
+        <a href="rejoindre.html" target="_blank" class="nav-link" style="color: var(--el-jaune-cmn);">⚡ S'inscrire (Lien direct)</a>
+      </div>
+    </nav>
+
+    <!-- En-tête -->
+    <header class="header">
+      <div class="header-logos">
+        <img class="hero-logo-el" src="assets/logo-extra-life-white.svg" alt="Extra Life">
+        <div class="partner-pill">
+          <span class="partner-label">Au profit de</span>
+          <img class="partner-logo-oes" src="assets/logo-enfant-soleil-horizontal.png" alt="Opération Enfant Soleil" style="height: 32px; width: auto;">
+        </div>
+      </div>
+      <h1>☀️ Guide d'inscription : Les alliés du soleil</h1>
+      <p>Rejoignez notre équipe de créateurs et streamers pour soutenir le développement d'une pédiatrie de pointe pour les enfants malades du Québec !</p>
+
+      <div class="header-cta-group">
+        <a href="https://dd.extra-life.org/?fuseaction=register.start&eventID=562&language=fr" target="_blank" class="btn btn-primary btn-lg">
+          🚀 S'inscrire maintenant sur Extra Life (FR)
+        </a>
+        <a href="index.html" class="btn btn-secondary btn-lg">
+          🎮 Configurer mon Overlay OBS
+        </a>
+      </div>
+    </header>
+
+    <!-- Étape 1 : Accéder à l'inscription -->
+    <section class="step-card">
+      <div class="step-header">
+        <div class="step-badge">1</div>
+        <div class="step-title">Accéder au formulaire d'inscription officiel</div>
+      </div>
+      <div class="step-body">
+        <p>
+          Pour vous inscrire directement dans la campagne en cours en français, utilisez le lien direct ci-dessous :
+        </p>
+
+        <div class="action-box">
+          <span class="action-url">https://dd.extra-life.org/?fuseaction=register.start&eventID=562&language=fr</span>
+          <div style="display: flex; gap: 8px;">
+            <button class="btn btn-secondary" onclick="copyText('https://dd.extra-life.org/?fuseaction=register.start&eventID=562&language=fr')">📋 Copier le lien</button>
+            <a href="https://dd.extra-life.org/?fuseaction=register.start&eventID=562&language=fr" target="_blank" class="btn btn-primary">Ouvrir ↗</a>
+          </div>
+        </div>
+
+        <details>
+          <summary>⚙️ Vous arrivez depuis la page d'accueil Extra-Life.org ? (Méthode universelle)</summary>
+          <ol>
+            <li>Sur <a href="https://extra-life.org/?language=fr" target="_blank" style="color: var(--el-cyan);">extra-life.org</a>, cliquez sur le bouton bleu <strong>Fundraise With Extra Life</strong>.</li>
+            <li>Dans la fenêtre modale qui apparaît, sélectionnez impérativement <strong>Fundraise with DonorDrive</strong>.</li>
+            <li>Vous arriverez sur la page de la campagne en cours : cliquez sur <strong>Inscrivez-vous maintenant !</strong>.</li>
+          </ol>
+        </details>
+      </div>
+    </section>
+
+    <!-- Étape 2 : Type d'inscription & Choix de l'équipe -->
+    <section class="step-card">
+      <div class="step-header">
+        <div class="step-badge">2</div>
+        <div class="step-title">Choisir le type d'inscription et notre équipe</div>
+      </div>
+      <div class="step-body">
+        <p>Sur le premier écran du formulaire DonorDrive, renseignez les options suivantes :</p>
+        
+        <ul class="guide-checklist">
+          <li>
+            <span class="check-icon">✓</span>
+            <div>
+              <strong>Type d’inscription :</strong> Sélectionnez <span class="tag tag-green">Extra Life Classic</span> (gratuit).
+            </div>
+          </li>
+          <li>
+            <span class="check-icon">✓</span>
+            <div>
+              <strong>Rôle de participation :</strong> Sélectionnez <strong>Joindre une équipe</strong> (<em>Join a Team</em>).
+            </div>
+          </li>
+          <li>
+            <span class="check-icon">✓</span>
+            <div>
+              <strong>Recherche de l'équipe :</strong> Tapez exactement <span class="tag tag-gold">Les alliés du soleil</span>.
+              <button class="btn btn-outline" style="padding: 4px 10px; margin-left: 8px; font-size: 12px;" onclick="copyText('Les alliés du soleil')">Copier le nom</button>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Étape 3 : Objectif & Choix de l'Hôpital (IMPORTANT) -->
+    <section class="step-card">
+      <div class="step-header">
+        <div class="step-badge">3</div>
+        <div class="step-title">Fixer votre objectif & Sélectionner l'hôpital</div>
+      </div>
+      <div class="step-body">
+        <p>
+          À la page <strong>Détails de l’Inscription</strong> :
+        </p>
+
+        <ul class="guide-checklist">
+          <li>
+            <span class="check-icon">✓</span>
+            <div>
+              <strong>Votre Objectif de Collecte de Fonds :</strong> Entrez le montant que vous aimeriez atteindre avec votre communauté (ex: <code>100 $</code>, <code>250 $</code>, <code>500 $</code>). Vous pourrez ajuster ce chiffre en tout temps depuis votre tableau de bord !
+            </div>
+          </li>
+        </ul>
+
+        <!-- Alerte Hôpital Enfant Soleil -->
+        <div class="alert-banner alert-warning">
+          <div class="alert-icon">⚠️</div>
+          <div>
+            <strong style="color: #FFD000; font-size: 16px;">ATTENTION : Choix de votre hôpital bénéficiaire</strong><br>
+            Dans le menu déroulant des hôpitaux, choisissez impérativement <strong>Enfant Soleil</strong> (ou <em>Opération Enfant Soleil</em>).<br>
+            C'est cette étape clé qui garantit que <strong>100 % des dons amassés sur votre chaîne</strong> seront directement investis dans les hôpitaux et centres pédiatriques au Québec !
+          </div>
+        </div>
+
+        <p style="font-size: 14px; color: var(--el-text-dim);">
+          Complétez ensuite la création de votre compte (nom, courriel, mot de passe) pour valider votre inscription.
+        </p>
+      </div>
+    </section>
+
+    <!-- Étape 4 : Extension Twitch DonorDrive -->
+    <section class="step-card">
+      <div class="step-header">
+        <div class="step-badge">4</div>
+        <div class="step-title">Installer l'extension Twitch DonorDrive (Panneau interactif)</div>
+      </div>
+      <div class="step-body">
+        <p>
+          Donnez à vos spectateurs la possibilité de voir votre progression et de faire un don sans jamais quitter votre diffusion grâce à l'extension officielle Twitch !
+        </p>
+
+        <div class="action-box">
+          <span class="action-url">https://dashboard.twitch.tv/extensions/73ititk72tpr6bze4658lkbddnsc0f</span>
+          <a href="https://dashboard.twitch.tv/extensions/73ititk72tpr6bze4658lkbddnsc0f" target="_blank" class="btn btn-secondary">
+            💜 Ouvrir l'extension sur Twitch
+          </a>
+        </div>
+
+        <ol style="padding-left: 20px; display: flex; flex-direction: column; gap: 8px; margin: 16px 0;">
+          <li>Cliquez sur <strong>Installer</strong>, puis ouvrez la page <strong>Configurer</strong>.</li>
+          <li>Dans la liste des programmes caritatifs, sélectionnez <strong>Extra Life</strong>.</li>
+          <li>
+            Indiquez votre <strong>Participant ID</strong> : ce numéro correspond aux chiffres situés à la toute fin du lien de votre profil personnel DonorDrive (ex: <code>...participant/582063</code> ➔ votre ID est <code>582063</code>).
+          </li>
+          <li>Cliquez sur <strong>Activer</strong> et assignez l'extension à l'emplacement <strong>Panneau 1, 2 ou 3</strong> sous votre lecteur Twitch.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Étape 5 : Le Kit Streamer (Overlays, Alertes & Commandes) -->
+    <section class="step-card">
+      <div class="step-header">
+        <div class="step-badge">5</div>
+        <div class="step-title">Personnalisez votre stream avec notre Kit Streamer</div>
+      </div>
+      <div class="step-body">
+        <p>
+          Notre site vous offre un <strong>Kit Streamer 100% automatisé</strong> : vous entrez simplement votre identifiant et vos overlays OBS sont prêts !
+        </p>
+
+        <div class="alert-banner alert-info">
+          <div class="alert-icon">✨</div>
+          <div>
+            <strong>Tout est prêt pour votre live :</strong>
+            <ul style="margin-top: 6px; padding-left: 18px;">
+              <li><strong>Barre d'objectif en direct :</strong> Jauge animée avec alternance automatique entre votre objectif solo et la cagnotte d'équipe.</li>
+              <li><strong>Pop-up d'alerte sonore et visuelle :</strong> Alerte carillon + rayonnement solaire lors de chaque nouveau don reçu.</li>
+              <li><strong>Commandes de bot préconfigurées :</strong> <code>!don</code>, <code>!equipe</code>, <code>!extralife</code> prêtes pour Nightbot, StreamElements, Streamlabs, etc.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 20px;">
+          <a href="index.html" class="btn btn-primary btn-lg">
+            🎮 Ouvrir le configurateur d'Overlays & Alertes OBS
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Boîte à outils Discord -->
+    <section class="step-card">
+      <div class="step-header">
+        <div class="step-badge">💬</div>
+        <div class="step-title">Texte d'annonce prêt pour Discord</div>
+      </div>
+      <div class="step-body">
+        <p>
+          Vous gérez un serveur Discord de streamers ou vous souhaitez inviter des amis à rejoindre l'équipe ? Voici le texte complet prêt à être copié avec toutes les émoticônes et le formatage Discord :
+        </p>
+
+        <div class="code-preview">
+          <button class="btn btn-secondary btn-copy-float" onclick="copyDiscordMarkdown()">📋 Copier pour Discord</button>
+          <pre id="discord-text"># ☀️ Guide : Rejoindre l'équipe « Les alliés du soleil » sur Extra Life ! ☀️
+
+Bienvenue dans l'aventure ! Voici la marche à suivre pour inscrire ta chaîne et collecter des dons pour ***Opération Enfant Soleil*** 💛.
+
+---
+
+### 🚀 Étape 1 : Accéder à l'inscription
+👉 **Lien direct en français :** 
+https://dd.extra-life.org/?fuseaction=register.start&eventID=562&language=fr
+
+*(Lien permanent de secours : https://cybervirus101.github.io/extra-life/rejoindre.html)*
+
+---
+
+### 📋 Étape 2 : Type d'inscription & Équipe
+1. **Type d'inscription :** Choisis **Extra Life Classic** *(gratuit)*.
+2. **Rôle :** Sélectionne **Joindre une équipe** (*Join a Team*).
+3. **Recherche de l'équipe :** Tape et choisis **Les alliés du soleil**.
+
+---
+
+### 🏥 Étape 3 : Objectif de collecte & Hôpital
+1. **Objectif personnel :** Indique ton montant cible (ex: `100$`, `250$`, `500$`... modifiable en tout temps !).
+2. __**Hôpital (TRÈS IMPORTANT) :**__ Dans le menu déroulant des hôpitaux, choisis bien **Enfant Soleil** *(pour que 100% des fonds aillent aux enfants soignés au Québec)*.
+3. Remplis tes informations personnelles pour finaliser le compte.
+
+---
+
+### 💜 Étape 4 : Installer l'extension de panneau Twitch (DonorDrive)
+Affiche ta barre de dons et le bouton interactif directement sous ton live :
+1. Ouvre la page de l'extension : https://dashboard.twitch.tv/extensions/73ititk72tpr6bze4658lkbddnsc0f
+2. Clique sur **Installer**, puis sur **Configurer**.
+3. Dans les réglages :
+   - Programme caritatif : Choisis **Extra Life**.
+   - Identifiant : Entre ton **Participant ID** *(ce sont les chiffres à la fin de l'adresse web de ta page de profil DonorDrive)*.
+4. Clique sur **Activer** et place-le en **Panneau 1, 2 ou 3**.
+
+---
+
+### 🛠️ Étape 5 : Récupère ton Kit pour Streamer !
+> ⚠️ **Avant de lancer ton premier live caritatif :**
+> Rends-toi sur notre page dédiée : https://cybervirus101.github.io/extra-life/
+
+Tu y trouveras tout le matériel prêt à l'emploi :
+- **Visuels & Overlays :** Barres de progression OBS animées en direct.
+- **Alertes en direct :** Sons et animations pop-up festives.
+- **Commandes de clavardage :** Textes pour ton bot (`!don`, `!extralife`, `!equipe`).
+- **Idées de défis et paliers :** Pour animer ton chat pendant tes sessions !</pre>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <div id="toast" class="toast">Copié dans le presse-papier ! ✨</div>
+
+  <script>
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message || 'Copié dans le presse-papier ! ✨';
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2500);
+    }
+
+    function copyText(text) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+          showToast();
+        }).catch(() => {
+          prompt('Copiez ce texte :', text);
+        });
+      } else {
+        prompt('Copiez ce texte :', text);
+      }
+    }
+
+    function copyDiscordMarkdown() {
+      const text = document.getElementById('discord-text').innerText;
+      copyText(text);
+    }
+  </script>
+</body>
+</html>

@@ -256,39 +256,37 @@
 
   /**
    * Formate les montants convertis en CAD uniquement : "750 $ CAD"
-   * (Affichage exclusif en CAD sans symbole d'approximation selon la demande de l'utilisateur)
+   * Arrondi systématique à l'entier pour éliminer les micro-décimales et écarts causés par la double conversion (CAD -> USD -> CAD).
    * @param {number} usdAmount - Montant en USD reçu de DonorDrive
    * @param {boolean} isGoal - Indique s'il s'agit du montant de l'objectif de collecte
+   * @param {boolean} isTeam - Indique s'il s'agit de la vue d'équipe
    */
-  function formatBothCurrenciesHTML(usdAmount, isGoal = false) {
+  function formatBothCurrenciesHTML(usdAmount, isGoal = false, isTeam = false) {
     const usd = Number(usdAmount) || 0;
     let cad = usd * state.exchangeRate;
 
     if (isGoal) {
-      if (CONFIG.forcedGoal && !isNaN(CONFIG.forcedGoal)) {
-        cad = CONFIG.forcedGoal;
+      if (!isTeam && CONFIG.forcedGoal && !isNaN(CONFIG.forcedGoal)) {
+        cad = Math.round(CONFIG.forcedGoal);
       } else {
         // Pour l'objectif : Extra Life enregistre en USD entier lors de l'inscription (ex: 200 CAD -> 143 USD).
-        // Si reconverti à 199.75 $ CAD, on recale sur le palier rond habituel (multiples de 5, 10, 50, 100) si l'écart est <= 1.50 $.
+        // Recale sur un palier rond habituel (multiples de 5 $) si proche (<= 3.00 $), sinon arrondi simple à l'entier.
         const step = 5;
         const nearest = Math.round(cad / step) * step;
-        if (Math.abs(cad - nearest) <= 1.50) {
+        if (Math.abs(cad - nearest) <= 3.00) {
           cad = nearest;
+        } else {
+          cad = Math.round(cad);
         }
       }
     } else {
-      // Ajustement de précision pour corriger les micro-écarts d'arrondi (CAD -> USD lors du paiement -> CAD)
-      // Ex: Un don de 20 $ CAD converti en 14.31 USD par Extra Life donne 19.99 $ CAD avec le taux en direct.
-      // Si l'écart avec un montant entier est inférieur ou égal à 0.08 $, on rétablit le montant entier exact (ex: 20 $ CAD, 75 $ CAD).
-      const rounded = Math.round(cad);
-      if (Math.abs(cad - rounded) <= 0.08) {
-        cad = rounded;
-      }
+      // Arrondi systématique à l'entier pour corriger les écarts dus aux multiples conversions de devises
+      cad = Math.round(cad);
     }
 
-    const cadFormatted = cad.toLocaleString('fr-CA', {
-      minimumFractionDigits: cad % 1 === 0 ? 0 : 2,
-      maximumFractionDigits: 2,
+    const cadFormatted = Math.round(cad).toLocaleString('fr-CA', {
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
     });
 
     return `<span class="cur-cad">${cadFormatted}&nbsp;$ CAD</span>`;
@@ -601,21 +599,19 @@
       }
     }
 
-    // Calculs en CAD
-    let cadRaised = raisedUSD * state.exchangeRate;
-    const roundedRaised = Math.round(cadRaised);
-    if (Math.abs(cadRaised - roundedRaised) <= 0.08) {
-      cadRaised = roundedRaised;
-    }
+    // Calculs en CAD (arrondi systématique pour éliminer les écarts de devises)
+    const cadRaised = Math.round(raisedUSD * state.exchangeRate);
 
     let cadGoal = goalUSD * state.exchangeRate;
     if (!isTeamView && CONFIG.forcedGoal && !isNaN(CONFIG.forcedGoal)) {
-      cadGoal = CONFIG.forcedGoal;
+      cadGoal = Math.round(CONFIG.forcedGoal);
     } else {
       const step = 5;
       const nearestGoal = Math.round(cadGoal / step) * step;
-      if (Math.abs(cadGoal - nearestGoal) <= 1.50) {
+      if (Math.abs(cadGoal - nearestGoal) <= 3.00) {
         cadGoal = nearestGoal;
+      } else {
+        cadGoal = Math.round(cadGoal);
       }
     }
 
@@ -1265,10 +1261,10 @@
 
       if (isCustom) {
         const urlParams = new URLSearchParams(window.location.search);
-        const cBg = urlParams.get('cBg') || '#0F172A';
-        const cCard = urlParams.get('cCard') || '#1E293B';
-        const cAccent = urlParams.get('cAccent') || '#38BDF8';
-        const cText = urlParams.get('cText') || '#F8FAFC';
+        const cBg = urlParams.get('cBg') || '#0C1829';
+        const cCard = urlParams.get('cCard') || '#132238';
+        const cAccent = urlParams.get('cAccent') || '#1C9ED6';
+        const cText = urlParams.get('cText') || '#FFFFFF';
         const cLogo = urlParams.get('cLogo') || 'el-auto';
         const cLogoUrl = urlParams.get('cLogoUrl');
 

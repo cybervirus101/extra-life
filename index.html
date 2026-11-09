@@ -9,19 +9,19 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root {
-      /* Couleurs officielles Extra Life & CMN - Palette lumineuse et aérée */
-      --el-navy-deep: #11233B;
-      --el-navy-bg: #142844;
-      --el-navy-card: #1F3C64;
-      --el-navy-card-border: rgba(56, 189, 248, 0.45);
-      --el-navy-input: #172F4F;
-      --el-bleu-cmn: #1389B2;
-      --el-cyan: #22B2F2;
+      /* Couleurs officielles Extra Life & CMN */
+      --el-navy-deep: #070E18;
+      --el-navy-bg: #0C1829;
+      --el-navy-card: #132238;
+      --el-navy-card-border: rgba(28, 158, 214, 0.45);
+      --el-navy-input: #0E1A2C;
+      --el-bleu-cmn: #0E7CA2;
+      --el-cyan: #1C9ED6;
       --el-cyan-light: #70D3FF;
-      --el-cyan-glow: rgba(34, 178, 242, 0.45);
+      --el-cyan-glow: rgba(28, 158, 214, 0.45);
       --el-vert-manette: #62AF0F;
       --el-vert-hover: #52970B;
-      --el-jaune-cmn: #FFD000;
+      --el-jaune-cmn: #FFCB05;
       --el-text-main: #FFFFFF;
       --el-text-sub: #D3E7F8;
       --el-text-dim: #99C3E6;
@@ -845,11 +845,85 @@
       from { transform: translateY(20px); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
     }
+
+    /* Barre de navigation supérieure */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(19, 34, 56, 0.85);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--el-navy-card-border);
+      padding: 12px 20px;
+      border-radius: 14px;
+      margin-bottom: 24px;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      font-size: 15px;
+      color: #FFFFFF;
+      text-decoration: none;
+    }
+
+    .nav-brand img {
+      height: 28px;
+      width: auto;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .nav-link {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--el-text-sub);
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-link:hover {
+      color: #FFFFFF;
+      background: rgba(28, 158, 214, 0.2);
+    }
+
+    .nav-link.active {
+      color: #FFFFFF;
+      background: var(--el-cyan);
+      box-shadow: 0 2px 10px rgba(28, 158, 214, 0.4);
+    }
   </style>
 </head>
 <body>
 
   <div class="container">
+
+    <!-- Barre de navigation -->
+    <nav class="top-nav">
+      <a href="index.html" class="nav-brand">
+        <img src="assets/logo-extra-life-icon.svg" alt="Extra Life">
+        <span>Les alliés du soleil</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link active">🎮 Kit Overlays & Alertes OBS</a>
+        <a href="guide.html" class="nav-link">📖 Guide d'inscription</a>
+        <a href="rejoindre.html" target="_blank" class="nav-link" style="color: var(--el-jaune-cmn);">⚡ S'inscrire (Lien direct)</a>
+      </div>
+    </nav>
 
     <!-- En-tête officiel Extra Life -->
     <header class="header">
@@ -869,6 +943,14 @@
       <p class="step-instruction">
         Entrez votre <strong>ID de participant</strong> ou collez le lien direct de votre page Extra Life :
       </p>
+
+      <!-- Bannière d'invitation pour nouveaux streamers -->
+      <div style="background: rgba(28, 158, 214, 0.12); border: 1.5px solid var(--el-cyan); border-radius: 12px; padding: 12px 16px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
+        <span style="font-size: 13.5px; color: #E0F2FE;">
+          👋 <strong>Pas encore inscrit sur Extra Life ?</strong> Rejoignez notre équipe <strong>Les alliés du soleil</strong> pour Opération Enfant Soleil !
+        </span>
+        <a href="guide.html" class="btn btn-secondary" style="font-size: 13px; padding: 6px 14px;">📖 Guide d'inscription pas à pas</a>
+      </div>
 
       <div class="input-group">
         <input type="text" id="input-participant" class="input-field" placeholder="Ex: 582063 ou https://www.extra-life.org/participant/582063" value="582063">
@@ -973,11 +1055,11 @@
             <label for="color-custom-bg">1. Fond principal</label>
             <div class="color-picker-wrapper">
               <label class="color-btn-trigger" for="color-custom-bg" title="Cliquer pour ouvrir la palette de couleurs">
-                <span class="color-btn-swatch" id="swatch-custom-bg" style="background-color: #0F172A;"></span>
+                <span class="color-btn-swatch" id="swatch-custom-bg" style="background-color: #0C1829;"></span>
                 <span class="color-btn-icon">🎨</span>
-                <input type="color" id="color-custom-bg" class="color-input" value="#0F172A">
+                <input type="color" id="color-custom-bg" class="color-input" value="#0C1829">
               </label>
-              <input type="text" id="hex-custom-bg" class="hex-input" value="#0F172A" maxlength="7" title="Code hexadécimal de la couleur">
+              <input type="text" id="hex-custom-bg" class="hex-input" value="#0C1829" maxlength="7" title="Code hexadécimal de la couleur">
             </div>
             <span class="color-role-hint">Arrière-plan du panneau et de l'overlay</span>
           </div>
@@ -986,11 +1068,11 @@
             <label for="color-custom-card">2. Cadres & Boîtes</label>
             <div class="color-picker-wrapper">
               <label class="color-btn-trigger" for="color-custom-card" title="Cliquer pour ouvrir la palette de couleurs">
-                <span class="color-btn-swatch" id="swatch-custom-card" style="background-color: #1E293B;"></span>
+                <span class="color-btn-swatch" id="swatch-custom-card" style="background-color: #132238;"></span>
                 <span class="color-btn-icon">🎨</span>
-                <input type="color" id="color-custom-card" class="color-input" value="#1E293B">
+                <input type="color" id="color-custom-card" class="color-input" value="#132238">
               </label>
-              <input type="text" id="hex-custom-card" class="hex-input" value="#1E293B" maxlength="7" title="Code hexadécimal de la couleur">
+              <input type="text" id="hex-custom-card" class="hex-input" value="#132238" maxlength="7" title="Code hexadécimal de la couleur">
             </div>
             <span class="color-role-hint">Encadré du logo & boîtes de données</span>
           </div>
@@ -999,11 +1081,11 @@
             <label for="color-custom-accent">3. Bordures & Accent</label>
             <div class="color-picker-wrapper">
               <label class="color-btn-trigger" for="color-custom-accent" title="Cliquer pour ouvrir la palette de couleurs">
-                <span class="color-btn-swatch" id="swatch-custom-accent" style="background-color: #38BDF8;"></span>
+                <span class="color-btn-swatch" id="swatch-custom-accent" style="background-color: #1C9ED6;"></span>
                 <span class="color-btn-icon">🎨</span>
-                <input type="color" id="color-custom-accent" class="color-input" value="#38BDF8">
+                <input type="color" id="color-custom-accent" class="color-input" value="#1C9ED6">
               </label>
-              <input type="text" id="hex-custom-accent" class="hex-input" value="#38BDF8" maxlength="7" title="Code hexadécimal de la couleur">
+              <input type="text" id="hex-custom-accent" class="hex-input" value="#1C9ED6" maxlength="7" title="Code hexadécimal de la couleur">
             </div>
             <span class="color-role-hint">Contour extérieur, reflets & jauge de don</span>
           </div>
@@ -1012,11 +1094,11 @@
             <label for="color-custom-text">4. Texte & Bouton</label>
             <div class="color-picker-wrapper">
               <label class="color-btn-trigger" for="color-custom-text" title="Cliquer pour ouvrir la palette de couleurs">
-                <span class="color-btn-swatch" id="swatch-custom-text" style="background-color: #F8FAFC;"></span>
+                <span class="color-btn-swatch" id="swatch-custom-text" style="background-color: #FFFFFF;"></span>
                 <span class="color-btn-icon">🎨</span>
-                <input type="color" id="color-custom-text" class="color-input" value="#F8FAFC">
+                <input type="color" id="color-custom-text" class="color-input" value="#FFFFFF">
               </label>
-              <input type="text" id="hex-custom-text" class="hex-input" value="#F8FAFC" maxlength="7" title="Code hexadécimal de la couleur">
+              <input type="text" id="hex-custom-text" class="hex-input" value="#FFFFFF" maxlength="7" title="Code hexadécimal de la couleur">
             </div>
             <span class="color-role-hint">Titres, libellés et bouton d'action</span>
           </div>
@@ -1375,10 +1457,10 @@
       }
 
       const DEFAULT_CUSTOM_PALETTE = {
-        bg: '#0F172A',
-        card: '#1E293B',
-        accent: '#38BDF8',
-        text: '#F8FAFC',
+        bg: '#0C1829',
+        card: '#132238',
+        accent: '#1C9ED6',
+        text: '#FFFFFF',
         logo: 'el-color',
         logoUrl: '',
       };
@@ -1401,7 +1483,12 @@
           const saved = localStorage.getItem('oes_custom_palette');
           if (saved) {
             const parsed = JSON.parse(saved);
-            customPalette = { ...DEFAULT_CUSTOM_PALETTE, ...parsed };
+            // Migration automatique si l'utilisateur avait les anciens fallbacks génériques
+            if (parsed.bg === '#0F172A' || parsed.accent === '#38BDF8') {
+              customPalette = { ...DEFAULT_CUSTOM_PALETTE };
+            } else {
+              customPalette = { ...DEFAULT_CUSTOM_PALETTE, ...parsed };
+            }
           }
         } catch (e) {}
         applyCustomPaletteToInputs();
@@ -1669,7 +1756,7 @@ Durant ce live, nous amassons des dons pour Extra Life afin de soutenir les soin
           if (isCustom) {
             ctx.fillStyle = customPalette.card;
           } else if (isExtraLife) {
-            ctx.fillStyle = isDark ? '#0E1B2D' : '#FFFFFF';
+            ctx.fillStyle = isDark ? '#132238' : '#FFFFFF';
           } else {
             ctx.fillStyle = '#FFFFFF';
           }

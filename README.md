@@ -70,6 +70,8 @@ Boîte à outils complète pour streamers Twitch et YouTube afin d'afficher leur
 ```text
 overlay-enfant-soleil/
 ├── index.html                             # Configurateur web & hub streamer (Page d'accueil)
+├── guide.html                             # Guide complet d'inscription (Les alliés du soleil)
+├── rejoindre.html                         # Redirection permanente vers l'inscription Extra Life FR
 ├── overlay.html                           # Overlay barre de progression OBS
 ├── alert.html                             # Source alerte pop-up de don OBS (audio + visuel)
 ├── style.css                              # Charte graphique officielle Enfant Soleil
