@@ -611,14 +611,9 @@
         <span style="display: flex; align-items: center; gap: 8px;">
           💾 <strong>Profil mémorisé sur ce navigateur</strong> (synchronisé avec votre Kit Streamer)
         </span>
-        <div style="display: flex; gap: 8px; align-items: center;">
-          <a id="btn-open-my-kit" href="kit-streamer.html" class="btn btn-secondary btn-sm">
-            <span>🎮 Ouvrir mon Kit Streamer</span>
-          </a>
-          <button id="btn-forget" type="button" style="background: transparent; border: 1px solid rgba(28, 158, 214, 0.5); color: #5BC3F0; cursor: pointer; font-size: 12px; font-weight: 700; padding: 5px 12px; border-radius: 8px; transition: all 0.2s ease;">
-            🗑️ Oublier / Réinitialiser
-          </button>
-        </div>
+        <button id="btn-forget" type="button" style="background: transparent; border: 1px solid rgba(28, 158, 214, 0.5); color: #5BC3F0; cursor: pointer; font-size: 12px; font-weight: 700; padding: 5px 12px; border-radius: 8px; transition: all 0.2s ease;">
+          🗑️ Oublier / Réinitialiser
+        </button>
       </div>
     </section>
 
@@ -656,14 +651,10 @@
             </ul>
           </div>
 
-          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-            <a href="guide.html" class="btn btn-primary" style="flex: 1;">
-              <span>📖 Ouvrir le Guide d'inscription</span>
-            </a>
-            <a href="rejoindre.html" target="_blank" class="btn btn-outline" title="Lien officiel Extra Life">
-              <span>🔗 Accès Extra Life</span>
-            </a>
-          </div>
+          <a href="guide.html" class="btn btn-primary">
+            <span>📖 Ouvrir le Guide d'inscription</span>
+            <span>➔</span>
+          </a>
         </article>
 
         <!-- Section 2 : Kit Streamer (Overlays & Alertes) -->
@@ -859,7 +850,9 @@
         }
 
         elements.badgeMilestones.textContent = `${detectedParticipant.numMilestones} défi(s) / jalons`;
-        elements.btnOpenMyKit.href = `kit-streamer.html?participantID=${detectedParticipant.participantID}`;
+        if (elements.btnOpenMyKit) {
+          elements.btnOpenMyKit.href = `kit-streamer.html?participantID=${detectedParticipant.participantID}`;
+        }
       }
 
       function saveStreamerMemory() {
