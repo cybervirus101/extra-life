@@ -494,7 +494,6 @@
       <div class="nav-links">
         <a href="index.html" class="nav-link">🎮 Kit Overlays & Alertes OBS</a>
         <a href="guide.html" class="nav-link active">📖 Guide d'inscription</a>
-        <a href="rejoindre.html" target="_blank" class="nav-link" style="color: var(--el-jaune-cmn);">⚡ S'inscrire (Lien direct)</a>
       </div>
     </nav>
 
@@ -509,15 +508,6 @@
       </div>
       <h1>☀️ Guide d'inscription : Les alliés du soleil</h1>
       <p>Rejoignez notre équipe de créateurs et streamers pour soutenir le développement d'une pédiatrie de pointe pour les enfants malades du Québec !</p>
-
-      <div class="header-cta-group">
-        <a href="https://dd.extra-life.org/?fuseaction=register.start&eventID=562&language=fr" target="_blank" class="btn btn-primary btn-lg">
-          🚀 S'inscrire maintenant sur Extra Life (FR)
-        </a>
-        <a href="index.html" class="btn btn-secondary btn-lg">
-          🎮 Configurer mon Overlay OBS
-        </a>
-      </div>
     </header>
 
     <!-- Étape 1 : Accéder à l'inscription -->
@@ -576,7 +566,7 @@
             <span class="check-icon">✓</span>
             <div>
               <strong>Recherche de l'équipe :</strong> Tapez exactement <span class="tag tag-gold">Les alliés du soleil</span>.
-              <button class="btn btn-outline" style="padding: 4px 10px; margin-left: 8px; font-size: 12px;" onclick="copyText('Les alliés du soleil')">Copier le nom</button>
+              <button class="btn btn-secondary" style="padding: 4px 10px; margin-left: 8px; font-size: 12px;" onclick="copyText('Les alliés du soleil')">📋 Copier le nom</button>
             </div>
           </li>
         </ul>
@@ -679,71 +669,6 @@
       </div>
     </section>
 
-    <!-- Boîte à outils Discord -->
-    <section class="step-card">
-      <div class="step-header">
-        <div class="step-badge">💬</div>
-        <div class="step-title">Texte d'annonce prêt pour Discord</div>
-      </div>
-      <div class="step-body">
-        <p>
-          Vous gérez un serveur Discord de streamers ou vous souhaitez inviter des amis à rejoindre l'équipe ? Voici le texte complet prêt à être copié avec toutes les émoticônes et le formatage Discord :
-        </p>
-
-        <div class="code-preview">
-          <button class="btn btn-secondary btn-copy-float" onclick="copyDiscordMarkdown()">📋 Copier pour Discord</button>
-          <pre id="discord-text"># ☀️ Guide : Rejoindre l'équipe « Les alliés du soleil » sur Extra Life ! ☀️
-
-Bienvenue dans l'aventure ! Voici la marche à suivre pour inscrire ta chaîne et collecter des dons pour ***Opération Enfant Soleil*** 💛.
-
----
-
-### 🚀 Étape 1 : Accéder à l'inscription
-👉 **Lien direct en français :** 
-https://dd.extra-life.org/?fuseaction=register.start&eventID=562&language=fr
-
-*(Lien permanent de secours : https://cybervirus101.github.io/extra-life/rejoindre.html)*
-
----
-
-### 📋 Étape 2 : Type d'inscription & Équipe
-1. **Type d'inscription :** Choisis **Extra Life Classic** *(gratuit)*.
-2. **Rôle :** Sélectionne **Joindre une équipe** (*Join a Team*).
-3. **Recherche de l'équipe :** Tape et choisis **Les alliés du soleil**.
-
----
-
-### 🏥 Étape 3 : Objectif de collecte & Hôpital
-1. **Objectif personnel :** Indique ton montant cible (ex: `100$`, `250$`, `500$`... modifiable en tout temps !).
-2. __**Hôpital (TRÈS IMPORTANT) :**__ Dans le menu déroulant des hôpitaux, choisis bien **Enfant Soleil** *(pour que 100% des fonds aillent aux enfants soignés au Québec)*.
-3. Remplis tes informations personnelles pour finaliser le compte.
-
----
-
-### 💜 Étape 4 : Installer l'extension de panneau Twitch (DonorDrive)
-Affiche ta barre de dons et le bouton interactif directement sous ton live :
-1. Ouvre la page de l'extension : https://dashboard.twitch.tv/extensions/73ititk72tpr6bze4658lkbddnsc0f
-2. Clique sur **Installer**, puis sur **Configurer**.
-3. Dans les réglages :
-   - Programme caritatif : Choisis **Extra Life**.
-   - Identifiant : Entre ton **Participant ID** *(ce sont les chiffres à la fin de l'adresse web de ta page de profil DonorDrive)*.
-4. Clique sur **Activer** et place-le en **Panneau 1, 2 ou 3**.
-
----
-
-### 🛠️ Étape 5 : Récupère ton Kit pour Streamer !
-> ⚠️ **Avant de lancer ton premier live caritatif :**
-> Rends-toi sur notre page dédiée : https://cybervirus101.github.io/extra-life/
-
-Tu y trouveras tout le matériel prêt à l'emploi :
-- **Visuels & Overlays :** Barres de progression OBS animées en direct.
-- **Alertes en direct :** Sons et animations pop-up festives.
-- **Commandes de clavardage :** Textes pour ton bot (`!don`, `!extralife`, `!equipe`).
-- **Idées de défis et paliers :** Pour animer ton chat pendant tes sessions !</pre>
-        </div>
-      </div>
-    </section>
-
   </div>
 
   <div id="toast" class="toast">Copié dans le presse-papier ! ✨</div>
@@ -768,11 +693,6 @@ Tu y trouveras tout le matériel prêt à l'emploi :
       } else {
         prompt('Copiez ce texte :', text);
       }
-    }
-
-    function copyDiscordMarkdown() {
-      const text = document.getElementById('discord-text').innerText;
-      copyText(text);
     }
   </script>
 </body>
