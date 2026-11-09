@@ -62,7 +62,7 @@
       background: linear-gradient(180deg, #244570 0%, #1A3456 100%);
       border-radius: var(--radius);
       border: 3px solid var(--el-cyan);
-      padding: 32px 24px;
+      padding: 40px 24px;
       text-align: center;
       margin-bottom: 30px;
       box-shadow: 0 12px 40px rgba(10, 25, 47, 0.4), 0 0 35px rgba(34, 178, 242, 0.3);
@@ -73,56 +73,33 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 14px;
-      margin-bottom: 18px;
+      gap: 16px;
+      margin-bottom: 22px;
     }
 
     .hero-logo-el {
-      height: 85px;
-      max-width: 100%;
+      height: 135px;
+      max-height: 150px;
+      max-width: 90%;
       width: auto;
       display: block;
-      filter: drop-shadow(0 4px 14px rgba(28, 158, 214, 0.5));
-    }
-
-    .partner-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: #FFFFFF;
-      border: 2px solid var(--el-cyan);
-      padding: 6px 18px;
-      border-radius: 30px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(28, 158, 214, 0.25);
-    }
-
-    .partner-label {
-      font-size: 13px;
-      font-weight: 800;
-      color: #252625;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .partner-logo-oes {
-      height: 38px;
-      width: auto;
-      display: block;
+      filter: drop-shadow(0 6px 24px rgba(28, 158, 214, 0.65));
+      transition: transform 0.3s ease;
     }
 
     .header h1 {
-      font-size: 28px;
+      font-size: 32px;
       font-weight: 900;
       color: #FFFFFF;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
       letter-spacing: 0.5px;
       text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
     }
 
     .header p {
-      font-size: 16px;
+      font-size: 16.5px;
       color: var(--el-text-sub);
-      max-width: 680px;
+      max-width: 780px;
       margin: 0 auto;
     }
 
@@ -322,9 +299,22 @@
     }
 
     .badge-gold {
-      background: rgba(255, 203, 5, 0.2);
-      color: var(--el-jaune-cmn);
-      border-color: rgba(255, 203, 5, 0.4);
+      background: rgba(255, 208, 0, 0.22);
+      color: #FFD000;
+      border: 1.5px solid #FFD000;
+      font-weight: 800;
+      box-shadow: 0 0 12px rgba(255, 208, 0, 0.3);
+    }
+
+    .tag-gold {
+      display: inline-block;
+      background: rgba(255, 208, 0, 0.22);
+      border: 1.5px solid #FFD000;
+      color: #FFD000;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 6px;
+      box-shadow: 0 0 12px rgba(255, 208, 0, 0.3);
     }
 
     .badge-red {
@@ -913,6 +903,14 @@
       border-color: var(--el-cyan-light);
       box-shadow: 0 4px 16px rgba(28, 158, 214, 0.45);
     }
+
+    @media (max-width: 768px) {
+      .header { padding: 26px 16px; }
+      .hero-logo-el { height: 95px; }
+      .header h1 { font-size: 24px; }
+      .top-nav { flex-direction: column; align-items: stretch; }
+      .nav-tabs { justify-content: center; width: 100%; }
+    }
   </style>
 </head>
 <body>
@@ -957,7 +955,7 @@
       <!-- Bannière d'invitation pour nouveaux streamers -->
       <div style="background: rgba(28, 158, 214, 0.12); border: 1.5px solid var(--el-cyan); border-radius: 12px; padding: 12px 16px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
         <span style="font-size: 13.5px; color: #E0F2FE;">
-          👋 <strong>Pas encore inscrit sur Extra Life ?</strong> Rejoignez notre équipe <strong>Les alliés du soleil</strong> pour Opération Enfant Soleil !
+          👋 <strong>Pas encore inscrit sur Extra Life ?</strong> Rejoignez notre équipe <span class="tag-gold" style="font-size: 12.5px; padding: 2px 8px;">Les alliés du soleil</span> au profit d'<span class="tag-gold" style="font-size: 12.5px; padding: 2px 8px;">Enfant Soleil</span> !
         </span>
         <a href="guide.html" class="btn btn-secondary" style="font-size: 13px; padding: 6px 14px;">📖 Guide d'inscription pas à pas</a>
       </div>
