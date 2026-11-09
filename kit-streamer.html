@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kit Streamer Extra Life — Overlays & Alertes OBS (Enfant Soleil)</title>
+  <title>Kit Streamer Extra Life — Overlays & Alertes OBS</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
@@ -1040,9 +1040,9 @@
               <option value="extralife-sombre" selected>🕹️ Extra Life — Thème sombre (Bleu nuit & Cyan néon)</option>
               <option value="extralife-clair">🎮 Extra Life — Thème clair (Bleu CMN & Blanc)</option>
             </optgroup>
-            <optgroup label="☀️ Thèmes Opération Enfant Soleil">
-              <option value="clair">☀️ Enfant Soleil — Thème clair (Jaune & Blanc)</option>
-              <option value="sombre">🌙 Enfant Soleil — Thème sombre (Noir velours)</option>
+            <optgroup label="☀️ Thèmes alternatifs">
+              <option value="clair">☀️ Thème solaire clair (Jaune & Blanc)</option>
+              <option value="sombre">🌙 Thème solaire sombre (Noir velours)</option>
             </optgroup>
             <optgroup label="🎨 Thème Personnalisé">
               <option value="personnalise">🎨 Thème personnalisé (Palette sur mesure)</option>
@@ -1129,8 +1129,7 @@
             <select id="select-custom-logo" class="option-select" style="padding: 8px 12px; font-size: 13px;">
               <option value="el-color" selected>Extra Life (Couleur classique)</option>
               <option value="el-dark">Extra Life (Couleur alternative - Sombre)</option>
-              <option value="oes">Opération Enfant Soleil (Couleur classique)</option>
-              <option value="oes-dark">Opération Enfant Soleil (Couleur alternative - Sombre)</option>
+              <option value="el-white">Extra Life (Blanc pur)</option>
               <option value="custom">🌐 Image personnalisée (Lien direct URL)</option>
             </select>
             <span class="color-role-hint">Logo affiché au centre de la bannière & overlay</span>
@@ -1654,48 +1653,24 @@
         const donateLink = `https://www.extra-life.org/participant/${id}`;
         elements.twitchRedirectLink.textContent = donateLink;
 
-        const isEnfantSoleilTheme = (theme === 'clair' || theme === 'sombre');
-        let markdownText = '';
-        if (isEnfantSoleilTheme) {
-          markdownText = `### ☀️ Campagne au profit d'Opération Enfant Soleil (Extra Life)
+        let markdownText = `### 🎮 Campagne caritative Extra Life
 
-Durant ce live, nous amassons des dons pour soutenir le développement d'une pédiatrie de qualité et des soins adaptés pour tous les enfants malades du Québec.
-
-💛 **Chaque don fait une différence directe :**
-👉 [CLIQUEZ ICI POUR FAIRE UN DON](${donateLink})
-
-*(Reçu fiscal officiel canadien émis instantanément par courriel pour chaque don)*`;
-
-          elements.cmdDon.value = `💛 Soutenez les enfants malades du Québec avec Opération Enfant Soleil ! Don sécurisé avec reçu fiscal ici 👉 ${donateLink}`;
-          if (elements.cmdEvent) {
-            elements.cmdEvent.value = `☀️ $(user) envoie un grand rayon de chaleur et d'ondes positives sur tout le chat pour soutenir Opération Enfant Soleil ! 🌻✨`;
-            if (elements.cmdEventLabel) elements.cmdEventLabel.textContent = '!soleil';
-          }
-          if (detectedParticipant && detectedParticipant.teamID) {
-            elements.cmdEquipe.value = `👥 Suivez et soutenez notre équipe « ${detectedParticipant.teamName} » pour Opération Enfant Soleil ici 👉 https://www.extra-life.org/team/${detectedParticipant.teamID}`;
-          } else {
-            elements.cmdEquipe.value = `👥 Découvrez notre campagne collective pour Opération Enfant Soleil ! Don ici 👉 ${donateLink}`;
-          }
-        } else {
-          markdownText = `### 🎮 Campagne caritative Extra Life
-
-Durant ce live, nous amassons des dons pour Extra Life afin de soutenir les soins pédiatriques et les hôpitaux pour enfants.
+Durant ce live, nous amassons des dons pour Extra Life afin de soutenir les hôpitaux pour enfants et les soins pédiatriques.
 
 💖 **Chaque don fait une différence directe :**
 👉 [CLIQUEZ ICI POUR FAIRE UN DON](${donateLink})
 
 *(Reçu fiscal officiel émis instantanément par courriel pour chaque don)*`;
 
-          elements.cmdDon.value = `🎮 Soutenez notre campagne caritative Extra Life ! Don sécurisé avec reçu fiscal ici 👉 ${donateLink}`;
-          if (elements.cmdEvent) {
-            elements.cmdEvent.value = `🎮 $(user) soutient la campagne caritative Extra Life pour les enfants malades ! Jouons ensemble pour guérir ! 💖🎮`;
-            if (elements.cmdEventLabel) elements.cmdEventLabel.textContent = '!extralife';
-          }
-          if (detectedParticipant && detectedParticipant.teamID) {
-            elements.cmdEquipe.value = `👥 Suivez et soutenez notre équipe Extra Life « ${detectedParticipant.teamName} » ici 👉 https://www.extra-life.org/team/${detectedParticipant.teamID}`;
-          } else {
-            elements.cmdEquipe.value = `👥 Découvrez notre campagne collective Extra Life ! Don ici 👉 ${donateLink}`;
-          }
+        elements.cmdDon.value = `🎮 Soutenez notre campagne caritative Extra Life ! Don sécurisé avec reçu fiscal ici 👉 ${donateLink}`;
+        if (elements.cmdEvent) {
+          elements.cmdEvent.value = `🎮 $(user) soutient la campagne caritative Extra Life pour les enfants malades ! Jouons ensemble pour guérir ! 💖🎮`;
+          if (elements.cmdEventLabel) elements.cmdEventLabel.textContent = '!extralife';
+        }
+        if (detectedParticipant && detectedParticipant.teamID) {
+          elements.cmdEquipe.value = `👥 Suivez et soutenez notre équipe Extra Life « ${detectedParticipant.teamName} » ici 👉 https://www.extra-life.org/team/${detectedParticipant.teamID}`;
+        } else {
+          elements.cmdEquipe.value = `👥 Découvrez notre campagne collective Extra Life ! Don ici 👉 ${donateLink}`;
         }
 
         elements.twitchMarkdown.textContent = markdownText;

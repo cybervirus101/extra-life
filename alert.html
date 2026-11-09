@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Alerte de Don Extra Life — Opération Enfant Soleil</title>
+  <title>Alerte de Don Extra Life</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
@@ -401,10 +401,10 @@
             logo.alt = 'Logo personnalisé';
           } else if (cLogo === 'oes-dark') {
             logo.src = 'assets/logo-enfant-soleil-dark.png';
-            logo.alt = 'Opération Enfant Soleil';
+            logo.alt = 'Extra Life';
           } else if (cLogo === 'oes') {
             logo.src = 'assets/logo-enfant-soleil-horizontal.png';
-            logo.alt = 'Opération Enfant Soleil';
+            logo.alt = 'Extra Life';
           } else if (cLogo === 'el-dark' || cLogo === 'el-white') {
             logo.src = 'assets/logo-extra-life-dark.svg';
             logo.alt = 'Extra Life';
@@ -566,7 +566,7 @@
                 queueDonation({
                   displayName: e.data.displayName || 'Testeur Solaire',
                   amount: parseFloat(e.data.amount) || 25,
-                  message: e.data.message || 'Bravo pour votre live au profit d\'Enfant Soleil ! ☀️'
+                  message: e.data.message || 'Bravo pour votre live caritatif Extra Life ! 🎮✨'
                 });
               }
             };

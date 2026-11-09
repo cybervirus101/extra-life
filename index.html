@@ -50,7 +50,7 @@
 
     .container {
       width: 100%;
-      max-width: min(1100px, 95vw);
+      max-width: min(1600px, 95vw);
       margin: 0 auto;
     }
 
@@ -128,26 +128,33 @@
       box-shadow: 0 4px 16px rgba(28, 158, 214, 0.45);
     }
 
-    /* En-tête Hero Extra Life */
+    /* En-tête officiel Extra Life — Disposition identique à la page Kit Streamer */
     .header {
-      background: linear-gradient(180deg, #244570 0%, #172F4D 100%);
+      background: linear-gradient(180deg, #244570 0%, #1A3456 100%);
       border-radius: var(--radius);
       border: 3px solid var(--el-cyan);
-      padding: 38px 24px 34px 24px;
+      padding: 40px 24px;
       text-align: center;
       margin-bottom: 30px;
-      box-shadow: 0 12px 40px rgba(10, 25, 47, 0.4), 0 0 35px rgba(34, 178, 242, 0.25);
-      position: relative;
+      box-shadow: 0 12px 40px rgba(10, 25, 47, 0.4), 0 0 35px rgba(34, 178, 242, 0.3);
+    }
+
+    .header-logos {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 22px;
     }
 
     .hero-logo-el {
-      height: 95px;
-      max-height: 110px;
-      max-width: 85%;
+      height: 135px;
+      max-height: 150px;
+      max-width: 90%;
       width: auto;
       display: block;
-      margin: 0 auto 18px auto;
-      filter: drop-shadow(0 6px 20px rgba(28, 158, 214, 0.6));
+      filter: drop-shadow(0 6px 24px rgba(28, 158, 214, 0.65));
       transition: transform 0.3s ease;
     }
 
@@ -159,178 +166,183 @@
       font-size: 32px;
       font-weight: 900;
       color: #FFFFFF;
-      margin-bottom: 6px;
+      margin-bottom: 10px;
       letter-spacing: 0.5px;
       text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
     }
 
-    .header-subtitle {
+    .header p {
+      font-size: 16.5px;
+      color: var(--el-text-sub);
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    /* Cartes de sections */
+    .step-card {
+      background: var(--el-navy-card);
+      border-radius: var(--radius);
+      border: 2px solid var(--el-navy-card-border);
+      padding: 26px;
+      margin-bottom: 24px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .step-card:hover {
+      border-color: var(--el-cyan);
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.6), 0 0 20px rgba(28, 158, 214, 0.2);
+    }
+
+    .step-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 20px;
+      font-weight: 800;
+      color: #FFFFFF;
+      margin-bottom: 16px;
+    }
+
+    .step-number {
+      background: linear-gradient(135deg, var(--el-cyan) 0%, var(--el-bleu-cmn) 100%);
+      color: #FFFFFF;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 900;
+      flex-shrink: 0;
+      box-shadow: 0 2px 10px rgba(28, 158, 214, 0.5);
+    }
+
+    .card-accent-green .step-number {
+      background: linear-gradient(135deg, var(--el-vert-manette) 0%, #468606 100%);
+      box-shadow: 0 2px 10px rgba(98, 175, 15, 0.5);
+    }
+
+    .step-instruction {
+      margin-bottom: 14px;
+      font-size: 14.5px;
+      color: var(--el-text-sub);
+    }
+
+    /* Formulaire & Recherche — Identique au Kit Streamer */
+    .input-group {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .input-field {
+      flex: 1;
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 600;
+      padding: 12px 18px;
+      border: 2px solid rgba(28, 158, 214, 0.4);
+      border-radius: 12px;
+      background: var(--el-navy-input);
+      color: #FFFFFF;
+      transition: all 0.2s ease;
+    }
+
+    .input-field:focus {
+      outline: none;
+      border-color: var(--el-cyan);
+      box-shadow: 0 0 0 3px rgba(28, 158, 214, 0.3);
+    }
+
+    .input-field::placeholder {
+      color: var(--el-text-dim);
+    }
+
+    /* Carte de profil détectée — Identique à la page Kit Streamer */
+    .profile-card {
+      display: none;
+      background: var(--el-navy-input);
+      border: 2px solid var(--el-cyan);
+      border-radius: 14px;
+      padding: 16px;
+      margin-top: 16px;
+      gap: 16px;
+      align-items: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .profile-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 3px solid var(--el-cyan);
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .profile-info h3 {
       font-size: 18px;
       font-weight: 800;
-      color: var(--el-cyan-light);
-      margin-bottom: 12px;
-    }
-
-    .header-intro {
-      font-size: 15.5px;
-      color: var(--el-text-sub);
-      max-width: 780px;
-      margin: 0 auto 22px auto;
-      line-height: 1.6;
-    }
-
-    /* Barre de saisie de profil */
-    .profile-picker-bar {
-      background: rgba(9, 19, 34, 0.85);
-      border: 1.5px solid var(--el-navy-card-border);
-      border-radius: 14px;
-      padding: 12px 16px;
-      max-width: 680px;
-      margin: 0 auto 18px auto;
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-      flex-wrap: wrap;
-    }
-
-    .profile-picker-bar label {
-      font-size: 13.5px;
-      font-weight: 800;
-      color: var(--el-cyan-light);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      white-space: nowrap;
-    }
-
-    .profile-picker-input {
-      flex: 1;
-      min-width: 200px;
-      background: var(--el-navy-input);
-      border: 1.5px solid rgba(28, 158, 214, 0.4);
       color: #FFFFFF;
-      font-family: inherit;
-      font-size: 14px;
-      padding: 9px 13px;
-      border-radius: 9px;
-      outline: none;
-      transition: border-color 0.2s ease;
+      margin-bottom: 4px;
     }
 
-    .profile-picker-input:focus {
-      border-color: var(--el-cyan-light);
-      box-shadow: 0 0 12px rgba(28, 158, 214, 0.4);
-    }
-
-    /* Carte dynamique affichée uniquement après saisie */
-    .dynamic-profile-card {
-      display: none;
-      background: linear-gradient(135deg, rgba(19, 34, 56, 0.95) 0%, rgba(14, 26, 44, 0.95) 100%);
-      border: 2px solid var(--el-cyan);
-      border-radius: 14px;
-      padding: 16px 20px;
-      max-width: 720px;
-      margin: 0 auto 18px auto;
-      text-align: left;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
-      animation: fadeIn 0.3s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .profile-card-inner {
+    .profile-badges {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
       flex-wrap: wrap;
-    }
-
-    .profile-entity-info {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .profile-entity-logo {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      border: 2px solid var(--el-cyan);
-      object-fit: cover;
-      background: #0C1829;
-      box-shadow: 0 0 12px rgba(28, 158, 214, 0.4);
-    }
-
-    .profile-entity-title {
-      font-size: 17px;
-      font-weight: 800;
-      color: #FFFFFF;
-    }
-
-    .profile-entity-sub {
-      font-size: 13px;
-      color: var(--el-cyan-light);
-      font-weight: 700;
-    }
-
-    .profile-stats-group {
-      display: flex;
       gap: 8px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
-    .stat-pill {
-      background: rgba(8, 18, 32, 0.7);
-      border: 1px solid rgba(28, 158, 214, 0.4);
-      padding: 6px 12px;
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--el-text-sub);
-    }
-
-    .stat-pill strong {
-      color: #70D3FF;
-    }
-
-    /* Badges d'atouts généraux */
-    .impact-badges {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
       margin-top: 6px;
     }
 
-    .impact-badge {
-      background: rgba(8, 18, 32, 0.7);
-      border: 1.5px solid var(--el-navy-card-border);
-      border-radius: 30px;
-      padding: 6px 16px;
-      font-size: 13px;
+    .badge {
+      display: inline-block;
+      font-size: 12.5px;
       font-weight: 700;
-      color: var(--el-text-sub);
-      display: inline-flex;
+      padding: 4px 12px;
+      border-radius: 20px;
+      background: rgba(28, 158, 214, 0.15);
+      color: var(--el-cyan-light);
+      border: 1px solid rgba(28, 158, 214, 0.3);
+    }
+
+    .badge-gold {
+      background: rgba(255, 208, 0, 0.22);
+      color: #FFD000;
+      border: 1.5px solid #FFD000;
+      font-weight: 800;
+      box-shadow: 0 0 12px rgba(255, 208, 0, 0.3);
+    }
+
+    .badge-red {
+      background: rgba(241, 80, 41, 0.2);
+      color: #FF7B5C;
+      border: 1px solid rgba(241, 80, 41, 0.4);
+    }
+
+    /* Bandeau de mémorisation */
+    .saved-notice-box {
+      display: none;
       align-items: center;
-      gap: 8px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      justify-content: space-between;
+      font-size: 13.5px;
+      color: #E0F2FE;
+      background: rgba(28, 158, 214, 0.15);
+      border: 1.5px solid var(--el-cyan);
+      padding: 10px 16px;
+      border-radius: 12px;
+      margin-top: 14px;
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
-    .impact-badge strong {
-      color: #FFFFFF;
-    }
-
-    /* Section des 2 étapes */
+    /* Grille des 2 étapes */
     .portal-section-title {
-      font-size: 24px;
+      font-size: 26px;
       font-weight: 900;
       color: #FFFFFF;
+      margin-top: 10px;
       margin-bottom: 6px;
       display: flex;
       align-items: center;
@@ -338,15 +350,15 @@
     }
 
     .portal-section-subtitle {
-      font-size: 15px;
+      font-size: 15.5px;
       color: var(--el-text-sub);
-      margin-bottom: 22px;
+      margin-bottom: 24px;
     }
 
     .cards-grid-two {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 22px;
+      grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+      gap: 24px;
       margin-bottom: 35px;
     }
 
@@ -354,7 +366,7 @@
       background: var(--el-navy-card);
       border-radius: var(--radius);
       border: 2px solid var(--el-navy-card-border);
-      padding: 28px;
+      padding: 30px;
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
       transition: all 0.3s ease;
       display: flex;
@@ -393,38 +405,18 @@
       display: flex;
       align-items: center;
       gap: 14px;
-      margin-bottom: 14px;
-    }
-
-    .step-badge {
-      background: linear-gradient(135deg, var(--el-cyan) 0%, var(--el-bleu-cmn) 100%);
-      color: #FFFFFF;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      font-weight: 900;
-      flex-shrink: 0;
-      box-shadow: 0 4px 14px rgba(28, 158, 214, 0.5);
-    }
-
-    .card-accent-green .step-badge {
-      background: linear-gradient(135deg, var(--el-vert-manette) 0%, #468606 100%);
-      box-shadow: 0 4px 14px rgba(98, 175, 15, 0.5);
+      margin-bottom: 16px;
     }
 
     .card-title-group h2 {
-      font-size: 21px;
+      font-size: 22px;
       font-weight: 900;
       color: #FFFFFF;
       margin-bottom: 3px;
     }
 
     .card-title-group .card-tagline {
-      font-size: 13.5px;
+      font-size: 14px;
       color: var(--el-cyan-light);
       font-weight: 700;
     }
@@ -434,26 +426,26 @@
     }
 
     .card-description {
-      font-size: 14.5px;
+      font-size: 15px;
       color: var(--el-text-sub);
-      margin-bottom: 18px;
-      line-height: 1.55;
+      margin-bottom: 20px;
+      line-height: 1.6;
     }
 
     .card-checklist {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      margin-bottom: 22px;
+      gap: 10px;
+      margin-bottom: 26px;
     }
 
     .card-checklist li {
-      font-size: 13.5px;
+      font-size: 14px;
       color: var(--el-text-sub);
       display: flex;
       align-items: flex-start;
-      gap: 8px;
+      gap: 10px;
     }
 
     .card-checklist li span.icon {
@@ -468,9 +460,9 @@
     /* Boutons et actions */
     .btn {
       font-family: inherit;
-      font-size: 14.5px;
+      font-size: 15px;
       font-weight: 800;
-      padding: 12px 22px;
+      padding: 12px 24px;
       border-radius: 11px;
       border: none;
       cursor: pointer;
@@ -484,7 +476,7 @@
     }
 
     .btn-sm {
-      padding: 8px 14px;
+      padding: 6px 14px;
       font-size: 13px;
       border-radius: 8px;
     }
@@ -525,17 +517,6 @@
       transform: translateY(-2px);
     }
 
-    .btn-outline-danger {
-      background: rgba(241, 80, 41, 0.1);
-      border: 1.5px solid #F15029;
-      color: #FFA592;
-    }
-
-    .btn-outline-danger:hover {
-      background: rgba(241, 80, 41, 0.25);
-      color: #FFFFFF;
-    }
-
     .footer {
       text-align: center;
       padding: 24px 0 10px 0;
@@ -547,12 +528,12 @@
     @media (max-width: 768px) {
       .header h1 { font-size: 24px; }
       .header { padding: 26px 16px; }
-      .hero-logo-el { height: 75px; }
+      .hero-logo-el { height: 95px; }
       .top-nav { flex-direction: column; align-items: stretch; gap: 12px; }
       .nav-brand { font-size: 18px; justify-content: center; }
       .nav-tabs { justify-content: center; width: 100%; }
-      .profile-picker-bar { flex-direction: column; align-items: stretch; }
-      .profile-picker-input { min-width: 100%; }
+      .input-group { flex-direction: column; }
+      .cards-grid-two { grid-template-columns: 1fr; }
       .btn { width: 100%; }
     }
   </style>
@@ -580,80 +561,68 @@
       </div>
     </nav>
 
-    <!-- En-tête Hero Extra Life (Universel) -->
+    <!-- En-tête Hero Extra Life — Disposition identique à la page Kit Streamer -->
     <header class="header">
-      
-      <!-- Uniquement le logo Extra Life officiel -->
-      <img class="hero-logo-el" src="assets/logo-extra-life-white.svg" alt="Extra Life">
-
-      <h1 id="page-hero-title">Portail Créateurs & Streamers</h1>
-      <div id="page-hero-subtitle" class="header-subtitle">Jouer pour guérir • Campagne caritative Extra Life</div>
-
-      <p id="page-hero-desc" class="header-intro">
-        Bienvenue sur le portail d'outils pour créateurs et streamers Extra Life. 
-        Retrouvez ici tous les guides, overlays et alertes pour propulser votre collecte de fonds au profit des enfants malades.
+      <div class="header-logos">
+        <img class="hero-logo-el" src="assets/logo-extra-life-white.svg" alt="Extra Life">
+      </div>
+      <h1 id="page-hero-title">Portail Créateurs & Streamers Extra Life</h1>
+      <p id="page-hero-desc">
+        Configurez votre overlay OBS, vos alertes en direct et vos outils caritatifs en 30 secondes sans aucune installation.
       </p>
-
-      <!-- Sélecteur rapide de profil / équipe Extra Life -->
-      <div class="profile-picker-bar">
-        <label for="input-streamer-lookup">
-          <span>🎮</span> Mon profil / Mon équipe :
-        </label>
-        <input 
-          id="input-streamer-lookup" 
-          type="text" 
-          class="profile-picker-input" 
-          placeholder="Entrez votre ID participant (ex: 582063) ou collez votre lien Extra Life..." 
-          autocomplete="off"
-        >
-        <button id="btn-streamer-lookup" class="btn btn-primary btn-sm">
-          <span>🔍 Charger</span>
-        </button>
-      </div>
-
-      <!-- Fiche dynamique (affichée UNIQUEMENT lorsque le visiteur charge son profil/équipe) -->
-      <div id="dynamic-profile-card" class="dynamic-profile-card">
-        <div class="profile-card-inner">
-          <div class="profile-entity-info">
-            <img id="profile-entity-img" class="profile-entity-logo" src="assets/logo-extra-life-icon.svg" alt="Logo">
-            <div>
-              <div id="profile-entity-name" class="profile-entity-title">Streamer</div>
-              <div id="profile-entity-tag" class="profile-entity-sub">Équipe Extra Life</div>
-            </div>
-          </div>
-
-          <div class="profile-stats-group">
-            <div id="stat-pill-user" class="stat-pill">
-              Collecté : <strong id="profile-sum-text">0.00 $ USD</strong>
-            </div>
-            <div id="stat-pill-goal" class="stat-pill">
-              Objectif : <strong id="profile-goal-text">1 000 $ USD</strong>
-            </div>
-            <a id="btn-open-my-kit" href="kit-streamer.html" class="btn btn-secondary btn-sm">
-              <span>🎮 Ouvrir mon Kit</span>
-            </a>
-            <button id="btn-reset-profile" class="btn btn-outline-danger btn-sm" title="Réinitialiser la sélection">
-              <span>✕</span>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Atouts techniques généraux -->
-      <div class="impact-badges">
-        <div class="impact-badge">
-          <span>⚡</span>
-          <span><strong>Outils OBS Zéro-Code :</strong> Jauges et alertes automatisées</span>
-        </div>
-        <div class="impact-badge">
-          <span>🎮</span>
-          <span><strong>100 % Gratuit :</strong> Compatible OBS Studio, Streamlabs et Twitch</span>
-        </div>
-      </div>
-
     </header>
 
-    <!-- Section Principale : Uniquement les 2 étapes -->
+    <!-- Section Recherche / Connexion Profil — Même disposition que Kit Streamer -->
+    <section class="step-card">
+      <div class="step-title">
+        <span class="step-number">🔍</span>
+        <span>Votre profil ou équipe Extra Life</span>
+      </div>
+      <p class="step-instruction">
+        Entrez votre <strong>ID de participant</strong> ou collez le lien direct de votre page Extra Life :
+      </p>
+
+      <div class="input-group">
+        <input 
+          type="text" 
+          id="input-participant" 
+          class="input-field" 
+          placeholder="Ex: 582063 ou https://www.extra-life.org/participant/582063"
+        >
+        <button id="btn-detect" class="btn btn-primary">🔍 Charger mes infos</button>
+      </div>
+
+      <!-- Carte d'informations auto-détectées — Affichage identique à Kit Streamer -->
+      <div id="profile-card" class="profile-card">
+        <img id="profile-avatar" class="profile-avatar" src="https://via.placeholder.com/60" alt="Avatar">
+        <div class="profile-info">
+          <h3 id="profile-name">Streamer</h3>
+          <div class="profile-badges">
+            <span id="badge-total" class="badge badge-gold">Total : -- $ USD</span>
+            <span id="badge-goal" class="badge">Objectif : -- $ USD</span>
+            <span id="badge-team" class="badge badge-red">Solo</span>
+            <span id="badge-milestones" class="badge">0 jalon</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bandeau de confirmation de mémorisation -->
+      <div id="saved-notice" class="saved-notice-box">
+        <span style="display: flex; align-items: center; gap: 8px;">
+          💾 <strong>Profil mémorisé sur ce navigateur</strong> (synchronisé avec votre Kit Streamer)
+        </span>
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <a id="btn-open-my-kit" href="kit-streamer.html" class="btn btn-secondary btn-sm">
+            <span>🎮 Ouvrir mon Kit Streamer</span>
+          </a>
+          <button id="btn-forget" type="button" style="background: transparent; border: 1px solid rgba(28, 158, 214, 0.5); color: #5BC3F0; cursor: pointer; font-size: 12px; font-weight: 700; padding: 5px 12px; border-radius: 8px; transition: all 0.2s ease;">
+            🗑️ Oublier / Réinitialiser
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section Principale : Uniquement les 2 sections demandées -->
     <main>
       <div class="portal-section-title">
         <span>🚀</span> Explorez nos ressources et outils
@@ -664,7 +633,7 @@
 
       <div class="cards-grid-two">
 
-        <!-- Étape 1 : Inscription & Guide Équipe -->
+        <!-- Section 1 : Inscription & Guide Équipe -->
         <article class="portal-card">
           <div>
             <div class="card-top">
@@ -683,7 +652,7 @@
               <li><span class="icon">✔</span> Inscription <strong>Extra Life Classic</strong> (100% gratuite)</li>
               <li><span class="icon">✔</span> Rejoindre une équipe existante ou créer la vôtre</li>
               <li><span class="icon">✔</span> Sélection de l'hôpital pédiatrique de votre choix</li>
-              <li><span class="icon">✔</span> Objectif personnel personnalisable en tout temps</li>
+              <li><span class="icon">✔</span> Objectif personnel modifiable en tout temps</li>
             </ul>
           </div>
 
@@ -697,7 +666,7 @@
           </div>
         </article>
 
-        <!-- Étape 2 : Kit Streamer (Overlays & Alertes OBS) -->
+        <!-- Section 2 : Kit Streamer (Overlays & Alertes) -->
         <article class="portal-card card-accent-green">
           <div>
             <div class="card-top">
@@ -739,29 +708,29 @@
 
   </div>
 
-  <!-- Script interactif : Chargement dynamique du profil et de l'équipe réelle -->
+  <!-- Script interactif : Détection et rendu profil identique à la page Kit Streamer -->
   <script>
     (function() {
-      const DEFAULT_PORTAL_TITLE = "Portail Créateurs & Streamers";
-      const DEFAULT_PORTAL_SUBTITLE = "Jouer pour guérir • Campagne caritative Extra Life";
-      const DEFAULT_PORTAL_BRAND = "Portail Streamer Extra Life";
-      const DEFAULT_LOGO_ICON = "assets/logo-extra-life-icon.svg";
+      'use strict';
+
+      let detectedParticipant = null;
 
       const elements = {
         topNavLogo: document.getElementById('top-nav-logo'),
         topNavBrandText: document.getElementById('top-nav-brand-text'),
         pageHeroTitle: document.getElementById('page-hero-title'),
-        pageHeroSubtitle: document.getElementById('page-hero-subtitle'),
-        inputLookup: document.getElementById('input-streamer-lookup'),
-        btnLookup: document.getElementById('btn-streamer-lookup'),
-        dynamicCard: document.getElementById('dynamic-profile-card'),
-        entityImg: document.getElementById('profile-entity-img'),
-        entityName: document.getElementById('profile-entity-name'),
-        entityTag: document.getElementById('profile-entity-tag'),
-        profileSum: document.getElementById('profile-sum-text'),
-        profileGoal: document.getElementById('profile-goal-text'),
-        btnOpenMyKit: document.getElementById('btn-open-my-kit'),
-        btnReset: document.getElementById('btn-reset-profile')
+        inputParticipant: document.getElementById('input-participant'),
+        btnDetect: document.getElementById('btn-detect'),
+        profileCard: document.getElementById('profile-card'),
+        profileAvatar: document.getElementById('profile-avatar'),
+        profileName: document.getElementById('profile-name'),
+        badgeTotal: document.getElementById('badge-total'),
+        badgeGoal: document.getElementById('badge-goal'),
+        badgeTeam: document.getElementById('badge-team'),
+        badgeMilestones: document.getElementById('badge-milestones'),
+        savedNotice: document.getElementById('saved-notice'),
+        btnForget: document.getElementById('btn-forget'),
+        btnOpenMyKit: document.getElementById('btn-open-my-kit')
       };
 
       // Requête JSONP résiliente
@@ -796,7 +765,7 @@
         }
       }
 
-      function extractParticipantId(input) {
+      function extractId(input) {
         if (!input) return null;
         const str = input.trim();
         const match = str.match(/participant\/(\d+)/i) || 
@@ -805,125 +774,150 @@
         return match ? match[1] : str;
       }
 
-      // Charge les infos du participant et de son équipe réelle
-      async function loadProfile(rawInput, isAutoRestore = false) {
-        const idOrSlug = extractParticipantId(rawInput);
+      async function detectStreamerInfo(idOrSlug) {
         if (!idOrSlug) return;
-
-        elements.btnLookup.disabled = true;
-        elements.btnLookup.textContent = "⏳...";
+        elements.btnDetect.disabled = true;
+        elements.btnDetect.textContent = '⏳ Recherche...';
 
         try {
-          const participant = await fetchWithFallback(`https://dd.extra-life.org/api/participants/${idOrSlug}`);
-          if (participant && typeof participant.fundraisingGoal !== 'undefined') {
-            const numericId = String(participant.participantID || idOrSlug);
+          const data = await fetchWithFallback(`https://dd.extra-life.org/api/participants/${idOrSlug}`);
+          if (data && typeof data.fundraisingGoal !== 'undefined') {
+            const numericId = String(data.participantID || idOrSlug);
+            detectedParticipant = {
+              participantID: numericId,
+              displayName: data.displayName || 'Streamer',
+              sumDonations: data.sumDonations || 0,
+              fundraisingGoal: data.fundraisingGoal || 1000,
+              avatarImageURL: data.avatarImageURL || '',
+              teamID: data.teamID || null,
+              teamName: data.teamName || null,
+              numMilestones: data.numMilestones || 0
+            };
 
-            let teamData = null;
-            if (participant.teamID) {
+            // Charger l'avatar d'équipe si présent
+            if (data.teamID) {
               try {
-                teamData = await fetchWithFallback(`https://dd.extra-life.org/api/teams/${participant.teamID}`);
-              } catch (e) {
-                console.warn('Impossible de charger les détails de l’équipe:', e);
-              }
+                const teamData = await fetchWithFallback(`https://dd.extra-life.org/api/teams/${data.teamID}`);
+                if (teamData && teamData.avatarImageURL) {
+                  detectedParticipant.teamAvatar = teamData.avatarImageURL;
+                }
+                if (teamData && teamData.name) {
+                  detectedParticipant.teamName = teamData.name;
+                }
+              } catch (e) {}
             }
 
-            // Met à jour l'affichage avec l'équipe et le streamer réels
-            applyProfileData(participant, teamData, numericId);
-
-            // Mémorise l'ID
-            try {
-              localStorage.setItem('oes_streamer_input', numericId);
-            } catch (e) {}
-
-          } else if (!isAutoRestore) {
-            alert("Participant introuvable sur Extra Life. Veuillez vérifier votre ID ou lien.");
+            renderProfile();
+            saveStreamerMemory();
+          } else {
+            alert('Participant introuvable sur Extra Life (vérifiez le lien ou l’ID).');
           }
         } catch (err) {
-          console.warn('Erreur chargement profil:', err);
-          if (!isAutoRestore) {
-            alert("Impossible de joindre l'API Extra Life pour le moment.");
-          }
+          console.warn('Erreur chargement participant:', err);
+          alert('Impossible de contacter l’API Extra Life pour le moment.');
         } finally {
-          elements.btnLookup.disabled = false;
-          elements.btnLookup.textContent = "🔍 Charger";
+          elements.btnDetect.disabled = false;
+          elements.btnDetect.textContent = '🔍 Charger mes infos';
         }
       }
 
-      function applyProfileData(participant, team, numericId) {
-        const hasTeam = Boolean(team && team.name);
-        const teamName = hasTeam ? team.name : (participant.teamName || '');
-        const teamLogoUrl = (team && team.avatarImageURL) ? team.avatarImageURL : (participant.avatarImageURL || DEFAULT_LOGO_ICON);
+      // Rendu de la carte de profil identique à Kit Streamer
+      function renderProfile() {
+        if (!detectedParticipant) {
+          elements.profileCard.style.display = 'none';
+          if (elements.savedNotice) elements.savedNotice.style.display = 'none';
+          elements.pageHeroTitle.textContent = "Portail Créateurs & Streamers Extra Life";
+          if (elements.topNavBrandText) elements.topNavBrandText.textContent = "Portail Streamer Extra Life";
+          if (elements.topNavLogo) elements.topNavLogo.src = "assets/logo-extra-life-icon.svg";
+          return;
+        }
 
-        // Si une équipe existe, mettre à jour le titre et la barre de navigation
-        if (hasTeam || participant.teamName) {
-          elements.pageHeroTitle.textContent = teamName;
-          elements.pageHeroSubtitle.textContent = `Équipe Extra Life • Campagne de ${participant.displayName || 'Streamer'}`;
-          if (elements.topNavBrandText) elements.topNavBrandText.textContent = teamName;
-          if (elements.topNavLogo && teamLogoUrl) {
-            elements.topNavLogo.src = teamLogoUrl;
+        elements.profileCard.style.display = 'flex';
+        if (elements.savedNotice) elements.savedNotice.style.display = 'flex';
+
+        elements.profileName.textContent = detectedParticipant.displayName;
+        elements.profileAvatar.src = detectedParticipant.avatarImageURL || 'https://via.placeholder.com/60/0C1829/1C9ED6?text=EL';
+        elements.badgeTotal.textContent = `Total : ${detectedParticipant.sumDonations.toFixed(2)} $ USD`;
+        elements.badgeGoal.textContent = `Objectif : ${detectedParticipant.fundraisingGoal.toFixed(0)} $ USD`;
+
+        if (detectedParticipant.teamID && detectedParticipant.teamName) {
+          elements.badgeTeam.textContent = `Équipe : ${detectedParticipant.teamName}`;
+          elements.badgeTeam.className = 'badge badge-gold';
+
+          // Mettre à jour titre et nav si connecté à une équipe
+          elements.pageHeroTitle.textContent = detectedParticipant.teamName;
+          if (elements.topNavBrandText) elements.topNavBrandText.textContent = detectedParticipant.teamName;
+          if (elements.topNavLogo && detectedParticipant.teamAvatar) {
+            elements.topNavLogo.src = detectedParticipant.teamAvatar;
           }
         } else {
-          elements.pageHeroTitle.textContent = participant.displayName || 'Streamer';
-          elements.pageHeroSubtitle.textContent = `Participant Solo • Campagne Extra Life`;
+          elements.badgeTeam.textContent = 'Participant Solo';
+          elements.badgeTeam.className = 'badge';
+          elements.pageHeroTitle.textContent = detectedParticipant.displayName;
+          if (elements.topNavBrandText) elements.topNavBrandText.textContent = "Portail Streamer Extra Life";
+          if (elements.topNavLogo) elements.topNavLogo.src = "assets/logo-extra-life-icon.svg";
         }
 
-        // Fiche profil détaillée
-        elements.entityName.textContent = participant.displayName || 'Streamer';
-        elements.entityImg.src = participant.avatarImageURL || teamLogoUrl;
-        elements.entityTag.textContent = hasTeam ? `🛡️ Équipe : ${teamName}` : `👤 Participant Solo`;
-
-        const sumUsd = Number(participant.sumDonations || 0).toLocaleString('fr-CA', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-        const goalUsd = Number(participant.fundraisingGoal || 0).toLocaleString('fr-CA', { maximumFractionDigits: 0 });
-
-        elements.profileSum.textContent = `${sumUsd} $ USD`;
-        elements.profileGoal.textContent = `${goalUsd} $ USD`;
-
-        // Lien direct vers le Kit Streamer
-        elements.btnOpenMyKit.href = `kit-streamer.html?participantID=${numericId}`;
-
-        // Affiche la carte profil
-        elements.dynamicCard.style.display = 'block';
-        elements.inputLookup.value = numericId;
+        elements.badgeMilestones.textContent = `${detectedParticipant.numMilestones} défi(s) / jalons`;
+        elements.btnOpenMyKit.href = `kit-streamer.html?participantID=${detectedParticipant.participantID}`;
       }
 
-      function resetDefaultView() {
-        elements.pageHeroTitle.textContent = DEFAULT_PORTAL_TITLE;
-        elements.pageHeroSubtitle.textContent = DEFAULT_PORTAL_SUBTITLE;
-        if (elements.topNavBrandText) elements.topNavBrandText.textContent = DEFAULT_PORTAL_BRAND;
-        if (elements.topNavLogo) elements.topNavLogo.src = DEFAULT_LOGO_ICON;
-
-        elements.dynamicCard.style.display = 'none';
-        elements.inputLookup.value = '';
-
+      function saveStreamerMemory() {
         try {
-          localStorage.removeItem('oes_streamer_input');
+          const val = elements.inputParticipant.value.trim();
+          if (val) {
+            localStorage.setItem('oes_streamer_input', val);
+          }
         } catch (e) {}
       }
 
+      function forgetStreamerMemory() {
+        try {
+          localStorage.removeItem('oes_streamer_input');
+        } catch (e) {}
+        detectedParticipant = null;
+        elements.inputParticipant.value = '';
+        renderProfile();
+      }
+
+      function restoreSavedStreamer() {
+        try {
+          const savedInput = localStorage.getItem('oes_streamer_input');
+          if (savedInput) {
+            elements.inputParticipant.value = savedInput;
+            const rawId = extractId(savedInput);
+            if (rawId) {
+              detectStreamerInfo(rawId);
+              return true;
+            }
+          }
+        } catch (e) {}
+        return false;
+      }
+
       // Événements
-      elements.btnLookup.addEventListener('click', () => {
-        loadProfile(elements.inputLookup.value);
+      elements.btnDetect.addEventListener('click', () => {
+        const rawId = extractId(elements.inputParticipant.value);
+        if (rawId) {
+          detectStreamerInfo(rawId);
+        } else {
+          alert('Veuillez entrer un ID de participant ou lien Extra Life.');
+        }
       });
 
-      elements.inputLookup.addEventListener('keydown', (e) => {
+      elements.inputParticipant.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
           e.preventDefault();
-          loadProfile(elements.inputLookup.value);
+          elements.btnDetect.click();
         }
       });
 
-      elements.btnReset.addEventListener('click', () => {
-        resetDefaultView();
+      elements.btnForget.addEventListener('click', () => {
+        forgetStreamerMemory();
       });
 
-      // Restauration automatique uniquement si l'utilisateur avait déjà renseigné son profil
-      try {
-        const savedInput = localStorage.getItem('oes_streamer_input');
-        if (savedInput) {
-          elements.inputLookup.value = savedInput;
-          loadProfile(savedInput, true);
-        }
-      } catch (e) {}
+      // Restauration automatique si profil déjà saisi
+      restoreSavedStreamer();
 
     })();
   </script>
