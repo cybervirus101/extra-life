@@ -39,7 +39,7 @@ Boîte à outils complète pour streamers Twitch et YouTube afin d'afficher leur
 ### Méthode Web (Recommandée — Zéro installation)
 
 1. Ouvrez le configurateur web :  
-   👉 **`https://cybervirus101.github.io/extra-life/`**
+   👉 **`https://cybervirus101.github.io/extra-life/kit-streamer.html`** (ou `/KitStreameur`)
 2. Entrez votre ID de participant Extra Life et personnalisez vos options.
 3. Copiez les liens générés et collez-les dans OBS en ajoutant des **Sources Navigateur (Browser Source)** :
 
@@ -69,8 +69,10 @@ Boîte à outils complète pour streamers Twitch et YouTube afin d'afficher leur
 
 ```text
 overlay-enfant-soleil/
-├── index.html                             # Configurateur web & hub streamer (Page d'accueil)
+├── index.html                             # Portail d'accueil officiel (Accueil, Inscription & Kit)
 ├── guide.html                             # Guide complet d'inscription (Les alliés du soleil)
+├── kit-streamer.html                      # Configurateur web & Kit Streamer (Overlays, Alertes OBS, Twitch)
+├── KitStreameur.html                      # Redirection d'alias vers kit-streamer.html
 ├── rejoindre.html                         # Redirection permanente vers l'inscription Extra Life FR
 ├── overlay.html                           # Overlay barre de progression OBS
 ├── alert.html                             # Source alerte pop-up de don OBS (audio + visuel)

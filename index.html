@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kit Streamer Extra Life — Overlays & Alertes OBS (Enfant Soleil)</title>
+  <title>Accueil — Les alliés du soleil (Extra Life & Opération Enfant Soleil)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
@@ -26,7 +26,7 @@
       --el-text-sub: #D3E7F8;
       --el-text-dim: #99C3E6;
 
-      /* Enfant Soleil (Palette partenaire) */
+      /* Enfant Soleil */
       --es-jaune-soleil: #FFD000;
       --es-rouge-sante: #F15029;
       --font-main: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -43,7 +43,7 @@
       background: var(--el-navy-bg);
       color: var(--el-text-main);
       font-family: var(--font-main);
-      line-height: 1.5;
+      line-height: 1.6;
       padding: 12px 24px 80px 24px;
       background-image: 
         radial-gradient(circle at 50% -10%, rgba(34, 178, 242, 0.22) 0%, transparent 55%),
@@ -53,791 +53,11 @@
 
     .container {
       width: 100%;
-      max-width: min(1600px, 95vw);
+      max-width: min(1200px, 95vw);
       margin: 0 auto;
     }
 
-    /* En-tête officiel Extra Life */
-    .header {
-      background: linear-gradient(180deg, #244570 0%, #1A3456 100%);
-      border-radius: var(--radius);
-      border: 3px solid var(--el-cyan);
-      padding: 40px 24px;
-      text-align: center;
-      margin-bottom: 30px;
-      box-shadow: 0 12px 40px rgba(10, 25, 47, 0.4), 0 0 35px rgba(34, 178, 242, 0.3);
-    }
-
-    .header-logos {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-      margin-bottom: 22px;
-    }
-
-    .hero-logo-el {
-      height: 135px;
-      max-height: 150px;
-      max-width: 90%;
-      width: auto;
-      display: block;
-      filter: drop-shadow(0 6px 24px rgba(28, 158, 214, 0.65));
-      transition: transform 0.3s ease;
-    }
-
-    .header h1 {
-      font-size: 32px;
-      font-weight: 900;
-      color: #FFFFFF;
-      margin-bottom: 10px;
-      letter-spacing: 0.5px;
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-    }
-
-    .header p {
-      font-size: 16.5px;
-      color: var(--el-text-sub);
-      max-width: 780px;
-      margin: 0 auto;
-    }
-
-    /* Cartes d'étapes */
-    .step-card {
-      background: var(--el-navy-card);
-      border-radius: var(--radius);
-      border: 2px solid var(--el-navy-card-border);
-      padding: 26px;
-      margin-bottom: 24px;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
-      transition: all 0.3s ease;
-    }
-
-    .step-card:hover {
-      border-color: var(--el-cyan);
-      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.6), 0 0 20px rgba(28, 158, 214, 0.2);
-    }
-
-    .step-title {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 20px;
-      font-weight: 800;
-      color: #FFFFFF;
-      margin-bottom: 16px;
-    }
-
-    .step-number {
-      background: linear-gradient(135deg, var(--el-cyan) 0%, var(--el-bleu-cmn) 100%);
-      color: #FFFFFF;
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 15px;
-      font-weight: 900;
-      flex-shrink: 0;
-      box-shadow: 0 2px 10px rgba(28, 158, 214, 0.5);
-    }
-
-    .step-instruction {
-      margin-bottom: 14px;
-      font-size: 14px;
-      color: var(--el-text-sub);
-    }
-
-    /* Formulaire & Recherche */
-    .input-group {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 16px;
-    }
-
-    .input-field {
-      flex: 1;
-      font-family: inherit;
-      font-size: 16px;
-      font-weight: 600;
-      padding: 12px 18px;
-      border: 2px solid rgba(28, 158, 214, 0.4);
-      border-radius: 12px;
-      background: var(--el-navy-input);
-      color: #FFFFFF;
-      transition: all 0.2s ease;
-    }
-
-    .input-field:focus {
-      outline: none;
-      border-color: var(--el-cyan);
-      box-shadow: 0 0 0 3px rgba(28, 158, 214, 0.3);
-    }
-
-    .input-field::placeholder {
-      color: var(--el-text-dim);
-    }
-
-    .btn {
-      font-family: inherit;
-      font-size: 15px;
-      font-weight: 800;
-      padding: 12px 22px;
-      border-radius: 12px;
-      border: none;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      transition: all 0.2s ease;
-      white-space: nowrap;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--el-cyan) 0%, var(--el-bleu-cmn) 100%);
-      color: #FFFFFF;
-      box-shadow: 0 4px 16px rgba(28, 158, 214, 0.4);
-    }
-
-    .btn-primary:hover {
-      background: linear-gradient(135deg, var(--el-cyan-light) 0%, var(--el-cyan) 100%);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 22px rgba(28, 158, 214, 0.6);
-    }
-
-    .btn-secondary {
-      background: var(--el-vert-manette);
-      color: #FFFFFF;
-      box-shadow: 0 4px 14px rgba(98, 175, 15, 0.35);
-    }
-
-    .btn-secondary:hover {
-      background: var(--el-vert-hover);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(98, 175, 15, 0.55);
-    }
-
-    .btn-outline {
-      background: transparent;
-      border: 2px solid var(--el-cyan);
-      color: var(--el-cyan);
-    }
-
-    .btn-outline:hover {
-      background: var(--el-cyan);
-      color: #0A1424;
-      transform: translateY(-2px);
-    }
-
-    .btn-test {
-      background: linear-gradient(135deg, #FF4B1F 0%, #FF9000 50%, #FFB300 100%);
-      color: #FFFFFF;
-      font-weight: 800;
-      letter-spacing: 0.3px;
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      box-shadow: 0 4px 18px rgba(255, 75, 31, 0.45), 0 0 12px rgba(255, 160, 0, 0.35);
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
-    }
-
-    .btn-test:hover {
-      background: linear-gradient(135deg, #FF5E36 0%, #FFA726 50%, #FFC107 100%);
-      transform: translateY(-2px) scale(1.02);
-      box-shadow: 0 6px 24px rgba(255, 75, 31, 0.65), 0 0 20px rgba(255, 175, 0, 0.55);
-    }
-
-    .btn-test:active {
-      transform: translateY(0px) scale(0.98);
-      box-shadow: 0 2px 10px rgba(255, 75, 31, 0.5);
-    }
-
-    /* Carte de profil détectée */
-    .profile-card {
-      display: none;
-      background: var(--el-navy-input);
-      border: 2px solid var(--el-cyan);
-      border-radius: 14px;
-      padding: 16px;
-      margin-top: 16px;
-      gap: 16px;
-      align-items: center;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-    }
-
-    .profile-avatar {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      border: 3px solid var(--el-cyan);
-      object-fit: cover;
-    }
-
-    .profile-info h3 {
-      font-size: 18px;
-      font-weight: 800;
-      color: #FFFFFF;
-    }
-
-    .profile-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 6px;
-    }
-
-    .badge {
-      display: inline-block;
-      font-size: 12px;
-      font-weight: 700;
-      padding: 3px 10px;
-      border-radius: 20px;
-      background: rgba(28, 158, 214, 0.15);
-      color: var(--el-cyan-light);
-      border: 1px solid rgba(28, 158, 214, 0.3);
-    }
-
-    .badge-gold {
-      background: rgba(255, 208, 0, 0.22);
-      color: #FFD000;
-      border: 1.5px solid #FFD000;
-      font-weight: 800;
-      box-shadow: 0 0 12px rgba(255, 208, 0, 0.3);
-    }
-
-    .tag-gold {
-      display: inline-block;
-      background: rgba(255, 208, 0, 0.22);
-      border: 1.5px solid #FFD000;
-      color: #FFD000;
-      font-weight: 800;
-      padding: 3px 10px;
-      border-radius: 6px;
-      box-shadow: 0 0 12px rgba(255, 208, 0, 0.3);
-    }
-
-    .badge-red {
-      background: rgba(98, 175, 15, 0.2);
-      color: #8CDE35;
-      border-color: rgba(98, 175, 15, 0.4);
-    }
-
-    /* Grille d'options */
-    .options-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 16px;
-      margin-top: 14px;
-    }
-
-    .option-box {
-      background: var(--el-navy-input);
-      border: 1.5px solid var(--el-navy-card-border);
-      border-radius: 12px;
-      padding: 14px;
-    }
-
-    .option-box label {
-      display: block;
-      font-size: 13px;
-      font-weight: 800;
-      color: var(--el-text-sub);
-      margin-bottom: 8px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .option-select {
-      width: 100%;
-      font-family: inherit;
-      font-size: 14.5px;
-      font-weight: 700;
-      padding: 9px 12px;
-      border-radius: 8px;
-      border: 2px solid rgba(56, 189, 248, 0.45);
-      background: #172F4F;
-      color: #FFFFFF;
-    }
-
-    .option-select optgroup {
-      background: #172F4F;
-      color: var(--el-cyan-light);
-      font-weight: 800;
-    }
-
-    .option-select option {
-      background: #172F4F;
-      color: #FFFFFF;
-      font-weight: 600;
-    }
-
-    /* Stepper d'incrément/décrément */
-    .stepper-group {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: #172F4F;
-      border: 2px solid rgba(56, 189, 248, 0.45);
-      border-radius: 8px;
-      padding: 4px;
-      gap: 6px;
-    }
-
-    .btn-stepper {
-      background: var(--el-cyan);
-      color: #FFFFFF;
-      border: none;
-      border-radius: 6px;
-      width: 38px;
-      height: 34px;
-      font-size: 20px;
-      font-weight: 900;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.15s ease;
-      user-select: none;
-    }
-
-    .btn-stepper:hover {
-      background: var(--el-bleu-cmn);
-      transform: scale(1.05);
-    }
-
-    .stepper-input-wrapper {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      flex: 1;
-    }
-
-    .stepper-input {
-      width: 58px;
-      padding: 5px 4px;
-      border: 1px solid rgba(28, 158, 214, 0.5);
-      border-radius: 6px;
-      text-align: center;
-      font-family: inherit;
-      font-size: 15px;
-      font-weight: 800;
-      color: #FFFFFF;
-      background: var(--el-navy-input);
-      -moz-appearance: textfield;
-    }
-
-    .stepper-input::-webkit-outer-spin-button,
-    .stepper-input::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-
-    .stepper-input:focus {
-      outline: none;
-      border-color: var(--el-cyan);
-      box-shadow: 0 0 0 2px rgba(28, 158, 214, 0.3);
-    }
-
-    .stepper-unit {
-      font-size: 13.5px;
-      font-weight: 700;
-      color: var(--el-text-sub);
-    }
-
-    /* Boîte de palette de thème personnalisé */
-    .custom-palette-box {
-      margin-top: 20px;
-      background: var(--el-navy-input);
-      border: 2px solid var(--el-cyan);
-      border-radius: 14px;
-      padding: 18px 20px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-      animation: fadeIn 0.3s ease;
-    }
-
-    .custom-palette-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 8px;
-    }
-
-    .custom-palette-title {
-      font-size: 15px;
-      font-weight: 800;
-      color: #FFFFFF;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .btn-palette-reset {
-      background: transparent;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      color: var(--el-text-sub);
-      font-family: inherit;
-      font-size: 12px;
-      font-weight: 600;
-      padding: 4px 10px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .btn-palette-reset:hover {
-      border-color: var(--el-cyan);
-      color: #FFFFFF;
-      background: rgba(28, 158, 214, 0.2);
-    }
-
-    .custom-palette-desc {
-      font-size: 13px;
-      color: var(--el-text-sub);
-      margin-bottom: 16px;
-      line-height: 1.4;
-    }
-
-    .palette-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 14px;
-    }
-
-    .color-picker-item {
-      background: rgba(10, 20, 36, 0.6);
-      border: 1px solid rgba(28, 158, 214, 0.3);
-      border-radius: 10px;
-      padding: 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      box-sizing: border-box;
-      min-width: 0;
-      overflow: hidden;
-    }
-
-    .color-picker-item label {
-      font-size: 13px;
-      font-weight: 700;
-      color: #FFFFFF;
-    }
-
-    .color-picker-wrapper {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      width: 100%;
-      box-sizing: border-box;
-      min-width: 0;
-    }
-
-    .color-btn-trigger {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 0 4px;
-      margin: 0;
-      flex: 1 1 0;
-      width: 0;
-      min-width: 0;
-      height: 38px;
-      background: rgba(14, 27, 45, 0.95);
-      border: 1.5px solid var(--el-navy-card-border);
-      border-radius: 8px;
-      cursor: pointer;
-      user-select: none;
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
-      overflow: hidden;
-      box-sizing: border-box;
-    }
-
-    .color-btn-trigger:hover {
-      border-color: var(--el-cyan);
-      background: rgba(28, 158, 214, 0.18);
-      box-shadow: 0 0 10px rgba(28, 158, 214, 0.35);
-      transform: translateY(-1px);
-    }
-
-    .color-btn-trigger:active {
-      transform: translateY(0);
-    }
-
-    .color-btn-swatch {
-      width: 22px;
-      height: 22px;
-      margin: 0;
-      border-radius: 6px;
-      border: 1.5px solid rgba(255, 255, 255, 0.5);
-      flex-shrink: 0;
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
-      transition: background-color 0.15s ease;
-      box-sizing: border-box;
-    }
-
-    .color-btn-icon {
-      font-size: 18px;
-      line-height: 1;
-      margin: 0;
-      padding: 0;
-      flex-shrink: 0;
-      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
-    }
-
-    /* L'input natif recouvre tout le bouton pour déclencher instantanément le sélecteur natif au clic */
-    .color-btn-trigger .color-input {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      cursor: pointer;
-      border: none;
-      padding: 0;
-      margin: 0;
-      box-sizing: border-box;
-    }
-
-    .hex-input {
-      flex: 1 1 0;
-      width: 0;
-      min-width: 0;
-      height: 38px;
-      text-align: center;
-      font-family: 'Consolas', 'Monaco', monospace;
-      font-size: 13px;
-      font-weight: 700;
-      padding: 0 4px;
-      margin: 0;
-      background: var(--el-navy-bg);
-      border: 1.5px solid var(--el-navy-card-border);
-      border-radius: 8px;
-      color: #FFFFFF;
-      text-transform: uppercase;
-      transition: border-color 0.2s ease;
-      box-sizing: border-box;
-    }
-
-    .hex-input:focus {
-      outline: none;
-      border-color: var(--el-cyan);
-    }
-
-    .custom-url-input {
-      width: 100%;
-      height: 40px;
-      padding: 8px 12px;
-      font-size: 13.5px;
-      font-family: inherit;
-      background: var(--el-navy-bg);
-      border: 1.5px solid var(--el-navy-card-border);
-      border-radius: 8px;
-      color: #FFFFFF;
-      box-sizing: border-box;
-      outline: none;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .custom-url-input:focus {
-      border-color: var(--el-cyan);
-      box-shadow: 0 0 10px rgba(28, 158, 214, 0.35);
-    }
-
-    .custom-url-input::placeholder {
-      color: rgba(255, 255, 255, 0.4);
-      font-size: 13px;
-    }
-
-    #custom-logo-url-box {
-      grid-column: 1 / -1;
-    }
-
-    .color-role-hint {
-      font-size: 11.5px;
-      color: var(--el-text-dim);
-      line-height: 1.3;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-6px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Liens OBS prêts */
-    .obs-card {
-      background: var(--el-navy-input);
-      border: 2px solid var(--el-cyan);
-      border-radius: 14px;
-      padding: 18px;
-      margin-bottom: 18px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
-    }
-
-    .obs-card-header {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      margin-bottom: 10px;
-    }
-
-    .obs-card-title {
-      font-size: 17px;
-      font-weight: 800;
-      color: #FFFFFF;
-    }
-
-    /* Hiérarchie résolutions : Recommandé en grand et clair, limites discrètes en dessous */
-    .obs-rec-box {
-      display: inline-block;
-      font-size: 14.5px;
-      font-weight: 800;
-      color: #FFFFFF;
-      background: rgba(28, 158, 214, 0.2);
-      border: 1.5px solid var(--el-cyan);
-      padding: 7px 14px;
-      border-radius: 8px;
-      width: fit-content;
-      margin: 4px 0 2px 0;
-      box-shadow: 0 0 14px rgba(28, 158, 214, 0.3);
-    }
-
-    .obs-rec-box strong {
-      color: #5BE6FF;
-    }
-
-    .obs-dims-limits {
-      font-size: 12px;
-      color: var(--el-text-dim);
-      margin-top: 2px;
-      margin-bottom: 4px;
-      font-style: italic;
-    }
-
-    .obs-formats-detail {
-      font-size: 13px;
-      color: var(--el-text-sub);
-      margin-top: 4px;
-      line-height: 1.45;
-    }
-
-    .url-row {
-      display: flex;
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    .url-input {
-      flex: 1;
-      font-family: monospace;
-      font-size: 13.5px;
-      padding: 10px 14px;
-      border: 1.5px solid rgba(56, 189, 248, 0.5);
-      border-radius: 10px;
-      background: #11233B;
-      color: #88DBFF;
-    }
-
-    /* Simulateur */
-    .simulator-box {
-      background: linear-gradient(135deg, rgba(255, 120, 0, 0.12) 0%, rgba(34, 178, 242, 0.12) 100%);
-      border: 2px dashed rgba(255, 140, 0, 0.55);
-      border-radius: 14px;
-      padding: 18px;
-      margin-top: 16px;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .simulator-info {
-      font-size: 14px;
-      font-weight: 700;
-      color: #FFFFFF;
-    }
-
-    .simulator-actions {
-      display: flex;
-      gap: 10px;
-    }
-
-    /* Bloc de texte Markdown */
-    .code-block {
-      position: relative;
-      background: #11233B;
-      color: #F0F7FD;
-      border: 2px solid rgba(56, 189, 248, 0.45);
-      font-family: inherit;
-      font-size: 14px;
-      line-height: 1.6;
-      padding: 18px 20px;
-      border-radius: 12px;
-      white-space: pre-wrap;
-      word-break: break-word;
-      max-height: 250px;
-      overflow-y: auto;
-      margin-top: 10px;
-      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.35);
-    }
-
-    .btn-copy-code {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      padding: 8px 16px;
-      font-size: 13px;
-    }
-
-    /* Aperçu de la bannière Twitch */
-    .twitch-banner-preview {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 20px;
-      margin-top: 14px;
-      background: var(--el-navy-input);
-      padding: 18px;
-      border-radius: 12px;
-      border: 2px solid var(--el-navy-card-border);
-    }
-
-    .twitch-canvas {
-      border: 1px solid rgba(28, 158, 214, 0.4);
-      border-radius: 8px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
-      max-width: 100%;
-      height: auto;
-    }
-
-    .toast {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      background: #172F4F;
-      color: var(--el-cyan-light);
-      border: 2px solid var(--el-cyan);
-      padding: 12px 24px;
-      border-radius: 10px;
-      font-size: 14px;
-      font-weight: 800;
-      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5), 0 0 15px rgba(34, 178, 242, 0.4);
-      display: none;
-      z-index: 9999;
-      animation: toastIn 0.3s ease;
-    }
-
-    @keyframes toastIn {
-      from { transform: translateY(20px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-
-    /* Barre de navigation principale en onglets bien évidents */
+    /* Barre de navigation principale */
     .top-nav {
       display: flex;
       justify-content: space-between;
@@ -847,7 +67,7 @@
       padding: 8px 18px;
       border-radius: 16px;
       margin-top: 0;
-      margin-bottom: 14px;
+      margin-bottom: 18px;
       gap: 16px;
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
       flex-wrap: wrap;
@@ -910,14 +130,324 @@
       box-shadow: 0 4px 16px rgba(28, 158, 214, 0.45);
     }
 
+    /* En-tête Hero */
+    .header {
+      background: linear-gradient(180deg, #244570 0%, #1A3456 100%);
+      border-radius: var(--radius);
+      border: 3px solid var(--el-cyan);
+      padding: 42px 24px;
+      text-align: center;
+      margin-bottom: 30px;
+      box-shadow: 0 12px 40px rgba(10, 25, 47, 0.4), 0 0 35px rgba(34, 178, 242, 0.3);
+    }
+
+    .header-logos {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .hero-logo-el {
+      height: 120px;
+      max-height: 140px;
+      max-width: 90%;
+      width: auto;
+      display: block;
+      filter: drop-shadow(0 6px 24px rgba(28, 158, 214, 0.65));
+    }
+
+    .header h1 {
+      font-size: 34px;
+      font-weight: 900;
+      color: #FFFFFF;
+      margin-bottom: 12px;
+      letter-spacing: 0.5px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .header-subtitle {
+      font-size: 20px;
+      font-weight: 800;
+      color: #FFD000;
+      margin-bottom: 14px;
+      text-shadow: 0 0 12px rgba(255, 208, 0, 0.3);
+    }
+
+    .header p {
+      font-size: 16.5px;
+      color: var(--el-text-sub);
+      max-width: 820px;
+      margin: 0 auto 20px auto;
+    }
+
+    /* Badges d'impact */
+    .impact-badges {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .impact-badge {
+      background: rgba(8, 18, 32, 0.7);
+      border: 1.5px solid var(--el-navy-card-border);
+      border-radius: 30px;
+      padding: 8px 18px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--el-text-sub);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    }
+
+    .impact-badge strong {
+      color: #FFFFFF;
+    }
+
+    /* Cartes des 2 grandes étapes */
+    .portal-section {
+      display: flex;
+      flex-direction: column;
+      gap: 26px;
+      margin-bottom: 30px;
+    }
+
+    .portal-card {
+      background: var(--el-navy-card);
+      border-radius: var(--radius);
+      border: 2px solid var(--el-navy-card-border);
+      padding: 32px 28px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .portal-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 6px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--el-cyan) 0%, var(--el-bleu-cmn) 100%);
+    }
+
+    .portal-card.card-kit::before {
+      background: linear-gradient(180deg, var(--el-vert-manette) 0%, #3F8005 100%);
+    }
+
+    .portal-card:hover {
+      border-color: var(--el-cyan);
+      transform: translateY(-2px);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(28, 158, 214, 0.25);
+    }
+
+    .portal-card.card-kit:hover {
+      border-color: var(--el-vert-manette);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(98, 175, 15, 0.25);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .step-number {
+      background: linear-gradient(135deg, var(--el-cyan) 0%, var(--el-bleu-cmn) 100%);
+      color: #FFFFFF;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: 900;
+      flex-shrink: 0;
+      box-shadow: 0 4px 14px rgba(28, 158, 214, 0.5);
+    }
+
+    .card-kit .step-number {
+      background: linear-gradient(135deg, var(--el-vert-manette) 0%, #468606 100%);
+      box-shadow: 0 4px 14px rgba(98, 175, 15, 0.5);
+    }
+
+    .card-title-group h2 {
+      font-size: 24px;
+      font-weight: 900;
+      color: #FFFFFF;
+      margin-bottom: 4px;
+    }
+
+    .card-title-group .card-tagline {
+      font-size: 14.5px;
+      color: var(--el-cyan-light);
+      font-weight: 700;
+    }
+
+    .card-kit .card-title-group .card-tagline {
+      color: #A3E635;
+    }
+
+    .card-description {
+      font-size: 15.5px;
+      color: var(--el-text-sub);
+      margin-bottom: 22px;
+      line-height: 1.6;
+    }
+
+    /* Grille d'avantages */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+      margin-bottom: 26px;
+    }
+
+    .feature-item {
+      background: var(--el-navy-input);
+      border: 1.5px solid rgba(28, 158, 214, 0.3);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .feature-icon {
+      font-size: 22px;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .feature-text strong {
+      display: block;
+      color: #FFFFFF;
+      font-size: 14.5px;
+      margin-bottom: 3px;
+    }
+
+    .feature-text span {
+      font-size: 13px;
+      color: var(--el-text-dim);
+      line-height: 1.4;
+      display: block;
+    }
+
+    /* Boutons et actions */
+    .card-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .btn {
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 800;
+      padding: 12px 24px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--el-cyan) 0%, var(--el-bleu-cmn) 100%);
+      color: #FFFFFF;
+      box-shadow: 0 4px 16px rgba(28, 158, 214, 0.4);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, var(--el-cyan-light) 0%, var(--el-cyan) 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(28, 158, 214, 0.65);
+    }
+
+    .btn-secondary {
+      background: linear-gradient(135deg, var(--el-vert-manette) 0%, #478907 100%);
+      color: #FFFFFF;
+      box-shadow: 0 4px 14px rgba(98, 175, 15, 0.4);
+    }
+
+    .btn-secondary:hover {
+      background: linear-gradient(135deg, #74C816 0%, var(--el-vert-manette) 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 22px rgba(98, 175, 15, 0.6);
+    }
+
+    .btn-outline {
+      background: rgba(28, 158, 214, 0.1);
+      border: 2px solid var(--el-cyan);
+      color: var(--el-cyan-light);
+    }
+
+    .btn-outline:hover {
+      background: rgba(28, 158, 214, 0.25);
+      color: #FFFFFF;
+      transform: translateY(-2px);
+    }
+
+    /* Boîte d'aide et pied de page */
+    .help-banner {
+      background: linear-gradient(180deg, #162840 0%, #0D1A2A 100%);
+      border: 2px solid rgba(255, 208, 0, 0.35);
+      border-radius: var(--radius);
+      padding: 24px;
+      text-align: center;
+      margin-bottom: 24px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .help-banner h3 {
+      color: #FFD000;
+      font-size: 19px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .help-banner p {
+      font-size: 14.5px;
+      color: var(--el-text-sub);
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 24px 0 10px 0;
+      color: var(--el-text-dim);
+      font-size: 13.5px;
+      border-top: 1px solid rgba(28, 158, 214, 0.2);
+    }
+
     @media (max-width: 768px) {
-      .header { padding: 26px 16px; }
+      .header h1 { font-size: 26px; }
+      .header { padding: 28px 16px; }
       .hero-logo-el { height: 95px; }
-      .header h1 { font-size: 24px; }
       .top-nav { flex-direction: column; align-items: stretch; gap: 12px; }
       .nav-brand { font-size: 20px; justify-content: center; }
       .nav-brand img { height: 36px; }
       .nav-tabs { justify-content: center; width: 100%; }
+      .card-actions { flex-direction: column; align-items: stretch; }
+      .btn { width: 100%; }
     }
   </style>
 </head>
@@ -927,1177 +457,191 @@
 
     <!-- Barre de navigation principale en onglets bien évidents -->
     <nav class="top-nav">
-      <a href="guide.html" class="nav-brand">
+      <a href="index.html" class="nav-brand">
         <img src="assets/logo-extra-life-icon.svg" alt="Extra Life">
         <span>Les alliés du soleil</span>
       </a>
       <div class="nav-tabs">
-        <a href="guide.html" class="nav-tab">
-          <span>📖 Guide d'installation</span>
-        </a>
         <a href="index.html" class="nav-tab active">
-          <span>🎮 Kit Overlays & Alertes OBS</span>
+          <span>🏠 Accueil</span>
+        </a>
+        <a href="guide.html" class="nav-tab">
+          <span>📖 Inscription & Guide</span>
+        </a>
+        <a href="kit-streamer.html" class="nav-tab">
+          <span>🎮 Kit Streamer</span>
         </a>
       </div>
     </nav>
 
-    <!-- En-tête officiel Extra Life -->
+    <!-- En-tête Hero -->
     <header class="header">
       <div class="header-logos">
         <img class="hero-logo-el" src="assets/logo-extra-life-white.svg" alt="Extra Life">
       </div>
-      <h1>🎮 Kit Streamer Extra Life</h1>
-      <p>Configurez votre overlay OBS, vos alertes en direct et vos panneaux Twitch en 30 secondes sans aucune installation.</p>
+      <h1>☀️ Les alliés du soleil</h1>
+      <div class="header-subtitle">Jouer pour guérir au profit d'Opération Enfant Soleil</div>
+      <p>
+        Bienvenue sur le portail officiel de notre équipe de créateurs et streamers Extra Life. 
+        Rejoignez notre mouvement, personnalisez vos outils de diffusion et collectez des fonds pour financer une pédiatrie de pointe pour tous les enfants malades du Québec !
+      </p>
+
+      <div class="impact-badges">
+        <div class="impact-badge">
+          <span>💛</span>
+          <span><strong>100 % au Québec :</strong> Soins et équipements pédiatriques</span>
+        </div>
+        <div class="impact-badge">
+          <span>🧾</span>
+          <span><strong>Reçu fiscal officiel :</strong> Émis automatiquement pour chaque don</span>
+        </div>
+        <div class="impact-badge">
+          <span>⚡</span>
+          <span><strong>Prêt en 5 minutes :</strong> Inscription guidée et outils OBS automatisés</span>
+        </div>
+      </div>
     </header>
 
-    <!-- Étape 1 : Saisie de l'ID Extra Life -->
-    <section class="step-card">
-      <div class="step-title">
-        <span class="step-number">1</span>
-        <span>Votre page Extra Life</span>
-      </div>
-      <p class="step-instruction">
-        Entrez votre <strong>ID de participant</strong> ou collez le lien direct de votre page Extra Life :
+    <!-- Section des 2 grandes étapes -->
+    <main class="portal-section">
+
+      <!-- Étape 1 : Inscription & Guide -->
+      <section class="portal-card">
+        <div class="card-top">
+          <div class="step-number">1</div>
+          <div class="card-title-group">
+            <h2>Étape 1 : Inscription & Guide de l'équipe</h2>
+            <div class="card-tagline">Rejoindre « Les alliés du soleil » sur Extra Life</div>
+          </div>
+        </div>
+
+        <p class="card-description">
+          Avant de lancer votre diffusion caritative, créez votre profil de collecte sur Extra Life. 
+          Notre guide pas à pas vous accompagne pour rejoindre l'équipe officielle et vous assurer que 100 % de vos dons sont bien acheminés à Opération Enfant Soleil.
+        </p>
+
+        <div class="features-grid">
+          <div class="feature-item">
+            <div class="feature-icon">📝</div>
+            <div class="feature-text">
+              <strong>Inscription Classic</strong>
+              <span>Gratuite, simple et sans aucun engagement financier.</span>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">👥</div>
+            <div class="feature-text">
+              <strong>Rejoindre l'équipe</strong>
+              <span>Sélectionnez directement <em>Les alliés du soleil</em>.</span>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">🏥</div>
+            <div class="feature-text">
+              <strong>Choix de l'hôpital</strong>
+              <span>Choisissez <em>Enfant Soleil</em> pour que les fonds restent au Québec.</span>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">🎯</div>
+            <div class="feature-text">
+              <strong>Objectif personnalisé</strong>
+              <span>Définissez votre cible (100 $, 250 $, 500 $... modifiable en tout temps).</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-actions">
+          <a href="guide.html" class="btn btn-primary">
+            <span>📖 Consulter le Guide d'inscription complet</span>
+            <span>➔</span>
+          </a>
+          <a href="rejoindre.html" target="_blank" class="btn btn-outline">
+            <span>🔗 Lien direct d'inscription Extra Life</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- Étape 2 : Le Kit Streamer -->
+      <section class="portal-card card-kit">
+        <div class="card-top">
+          <div class="step-number">2</div>
+          <div class="card-title-group">
+            <h2>Étape 2 : Le Kit Streamer (Overlays & Alertes OBS)</h2>
+            <div class="card-tagline">Préparez et dynamisez votre live en direct en 30 secondes</div>
+          </div>
+        </div>
+
+        <p class="card-description">
+          Une fois votre compte créé, utilisez notre configurateur interactif zéro-code : entrez simplement votre identifiant Extra Life 
+          pour générer vos sources navigateur OBS Studio / Streamlabs, vos bannières Twitch et vos commandes de clavardage !
+        </p>
+
+        <div class="features-grid">
+          <div class="feature-item">
+            <div class="feature-icon">📊</div>
+            <div class="feature-text">
+              <strong>Barre de progression OBS</strong>
+              <span>Conversion automatique USD ➔ CAD, alternance solo/équipe fluide.</span>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">🔔</div>
+            <div class="feature-text">
+              <strong>Alerte sonore Pop-up</strong>
+              <span>Animation festive avec jingle carillon Web Audio intégré (zéro fichier requis).</span>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">💜</div>
+            <div class="feature-text">
+              <strong>Panneaux & Extension Twitch</strong>
+              <span>Textes Markdown pré-remplis avec vos liens de don et intégration Twitch.</span>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">🤖</div>
+            <div class="feature-text">
+              <strong>Commandes pour Chatbots</strong>
+              <span>Textes prêts à coller pour Nightbot et StreamElements (<code>!don</code>, <code>!equipe</code>).</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-actions">
+          <a href="kit-streamer.html" class="btn btn-secondary">
+            <span>🎮 Ouvrir le Kit Streamer (Overlays & Alertes)</span>
+            <span>➔</span>
+          </a>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Bannière d'aide Discord -->
+    <div class="help-banner">
+      <h3>💬 Besoin d'aide pour configurer votre stream ?</h3>
+      <p>
+        Des questions sur l'inscription, un souci d'intégration dans OBS ou besoin d'idées de défis pour votre live ?
+        Notre communauté et l'équipe d'animation sont disponibles pour vous prêter main-forte sur Discord !
       </p>
+    </div>
 
-      <!-- Bannière d'invitation pour nouveaux streamers -->
-      <div style="background: rgba(28, 158, 214, 0.12); border: 1.5px solid var(--el-cyan); border-radius: 12px; padding: 12px 16px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
-        <span style="font-size: 13.5px; color: #E0F2FE;">
-          👋 <strong>Pas encore inscrit sur Extra Life ?</strong> Rejoignez notre équipe <span class="tag-gold" style="font-size: 12.5px; padding: 2px 8px;">Les alliés du soleil</span> au profit d'<span class="tag-gold" style="font-size: 12.5px; padding: 2px 8px;">Enfant Soleil</span> !
-        </span>
-        <a href="guide.html" class="btn btn-secondary" style="font-size: 13px; padding: 6px 14px;">📖 Guide d'inscription pas à pas</a>
-      </div>
-
-      <div class="input-group">
-        <input type="text" id="input-participant" class="input-field" placeholder="Ex: 582063 ou https://www.extra-life.org/participant/582063" value="582063">
-        <button id="btn-detect" class="btn btn-primary">🔍 Charger mes infos</button>
-      </div>
-
-      <!-- Carte d'informations auto-détectées -->
-      <div id="profile-card" class="profile-card">
-        <img id="profile-avatar" class="profile-avatar" src="https://via.placeholder.com/60" alt="Avatar">
-        <div class="profile-info">
-          <h3 id="profile-name">Streamer</h3>
-          <div class="profile-badges">
-            <span id="badge-total" class="badge badge-gold">Total : -- $ USD</span>
-            <span id="badge-goal" class="badge">Objectif : -- $ USD</span>
-            <span id="badge-team" class="badge badge-red">Solo</span>
-            <span id="badge-milestones" class="badge">0 jalon</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Bandeau de confirmation de mémorisation aux couleurs Extra Life -->
-      <div id="saved-notice" style="display: none; align-items: center; justify-content: space-between; font-size: 13.5px; color: #E0F2FE; background: rgba(28, 158, 214, 0.15); border: 1.5px solid var(--el-cyan); padding: 10px 16px; border-radius: 12px; margin-top: 14px; gap: 10px; flex-wrap: wrap;">
-        <span style="display: flex; align-items: center; gap: 8px;">
-          💾 <strong>Profil mémorisé sur ce navigateur</strong> (rechargé automatiquement pour vos prochains lives)
-        </span>
-        <button id="btn-forget" type="button" style="background: transparent; border: 1px solid rgba(28, 158, 214, 0.5); color: #5BC3F0; cursor: pointer; font-size: 12px; font-weight: 700; padding: 5px 12px; border-radius: 8px; transition: all 0.2s ease;">
-          🗑️ Oublier / Réinitialiser
-        </button>
-      </div>
-
-      <p id="prompt-notice" style="font-size: 13px; color: var(--el-text-dim); margin-top: 10px;">
-        💡 <em>Entrez votre identifiant ci-dessus pour pré-remplir automatiquement tous vos liens personnalisés.</em>
+    <!-- Pied de page -->
+    <footer class="footer">
+      <p>
+        <strong>Les alliés du soleil</strong> — Fièrement associés à <strong>Opération Enfant Soleil</strong> et <strong>Extra Life</strong>.<br>
+        Ensemble, petits et grands miracles pour les enfants malades.
       </p>
-    </section>
-
-    <!-- Étape 2 : Options d'affichage -->
-    <section class="step-card">
-      <div class="step-title">
-        <span class="step-number">2</span>
-        <span>Personnalisation de l'affichage</span>
-      </div>
-
-      <div class="options-grid">
-        <div class="option-box">
-          <label for="select-layout">Disposition dans OBS</label>
-          <select id="select-layout" class="option-select">
-            <option value="horizontal" selected>Bannière horizontale (Haut / Bas)</option>
-            <option value="two-tier">Format 2 étages (Moyen / Carré)</option>
-            <option value="vertical">Colonne latérale (Verticale)</option>
-          </select>
-        </div>
-
-        <div class="option-box">
-          <label for="select-mode">Mode d'affichage</label>
-          <select id="select-mode" class="option-select">
-            <option value="alternance" selected>☀️ Alternance douce (Solo + Équipe)</option>
-            <option value="participant">Solo uniquement (Mon objectif)</option>
-            <option value="team">Équipe uniquement (Cagnotte globale)</option>
-          </select>
-        </div>
-
-        <div class="option-box">
-          <label for="select-theme">Thème visuel</label>
-          <select id="select-theme" class="option-select">
-            <optgroup label="🎮 Thèmes officiels Extra Life (Prioritaire)">
-              <option value="extralife-sombre" selected>🕹️ Extra Life — Thème sombre (Bleu nuit & Cyan néon)</option>
-              <option value="extralife-clair">🎮 Extra Life — Thème clair (Bleu CMN & Blanc)</option>
-            </optgroup>
-            <optgroup label="☀️ Thèmes Opération Enfant Soleil">
-              <option value="clair">☀️ Enfant Soleil — Thème clair (Jaune & Blanc)</option>
-              <option value="sombre">🌙 Enfant Soleil — Thème sombre (Noir velours)</option>
-            </optgroup>
-            <optgroup label="🎨 Thème Personnalisé">
-              <option value="personnalise">🎨 Thème personnalisé (Palette sur mesure)</option>
-            </optgroup>
-          </select>
-        </div>
-
-        <div class="option-box">
-          <label for="input-interval">Vitesse d'alternance</label>
-          <div class="stepper-group">
-            <button type="button" class="btn-stepper" id="btn-interval-minus" title="Diminuer (−5s)">−</button>
-            <div class="stepper-input-wrapper">
-              <input type="number" id="input-interval" class="stepper-input" min="3" max="300" step="1" value="20" title="Entrez le nombre de secondes">
-              <span class="stepper-unit">sec</span>
-            </div>
-            <button type="button" class="btn-stepper" id="btn-interval-plus" title="Augmenter (+5s)">+</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Panneau de personnalisation des couleurs -->
-      <div id="custom-theme-panel" class="custom-palette-box" style="display: none;">
-        <div class="custom-palette-header">
-          <span class="custom-palette-title">🎨 Palette de couleurs personnalisée (Panneaux & Overlay)</span>
-          <button type="button" id="btn-reset-custom-theme" class="btn-palette-reset" title="Réinitialiser aux couleurs par défaut">↺ Réinitialiser</button>
-        </div>
-        <p class="custom-palette-desc">Choisissez les couleurs de vos panneaux Twitch et overlays pour correspondre à votre identité de chaîne. Vos réglages sont automatiquement mémorisés.</p>
-        
-        <div class="palette-grid">
-          <div class="color-picker-item">
-            <label for="color-custom-bg">1. Fond principal</label>
-            <div class="color-picker-wrapper">
-              <label class="color-btn-trigger" for="color-custom-bg" title="Cliquer pour ouvrir la palette de couleurs">
-                <span class="color-btn-swatch" id="swatch-custom-bg" style="background-color: #0C1829;"></span>
-                <span class="color-btn-icon">🎨</span>
-                <input type="color" id="color-custom-bg" class="color-input" value="#0C1829">
-              </label>
-              <input type="text" id="hex-custom-bg" class="hex-input" value="#0C1829" maxlength="7" title="Code hexadécimal de la couleur">
-            </div>
-            <span class="color-role-hint">Arrière-plan du panneau et de l'overlay</span>
-          </div>
-
-          <div class="color-picker-item">
-            <label for="color-custom-card">2. Cadres & Boîtes</label>
-            <div class="color-picker-wrapper">
-              <label class="color-btn-trigger" for="color-custom-card" title="Cliquer pour ouvrir la palette de couleurs">
-                <span class="color-btn-swatch" id="swatch-custom-card" style="background-color: #132238;"></span>
-                <span class="color-btn-icon">🎨</span>
-                <input type="color" id="color-custom-card" class="color-input" value="#132238">
-              </label>
-              <input type="text" id="hex-custom-card" class="hex-input" value="#132238" maxlength="7" title="Code hexadécimal de la couleur">
-            </div>
-            <span class="color-role-hint">Encadré du logo & boîtes de données</span>
-          </div>
-
-          <div class="color-picker-item">
-            <label for="color-custom-accent">3. Bordures & Accent</label>
-            <div class="color-picker-wrapper">
-              <label class="color-btn-trigger" for="color-custom-accent" title="Cliquer pour ouvrir la palette de couleurs">
-                <span class="color-btn-swatch" id="swatch-custom-accent" style="background-color: #1C9ED6;"></span>
-                <span class="color-btn-icon">🎨</span>
-                <input type="color" id="color-custom-accent" class="color-input" value="#1C9ED6">
-              </label>
-              <input type="text" id="hex-custom-accent" class="hex-input" value="#1C9ED6" maxlength="7" title="Code hexadécimal de la couleur">
-            </div>
-            <span class="color-role-hint">Contour extérieur, reflets & jauge de don</span>
-          </div>
-
-          <div class="color-picker-item">
-            <label for="color-custom-text">4. Texte & Bouton</label>
-            <div class="color-picker-wrapper">
-              <label class="color-btn-trigger" for="color-custom-text" title="Cliquer pour ouvrir la palette de couleurs">
-                <span class="color-btn-swatch" id="swatch-custom-text" style="background-color: #FFFFFF;"></span>
-                <span class="color-btn-icon">🎨</span>
-                <input type="color" id="color-custom-text" class="color-input" value="#FFFFFF">
-              </label>
-              <input type="text" id="hex-custom-text" class="hex-input" value="#FFFFFF" maxlength="7" title="Code hexadécimal de la couleur">
-            </div>
-            <span class="color-role-hint">Titres, libellés et bouton d'action</span>
-          </div>
-
-          <div class="color-picker-item">
-            <label for="select-custom-logo">5. Logo du panneau & overlay</label>
-            <select id="select-custom-logo" class="option-select" style="padding: 8px 12px; font-size: 13px;">
-              <option value="el-color" selected>Extra Life (Couleur classique)</option>
-              <option value="el-dark">Extra Life (Couleur alternative - Sombre)</option>
-              <option value="oes">Opération Enfant Soleil (Couleur classique)</option>
-              <option value="oes-dark">Opération Enfant Soleil (Couleur alternative - Sombre)</option>
-              <option value="custom">🌐 Image personnalisée (Lien direct URL)</option>
-            </select>
-            <span class="color-role-hint">Logo affiché au centre de la bannière & overlay</span>
-          </div>
-
-          <div class="color-picker-item" id="custom-logo-url-box" style="display: none;">
-            <label for="input-custom-logo-url">6. Lien d'image personnalisée</label>
-            <input type="url" id="input-custom-logo-url" class="custom-url-input" placeholder="https://exemple.com/mon-logo.png" title="Collez l'adresse URL directe de votre image (PNG, SVG, WebP...)">
-            <span class="color-role-hint">Lien direct vers votre image (PNG transparent ou SVG conseillé)</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Étape 3 : Liens OBS Studio prêts à l'emploi -->
-    <section class="step-card">
-      <div class="step-title">
-        <span class="step-number">3</span>
-        <span>Vos liens pour OBS Studio / Streamlabs</span>
-      </div>
-      <p class="step-instruction">
-        Dans OBS, ajoutez une <strong>Source Navigateur</strong> (Browser Source) et collez le lien :
-      </p>
-
-      <!-- Source 1 : Overlay Barre -->
-      <div class="obs-card">
-        <div class="obs-card-header">
-          <h4 class="obs-card-title">📊 1. Overlay Barre de progression & Dons récents</h4>
-          <div id="obs-rec-box" class="obs-rec-box">
-            ✨ Résolution recommandée dans OBS : <span id="obs-rec-val"><strong>1920 × 140 px</strong></span>
-          </div>
-          <div id="obs-dims-limits" class="obs-dims-limits">
-            📐 <em>Dimensions autorisées : Min 1050 × 135 px • Max 1920 × 150 px</em>
-          </div>
-          <div id="obs-formats-detail" class="obs-formats-detail">
-            • <strong>Bannière horizontale :</strong> Recommandé 1920 × 140 px (ou 1280 × 140 px) — <em>Idéal en bandeau haut ou bas</em><br>
-            • <strong>Format 2 étages :</strong> Recommandé 850 × 240 px — <em>Idéal au-dessus de la webcam</em><br>
-            • <strong>Colonne latérale :</strong> Recommandé 420 × 700 px — <em>Idéal pour barre latérale</em>
-          </div>
-        </div>
-        <div class="url-row">
-          <input type="text" id="url-overlay" class="url-input" readonly>
-          <button class="btn btn-secondary" onclick="copyInput('url-overlay')">📋 Copier</button>
-          <a id="link-preview-overlay" href="#" target="_blank" class="btn btn-outline">👁️ Aperçu</a>
-        </div>
-      </div>
-
-      <!-- Source 2 : Alertes -->
-      <div class="obs-card">
-        <div class="obs-card-header">
-          <h4 class="obs-card-title">🔔 2. Alerte Pop-up de Don (Audio & Visuel)</h4>
-          <div class="obs-rec-box">
-            ✨ Résolution recommandée dans OBS : <strong>800 × 400 px</strong> (Centré sur votre scène)
-          </div>
-          <div class="obs-dims-limits">
-            📐 <em>Dimensions autorisées : Min 500 × 250 px • Plein écran transparent jusqu'à 1920 × 1080 px</em>
-          </div>
-          <div class="obs-formats-detail">
-            🔊 <strong>Son dans OBS :</strong> Laissez la case <em>« Contrôler le son via OBS »</em> <u>décochée</u> pour entendre le carillon directement dans vos écouteurs. (Si vous la cochez, assurez-vous d'activer <em>« Monitoring audio »</em> dans les propriétés audio avancées du mixeur OBS).
-          </div>
-        </div>
-        <div class="url-row" style="flex-wrap: wrap;">
-          <input type="text" id="url-alert" class="url-input" readonly>
-          <button class="btn btn-secondary" onclick="copyInput('url-alert')">📋 Copier</button>
-          <a id="link-preview-alert" href="#" target="_blank" class="btn btn-outline">👁️ Aperçu</a>
-        </div>
-      </div>
-
-      <!-- Simulateur de test OBS -->
-      <div class="simulator-box">
-        <div class="simulator-info" style="flex: 1 1 360px;">
-          🧪 <strong>Simulateur de don en direct :</strong> Testez votre cadrage et le carillon sonore instantanément dans votre navigateur ET dans OBS Studio !<br>
-          <span style="font-size: 12.5px; font-weight: 500; color: var(--el-text-sub);">
-            💡 <em>Dans OBS : vous pouvez aussi faire un <strong>clic droit sur la source &gt; Interagir</strong> et cliquer dans la fenêtre pour tester le son à tout moment.</em>
-          </span>
-        </div>
-        <div class="simulator-actions">
-          <button id="btn-test-donation" class="btn btn-test">🚀 Envoyer un don test (25 $)</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Étape 4 : Kit Twitch (Liens & Panneaux) -->
-    <section class="step-card">
-      <div class="step-title">
-        <span class="step-number">4</span>
-        <span>Panneau Twitch & Commandes de Chatbot</span>
-      </div>
-
-      <!-- Option 100% Liens & Markdown -->
-      <h4 style="font-size: 15px; margin-bottom: 6px; color: #FFFFFF;">📝 Option A : Panneau Twitch 100% Texte & Liens (Sans téléchargement)</h4>
-      <p class="step-instruction">Collez ce texte directement dans un nouveau panneau sous votre stream :</p>
-      <div style="position: relative;">
-        <pre id="twitch-markdown" class="code-block"></pre>
-        <button class="btn btn-secondary btn-copy-code" onclick="copyTwitchMarkdown()">📋 Copier</button>
-      </div>
-
-      <!-- Option Image de bannière Twitch -->
-      <h4 style="font-size: 15px; margin-top: 24px; margin-bottom: 6px; color: #FFFFFF;">🎨 Option B : Image officielle de panneau Twitch</h4>
-      <p class="step-instruction">Pour ceux qui préfèrent une image au-dessus de leur texte, voici la bannière officielle :</p>
-      
-      <div class="twitch-banner-preview">
-        <canvas id="canvas-twitch" width="320" height="210" class="twitch-canvas"></canvas>
-        <div>
-          <button id="btn-download-banner" class="btn btn-primary" onclick="downloadBanner()">📥 Télécharger l'image</button>
-          <p style="font-size: 12.5px; color: var(--el-text-sub); margin-top: 8px;">
-            Lien à mettre dans le champ <em>« L'image redirige vers »</em> :<br>
-            <code id="twitch-redirect-link" style="font-weight: 700; color: var(--el-cyan);">https://www.extra-life.org/participant/...</code>
-          </p>
-        </div>
-      </div>
-
-      <!-- Commandes de Bots -->
-      <h4 style="font-size: 15px; margin-top: 24px; margin-bottom: 6px; color: #FFFFFF;">🤖 Commandes de Chatbot prêtes à copier</h4>
-      <p style="font-size: 13px; color: var(--el-text-sub); margin-bottom: 10px;">
-        💡 <em>Note sur <code>$(user)</code> : cette variable insère automatiquement le nom du spectateur qui tape la commande. Elle fonctionne nativement sur <strong>Nightbot</strong>, <strong>StreamElements</strong>, <strong>Streamlabs Cloudbot</strong>, <strong>Wizebot</strong>, <strong>Firebot</strong> et <strong>Fossabot</strong>.</em>
-      </p>
-
-      <div style="display: flex; flex-direction: column; gap: 10px;">
-        <div style="display: flex; gap: 10px; align-items: center; background: var(--el-navy-input); padding: 10px 14px; border-radius: 10px; border: 1.5px solid var(--el-navy-card-border);">
-          <code style="font-weight: 800; width: 90px; color: var(--el-cyan); font-size: 15px;">!don</code>
-          <input type="text" id="cmd-don" class="url-input" readonly>
-          <button class="btn btn-secondary" onclick="copyInput('cmd-don')">Copier</button>
-        </div>
-        <div style="display: flex; gap: 10px; align-items: center; background: var(--el-navy-input); padding: 10px 14px; border-radius: 10px; border: 1.5px solid var(--el-navy-card-border);">
-          <code id="cmd-event-label" style="font-weight: 800; width: 90px; color: var(--el-cyan); font-size: 15px;">!extralife</code>
-          <input type="text" id="cmd-event" class="url-input" value="🎮 $(user) soutient la campagne caritative Extra Life pour les enfants malades ! Jouons ensemble pour guérir ! 💖🎮" readonly>
-          <button class="btn btn-secondary" onclick="copyInput('cmd-event')">Copier</button>
-        </div>
-        <div style="display: flex; gap: 10px; align-items: center; background: var(--el-navy-input); padding: 10px 14px; border-radius: 10px; border: 1.5px solid var(--el-navy-card-border);">
-          <code style="font-weight: 800; width: 90px; color: var(--el-cyan); font-size: 15px;">!equipe</code>
-          <input type="text" id="cmd-equipe" class="url-input" readonly>
-          <button class="btn btn-secondary" onclick="copyInput('cmd-equipe')">Copier</button>
-        </div>
-      </div>
-
-    </section>
+    </footer>
 
   </div>
 
-  <div id="toast" class="toast">Texte copié dans le presse-papier ! ✨</div>
-
-  <script>
-    (function () {
-      'use strict';
-
-      let detectedParticipant = null;
-
-      const elements = {
-        inputParticipant: document.getElementById('input-participant'),
-        btnDetect: document.getElementById('btn-detect'),
-        profileCard: document.getElementById('profile-card'),
-        profileAvatar: document.getElementById('profile-avatar'),
-        profileName: document.getElementById('profile-name'),
-        badgeTotal: document.getElementById('badge-total'),
-        badgeGoal: document.getElementById('badge-goal'),
-        badgeTeam: document.getElementById('badge-team'),
-        badgeMilestones: document.getElementById('badge-milestones'),
-        promptNotice: document.getElementById('prompt-notice'),
-        savedNotice: document.getElementById('saved-notice'),
-        btnForget: document.getElementById('btn-forget'),
-        selectMode: document.getElementById('select-mode'),
-        selectTheme: document.getElementById('select-theme'),
-        selectLayout: document.getElementById('select-layout'),
-        inputInterval: document.getElementById('input-interval'),
-        btnIntervalMinus: document.getElementById('btn-interval-minus'),
-        btnIntervalPlus: document.getElementById('btn-interval-plus'),
-        urlOverlay: document.getElementById('url-overlay'),
-        urlAlert: document.getElementById('url-alert'),
-        linkPreviewOverlay: document.getElementById('link-preview-overlay'),
-        linkPreviewAlert: document.getElementById('link-preview-alert'),
-        btnTestDonation: document.getElementById('btn-test-donation'),
-        twitchMarkdown: document.getElementById('twitch-markdown'),
-        twitchRedirectLink: document.getElementById('twitch-redirect-link'),
-        cmdDon: document.getElementById('cmd-don'),
-        cmdEquipe: document.getElementById('cmd-equipe'),
-        cmdEvent: document.getElementById('cmd-event'),
-        cmdEventLabel: document.getElementById('cmd-event-label'),
-        canvasTwitch: document.getElementById('canvas-twitch'),
-        obsRecVal: document.getElementById('obs-rec-val'),
-        obsDimsLimits: document.getElementById('obs-dims-limits'),
-        obsFormatsDetail: document.getElementById('obs-formats-detail'),
-        customThemePanel: document.getElementById('custom-theme-panel'),
-        btnResetCustomTheme: document.getElementById('btn-reset-custom-theme'),
-        colorCustomBg: document.getElementById('color-custom-bg'),
-        hexCustomBg: document.getElementById('hex-custom-bg'),
-        swatchCustomBg: document.getElementById('swatch-custom-bg'),
-        colorCustomCard: document.getElementById('color-custom-card'),
-        hexCustomCard: document.getElementById('hex-custom-card'),
-        swatchCustomCard: document.getElementById('swatch-custom-card'),
-        colorCustomAccent: document.getElementById('color-custom-accent'),
-        hexCustomAccent: document.getElementById('hex-custom-accent'),
-        swatchCustomAccent: document.getElementById('swatch-custom-accent'),
-        colorCustomText: document.getElementById('color-custom-text'),
-        hexCustomText: document.getElementById('hex-custom-text'),
-        swatchCustomText: document.getElementById('swatch-custom-text'),
-        selectCustomLogo: document.getElementById('select-custom-logo'),
-        customLogoUrlBox: document.getElementById('custom-logo-url-box'),
-        inputCustomLogoUrl: document.getElementById('input-custom-logo-url'),
-        toast: document.getElementById('toast'),
-      };
-
-      // Gestion des boutons incrémentaux et de la saisie manuelle pour l'intervalle d'alternance
-      let currentInterval = 20;
-      function setIntervalValue(val) {
-        let num = parseInt(val, 10);
-        if (isNaN(num)) num = 20;
-        currentInterval = Math.max(3, Math.min(300, num));
-        elements.inputInterval.value = currentInterval;
-        updateGeneratedUrls();
-        updateOptionMemory();
-      }
-
-      elements.inputInterval.addEventListener('input', () => {
-        const val = parseInt(elements.inputInterval.value, 10);
-        if (!isNaN(val) && val >= 1) {
-          currentInterval = Math.max(3, Math.min(300, val));
-          updateGeneratedUrls();
-          updateOptionMemory();
-        }
-      });
-
-      elements.inputInterval.addEventListener('blur', () => {
-        setIntervalValue(elements.inputInterval.value);
-      });
-
-      elements.btnIntervalMinus.addEventListener('click', () => {
-        setIntervalValue(currentInterval - 5);
-      });
-
-      elements.btnIntervalPlus.addEventListener('click', () => {
-        setIntervalValue(currentInterval + 5);
-      });
-
-      // Extraction intelligente de l'ID ou slug (supporte vanity URLs, liens Extra Life ou identifiant seul)
-      function extractId(input) {
-        if (!input) return '';
-        const trimmed = input.trim();
-        // Cas 1 : URL avec paramètre ?participantID=582063
-        const idParam = trimmed.match(/participantID=(\d+)/i);
-        if (idParam) return idParam[1];
-        // Cas 2 : URL de type /participants/cybervirus_101 ou /participant/582063
-        const slugMatch = trimmed.match(/participants?\/([a-zA-Z0-9_\-]+)/i);
-        if (slugMatch) return slugMatch[1];
-        // Cas 3 : Identifiant numérique ou pseudo direct
-        const directMatch = trimmed.match(/^([a-zA-Z0-9_\-]+)$/);
-        if (directMatch) return directMatch[1];
-        return trimmed;
-      }
-
-      // Requête JSONP résiliente
-      function fetchJSONP(url) {
-        return new Promise((resolve, reject) => {
-          const cbName = 'cfg_cb_' + Math.random().toString(36).substring(2, 9);
-          const script = document.createElement('script');
-          const sep = url.includes('?') ? '&' : '?';
-          script.src = `${url}${sep}callback=${cbName}`;
-          const timer = setTimeout(() => {
-            cleanup();
-            reject(new Error('Timeout JSONP'));
-          }, 8000);
-          function cleanup() {
-            clearTimeout(timer);
-            delete window[cbName];
-            if (script.parentNode) script.remove();
-          }
-          window[cbName] = (data) => { cleanup(); resolve(data); };
-          script.onerror = () => { cleanup(); reject(new Error('Erreur JSONP')); };
-          document.head.appendChild(script);
-        });
-      }
-
-      async function fetchWithFallback(url) {
-        try {
-          const res = await fetch(url);
-          if (res.ok) return await res.json();
-          throw new Error('Fetch failed');
-        } catch {
-          return await fetchJSONP(url);
-        }
-      }
-
-      // Détection automatique des infos du streamer (ID numérique ou pseudo vanity)
-      async function detectStreamerInfo(idOrSlug) {
-        if (!idOrSlug) return;
-        elements.btnDetect.disabled = true;
-        elements.btnDetect.textContent = '⏳ Recherche...';
-
-        try {
-          const data = await fetchWithFallback(`https://dd.extra-life.org/api/participants/${idOrSlug}`);
-          if (data && typeof data.fundraisingGoal !== 'undefined') {
-            const numericId = String(data.participantID || idOrSlug);
-            detectedParticipant = {
-              participantID: numericId,
-              displayName: data.displayName || 'Streamer',
-              sumDonations: data.sumDonations || 0,
-              fundraisingGoal: data.fundraisingGoal || 1000,
-              avatarImageURL: data.avatarImageURL || '',
-              teamID: data.teamID || null,
-              teamName: data.teamName || null,
-              numMilestones: data.numMilestones || 0,
-              donateUrl: (data.links && data.links.donate) ? data.links.donate : `https://www.extra-life.org/participant/${numericId}`,
-            };
-
-            renderProfile();
-            saveStreamerMemory();
-            showToast('Informations Extra Life chargées avec succès ! ☀️');
-          } else {
-            showToast('Participant introuvable sur Extra Life (vérifiez le lien ou l’ID)');
-          }
-        } catch (err) {
-          console.warn('Erreur chargement participant:', err);
-          showToast('Impossible de contacter l’API Extra Life');
-        } finally {
-          elements.btnDetect.disabled = false;
-          elements.btnDetect.textContent = '🔍 Charger mes infos';
-          updateGeneratedUrls();
-        }
-      }
-
-      function renderProfile() {
-        if (!detectedParticipant) {
-          elements.profileCard.style.display = 'none';
-          if (elements.promptNotice) elements.promptNotice.style.display = 'block';
-          return;
-        }
-
-        elements.profileCard.style.display = 'flex';
-        if (elements.promptNotice) elements.promptNotice.style.display = 'none';
-
-        elements.profileName.textContent = detectedParticipant.displayName;
-        elements.profileAvatar.src = detectedParticipant.avatarImageURL || 'https://via.placeholder.com/60/0C1829/1C9ED6?text=EL';
-        elements.badgeTotal.textContent = `Total : ${detectedParticipant.sumDonations.toFixed(2)} $ USD`;
-        elements.badgeGoal.textContent = `Objectif : ${detectedParticipant.fundraisingGoal.toFixed(0)} $ USD`;
-
-        if (detectedParticipant.teamID && detectedParticipant.teamName) {
-          elements.badgeTeam.textContent = `Équipe : ${detectedParticipant.teamName}`;
-          elements.badgeTeam.className = 'badge badge-gold';
-        } else {
-          elements.badgeTeam.textContent = 'Participant Solo';
-          elements.badgeTeam.className = 'badge';
-        }
-
-        elements.badgeMilestones.textContent = `${detectedParticipant.numMilestones} défi(s) / jalons`;
-      }
-
-      const DEFAULT_CUSTOM_PALETTE = {
-        bg: '#0C1829',
-        card: '#132238',
-        accent: '#1C9ED6',
-        text: '#FFFFFF',
-        logo: 'el-color',
-        logoUrl: '',
-      };
-
-      let customPalette = { ...DEFAULT_CUSTOM_PALETTE };
-
-      function isColorDark(hex) {
-        if (!hex || typeof hex !== 'string') return true;
-        let c = hex.replace('#', '');
-        if (c.length === 3) c = c.split('').map(x => x + x).join('');
-        if (c.length !== 6) return true;
-        const r = parseInt(c.substr(0, 2), 16) || 0;
-        const g = parseInt(c.substr(2, 2), 16) || 0;
-        const b = parseInt(c.substr(4, 2), 16) || 0;
-        return (0.299 * r + 0.587 * g + 0.114 * b) < 140;
-      }
-
-      function loadCustomPaletteMemory() {
-        try {
-          const saved = localStorage.getItem('oes_custom_palette');
-          if (saved) {
-            const parsed = JSON.parse(saved);
-            // Migration automatique si l'utilisateur avait les anciens fallbacks génériques
-            if (parsed.bg === '#0F172A' || parsed.accent === '#38BDF8') {
-              customPalette = { ...DEFAULT_CUSTOM_PALETTE };
-            } else {
-              customPalette = { ...DEFAULT_CUSTOM_PALETTE, ...parsed };
-            }
-          }
-        } catch (e) {}
-        applyCustomPaletteToInputs();
-      }
-
-      function saveCustomPaletteMemory() {
-        try {
-          localStorage.setItem('oes_custom_palette', JSON.stringify(customPalette));
-        } catch (e) {}
-      }
-
-      function updateCustomLogoVisibility() {
-        if (elements.customLogoUrlBox) {
-          const isCustom = elements.selectCustomLogo && elements.selectCustomLogo.value === 'custom';
-          elements.customLogoUrlBox.style.display = isCustom ? 'flex' : 'none';
-        }
-      }
-
-      function applyCustomPaletteToInputs() {
-        if (elements.colorCustomBg) elements.colorCustomBg.value = customPalette.bg;
-        if (elements.hexCustomBg) elements.hexCustomBg.value = customPalette.bg.toUpperCase();
-        if (elements.swatchCustomBg) elements.swatchCustomBg.style.backgroundColor = customPalette.bg;
-
-        if (elements.colorCustomCard) elements.colorCustomCard.value = customPalette.card;
-        if (elements.hexCustomCard) elements.hexCustomCard.value = customPalette.card.toUpperCase();
-        if (elements.swatchCustomCard) elements.swatchCustomCard.style.backgroundColor = customPalette.card;
-
-        if (elements.colorCustomAccent) elements.colorCustomAccent.value = customPalette.accent;
-        if (elements.hexCustomAccent) elements.hexCustomAccent.value = customPalette.accent.toUpperCase();
-        if (elements.swatchCustomAccent) elements.swatchCustomAccent.style.backgroundColor = customPalette.accent;
-
-        if (elements.colorCustomText) elements.colorCustomText.value = customPalette.text;
-        if (elements.hexCustomText) elements.hexCustomText.value = customPalette.text.toUpperCase();
-        if (elements.swatchCustomText) elements.swatchCustomText.style.backgroundColor = customPalette.text;
-
-        let selectedLogo = customPalette.logo || 'el-color';
-        if (selectedLogo === 'el-white') selectedLogo = 'el-dark'; // Rétrocompatibilité transparente
-        if (elements.selectCustomLogo) elements.selectCustomLogo.value = selectedLogo;
-        if (elements.inputCustomLogoUrl) elements.inputCustomLogoUrl.value = customPalette.logoUrl || '';
-        updateCustomLogoVisibility();
-      }
-
-      function updateThemePanelVisibility() {
-        const isCustom = elements.selectTheme.value === 'personnalise';
-        if (elements.customThemePanel) {
-          elements.customThemePanel.style.display = isCustom ? 'block' : 'none';
-        }
-      }
-
-      // Mise à jour dynamique des URLs OBS
-      function updateGeneratedUrls() {
-        const baseUrl = window.location.origin + window.location.pathname.replace(/\/index\.html$/i, '').replace(/\/$/, '');
-        const id = detectedParticipant ? detectedParticipant.participantID : (extractId(elements.inputParticipant.value) || 'VOTRE_ID');
-        const mode = elements.selectMode.value;
-        const theme = elements.selectTheme.value;
-        const layout = elements.selectLayout.value;
-        const interval = currentInterval;
-
-        // URL Overlay
-        const overlayParams = new URLSearchParams({
-          participantID: id,
-          mode: mode,
-          theme: theme,
-        });
-        if (detectedParticipant && detectedParticipant.teamID) {
-          overlayParams.set('teamID', detectedParticipant.teamID);
-        }
-        if (layout !== 'auto') {
-          overlayParams.set('layout', layout);
-        }
-        if (mode === 'alternance' && interval !== 20) {
-          overlayParams.set('interval', interval);
-        }
-        if (theme === 'personnalise') {
-          overlayParams.set('cBg', customPalette.bg);
-          overlayParams.set('cCard', customPalette.card);
-          overlayParams.set('cAccent', customPalette.accent);
-          overlayParams.set('cText', customPalette.text);
-          if (customPalette.logo) overlayParams.set('cLogo', customPalette.logo);
-          if (customPalette.logo === 'custom' && customPalette.logoUrl) {
-            overlayParams.set('cLogoUrl', customPalette.logoUrl);
-          }
-        }
-
-        const overlayFullUrl = `${baseUrl}/overlay.html?${overlayParams.toString()}`;
-        elements.urlOverlay.value = overlayFullUrl;
-        elements.linkPreviewOverlay.href = overlayFullUrl;
-
-        // URL Alertes
-        const alertParams = new URLSearchParams({
-          participantID: id,
-          theme: theme,
-        });
-        if (mode === 'team' && detectedParticipant && detectedParticipant.teamID) {
-          alertParams.set('mode', 'team');
-          alertParams.set('teamID', detectedParticipant.teamID);
-        }
-        if (theme === 'personnalise') {
-          alertParams.set('cBg', customPalette.bg);
-          alertParams.set('cCard', customPalette.card);
-          alertParams.set('cAccent', customPalette.accent);
-          alertParams.set('cText', customPalette.text);
-          if (customPalette.logo) alertParams.set('cLogo', customPalette.logo);
-          if (customPalette.logo === 'custom' && customPalette.logoUrl) {
-            alertParams.set('cLogoUrl', customPalette.logoUrl);
-          }
-        }
-
-        const alertFullUrl = `${baseUrl}/alert.html?${alertParams.toString()}`;
-        elements.urlAlert.value = alertFullUrl;
-        elements.linkPreviewAlert.href = alertFullUrl;
-
-        // Mise à jour dynamique des recommandations d'affichage selon la disposition choisie
-        if (elements.obsRecVal && elements.obsDimsLimits && elements.obsFormatsDetail) {
-          if (layout === 'horizontal') {
-            elements.obsRecVal.innerHTML = '<strong>1920 × 140 px</strong> (ou 1280 × 140 px)';
-            elements.obsDimsLimits.innerHTML = '📐 <em>Dimensions autorisées : Min 1050 × 135 px • Max 1920 × 150 px</em>';
-            elements.obsFormatsDetail.innerHTML = '✨ <strong>Bannière horizontale :</strong> Idéal pour placer en bandeau étendu en haut ou en bas de votre écran de jeu.';
-          } else if (layout === 'two-tier') {
-            elements.obsRecVal.innerHTML = '<strong>850 × 240 px</strong>';
-            elements.obsDimsLimits.innerHTML = '📐 <em>Dimensions autorisées : Min 760 × 220 px • Max 1050 × 270 px</em>';
-            elements.obsFormatsDetail.innerHTML = '✨ <strong>Format 2 étages :</strong> Idéal au-dessus de la webcam ou dans un coin d\'écran (Étage 1: Logo & Jauge, Étage 2: Dons récents).';
-          } else if (layout === 'vertical') {
-            elements.obsRecVal.innerHTML = '<strong>420 × 700 px</strong>';
-            elements.obsDimsLimits.innerHTML = '📐 <em>Dimensions autorisées : Min 360 × 550 px • Max 480 × 800 px</em>';
-            elements.obsFormatsDetail.innerHTML = '✨ <strong>Colonne latérale :</strong> Idéal pour placer dans une barre latérale complète ou à côté du chat.';
-          } else {
-            // Mode automatique
-            elements.obsRecVal.innerHTML = '<strong>1920 × 140 px</strong> (Horizontal), <strong>850 × 240 px</strong> (2 étages), <strong>420 × 700 px</strong> (Vertical)';
-            elements.obsDimsLimits.innerHTML = '📐 <em>Dimensions autorisées globales : Min 360 × 65 px • Max 1920 × 150 px</em>';
-            elements.obsFormatsDetail.innerHTML = '• <strong>Bannière horizontale :</strong> 1920 × 140 px<br>' +
-              '• <strong>Format 2 étages :</strong> 850 × 240 px<br>' +
-              '• <strong>Colonne latérale :</strong> 420 × 700 px';
-          }
-        }
-
-        // Liens Twitch
-        const donateLink = `https://www.extra-life.org/participant/${id}`;
-        elements.twitchRedirectLink.textContent = donateLink;
-
-        const isEnfantSoleilTheme = (theme === 'clair' || theme === 'sombre');
-        let markdownText = '';
-        if (isEnfantSoleilTheme) {
-          markdownText = `### ☀️ Campagne au profit d'Opération Enfant Soleil (Extra Life)
-
-Durant ce live, nous amassons des dons pour soutenir le développement d'une pédiatrie de qualité et des soins adaptés pour tous les enfants malades du Québec.
-
-💛 **Chaque don fait une différence directe :**
-👉 [CLIQUEZ ICI POUR FAIRE UN DON](${donateLink})
-
-*(Reçu fiscal officiel canadien émis instantanément par courriel pour chaque don)*`;
-
-          elements.cmdDon.value = `💛 Soutenez les enfants malades du Québec avec Opération Enfant Soleil ! Don sécurisé avec reçu fiscal ici 👉 ${donateLink}`;
-          if (elements.cmdEvent) {
-            elements.cmdEvent.value = `☀️ $(user) envoie un grand rayon de chaleur et d'ondes positives sur tout le chat pour soutenir Opération Enfant Soleil ! 🌻✨`;
-            if (elements.cmdEventLabel) elements.cmdEventLabel.textContent = '!soleil';
-          }
-          if (detectedParticipant && detectedParticipant.teamID) {
-            elements.cmdEquipe.value = `👥 Suivez et soutenez notre équipe « ${detectedParticipant.teamName} » pour Opération Enfant Soleil ici 👉 https://www.extra-life.org/team/${detectedParticipant.teamID}`;
-          } else {
-            elements.cmdEquipe.value = `👥 Découvrez notre campagne collective pour Opération Enfant Soleil ! Don ici 👉 ${donateLink}`;
-          }
-        } else {
-          markdownText = `### 🎮 Campagne caritative Extra Life
-
-Durant ce live, nous amassons des dons pour Extra Life afin de soutenir les soins pédiatriques et les hôpitaux pour enfants.
-
-💖 **Chaque don fait une différence directe :**
-👉 [CLIQUEZ ICI POUR FAIRE UN DON](${donateLink})
-
-*(Reçu fiscal officiel émis instantanément par courriel pour chaque don)*`;
-
-          elements.cmdDon.value = `🎮 Soutenez notre campagne caritative Extra Life ! Don sécurisé avec reçu fiscal ici 👉 ${donateLink}`;
-          if (elements.cmdEvent) {
-            elements.cmdEvent.value = `🎮 $(user) soutient la campagne caritative Extra Life pour les enfants malades ! Jouons ensemble pour guérir ! 💖🎮`;
-            if (elements.cmdEventLabel) elements.cmdEventLabel.textContent = '!extralife';
-          }
-          if (detectedParticipant && detectedParticipant.teamID) {
-            elements.cmdEquipe.value = `👥 Suivez et soutenez notre équipe Extra Life « ${detectedParticipant.teamName} » ici 👉 https://www.extra-life.org/team/${detectedParticipant.teamID}`;
-          } else {
-            elements.cmdEquipe.value = `👥 Découvrez notre campagne collective Extra Life ! Don ici 👉 ${donateLink}`;
-          }
-        }
-
-        elements.twitchMarkdown.textContent = markdownText;
-
-        // Redessiner la bannière Twitch sans déformation
-        drawTwitchBanner(theme);
-      }
-
-      // Dessin de la bannière Twitch 320x210 avec logo maximisé au maximum dans les normes
-      function drawTwitchBanner(theme) {
-        const canvas = elements.canvasTwitch;
-        const ctx = canvas.getContext('2d');
-        const isCustom = (theme === 'personnalise');
-        const isExtraLife = theme.startsWith('extralife') || isCustom;
-        const isDark = isCustom 
-          ? isColorDark(customPalette.bg)
-          : (theme === 'sombre' || theme === 'extralife-sombre' || theme.includes('sombre') || theme.includes('dark'));
-
-        canvas.width = 320;
-        canvas.height = 210;
-
-        // Fond & Bordure officielle
-        if (isCustom) {
-          ctx.fillStyle = customPalette.bg;
-          ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-          ctx.strokeStyle = customPalette.accent;
-          ctx.lineWidth = 5;
-          ctx.strokeRect(0, 0, canvas.width, canvas.height);
-        } else if (isExtraLife) {
-          ctx.fillStyle = isDark ? '#0C1829' : '#F4F9FD';
-          ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-          ctx.strokeStyle = isDark ? '#1C9ED6' : '#0E7CA2';
-          ctx.lineWidth = 5;
-          ctx.strokeRect(0, 0, canvas.width, canvas.height);
-        } else {
-          ctx.fillStyle = isDark ? '#252625' : '#FAF7F0';
-          ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-          ctx.strokeStyle = '#FFD000';
-          ctx.lineWidth = 5;
-          ctx.strokeRect(0, 0, canvas.width, canvas.height);
-        }
-
-        // Chargement du logo officiel ou personnalisé
-        const img = new Image();
-        if (isCustom) {
-          if (customPalette.logo === 'custom' && customPalette.logoUrl) {
-            img.crossOrigin = 'anonymous';
-            img.src = customPalette.logoUrl;
-          } else if (customPalette.logo === 'oes-dark') {
-            img.src = 'assets/logo-enfant-soleil-dark.png';
-          } else if (customPalette.logo === 'oes') {
-            img.src = 'assets/logo-enfant-soleil-horizontal.png';
-          } else if (customPalette.logo === 'el-dark' || customPalette.logo === 'el-white') {
-            img.src = 'assets/logo-extra-life-dark.svg';
-          } else if (customPalette.logo === 'el-color' || customPalette.logo === 'el-classic') {
-            img.src = 'assets/logo-extra-life-color.svg';
-          } else {
-            const cardDark = isColorDark(customPalette.card);
-            img.src = cardDark ? 'assets/logo-extra-life-color.svg' : 'assets/logo-extra-life-dark.svg';
-          }
-        } else if (isExtraLife) {
-          img.src = isDark ? 'assets/logo-extra-life-color.svg' : 'assets/logo-extra-life-dark.svg';
-        } else {
-          img.src = 'assets/logo-enfant-soleil-horizontal.png';
-        }
-
-        img.onerror = function () {
-          if (img.src !== 'assets/logo-extra-life-color.svg') {
-            img.src = 'assets/logo-extra-life-color.svg';
-          }
-        };
-
-        img.onload = function () {
-          // Encadré de sécurité pour le logo (Zone de dégagement officielle)
-          const boxX = 10;
-          const boxY = 10;
-          const boxW = 300;
-          const boxH = 144;
-
-          if (isCustom) {
-            ctx.fillStyle = customPalette.card;
-          } else if (isExtraLife) {
-            ctx.fillStyle = isDark ? '#132238' : '#FFFFFF';
-          } else {
-            ctx.fillStyle = '#FFFFFF';
-          }
-          ctx.beginPath();
-          ctx.roundRect(boxX, boxY, boxW, boxH, 10);
-          ctx.fill();
-
-          if (isCustom) {
-            ctx.strokeStyle = customPalette.accent;
-            ctx.lineWidth = 1.5;
-            ctx.stroke();
-          } else if (isExtraLife) {
-            ctx.strokeStyle = isDark ? 'rgba(28, 158, 214, 0.45)' : 'rgba(14, 124, 162, 0.35)';
-            ctx.lineWidth = 1.5;
-            ctx.stroke();
-          }
-
-          // Calcul des proportions sans aucune déformation
-          const naturalRatio = (img.naturalWidth && img.naturalHeight) ? (img.naturalWidth / img.naturalHeight) : 2.5;
-          const isOESLogo = (isCustom && (customPalette.logo === 'oes' || customPalette.logo === 'oes-dark')) || (!isCustom && !isExtraLife);
-          const maxLogoW = isOESLogo ? 274 : 260;
-          const maxLogoH = isOESLogo ? 118 : 90;
-
-          let targetW = maxLogoW;
-          let targetH = targetW / naturalRatio;
-          if (targetH > maxLogoH) {
-            targetH = maxLogoH;
-            targetW = targetH * naturalRatio;
-          }
-
-          const posX = boxX + (boxW - targetW) / 2;
-          const posY = boxY + (boxH - targetH) / 2;
-
-          ctx.drawImage(img, posX, posY, targetW, targetH);
-
-          // Texte d'action clair et lisible sans texte parasite
-          if (isCustom) {
-            ctx.fillStyle = customPalette.text;
-            ctx.font = 'bold 16px Montserrat, sans-serif';
-            ctx.textAlign = 'center';
-            ctx.fillText('🎮 FAIRE UN DON SUR EXTRA LIFE', 160, 184);
-          } else if (isExtraLife) {
-            ctx.fillStyle = isDark ? '#1C9ED6' : '#0E7CA2';
-            ctx.font = 'bold 16px Montserrat, sans-serif';
-            ctx.textAlign = 'center';
-            ctx.fillText('🎮 FAIRE UN DON SUR EXTRA LIFE', 160, 184);
-          } else {
-            ctx.fillStyle = isDark ? '#FFD000' : '#F15029';
-            ctx.font = 'bold 16px Montserrat, sans-serif';
-            ctx.textAlign = 'center';
-            ctx.fillText('💛 FAIRE UN DON EN DIRECT', 160, 184);
-          }
-        };
-      }
-
-      // Téléchargement de la bannière
-      window.downloadBanner = function () {
-        try {
-          const link = document.createElement('a');
-          link.download = `panneau-twitch-extralife-${elements.selectTheme.value}.png`;
-          link.href = elements.canvasTwitch.toDataURL('image/png');
-          link.click();
-        } catch (err) {
-          console.warn('Export canvas impossible avec image externe sans CORS:', err);
-          showToast('Note: Cette image externe bloque l\'export direct. Le lien fonctionne dans OBS !');
-        }
-      };
-
-      // Toast de confirmation
-      function showToast(msg) {
-        elements.toast.textContent = msg;
-        elements.toast.style.display = 'block';
-        setTimeout(() => {
-          elements.toast.style.display = 'none';
-        }, 3000);
-      }
-
-      window.copyInput = function (inputId) {
-        const input = document.getElementById(inputId);
-        input.select();
-        navigator.clipboard.writeText(input.value).then(() => {
-          showToast('Copié dans le presse-papier ! 📋');
-        });
-      };
-
-      window.copyTwitchMarkdown = function () {
-        navigator.clipboard.writeText(elements.twitchMarkdown.textContent).then(() => {
-          showToast('Markdown copié pour Twitch ! 📋');
-        });
-      };
-
-      // Simulateur de don test sans déclenchement en double
-      elements.btnTestDonation.addEventListener('click', () => {
-        const uniqueTestId = 'test_' + Date.now();
-        const testPayload = {
-          type: 'TEST_DONATION',
-          donationID: uniqueTestId,
-          displayName: 'Donateur Extra Life',
-          amount: 25,
-          message: 'Bravo pour votre live de jeux vidéo au profit des enfants malades ! 🎮',
-        };
-
-        // 1. BroadcastChannel local (pour l'onglet d'aperçu dans le même navigateur)
-        if (typeof BroadcastChannel !== 'undefined') {
-          try {
-            const bus = new BroadcastChannel('extra_life_overlay_bus');
-            bus.postMessage(testPayload);
-          } catch (e) {}
-        }
-
-        // 2. LocalStorage (pour les fenêtres locales)
-        try {
-          localStorage.setItem('oes_test_donation_trigger', JSON.stringify({
-            ...testPayload,
-            _time: Date.now(),
-          }));
-        } catch (e) {}
-
-        // 3. Pont temps réel direct vers OBS Studio via SSE ntfy.sh
-        const targetId = detectedParticipant ? detectedParticipant.participantID : (extractId(elements.inputParticipant.value) || 'VOTRE_ID');
-        if (targetId && targetId !== 'VOTRE_ID') {
-          const cleanId = String(targetId).replace(/[^a-zA-Z0-9_-]/g, '');
-          fetch(`https://ntfy.sh/oes_alert_${cleanId}`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(testPayload),
-          }).catch(() => {});
-        }
-
-        showToast('Don test envoyé en direct vers OBS et votre aperçu ! 🚀');
-      });
-
-      // Sauvegarde et gestion de la mémoire locale du streamer
-      function saveStreamerMemory() {
-        try {
-          const val = elements.inputParticipant.value.trim();
-          if (val) {
-            localStorage.setItem('oes_streamer_input', val);
-          }
-          localStorage.setItem('oes_streamer_layout', elements.selectLayout.value);
-          localStorage.setItem('oes_streamer_mode', elements.selectMode.value);
-          localStorage.setItem('oes_streamer_theme', elements.selectTheme.value);
-          localStorage.setItem('oes_streamer_interval', String(currentInterval));
-          if (elements.savedNotice) elements.savedNotice.style.display = 'flex';
-        } catch (e) {
-          console.warn('LocalStorage non disponible', e);
-        }
-      }
-
-      function updateOptionMemory() {
-        try {
-          if (localStorage.getItem('oes_streamer_input')) {
-            localStorage.setItem('oes_streamer_layout', elements.selectLayout.value);
-            localStorage.setItem('oes_streamer_mode', elements.selectMode.value);
-            localStorage.setItem('oes_streamer_theme', elements.selectTheme.value);
-            localStorage.setItem('oes_streamer_interval', String(currentInterval));
-          }
-        } catch (e) {}
-      }
-
-      function forgetStreamerMemory() {
-        try {
-          localStorage.removeItem('oes_streamer_input');
-          localStorage.removeItem('oes_streamer_layout');
-          localStorage.removeItem('oes_streamer_mode');
-          localStorage.removeItem('oes_streamer_theme');
-          localStorage.removeItem('oes_streamer_interval');
-        } catch (e) {}
-        detectedParticipant = null;
-        elements.inputParticipant.value = '';
-        renderProfile();
-        if (elements.savedNotice) elements.savedNotice.style.display = 'none';
-        updateGeneratedUrls();
-        showToast('Identifiant et préférences oubliés avec succès ! 🗑️');
-      }
-
-      function restoreSavedStreamer() {
-        try {
-          const savedInput = localStorage.getItem('oes_streamer_input');
-          if (savedInput) {
-            elements.inputParticipant.value = savedInput;
-
-            const savedLayout = localStorage.getItem('oes_streamer_layout');
-            const savedMode = localStorage.getItem('oes_streamer_mode');
-            const savedTheme = localStorage.getItem('oes_streamer_theme');
-            const savedInterval = localStorage.getItem('oes_streamer_interval');
-
-            if (savedLayout && elements.selectLayout.querySelector(`option[value="${savedLayout}"]`)) {
-              elements.selectLayout.value = savedLayout;
-            }
-            if (savedMode && elements.selectMode.querySelector(`option[value="${savedMode}"]`)) {
-              elements.selectMode.value = savedMode;
-            }
-            if (savedTheme && elements.selectTheme.querySelector(`option[value="${savedTheme}"]`)) {
-              elements.selectTheme.value = savedTheme;
-            }
-            if (savedInterval) {
-              const num = parseInt(savedInterval, 10);
-              if (!isNaN(num)) setIntervalValue(num);
-            }
-
-            if (elements.savedNotice) elements.savedNotice.style.display = 'flex';
-            const rawId = extractId(savedInput);
-            if (rawId) {
-              detectStreamerInfo(rawId);
-              return true;
-            }
-          }
-        } catch (e) {
-          console.warn('Erreur lecture localStorage', e);
-        }
-        return false;
-      }
-
-      // Événements de changement
-      elements.btnDetect.addEventListener('click', () => {
-        const rawId = extractId(elements.inputParticipant.value);
-        if (rawId) {
-          detectStreamerInfo(rawId);
-        } else {
-          showToast('Veuillez entrer un ID de participant ou lien Extra Life.');
-        }
-      });
-
-      elements.inputParticipant.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-          e.preventDefault();
-          elements.btnDetect.click();
-        }
-      });
-
-      if (elements.btnForget) {
-        elements.btnForget.addEventListener('click', forgetStreamerMemory);
-      }
-
-      elements.inputParticipant.addEventListener('input', () => {
-        updateGeneratedUrls();
-      });
-
-      elements.selectMode.addEventListener('change', () => {
-        updateGeneratedUrls();
-        updateOptionMemory();
-      });
-      elements.selectTheme.addEventListener('change', () => {
-        updateThemePanelVisibility();
-        updateGeneratedUrls();
-        updateOptionMemory();
-      });
-      elements.selectLayout.addEventListener('change', () => {
-        updateGeneratedUrls();
-        updateOptionMemory();
-      });
-
-      // Liaison bidirectionnelle des palettes de couleurs personnalisées
-      function bindColorPair(colorInput, hexInput, swatchEl, key) {
-        if (!colorInput || !hexInput) return;
-        colorInput.addEventListener('input', () => {
-          hexInput.value = colorInput.value.toUpperCase();
-          if (swatchEl) swatchEl.style.backgroundColor = colorInput.value;
-          customPalette[key] = colorInput.value;
-          saveCustomPaletteMemory();
-          updateGeneratedUrls();
-        });
-        hexInput.addEventListener('input', () => {
-          let val = hexInput.value.trim();
-          if (!val.startsWith('#')) val = '#' + val;
-          if (/^#[0-9A-Fa-f]{6}$/.test(val)) {
-            colorInput.value = val;
-            if (swatchEl) swatchEl.style.backgroundColor = val;
-            customPalette[key] = val;
-            saveCustomPaletteMemory();
-            updateGeneratedUrls();
-          }
-        });
-        hexInput.addEventListener('blur', () => {
-          hexInput.value = customPalette[key].toUpperCase();
-          if (swatchEl) swatchEl.style.backgroundColor = customPalette[key];
-        });
-      }
-
-      bindColorPair(elements.colorCustomBg, elements.hexCustomBg, elements.swatchCustomBg, 'bg');
-      bindColorPair(elements.colorCustomCard, elements.hexCustomCard, elements.swatchCustomCard, 'card');
-      bindColorPair(elements.colorCustomAccent, elements.hexCustomAccent, elements.swatchCustomAccent, 'accent');
-      bindColorPair(elements.colorCustomText, elements.hexCustomText, elements.swatchCustomText, 'text');
-
-      if (elements.selectCustomLogo) {
-        elements.selectCustomLogo.addEventListener('change', () => {
-          customPalette.logo = elements.selectCustomLogo.value;
-          updateCustomLogoVisibility();
-          saveCustomPaletteMemory();
-          updateGeneratedUrls();
-        });
-      }
-
-      if (elements.inputCustomLogoUrl) {
-        elements.inputCustomLogoUrl.addEventListener('input', () => {
-          customPalette.logoUrl = elements.inputCustomLogoUrl.value.trim();
-          saveCustomPaletteMemory();
-          updateGeneratedUrls();
-        });
-      }
-
-      if (elements.btnResetCustomTheme) {
-        elements.btnResetCustomTheme.addEventListener('click', () => {
-          customPalette = { ...DEFAULT_CUSTOM_PALETTE };
-          applyCustomPaletteToInputs();
-          saveCustomPaletteMemory();
-          updateGeneratedUrls();
-          showToast('Palette réinitialisée aux couleurs par défaut ! ↺');
-        });
-      }
-
-      // Initialisation des données et mémoires
-      loadCustomPaletteMemory();
-      updateThemePanelVisibility();
-
-      // Initialisation : restaure le profil s'il était déjà mémorisé, sinon initialise avec 582063 par défaut
-      const hadSaved = restoreSavedStreamer();
-      if (!hadSaved) {
-        elements.inputParticipant.value = '582063';
-        detectStreamerInfo('582063');
-      } else {
-        updateThemePanelVisibility();
-      }
-    })();
-  </script>
 </body>
 </html>
