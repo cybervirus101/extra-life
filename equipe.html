@@ -556,9 +556,38 @@
     }
 
     /* Nuancier de couleurs */
+    .color-section-group {
+      margin-bottom: 24px;
+    }
+
+    .color-group-heading {
+      font-size: 15px;
+      font-weight: 800;
+      color: #FFFFFF;
+      margin-top: 18px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 6px;
+      border-bottom: 1.5px solid rgba(28, 158, 214, 0.25);
+    }
+
+    .color-group-heading .badge-palette {
+      font-size: 11px;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 12px;
+      background: rgba(28, 158, 214, 0.2);
+      color: var(--el-cyan-light);
+      border: 1px solid rgba(28, 158, 214, 0.4);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
     .color-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
       gap: 14px;
     }
 
@@ -567,9 +596,11 @@
       border: 1.5px solid rgba(28, 158, 214, 0.3);
       border-radius: 12px;
       padding: 12px;
-      text-align: center;
+      text-align: left;
       cursor: pointer;
       transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
     }
 
     .color-card:hover {
@@ -580,7 +611,7 @@
 
     .color-swatch {
       width: 100%;
-      height: 55px;
+      height: 50px;
       border-radius: 8px;
       margin-bottom: 10px;
       box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.4);
@@ -588,17 +619,24 @@
     }
 
     .color-name {
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 800;
       color: #FFFFFF;
       margin-bottom: 2px;
     }
 
     .color-hex {
-      font-size: 13px;
+      font-size: 13.5px;
       font-weight: 900;
       color: var(--el-cyan-light);
       font-family: monospace;
+      margin-bottom: 4px;
+    }
+
+    .color-meta {
+      font-size: 10.5px;
+      color: var(--el-text-dim);
+      line-height: 1.4;
     }
 
     /* Toast Notification */
@@ -891,43 +929,32 @@
       <section class="card">
         <div class="card-title">
           <div class="icon-badge">💬</div>
-          <span>Slogans & Messages Officiels Prêts à Copier</span>
+          <span>Slogans & Messages Officiels</span>
         </div>
         <div class="card-subtitle">
-          Copiez en un clic les phrases clés pour votre bio Twitch, vos panneaux et vos annonces en direct.
+          Phrases clés officielles prêtes à copier en un clic pour vos streams, panneaux et annonces.
         </div>
 
         <div class="slogans-list">
 
-          <!-- Slogan Officiel de l'Équipe -->
+          <!-- Slogan Officiel -->
           <div class="slogan-box">
             <div class="slogan-content">
-              <span class="slogan-badge">Slogan Officiel de l'Équipe</span>
+              <span class="slogan-badge">Slogan Officiel (Opération Enfant Soleil)</span>
+              <div class="slogan-text">« Pour que nos soleils brillent de santé »</div>
+            </div>
+            <button class="btn btn-secondary btn-copy-text" data-text="Pour que nos soleils brillent de santé">
+              📋 Copier
+            </button>
+          </div>
+
+          <!-- Slogan d'Équipe -->
+          <div class="slogan-box">
+            <div class="slogan-content">
+              <span class="slogan-badge">Slogan d'Équipe (Les alliés du soleil)</span>
               <div class="slogan-text">« Le rêve d'un enfant au bout des doigts »</div>
             </div>
             <button class="btn btn-secondary btn-copy-text" data-text="Le rêve d'un enfant au bout des doigts">
-              📋 Copier
-            </button>
-          </div>
-
-          <!-- Slogan Campagne -->
-          <div class="slogan-box">
-            <div class="slogan-content">
-              <span class="slogan-badge">Slogan de Campagne</span>
-              <div class="slogan-text">« Jouer pour guérir les petits miracles du Québec avec Extra Life et Opération Enfant Soleil. »</div>
-            </div>
-            <button class="btn btn-secondary btn-copy-text" data-text="Jouer pour guérir les petits miracles du Québec avec Extra Life et Opération Enfant Soleil.">
-              📋 Copier
-            </button>
-          </div>
-
-          <!-- Slogan Équipe -->
-          <div class="slogan-box">
-            <div class="slogan-content">
-              <span class="slogan-badge">Slogan d'Équipe</span>
-              <div class="slogan-text">« Tous unis sous le soleil : chaque don fait une réelle différence pour les enfants hospitalisés et leurs familles. »</div>
-            </div>
-            <button class="btn btn-secondary btn-copy-text" data-text="Tous unis sous le soleil : chaque don fait une réelle différence pour les enfants hospitalisés et leurs familles.">
               📋 Copier
             </button>
           </div>
@@ -937,10 +964,10 @@
             <div class="slogan-content">
               <span class="slogan-badge">Texte pour Panneau Twitch / Bio</span>
               <div class="slogan-text">
-                Durant ce stream, nous amassons des dons pour Extra Life afin de soutenir les hôpitaux pédiatriques d'Opération Enfant Soleil. 100% des dons vont directement aux soins et équipements médicaux pour les enfants malades.
+                Durant ce stream, nous amassons des dons pour Extra Life afin de soutenir Opération Enfant Soleil : pour que nos soleils brillent de santé ! 100% des dons vont directement aux soins et équipements médicaux pour les enfants malades.
               </div>
             </div>
-            <button class="btn btn-secondary btn-copy-text" data-text="Durant ce stream, nous amassons des dons pour Extra Life afin de soutenir les hôpitaux pédiatriques d'Opération Enfant Soleil. 100% des dons vont directement aux soins et équipements médicaux pour les enfants malades.">
+            <button class="btn btn-secondary btn-copy-text" data-text="Durant ce stream, nous amassons des dons pour Extra Life afin de soutenir Opération Enfant Soleil : pour que nos soleils brillent de santé ! 100% des dons vont directement aux soins et équipements médicaux pour les enfants malades.">
               📋 Copier
             </button>
           </div>
@@ -964,10 +991,10 @@
             <div class="slogan-content">
               <span class="slogan-badge">Publication Réseaux Sociaux (Twitter / X / Discord)</span>
               <div class="slogan-text">
-                🎮 EN LIVE POUR LA BONNE CAUSE ! Aujourd'hui on joue pour soutenir @EnfantSoleil via @ExtraLife4Kids ! Venez nous encourager et faites la différence pour les petits guerriers du Québec 💛
+                🎮 EN LIVE POUR LA BONNE CAUSE ! Aujourd'hui on joue avec notre équipe Les alliés du soleil pour soutenir @EnfantSoleil via @ExtraLife4Kids ! « Pour que nos soleils brillent de santé » 💛 Venez nous encourager !
               </div>
             </div>
-            <button class="btn btn-secondary btn-copy-text" data-text="🎮 EN LIVE POUR LA BONNE CAUSE ! Aujourd'hui on joue pour soutenir @EnfantSoleil via @ExtraLife4Kids ! Venez nous encourager et faites la différence pour les petits guerriers du Québec 💛">
+            <button class="btn btn-secondary btn-copy-text" data-text="🎮 EN LIVE POUR LA BONNE CAUSE ! Aujourd'hui on joue avec notre équipe Les alliés du soleil pour soutenir @EnfantSoleil via @ExtraLife4Kids ! « Pour que nos soleils brillent de santé » 💛 Venez nous encourager !">
               📋 Copier
             </button>
           </div>
@@ -975,228 +1002,270 @@
         </div>
       </section>
 
-      <!-- Section 3 : Panneaux Twitch & Bannières Prêtes à l'Emploi -->
-      <section class="card">
-        <div class="card-title">
-          <div class="icon-badge">🖼️</div>
-          <span>Bannières & Panneaux Twitch Prêts à l'Emploi</span>
-        </div>
-        <div class="card-subtitle">
-          Graphiques pré-conçus aux dimensions exactes pour habiller votre chaîne Twitch ou vos réseaux sociaux.
-        </div>
-
-        <div class="resource-grid">
-
-          <!-- Panneau Twitch Faire un don -->
-          <div class="resource-card">
-            <div>
-              <div class="resource-preview" style="height: 120px;">
-                <span class="resource-tag">320 × 100 px</span>
-                <img src="assets/panneau-twitch-don.svg" alt="Panneau Twitch Faire un don">
-              </div>
-              <div class="resource-meta">
-                <h4>Panneau Twitch — Faire un don</h4>
-                <p>Bouton officiel prêt à insérer sous votre stream Twitch.</p>
-              </div>
-            </div>
-            <div class="resource-actions">
-              <a href="assets/panneau-twitch-don.svg" download="panneau-twitch-don.svg" class="btn btn-primary">
-                📥 Télécharger
-              </a>
-              <button class="btn btn-secondary btn-copy-url" data-url="assets/panneau-twitch-don.svg">
-                📋 Lien direct
-              </button>
-            </div>
-          </div>
-
-          <!-- Panneau Twitch Notre Équipe -->
-          <div class="resource-card">
-            <div>
-              <div class="resource-preview" style="height: 120px;">
-                <span class="resource-tag">320 × 100 px</span>
-                <img src="assets/panneau-twitch-equipe.svg" alt="Panneau Twitch Notre Équipe">
-              </div>
-              <div class="resource-meta">
-                <h4>Panneau Twitch — Notre Équipe</h4>
-                <p>Bouton d'équipe avec logo et couleurs officielles.</p>
-              </div>
-            </div>
-            <div class="resource-actions">
-              <a href="assets/panneau-twitch-equipe.svg" download="panneau-twitch-equipe.svg" class="btn btn-primary">
-                📥 Télécharger
-              </a>
-              <button class="btn btn-secondary btn-copy-url" data-url="assets/panneau-twitch-equipe.svg">
-                📋 Lien direct
-              </button>
-            </div>
-          </div>
-
-          <!-- Bannière Live Caritatif -->
-          <div class="resource-card" style="grid-column: 1 / -1;">
-            <div>
-              <div class="resource-preview" style="height: 180px;">
-                <span class="resource-tag">1200 × 480 px</span>
-                <img src="assets/banniere-live-caritatif.svg" alt="Bannière Live Caritatif">
-              </div>
-              <div class="resource-meta">
-                <h4>Bannière Officielle — En Direct pour la Cause</h4>
-                <p>Bannière haute résolution pour vos annonces de stream, réseaux sociaux ou en-tête Discord.</p>
-              </div>
-            </div>
-            <div class="resource-actions">
-              <a href="assets/banniere-live-caritatif.svg" download="banniere-live-caritatif.svg" class="btn btn-primary">
-                📥 Télécharger la bannière HD
-              </a>
-              <button class="btn btn-secondary btn-copy-url" data-url="assets/banniere-live-caritatif.svg">
-                📋 Lien direct
-              </button>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      <!-- Section 4 : Overlays & Alertes Dédiés à l'Équipe -->
-      <section class="card">
-        <div class="card-title">
-          <div class="icon-badge">🎮</div>
-          <span>Overlays OBS & Alertes Sonores de l'Équipe</span>
-        </div>
-        <div class="card-subtitle">
-          Intégrez directement la cagnotte globale et les alertes de votre équipe dans votre logiciel de stream.
-        </div>
-
-        <div class="resource-grid">
-
-          <!-- Overlay Mode Équipe -->
-          <div class="resource-card">
-            <div>
-              <div class="resource-meta">
-                <span class="resource-tag" style="position: static; margin-bottom: 8px; display: inline-block;">OBS Browser Source</span>
-                <h4>Overlay Bannière — Cagnotte d'Équipe</h4>
-                <p>Affiche le total cumulé de l'équipe, la barre d'objectif collective et les derniers dons reçus par l'ensemble des membres.</p>
-              </div>
-            </div>
-            <div class="resource-actions" style="margin-top: 14px;">
-              <button id="btn-copy-team-overlay" class="btn btn-primary">
-                📋 Copier le lien OBS
-              </button>
-              <a id="btn-test-team-overlay" href="#" target="_blank" class="btn btn-secondary">
-                👁️ Tester
-              </a>
-            </div>
-          </div>
-
-          <!-- Overlay Mode Alternance -->
-          <div class="resource-card">
-            <div>
-              <div class="resource-meta">
-                <span class="resource-tag" style="position: static; margin-bottom: 8px; display: inline-block;">OBS Browser Source</span>
-                <h4>Overlay Hybride — Alternance Streamer ⇄ Équipe</h4>
-                <p>Alterne intelligemment toutes les 30 secondes entre votre objectif individuel et la cagnotte globale de l'équipe.</p>
-              </div>
-            </div>
-            <div class="resource-actions" style="margin-top: 14px;">
-              <button id="btn-copy-alt-overlay" class="btn btn-primary">
-                📋 Copier le lien OBS
-              </button>
-              <a id="btn-test-alt-overlay" href="#" target="_blank" class="btn btn-secondary">
-                👁️ Tester
-              </a>
-            </div>
-          </div>
-
-          <!-- Alerte Pop-up Équipe -->
-          <div class="resource-card">
-            <div>
-              <div class="resource-meta">
-                <span class="resource-tag" style="position: static; margin-bottom: 8px; display: inline-block;">Alerte Sonore</span>
-                <h4>Alerte Pop-Up de Don d'Équipe</h4>
-                <p>Jingle sonore et pop-up visuelle en direct chaque fois qu'un don est reçu pour votre équipe sur Extra Life.</p>
-              </div>
-            </div>
-            <div class="resource-actions" style="margin-top: 14px;">
-              <button id="btn-copy-team-alert" class="btn btn-primary">
-                📋 Copier le lien OBS
-              </button>
-              <a id="btn-test-team-alert" href="#" target="_blank" class="btn btn-secondary">
-                🔔 Tester l'alerte
-              </a>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      <!-- Section 5 : Charte Graphique & Couleurs Officielles -->
+      <!-- Section 3 : Charte Graphique & Couleurs Officielles -->
       <section class="card">
         <div class="card-title">
           <div class="icon-badge">🎨</div>
           <span>Charte Graphique & Couleurs Officielles</span>
         </div>
         <div class="card-subtitle">
-          Cliquez sur une couleur pour copier instantanément son code hexadécimal dans votre presse-papier.
+          Références officielles complètes (HEX, CMJN, RVB et Pantone). Cliquez sur une carte pour copier instantanément son code hexadécimal.
         </div>
 
-        <div class="color-grid">
+        <!-- ☀️ SOUS-SECTION OPÉRATION ENFANT SOLEIL -->
+        <div class="color-section-group">
+          <h3 class="color-group-heading" style="color: var(--el-jaune-or); font-size: 18px; margin-top: 10px;">
+            <span>☀️ Opération Enfant Soleil</span>
+            <span class="badge-palette">Charte Officielle</span>
+          </h3>
 
-          <div class="color-card" data-hex="#FFD000">
-            <div class="color-swatch" style="background: #FFD000;"></div>
-            <div class="color-name">Jaune Soleil</div>
-            <div class="color-hex">#FFD000</div>
+          <!-- Couleurs Principales -->
+          <div class="color-group-heading">
+            <span>Couleurs Principales</span>
+          </div>
+          <div class="color-grid">
+
+            <div class="color-card" data-hex="#FFD000">
+              <div class="color-swatch" style="background: #FFD000;"></div>
+              <div class="color-name">Jaune Soleil</div>
+              <div class="color-hex">#FFD000</div>
+              <div class="color-meta">
+                CMJN: C0 M17 Y100 K0<br>
+                RVB: 255, 208, 0<br>
+                Pantone: 109C / 109U
+              </div>
+            </div>
+
+            <div class="color-card" data-hex="#F15029">
+              <div class="color-swatch" style="background: #F15029;"></div>
+              <div class="color-name">Rouge santé</div>
+              <div class="color-hex">#F15029</div>
+              <div class="color-meta">
+                CMJN: C0 M84 Y95 K0<br>
+                RVB: 241, 80, 41<br>
+                Pantone: 2028C / 2028U
+              </div>
+            </div>
+
           </div>
 
-          <div class="color-card" data-hex="#1C9ED6">
-            <div class="color-swatch" style="background: #1C9ED6;"></div>
-            <div class="color-name">Cyan Extra Life</div>
-            <div class="color-hex">#1C9ED6</div>
+          <!-- Palette Complémentaire -->
+          <div class="color-group-heading">
+            <span>Palette Complémentaire</span>
+          </div>
+          <div class="color-grid">
+
+            <div class="color-card" data-hex="#FAF39B">
+              <div class="color-swatch" style="background: #FAF39B;"></div>
+              <div class="color-name">Jaune matin</div>
+              <div class="color-hex">#FAF39B</div>
+              <div class="color-meta">
+                CMJN: C3 M0 Y48 K0<br>
+                RVB: 250, 243, 155<br>
+                Pantone: 601C / 601U
+              </div>
+            </div>
+
+            <div class="color-card" data-hex="#F7EB24">
+              <div class="color-swatch" style="background: #F7EB24;"></div>
+              <div class="color-name">Jaune étoile</div>
+              <div class="color-hex">#F7EB24</div>
+              <div class="color-meta">
+                CMJN: C6 M0 Y94 K0<br>
+                RVB: 247, 235, 36<br>
+                Pantone: 102C / Yellow
+              </div>
+            </div>
+
+            <div class="color-card" data-hex="#F5AC1C">
+              <div class="color-swatch" style="background: #F5AC1C;"></div>
+              <div class="color-name">Orange</div>
+              <div class="color-hex">#F5AC1C</div>
+              <div class="color-meta">
+                CMJN: C3 M36 Y100 K0<br>
+                RVB: 245, 172, 28<br>
+                Pantone: 130C / 7549U
+              </div>
+            </div>
+
+            <div class="color-card" data-hex="#F58227">
+              <div class="color-swatch" style="background: #F58227;"></div>
+              <div class="color-name">Tangerine</div>
+              <div class="color-hex">#F58227</div>
+              <div class="color-meta">
+                CMJN: C0 M60 Y97 K0<br>
+                RVB: 245, 130, 39<br>
+                Pantone: 6019C / 144U
+              </div>
+            </div>
+
+            <div class="color-card" data-hex="#F48E99">
+              <div class="color-swatch" style="background: #F48E99;"></div>
+              <div class="color-name">Rose</div>
+              <div class="color-hex">#F48E99</div>
+              <div class="color-meta">
+                CMJN: C0 M55 Y24 K0<br>
+                RVB: 244, 142, 153<br>
+                Pantone: 6051C / 6050U
+              </div>
+            </div>
+
+            <div class="color-card" data-hex="#EF6E63">
+              <div class="color-swatch" style="background: #EF6E63;"></div>
+              <div class="color-name">Corail</div>
+              <div class="color-hex">#EF6E63</div>
+              <div class="color-meta">
+                CMJN: C0 M71 Y58 K0<br>
+                RVB: 239, 110, 99<br>
+                Pantone: 2346C / 2345U
+              </div>
+            </div>
+
           </div>
 
-          <div class="color-card" data-hex="#70D3FF">
-            <div class="color-swatch" style="background: #70D3FF;"></div>
-            <div class="color-name">Cyan Lumineux</div>
-            <div class="color-hex">#70D3FF</div>
+          <!-- Palette Utilitaire -->
+          <div class="color-group-heading">
+            <span>Palette Utilitaire</span>
           </div>
+          <div class="color-grid">
 
-          <div class="color-card" data-hex="#F15029">
-            <div class="color-swatch" style="background: #F15029;"></div>
-            <div class="color-name">Rouge Santé</div>
-            <div class="color-hex">#F15029</div>
+            <div class="color-card" data-hex="#FAF7F0">
+              <div class="color-swatch" style="background: #FAF7F0; border: 1px solid rgba(255,255,255,0.4);"></div>
+              <div class="color-name">Blanc chaud</div>
+              <div class="color-hex">#FAF7F0</div>
+              <div class="color-meta">
+                CMJN: C1 M2 Y4 K0<br>
+                RVB: 250, 247, 240<br>
+                Pantone: 9100C / 9100U
+              </div>
+            </div>
+
+            <div class="color-card" data-hex="#252625">
+              <div class="color-swatch" style="background: #252625; border: 1px solid rgba(255,255,255,0.2);"></div>
+              <div class="color-name">Noir velours</div>
+              <div class="color-hex">#252625</div>
+              <div class="color-meta">
+                CMJN: C71 M64 Y65 K70<br>
+                RVB: 37, 38, 37<br>
+                Pantone: Black 7C / Black 6U
+              </div>
+            </div>
+
           </div>
-
-          <div class="color-card" data-hex="#62AF0F">
-            <div class="color-swatch" style="background: #62AF0F;"></div>
-            <div class="color-name">Vert Manette</div>
-            <div class="color-hex">#62AF0F</div>
-          </div>
-
-          <div class="color-card" data-hex="#0C1829">
-            <div class="color-swatch" style="background: #0C1829; border: 1px solid #1C9ED6;"></div>
-            <div class="color-name">Bleu Nuit OBS</div>
-            <div class="color-hex">#0C1829</div>
-          </div>
-
-          <div class="color-card" data-hex="#004B87">
-            <div class="color-swatch" style="background: #004B87;"></div>
-            <div class="color-name">Bleu CMN</div>
-            <div class="color-hex">#004B87</div>
-          </div>
-
         </div>
-      </section>
 
-      <!-- Section 6 : Informations d'Hébergement & Stockage -->
-      <section class="card" style="background: linear-gradient(180deg, #10243C 0%, #0A1424 100%); border-color: rgba(28, 158, 214, 0.4);">
-        <div class="card-title">
-          <div class="icon-badge">💡</div>
-          <span>Hébergement & Ajout de Nouvelles Photos</span>
+        <!-- 🎮 SOUS-SECTION EXTRA LIFE & CMN -->
+        <div class="color-section-group" style="margin-top: 36px;">
+          <h3 class="color-group-heading" style="color: var(--el-cyan-light); font-size: 18px;">
+            <span>🎮 Extra Life & Children's Miracle Network</span>
+            <span class="badge-palette">Charte Officielle</span>
+          </h3>
+
+          <!-- Couleurs Principales Extra Life -->
+          <div class="color-group-heading">
+            <span>Couleurs Principales Extra Life</span>
+          </div>
+          <div class="color-grid">
+
+            <div class="color-card" data-hex="#1D9ED6">
+              <div class="color-swatch" style="background: #1D9ED6;"></div>
+              <div class="color-name">Cyan Extra Life</div>
+              <div class="color-hex">#1D9ED6</div>
+              <div class="color-meta">
+                CMJN: C75 M20 Y0 K0<br>
+                RVB: 29, 158, 214<br>
+                Pantone: 299 C
+              </div>
+            </div>
+
+            <div class="color-card" data-hex="#FFCB05">
+              <div class="color-swatch" style="background: #FFCB05;"></div>
+              <div class="color-name">Or Manette Extra Life</div>
+              <div class="color-hex">#FFCB05</div>
+              <div class="color-meta">
+                CMJN: C0 M18 Y98 K0<br>
+                RVB: 255, 203, 5<br>
+                Pantone: 116 C / 1235 C
+              </div>
+            </div>
+
+            <div class="color-card" data-hex="#0D7CA3">
+              <div class="color-swatch" style="background: #0D7CA3;"></div>
+              <div class="color-name">Bleu CMN Hospitals</div>
+              <div class="color-hex">#0D7CA3</div>
+              <div class="color-meta">
+                CMJN: C85 M35 Y15 K5<br>
+                RVB: 13, 124, 163<br>
+                Pantone: 307 C
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Palette Gaming & Secondaire Extra Life -->
+          <div class="color-group-heading">
+            <span>Palette Gaming & Secondaire Extra Life</span>
+          </div>
+          <div class="color-grid">
+
+            <div class="color-card" data-hex="#62AF0F">
+              <div class="color-swatch" style="background: #62AF0F;"></div>
+              <div class="color-name">Vert Manette (Level Up)</div>
+              <div class="color-hex">#62AF0F</div>
+              <div class="color-meta">
+                CMJN: C60 M0 Y100 K0<br>
+                RVB: 98, 175, 15<br>
+                Pantone: 368 C
+              </div>
+            </div>
+
+            <div class="color-card" data-hex="#FA6400">
+              <div class="color-swatch" style="background: #FA6400;"></div>
+              <div class="color-name">Orange Dés Extra Life</div>
+              <div class="color-hex">#FA6400</div>
+              <div class="color-meta">
+                CMJN: C0 M75 Y100 K0<br>
+                RVB: 250, 100, 0<br>
+                Pantone: 1585 C
+              </div>
+            </div>
+
+            <div class="color-card" data-hex="#0C1829">
+              <div class="color-swatch" style="background: #0C1829; border: 1px solid #1D9ED6;"></div>
+              <div class="color-name">Bleu Nuit Extra Life</div>
+              <div class="color-hex">#0C1829</div>
+              <div class="color-meta">
+                CMJN: C88 M74 Y48 K60<br>
+                RVB: 12, 24, 41<br>
+                Fond OBS & Portail
+              </div>
+            </div>
+
+            <div class="color-card" data-hex="#F4CD30">
+              <div class="color-swatch" style="background: #F4CD30;"></div>
+              <div class="color-name">Jaune CMN Signature</div>
+              <div class="color-hex">#F4CD30</div>
+              <div class="color-meta">
+                CMJN: C5 M18 Y90 K0<br>
+                RVB: 244, 205, 48<br>
+                Pantone: 7406 C
+              </div>
+            </div>
+
+            <div class="color-card" data-hex="#B31943">
+              <div class="color-swatch" style="background: #B31943;"></div>
+              <div class="color-name">Rouge CMN Signature</div>
+              <div class="color-hex">#B31943</div>
+              <div class="color-meta">
+                CMJN: C15 M100 Y65 K10<br>
+                RVB: 179, 25, 67<br>
+                Pantone: 193 C
+              </div>
+            </div>
+
+          </div>
         </div>
-        <div class="card-subtitle" style="margin-bottom: 12px;">
-          Vous disposez de <strong>1 Go de stockage</strong> gratuit et d'une distribution CDN mondiale rapide sur votre site GitHub Pages.
-        </div>
-        <p style="font-size: 13.5px; color: var(--el-text-sub); line-height: 1.6;">
-          Pour ajouter de nouvelles photos ou ressources à cette page, déposez simplement vos fichiers dans le dossier <code>assets/</code> de votre projet et déployez. Privilégiez le format <strong>WebP</strong> ou <strong>PNG optimisé</strong> (entre 100 Ko et 500 Ko) pour un chargement instantané.
-        </p>
+
       </section>
 
     </div>
@@ -1240,13 +1309,7 @@
         toast: document.getElementById('toast'),
         toastMessage: document.getElementById('toast-message'),
         cmdDonDisplay: document.getElementById('cmd-don-display'),
-        btnCopyCmdDon: document.getElementById('btn-copy-cmd-don'),
-        btnCopyTeamOverlay: document.getElementById('btn-copy-team-overlay'),
-        btnTestTeamOverlay: document.getElementById('btn-test-team-overlay'),
-        btnCopyAltOverlay: document.getElementById('btn-copy-alt-overlay'),
-        btnTestAltOverlay: document.getElementById('btn-test-alt-overlay'),
-        btnCopyTeamAlert: document.getElementById('btn-copy-team-alert'),
-        btnTestTeamAlert: document.getElementById('btn-test-team-alert')
+        btnCopyCmdDon: document.getElementById('btn-copy-cmd-don')
       };
 
       function showToast(msg) {
@@ -1418,24 +1481,6 @@
         if (elements.btnCopyCmdDon) {
           elements.btnCopyCmdDon.onclick = () => copyText(cmdText, 'Commande chatbot !don copiée ! 💬');
         }
-
-        // URLs d'overlays dédiées à l'équipe
-        const baseOverlayUrl = getAbsoluteUrl('index.html').replace('equipe.html', '');
-        
-        // 1. Overlay Team
-        const teamOverlayUrl = `${baseOverlayUrl}?mode=team&teamID=${currentParticipant.teamID}`;
-        elements.btnCopyTeamOverlay.onclick = () => copyText(teamOverlayUrl, 'URL Overlay Équipe copiée pour OBS ! 🎮');
-        elements.btnTestTeamOverlay.href = teamOverlayUrl;
-
-        // 2. Overlay Alternance
-        const altOverlayUrl = `${baseOverlayUrl}?mode=alternance&participantID=${currentParticipant.participantID}&teamID=${currentParticipant.teamID}&interval=30`;
-        elements.btnCopyAltOverlay.onclick = () => copyText(altOverlayUrl, 'URL Overlay Alternance copiée pour OBS ! 🎮');
-        elements.btnTestAltOverlay.href = altOverlayUrl;
-
-        // 3. Alerte Pop-up Équipe
-        const teamAlertUrl = `${baseOverlayUrl}alert.html?mode=team&teamID=${currentParticipant.teamID}`;
-        elements.btnCopyTeamAlert.onclick = () => copyText(teamAlertUrl, 'URL Alerte Équipe copiée pour OBS ! 🔔');
-        elements.btnTestTeamAlert.href = teamAlertUrl;
       }
 
       function switchAccount() {
