@@ -870,8 +870,10 @@
 
     .nav-brand img {
       height: 44px;
-      width: auto;
-      filter: drop-shadow(0 2px 8px rgba(28, 158, 214, 0.5));
+      width: 44px;
+      object-fit: contain;
+      border-radius: 50%;
+      filter: drop-shadow(0 0 10px rgba(255, 208, 0, 0.5));
     }
 
     .nav-tabs {
@@ -928,7 +930,7 @@
     <!-- Barre de navigation principale en onglets bien évidents -->
     <nav class="top-nav">
       <a href="index.html" class="nav-brand">
-        <img src="assets/logo-extra-life-icon.svg" alt="Extra Life">
+        <img src="assets/logo-allies-du-soleil.png" alt="Les alliés du soleil">
         <span>Les alliés du soleil</span>
       </a>
       <div class="nav-tabs">
@@ -1212,7 +1214,7 @@
     </section>
 
     <!-- Étape 4 : Kit Twitch (Liens & Panneaux) -->
-    <section class="step-card">
+    <section id="section-twitch" class="step-card">
       <div class="step-title">
         <span class="step-number">4</span>
         <span>Panneau Twitch & Commandes de Chatbot</span>
@@ -1242,7 +1244,7 @@
       </div>
 
       <!-- Commandes de Bots -->
-      <h4 style="font-size: 15px; margin-top: 24px; margin-bottom: 6px; color: #FFFFFF;">🤖 Commandes de Chatbot prêtes à copier</h4>
+      <h4 id="section-chatbot" style="font-size: 15px; margin-top: 24px; margin-bottom: 6px; color: #FFFFFF;">🤖 Commandes de Chatbot prêtes à copier</h4>
       <p style="font-size: 13px; color: var(--el-text-sub); margin-bottom: 10px;">
         💡 <em>Note sur <code>$(user)</code> : cette variable insère automatiquement le nom du spectateur qui tape la commande. Elle fonctionne nativement sur <strong>Nightbot</strong>, <strong>StreamElements</strong>, <strong>Streamlabs Cloudbot</strong>, <strong>Wizebot</strong>, <strong>Firebot</strong> et <strong>Fossabot</strong>.</em>
       </p>
@@ -2092,13 +2094,26 @@ Durant ce live, nous amassons des dons pour Extra Life afin de soutenir les soin
       loadCustomPaletteMemory();
       updateThemePanelVisibility();
 
-      // Initialisation : restaure le profil s'il était déjà mémorisé, sinon initialise avec 582063 par défaut
-      const hadSaved = restoreSavedStreamer();
-      if (!hadSaved) {
-        elements.inputParticipant.value = '582063';
-        detectStreamerInfo('582063');
+      // Initialisation : vérifie d'abord les paramètres d'URL, puis restaure le profil s'il était déjà mémorisé
+      const urlQuery = new URLSearchParams(window.location.search);
+      const paramId = urlQuery.get('participantID') || urlQuery.get('id');
+      if (paramId) {
+        const rawId = extractId(paramId);
+        if (rawId) {
+          elements.inputParticipant.value = rawId;
+          detectStreamerInfo(rawId);
+        } else {
+          elements.inputParticipant.value = '582063';
+          detectStreamerInfo('582063');
+        }
       } else {
-        updateThemePanelVisibility();
+        const hadSaved = restoreSavedStreamer();
+        if (!hadSaved) {
+          elements.inputParticipant.value = '582063';
+          detectStreamerInfo('582063');
+        } else {
+          updateThemePanelVisibility();
+        }
       }
     })();
   </script>
