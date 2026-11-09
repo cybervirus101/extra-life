@@ -405,19 +405,53 @@
     .card-top {
       display: flex;
       align-items: center;
-      gap: 14px;
-      margin-bottom: 16px;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .step-badge {
+      width: 58px;
+      height: 58px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: #FFFFFF;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .step-badge-blue {
+      background: linear-gradient(135deg, var(--el-cyan) 0%, var(--el-bleu-cmn) 100%);
+      box-shadow: 0 6px 20px rgba(28, 158, 214, 0.45);
+      border: 2px solid rgba(112, 211, 255, 0.55);
+    }
+
+    .step-badge-green {
+      background: linear-gradient(135deg, var(--el-vert-manette) 0%, #3F8005 100%);
+      box-shadow: 0 6px 20px rgba(98, 175, 15, 0.45);
+      border: 2px solid rgba(163, 230, 53, 0.55);
+    }
+
+    .portal-card:hover .step-badge {
+      transform: scale(1.08) rotate(-2deg);
+    }
+
+    .step-icon-svg {
+      display: block;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
     }
 
     .card-title-group h2 {
-      font-size: 22px;
+      font-size: 24px;
       font-weight: 900;
       color: #FFFFFF;
-      margin-bottom: 3px;
+      margin-bottom: 4px;
+      line-height: 1.25;
     }
 
     .card-title-group .card-tagline {
-      font-size: 14px;
+      font-size: 15px;
       color: var(--el-cyan-light);
       font-weight: 700;
     }
@@ -634,7 +668,12 @@
         <article class="portal-card">
           <div>
             <div class="card-top">
-              <div class="step-badge">1</div>
+              <div class="step-badge step-badge-blue" aria-label="Étape 1">
+                <svg class="step-icon-svg" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M10 8.5L13 6V18" />
+                  <path d="M9.5 18H16.5" />
+                </svg>
+              </div>
               <div class="card-title-group">
                 <h2>Inscription & Guide Équipe</h2>
                 <div class="card-tagline">Rejoindre la campagne Extra Life</div>
@@ -663,7 +702,11 @@
         <article class="portal-card card-accent-green">
           <div>
             <div class="card-top">
-              <div class="step-badge">2</div>
+              <div class="step-badge step-badge-green" aria-label="Étape 2">
+                <svg class="step-icon-svg" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M8.5 9A4 4 0 0 1 15.5 9C15.5 12.5 8.5 14.5 8.5 18H16" />
+                </svg>
+              </div>
               <div class="card-title-group">
                 <h2>Kit Streamer (Overlays & Alertes)</h2>
                 <div class="card-tagline">Sources navigateur OBS & Streamlabs</div>

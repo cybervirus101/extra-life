@@ -338,7 +338,7 @@
         theme: (urlParams.get('theme') || 'extralife-sombre').toLowerCase(),
         sound: urlParams.get('sound') !== 'false' && urlParams.get('sound') !== '0',
         volume: parseFloat(urlParams.get('volume')) || 0.7,
-        durationMs: (parseInt(urlParams.get('duration'), 10) || 6) * 1000,
+        durationMs: Math.max(2, Math.min(60, parseInt(urlParams.get('duration'), 10) || 6)) * 1000,
         pollIntervalSeconds: parseInt(urlParams.get('refresh'), 10) || 15,
         defaultRate: parseFloat(urlParams.get('rate')) || 1.38,
         isDemo: urlParams.get('demo') === '1' || urlParams.get('test') === '1' || !urlParams.get('participantID'),
@@ -521,6 +521,10 @@
 
         playChime();
 
+        const displayDuration = (donation && donation.duration)
+          ? Math.max(2, Math.min(60, parseInt(donation.duration, 10) || 6)) * 1000
+          : CONFIG.durationMs;
+
         setTimeout(() => {
           elements.wrapper.classList.remove('animate-pop-in');
           elements.wrapper.classList.add('animate-pop-out');
@@ -530,7 +534,7 @@
             isPlaying = false;
             processQueue();
           }, 500);
-        }, CONFIG.durationMs);
+        }, displayDuration);
       }
 
       function processQueue() {

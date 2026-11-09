@@ -1191,6 +1191,24 @@
             🔊 <strong>Son dans OBS :</strong> Laissez la case <em>« Contrôler le son via OBS »</em> <u>décochée</u> pour entendre le carillon directement dans vos écouteurs. (Si vous la cochez, assurez-vous d'activer <em>« Monitoring audio »</em> dans les propriétés audio avancées du mixeur OBS).
           </div>
         </div>
+        <div class="alert-duration-control" style="display: flex; align-items: center; justify-content: space-between; gap: 14px; margin: 14px 0 16px 0; padding: 12px 18px; background: #0E1A2C; border: 2px solid rgba(28, 158, 214, 0.35); border-radius: 12px; flex-wrap: wrap;">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <span style="font-size: 24px;">⏱️</span>
+            <div>
+              <label for="input-alert-duration" style="font-size: 14.5px; font-weight: 800; color: #FFFFFF; display: block; margin-bottom: 2px;">Durée d'affichage de l'alerte</label>
+              <span style="font-size: 12.5px; color: var(--el-cyan-light); font-weight: 600;">Temps pendant lequel le pop-up reste visible à l'écran (défaut : 6s)</span>
+            </div>
+          </div>
+          <div class="stepper-group" style="min-width: 155px;">
+            <button type="button" class="btn-stepper" id="btn-alert-duration-minus" title="Diminuer (−1s)">−</button>
+            <div class="stepper-input-wrapper">
+              <input type="number" id="input-alert-duration" class="stepper-input" min="2" max="60" step="1" value="6" title="Entrez la durée en secondes">
+              <span class="stepper-unit">sec</span>
+            </div>
+            <button type="button" class="btn-stepper" id="btn-alert-duration-plus" title="Augmenter (+1s)">+</button>
+          </div>
+        </div>
+
         <div class="url-row" style="flex-wrap: wrap;">
           <input type="text" id="url-alert" class="url-input" readonly>
           <button class="btn btn-secondary" onclick="copyInput('url-alert')">📋 Copier</button>
@@ -1297,6 +1315,9 @@
         inputInterval: document.getElementById('input-interval'),
         btnIntervalMinus: document.getElementById('btn-interval-minus'),
         btnIntervalPlus: document.getElementById('btn-interval-plus'),
+        inputAlertDuration: document.getElementById('input-alert-duration'),
+        btnAlertDurationMinus: document.getElementById('btn-alert-duration-minus'),
+        btnAlertDurationPlus: document.getElementById('btn-alert-duration-plus'),
         urlOverlay: document.getElementById('url-overlay'),
         urlAlert: document.getElementById('url-alert'),
         linkPreviewOverlay: document.getElementById('link-preview-overlay'),
@@ -1363,6 +1384,44 @@
       elements.btnIntervalPlus.addEventListener('click', () => {
         setIntervalValue(currentInterval + 5);
       });
+
+      // Gestion des boutons incrémentaux et de la saisie manuelle pour la durée d'affichage de l'alerte
+      let currentAlertDuration = 6;
+      function setAlertDurationValue(val) {
+        let num = parseInt(val, 10);
+        if (isNaN(num)) num = 6;
+        currentAlertDuration = Math.max(2, Math.min(60, num));
+        if (elements.inputAlertDuration) elements.inputAlertDuration.value = currentAlertDuration;
+        updateGeneratedUrls();
+        updateOptionMemory();
+      }
+
+      if (elements.inputAlertDuration) {
+        elements.inputAlertDuration.addEventListener('input', () => {
+          const val = parseInt(elements.inputAlertDuration.value, 10);
+          if (!isNaN(val) && val >= 1) {
+            currentAlertDuration = Math.max(2, Math.min(60, val));
+            updateGeneratedUrls();
+            updateOptionMemory();
+          }
+        });
+
+        elements.inputAlertDuration.addEventListener('blur', () => {
+          setAlertDurationValue(elements.inputAlertDuration.value);
+        });
+      }
+
+      if (elements.btnAlertDurationMinus) {
+        elements.btnAlertDurationMinus.addEventListener('click', () => {
+          setAlertDurationValue(currentAlertDuration - 1);
+        });
+      }
+
+      if (elements.btnAlertDurationPlus) {
+        elements.btnAlertDurationPlus.addEventListener('click', () => {
+          setAlertDurationValue(currentAlertDuration + 1);
+        });
+      }
 
       // Extraction intelligente de l'ID ou slug (supporte vanity URLs, liens Extra Life ou identifiant seul)
       function extractId(input) {
@@ -1635,6 +1694,9 @@
           alertParams.set('mode', 'team');
           alertParams.set('teamID', detectedParticipant.teamID);
         }
+        if (currentAlertDuration) {
+          alertParams.set('duration', String(currentAlertDuration));
+        }
         if (theme === 'personnalise') {
           alertParams.set('cBg', customPalette.bg);
           alertParams.set('cCard', customPalette.card);
@@ -1882,6 +1944,7 @@ Durant ce live, nous amassons des dons pour Extra Life afin de soutenir les hôp
           displayName: 'Donateur Extra Life',
           amount: 25,
           message: 'Bravo pour votre live de jeux vidéo au profit des enfants malades ! 🎮',
+          duration: currentAlertDuration,
         };
 
         // 1. BroadcastChannel local (pour l'onglet d'aperçu dans le même navigateur)
@@ -1928,6 +1991,7 @@ Durant ce live, nous amassons des dons pour Extra Life afin de soutenir les hôp
           localStorage.setItem('oes_streamer_mode', elements.selectMode.value);
           localStorage.setItem('oes_streamer_theme', elements.selectTheme.value);
           localStorage.setItem('oes_streamer_interval', String(currentInterval));
+          localStorage.setItem('oes_streamer_alert_duration', String(currentAlertDuration));
           if (elements.savedNotice) elements.savedNotice.style.display = 'flex';
         } catch (e) {
           console.warn('LocalStorage non disponible', e);
@@ -1941,6 +2005,7 @@ Durant ce live, nous amassons des dons pour Extra Life afin de soutenir les hôp
             localStorage.setItem('oes_streamer_mode', elements.selectMode.value);
             localStorage.setItem('oes_streamer_theme', elements.selectTheme.value);
             localStorage.setItem('oes_streamer_interval', String(currentInterval));
+            localStorage.setItem('oes_streamer_alert_duration', String(currentAlertDuration));
           }
         } catch (e) {}
       }
@@ -1953,10 +2018,12 @@ Durant ce live, nous amassons des dons pour Extra Life afin de soutenir les hôp
           localStorage.removeItem('oes_streamer_mode');
           localStorage.removeItem('oes_streamer_theme');
           localStorage.removeItem('oes_streamer_interval');
+          localStorage.removeItem('oes_streamer_alert_duration');
         } catch (e) {}
         detectedParticipant = null;
         elements.inputParticipant.value = '';
         renderProfile();
+        setAlertDurationValue(6);
         const brandText = document.getElementById('kit-nav-brand-text');
         if (brandText) brandText.textContent = 'Portail Streamer Extra Life';
         const brandImg = document.getElementById('kit-nav-brand-img');
@@ -1997,6 +2064,11 @@ Durant ce live, nous amassons des dons pour Extra Life afin de soutenir les hôp
             if (savedInterval) {
               const num = parseInt(savedInterval, 10);
               if (!isNaN(num)) setIntervalValue(num);
+            }
+            const savedAlertDuration = localStorage.getItem('oes_streamer_alert_duration');
+            if (savedAlertDuration) {
+              const durNum = parseInt(savedAlertDuration, 10);
+              if (!isNaN(durNum)) setAlertDurationValue(durNum);
             }
 
             if (elements.savedNotice) elements.savedNotice.style.display = 'flex';
