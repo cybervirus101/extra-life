@@ -834,19 +834,9 @@
         if (detectedParticipant.teamID && detectedParticipant.teamName) {
           elements.badgeTeam.textContent = `Équipe : ${detectedParticipant.teamName}`;
           elements.badgeTeam.className = 'badge badge-gold';
-
-          // Mettre à jour titre et nav si connecté à une équipe
-          elements.pageHeroTitle.textContent = detectedParticipant.teamName;
-          if (elements.topNavBrandText) elements.topNavBrandText.textContent = detectedParticipant.teamName;
-          if (elements.topNavLogo && detectedParticipant.teamAvatar) {
-            elements.topNavLogo.src = detectedParticipant.teamAvatar;
-          }
         } else {
           elements.badgeTeam.textContent = 'Participant Solo';
           elements.badgeTeam.className = 'badge';
-          elements.pageHeroTitle.textContent = detectedParticipant.displayName;
-          if (elements.topNavBrandText) elements.topNavBrandText.textContent = "Portail Streamer Extra Life";
-          if (elements.topNavLogo) elements.topNavLogo.src = "assets/logo-extra-life-icon.svg";
         }
 
         elements.badgeMilestones.textContent = `${detectedParticipant.numMilestones} défi(s) / jalons`;
