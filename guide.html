@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Guide d'inscription Streamer — Les alliés du soleil (Extra Life & Enfant Soleil)</title>
+  <title>Guide d'inscription Streamer — Extra Life</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
@@ -506,8 +506,8 @@
     <!-- Barre de navigation principale en onglets bien évidents -->
     <nav class="top-nav">
       <a href="index.html" class="nav-brand">
-        <img src="assets/logo-allies-du-soleil.png" alt="Les alliés du soleil">
-        <span>Les alliés du soleil</span>
+        <img id="nav-brand-img" src="assets/logo-extra-life-icon.svg" alt="Extra Life">
+        <span id="nav-brand-text">Portail Streamer Extra Life</span>
       </a>
       <div class="nav-tabs">
         <a href="index.html" class="nav-tab">
@@ -527,8 +527,8 @@
       <div class="header-logos">
         <img class="hero-logo-el" src="assets/logo-extra-life-white.svg" alt="Extra Life">
       </div>
-      <h1>☀️ Guide d'inscription : Les alliés du soleil</h1>
-      <p>Rejoignez notre équipe de créateurs et streamers pour soutenir le développement d'une pédiatrie de pointe pour les enfants malades du Québec !</p>
+      <h1 id="guide-header-title">🎮 Guide d'inscription Extra Life</h1>
+      <p id="guide-header-sub">Inscrivez votre chaîne, rejoignez ou créez une équipe et configurez votre page de collecte pour les enfants malades !</p>
     </header>
 
     <!-- Étape 1 : Accéder à l'inscription -->
@@ -565,7 +565,7 @@
     <section class="step-card">
       <div class="step-header">
         <div class="step-badge">2</div>
-        <div class="step-title">Choisir le type d'inscription et notre équipe</div>
+        <div class="step-title">Choisir le type d'inscription et votre équipe</div>
       </div>
       <div class="step-body">
         <p>Sur le premier écran du formulaire DonorDrive, renseignez les options suivantes :</p>
@@ -574,20 +574,23 @@
           <li>
             <span class="check-icon">✓</span>
             <div>
-              <strong>Type d’inscription :</strong> Sélectionnez <span class="tag tag-green">Extra Life Classic</span> (gratuit).
+              <strong>Type d’inscription :</strong> Sélectionnez <span class="tag tag-green">Extra Life Classic</span> (100% gratuit).
             </div>
           </li>
           <li>
             <span class="check-icon">✓</span>
             <div>
-              <strong>Rôle de participation :</strong> Sélectionnez <strong>Joindre une équipe</strong> (<em>Join a Team</em>).
+              <strong>Rôle de participation :</strong> Sélectionnez <strong>Joindre une équipe</strong> (<em>Join a Team</em>) ou <strong>Créer une équipe</strong> (<em>Create a Team</em>).
             </div>
           </li>
           <li>
             <span class="check-icon">✓</span>
             <div>
-              <strong>Recherche de l'équipe :</strong> Tapez exactement <span class="tag tag-gold">Les alliés du soleil</span>.
-              <button class="btn btn-secondary" style="padding: 4px 10px; margin-left: 8px; font-size: 12px;" onclick="copyText('Les alliés du soleil')">📋 Copier le nom</button>
+              <strong>Recherche de l'équipe :</strong> Tapez le nom de l'équipe que vous souhaitez rejoindre (ou renseignez votre propre équipe).
+              <span id="detected-team-hint" style="display: none; margin-left: 8px;">
+                <span id="detected-team-tag" class="tag tag-gold"></span>
+                <button id="btn-copy-detected-team" class="btn btn-secondary" style="padding: 4px 10px; margin-left: 6px; font-size: 12px;">📋 Copier le nom</button>
+              </span>
             </div>
           </li>
         </ul>
@@ -598,7 +601,7 @@
     <section class="step-card">
       <div class="step-header">
         <div class="step-badge">3</div>
-        <div class="step-title">Fixer votre objectif & Sélectionner l'hôpital</div>
+        <div class="step-title">Fixer votre objectif & Sélectionner votre hôpital</div>
       </div>
       <div class="step-body">
         <p>
@@ -609,30 +612,29 @@
           <li>
             <span class="check-icon">✓</span>
             <div>
-              <strong>Votre Objectif de Collecte de Fonds :</strong> Entrez le montant que vous aimeriez atteindre avec votre communauté (ex: <code>100 $</code>, <code>250 $</code>, <code>500 $</code>). Vous pourrez ajuster ce chiffre en tout temps depuis votre tableau de bord !
+              <strong>Votre Objectif de Collecte de Fonds :</strong> Entrez le montant que vous aimeriez atteindre avec votre communauté (ex: <code>100 $</code>, <code>250 $</code>, <code>500 $</code>). Vous pourrez ajuster ce montant en tout temps depuis votre tableau de bord !
             </div>
           </li>
           <li>
             <span class="check-icon">✓</span>
             <div>
-              <strong>Hôpital bénéficiaire :</strong> Sélectionnez <span class="tag tag-gold">Enfant Soleil</span>
-              <button class="btn btn-secondary" style="padding: 4px 10px; margin-left: 8px; font-size: 12px;" onclick="copyText('Enfant Soleil')">📋 Copier le nom</button>
+              <strong>Hôpital bénéficiaire :</strong> Sélectionnez l'hôpital pédiatrique de votre région ou de votre choix au sein du réseau <em>Children's Miracle Network Hospitals</em>.
             </div>
           </li>
         </ul>
 
-        <!-- Alerte Hôpital Enfant Soleil -->
-        <div class="alert-banner alert-warning">
-          <div class="alert-icon">⚠️</div>
+        <!-- Encadré Hôpital -->
+        <div class="alert-banner alert-info">
+          <div class="alert-icon">💡</div>
           <div>
-            <strong style="color: #FFD000; font-size: 16px;">ATTENTION : Choix de votre hôpital bénéficiaire</strong><br>
-            Dans le menu déroulant des hôpitaux, choisissez impérativement <span class="tag tag-gold" style="font-size: 14px; background: rgba(255, 208, 0, 0.25); border: 1.5px solid #FFD000;">Enfant Soleil</span> (ou <em>Opération Enfant Soleil</em> si le nom complet apparaît).<br>
-            C'est cette étape clé qui garantit que <strong>100 % des dons amassés sur votre chaîne</strong> seront directement investis dans les hôpitaux et centres pédiatriques au Québec !
+            <strong style="color: #70D3FF; font-size: 16px;">Choix de votre hôpital bénéficiaire</strong><br>
+            Dans le menu déroulant des hôpitaux, choisissez l'établissement que vous souhaitez soutenir (ex: <em>Enfant Soleil</em> au Québec, <em>CHU Sainte-Justine</em>, ou l'hôpital pour enfants de votre région).<br>
+            C'est cette étape clé qui garantit que <strong>100 % des dons amassés sur votre chaîne</strong> seront directement investis dans l'hôpital pédiatrique choisi !
           </div>
         </div>
 
         <p style="font-size: 14px; color: var(--el-text-dim);">
-          Complétez ensuite la création de votre compte (nom, courriel, mot de passe) pour valider votre inscription.
+          Complétez ensuite la création de votre compte (nom, courriel, mot de passe) pour finaliser votre inscription.
         </p>
       </div>
     </section>
@@ -710,6 +712,45 @@
         prompt('Copiez ce texte :', text);
       }
     }
+
+    // Détection dynamique si une équipe a été sélectionnée par le visiteur
+    (async function() {
+      try {
+        const savedInput = localStorage.getItem('oes_streamer_input');
+        if (!savedInput) return;
+        const match = savedInput.match(/participant\/(\d+)/i) || savedInput.match(/^(\d+)$/);
+        const pId = match ? match[1] : savedInput;
+        
+        const res = await fetch(`https://dd.extra-life.org/api/participants/${pId}`).catch(() => null);
+        if (!res || !res.ok) return;
+        const pData = await res.json();
+        
+        if (pData && pData.teamName) {
+          const brandText = document.getElementById('nav-brand-text');
+          if (brandText) brandText.textContent = pData.teamName;
+          
+          const hint = document.getElementById('detected-team-hint');
+          const tag = document.getElementById('detected-team-tag');
+          const btn = document.getElementById('btn-copy-detected-team');
+          if (hint && tag) {
+            tag.textContent = pData.teamName;
+            hint.style.display = 'inline-block';
+            if (btn) btn.onclick = () => copyText(pData.teamName);
+          }
+
+          if (pData.teamID) {
+            const teamRes = await fetch(`https://dd.extra-life.org/api/teams/${pData.teamID}`).catch(() => null);
+            if (teamRes && teamRes.ok) {
+              const tData = await teamRes.json();
+              const brandImg = document.getElementById('nav-brand-img');
+              if (brandImg && tData.avatarImageURL) {
+                brandImg.src = tData.avatarImageURL;
+              }
+            }
+          }
+        }
+      } catch (e) {}
+    })();
   </script>
 </body>
 </html>

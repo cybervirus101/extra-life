@@ -930,8 +930,8 @@
     <!-- Barre de navigation principale en onglets bien évidents -->
     <nav class="top-nav">
       <a href="index.html" class="nav-brand">
-        <img src="assets/logo-allies-du-soleil.png" alt="Les alliés du soleil">
-        <span>Les alliés du soleil</span>
+        <img id="kit-nav-brand-img" src="assets/logo-extra-life-icon.svg" alt="Extra Life">
+        <span id="kit-nav-brand-text">Portail Streamer Extra Life</span>
       </a>
       <div class="nav-tabs">
         <a href="index.html" class="nav-tab">
@@ -968,7 +968,7 @@
       <!-- Bannière d'invitation pour nouveaux streamers -->
       <div style="background: rgba(28, 158, 214, 0.12); border: 1.5px solid var(--el-cyan); border-radius: 12px; padding: 12px 16px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
         <span style="font-size: 13.5px; color: #E0F2FE;">
-          👋 <strong>Pas encore inscrit sur Extra Life ?</strong> Rejoignez notre équipe <span class="tag-gold" style="font-size: 12.5px; padding: 2px 8px;">Les alliés du soleil</span> au profit d'<span class="tag-gold" style="font-size: 12.5px; padding: 2px 8px;">Enfant Soleil</span> !
+          👋 <strong>Pas encore inscrit sur Extra Life ?</strong> Consultez notre guide d'inscription pour créer votre profil et rejoindre votre équipe !
         </span>
         <a href="guide.html" class="btn btn-secondary" style="font-size: 13px; padding: 6px 14px;">📖 Guide d'inscription pas à pas</a>
       </div>
@@ -1469,9 +1469,13 @@
         if (detectedParticipant.teamID && detectedParticipant.teamName) {
           elements.badgeTeam.textContent = `Équipe : ${detectedParticipant.teamName}`;
           elements.badgeTeam.className = 'badge badge-gold';
+          const brandText = document.getElementById('kit-nav-brand-text');
+          if (brandText) brandText.textContent = detectedParticipant.teamName;
         } else {
           elements.badgeTeam.textContent = 'Participant Solo';
           elements.badgeTeam.className = 'badge';
+          const brandText = document.getElementById('kit-nav-brand-text');
+          if (brandText) brandText.textContent = 'Portail Streamer Extra Life';
         }
 
         elements.badgeMilestones.textContent = `${detectedParticipant.numMilestones} défi(s) / jalons`;
@@ -1949,6 +1953,8 @@ Durant ce live, nous amassons des dons pour Extra Life afin de soutenir les soin
         detectedParticipant = null;
         elements.inputParticipant.value = '';
         renderProfile();
+        const brandText = document.getElementById('kit-nav-brand-text');
+        if (brandText) brandText.textContent = 'Portail Streamer Extra Life';
         if (elements.savedNotice) elements.savedNotice.style.display = 'none';
         updateGeneratedUrls();
         showToast('Identifiant et préférences oubliés avec succès ! 🗑️');
