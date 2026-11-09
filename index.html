@@ -834,9 +834,19 @@
         if (detectedParticipant.teamID && detectedParticipant.teamName) {
           elements.badgeTeam.textContent = `Équipe : ${detectedParticipant.teamName}`;
           elements.badgeTeam.className = 'badge badge-gold';
+          if (elements.topNavBrandText) {
+            elements.topNavBrandText.textContent = detectedParticipant.teamName;
+          }
+          if (elements.topNavLogo) {
+            const teamLogo = detectedParticipant.teamAvatar || 
+              (detectedParticipant.teamName.toLowerCase().includes('soleil') ? 'assets/logo-allies-du-soleil.png' : 'assets/logo-extra-life-icon.svg');
+            elements.topNavLogo.src = teamLogo;
+          }
         } else {
           elements.badgeTeam.textContent = 'Participant Solo';
           elements.badgeTeam.className = 'badge';
+          if (elements.topNavBrandText) elements.topNavBrandText.textContent = "Portail Streamer Extra Life";
+          if (elements.topNavLogo) elements.topNavLogo.src = "assets/logo-extra-life-icon.svg";
         }
 
         elements.badgeMilestones.textContent = `${detectedParticipant.numMilestones} défi(s) / jalons`;
@@ -851,12 +861,16 @@
           if (val) {
             localStorage.setItem('oes_streamer_input', val);
           }
+          if (detectedParticipant) {
+            localStorage.setItem('oes_streamer_profile', JSON.stringify(detectedParticipant));
+          }
         } catch (e) {}
       }
 
       function forgetStreamerMemory() {
         try {
           localStorage.removeItem('oes_streamer_input');
+          localStorage.removeItem('oes_streamer_profile');
         } catch (e) {}
         detectedParticipant = null;
         elements.inputParticipant.value = '';
@@ -865,6 +879,13 @@
 
       function restoreSavedStreamer() {
         try {
+          const cachedProfile = localStorage.getItem('oes_streamer_profile');
+          if (cachedProfile) {
+            try {
+              detectedParticipant = JSON.parse(cachedProfile);
+              renderProfile();
+            } catch (e) {}
+          }
           const savedInput = localStorage.getItem('oes_streamer_input');
           if (savedInput) {
             elements.inputParticipant.value = savedInput;

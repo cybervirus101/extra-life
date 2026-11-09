@@ -1040,9 +1040,9 @@
               <option value="extralife-sombre" selected>🕹️ Extra Life — Thème sombre (Bleu nuit & Cyan néon)</option>
               <option value="extralife-clair">🎮 Extra Life — Thème clair (Bleu CMN & Blanc)</option>
             </optgroup>
-            <optgroup label="☀️ Thèmes alternatifs">
-              <option value="clair">☀️ Thème solaire clair (Jaune & Blanc)</option>
-              <option value="sombre">🌙 Thème solaire sombre (Noir velours)</option>
+            <optgroup label="☀️ Thèmes alternatifs Enfant Soleil">
+              <option value="clair">☀️ Enfant Soleil — Thème clair (Jaune & Blanc)</option>
+              <option value="sombre">🌙 Enfant Soleil — Thème sombre (Noir velours)</option>
             </optgroup>
             <optgroup label="🎨 Thème Personnalisé">
               <option value="personnalise">🎨 Thème personnalisé (Palette sur mesure)</option>
@@ -1434,6 +1434,19 @@
               donateUrl: (data.links && data.links.donate) ? data.links.donate : `https://www.extra-life.org/participant/${numericId}`,
             };
 
+            // Charger l'avatar d'équipe si présent
+            if (data.teamID) {
+              try {
+                const teamData = await fetchWithFallback(`https://dd.extra-life.org/api/teams/${data.teamID}`);
+                if (teamData && teamData.avatarImageURL) {
+                  detectedParticipant.teamAvatar = teamData.avatarImageURL;
+                }
+                if (teamData && teamData.name) {
+                  detectedParticipant.teamName = teamData.name;
+                }
+              } catch (e) {}
+            }
+
             renderProfile();
             saveStreamerMemory();
             showToast('Informations Extra Life chargées avec succès ! ☀️');
@@ -1454,6 +1467,10 @@
         if (!detectedParticipant) {
           elements.profileCard.style.display = 'none';
           if (elements.promptNotice) elements.promptNotice.style.display = 'block';
+          const brandText = document.getElementById('kit-nav-brand-text');
+          if (brandText) brandText.textContent = 'Portail Streamer Extra Life';
+          const brandImg = document.getElementById('kit-nav-brand-img');
+          if (brandImg) brandImg.src = 'assets/logo-extra-life-icon.svg';
           return;
         }
 
@@ -1470,11 +1487,19 @@
           elements.badgeTeam.className = 'badge badge-gold';
           const brandText = document.getElementById('kit-nav-brand-text');
           if (brandText) brandText.textContent = detectedParticipant.teamName;
+          const brandImg = document.getElementById('kit-nav-brand-img');
+          if (brandImg) {
+            const teamLogo = detectedParticipant.teamAvatar || 
+              (detectedParticipant.teamName.toLowerCase().includes('soleil') ? 'assets/logo-allies-du-soleil.png' : 'assets/logo-extra-life-icon.svg');
+            brandImg.src = teamLogo;
+          }
         } else {
           elements.badgeTeam.textContent = 'Participant Solo';
           elements.badgeTeam.className = 'badge';
           const brandText = document.getElementById('kit-nav-brand-text');
           if (brandText) brandText.textContent = 'Portail Streamer Extra Life';
+          const brandImg = document.getElementById('kit-nav-brand-img');
+          if (brandImg) brandImg.src = 'assets/logo-extra-life-icon.svg';
         }
 
         elements.badgeMilestones.textContent = `${detectedParticipant.numMilestones} défi(s) / jalons`;
@@ -1896,6 +1921,9 @@ Durant ce live, nous amassons des dons pour Extra Life afin de soutenir les hôp
           if (val) {
             localStorage.setItem('oes_streamer_input', val);
           }
+          if (detectedParticipant) {
+            localStorage.setItem('oes_streamer_profile', JSON.stringify(detectedParticipant));
+          }
           localStorage.setItem('oes_streamer_layout', elements.selectLayout.value);
           localStorage.setItem('oes_streamer_mode', elements.selectMode.value);
           localStorage.setItem('oes_streamer_theme', elements.selectTheme.value);
@@ -1920,6 +1948,7 @@ Durant ce live, nous amassons des dons pour Extra Life afin de soutenir les hôp
       function forgetStreamerMemory() {
         try {
           localStorage.removeItem('oes_streamer_input');
+          localStorage.removeItem('oes_streamer_profile');
           localStorage.removeItem('oes_streamer_layout');
           localStorage.removeItem('oes_streamer_mode');
           localStorage.removeItem('oes_streamer_theme');
@@ -1930,6 +1959,8 @@ Durant ce live, nous amassons des dons pour Extra Life afin de soutenir les hôp
         renderProfile();
         const brandText = document.getElementById('kit-nav-brand-text');
         if (brandText) brandText.textContent = 'Portail Streamer Extra Life';
+        const brandImg = document.getElementById('kit-nav-brand-img');
+        if (brandImg) brandImg.src = 'assets/logo-extra-life-icon.svg';
         if (elements.savedNotice) elements.savedNotice.style.display = 'none';
         updateGeneratedUrls();
         showToast('Identifiant et préférences oubliés avec succès ! 🗑️');
@@ -1937,6 +1968,14 @@ Durant ce live, nous amassons des dons pour Extra Life afin de soutenir les hôp
 
       function restoreSavedStreamer() {
         try {
+          const cachedProfile = localStorage.getItem('oes_streamer_profile');
+          if (cachedProfile) {
+            try {
+              detectedParticipant = JSON.parse(cachedProfile);
+              renderProfile();
+            } catch (e) {}
+          }
+
           const savedInput = localStorage.getItem('oes_streamer_input');
           if (savedInput) {
             elements.inputParticipant.value = savedInput;
