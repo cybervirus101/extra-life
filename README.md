@@ -69,10 +69,11 @@ Boîte à outils complète pour streamers Twitch et YouTube afin d'afficher leur
 
 ```text
 overlay-enfant-soleil/
-├── index.html                             # Portail d'accueil officiel (Accueil, Inscription & Kit)
-├── guide.html                             # Guide complet d'inscription (Les alliés du soleil)
+├── .nojekyll                              # Désactivation de Jekyll pour GitHub Pages
+├── index.html                             # Portail d'accueil officiel Extra Life
+├── guide.html                             # Guide complet d'inscription Extra Life
 ├── kit-streamer.html                      # Configurateur web & Kit Streamer (Overlays, Alertes OBS, Twitch)
-├── KitStreameur.html                      # Redirection d'alias vers kit-streamer.html
+├── KitStreameur/                          # Redirection d'alias vers kit-streamer.html
 ├── rejoindre.html                         # Redirection permanente vers l'inscription Extra Life FR
 ├── overlay.html                           # Overlay barre de progression OBS
 ├── alert.html                             # Source alerte pop-up de don OBS (audio + visuel)
