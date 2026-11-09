@@ -70,8 +70,12 @@
       flex-wrap: wrap;
     }
 
+    .top-nav:not(:has(.nav-brand:not([style*="display: none"]))) {
+      justify-content: center;
+    }
+
     .nav-brand {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 14px;
       font-weight: 900;
@@ -83,6 +87,14 @@
       padding: 0;
       line-height: 1;
       text-shadow: 0 0 14px rgba(255, 208, 0, 0.35);
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .nav-brand:hover {
+      transform: translateY(-1px);
+      opacity: 0.92;
+      text-decoration: underline;
+      text-decoration-color: rgba(255, 208, 0, 0.5);
     }
 
     .nav-brand img {
@@ -698,9 +710,9 @@
 
     <!-- Barre de navigation principale -->
     <nav class="top-nav">
-      <a href="index.html" class="nav-brand">
+      <a href="#" id="top-nav-brand-link" class="nav-brand" target="_blank" rel="noopener noreferrer" style="display: none;">
         <img id="top-nav-logo" src="assets/logo-extra-life-icon.svg" alt="Extra Life">
-        <span id="top-nav-brand-text">Portail Streamer Extra Life</span>
+        <span id="top-nav-brand-text"></span>
       </a>
       <div class="nav-tabs">
         <a href="index.html" class="nav-tab active">
@@ -735,6 +747,16 @@
       <p class="step-instruction">
         Entrez votre <strong>ID de participant</strong> ou collez le lien direct de votre page Extra Life :
       </p>
+
+      <!-- Bannière d'invitation pour nouveaux participants -->
+      <div style="background: rgba(28, 158, 214, 0.12); border: 1.5px solid var(--el-cyan); border-radius: 12px; padding: 12px 16px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
+        <span style="font-size: 13.5px; color: #E0F2FE;">
+          👋 Pas encore inscrit sur Extra Life ? Consultez notre guide d'inscription pour créer votre profil et rejoindre votre équipe !
+        </span>
+        <a href="guide.html" class="btn btn-secondary" style="font-size: 13px; padding: 6px 14px; text-decoration: none; white-space: nowrap;">
+          📖 Guide d'inscription pas à pas
+        </a>
+      </div>
 
       <div class="input-group">
         <input 
@@ -890,6 +912,7 @@
       let detectedParticipant = null;
 
       const elements = {
+        topNavBrandLink: document.getElementById('top-nav-brand-link'),
         topNavLogo: document.getElementById('top-nav-logo'),
         topNavBrandText: document.getElementById('top-nav-brand-text'),
         pageHeroTitle: document.getElementById('page-hero-title'),
@@ -1006,8 +1029,11 @@
           elements.profileCard.style.display = 'none';
           if (elements.savedNotice) elements.savedNotice.style.display = 'none';
           elements.pageHeroTitle.textContent = "Portail Créateurs & Streamers Extra Life";
-          if (elements.topNavBrandText) elements.topNavBrandText.textContent = "Portail Streamer Extra Life";
-          if (elements.topNavLogo) elements.topNavLogo.src = "assets/logo-extra-life-icon.svg";
+          if (elements.topNavBrandLink) {
+            elements.topNavBrandLink.style.display = 'none';
+            elements.topNavBrandLink.href = '#';
+          }
+          if (elements.topNavBrandText) elements.topNavBrandText.textContent = '';
           return;
         }
 
@@ -1042,22 +1068,50 @@
         if (elements.badgeTotal) elements.badgeTotal.textContent = `Total : ${sumDonations.toFixed(2)} $ USD`;
         if (elements.badgeGoal) elements.badgeGoal.textContent = `Objectif : ${goal.toFixed(0)} $ USD`;
 
-        if (detectedParticipant.teamID && detectedParticipant.teamName) {
-          elements.badgeTeam.textContent = `Équipe : ${detectedParticipant.teamName}`;
+        // Gestion de la marque équipe ou fallback campagne personnelle
+        if (detectedParticipant.teamID) {
+          const teamName = detectedParticipant.teamName || 'Mon équipe Extra Life';
+          elements.badgeTeam.textContent = `Équipe : ${teamName}`;
           elements.badgeTeam.className = 'badge badge-gold';
+
+          if (elements.topNavBrandLink) {
+            elements.topNavBrandLink.href = `https://www.extra-life.org/team/${detectedParticipant.teamID}`;
+            elements.topNavBrandLink.target = '_blank';
+            elements.topNavBrandLink.rel = 'noopener noreferrer';
+            elements.topNavBrandLink.title = `Visiter la page de l'équipe ${teamName} sur Extra Life (s'ouvre dans un nouvel onglet)`;
+            elements.topNavBrandLink.style.display = 'inline-flex';
+          }
           if (elements.topNavBrandText) {
-            elements.topNavBrandText.textContent = detectedParticipant.teamName;
+            elements.topNavBrandText.textContent = teamName;
           }
           if (elements.topNavLogo) {
             const teamLogo = detectedParticipant.teamAvatar || 
-              (detectedParticipant.teamName.toLowerCase().includes('soleil') ? 'assets/logo-allies-du-soleil.png' : 'assets/logo-extra-life-icon.svg');
+              (teamName.toLowerCase().includes('soleil') ? 'assets/logo-allies-du-soleil.png' : 'assets/logo-extra-life-icon.svg');
             elements.topNavLogo.src = teamLogo;
           }
-        } else {
+        } else if (detectedParticipant.participantID) {
+          // Fallback sur la page de campagne personnelle pour participant solo
+          const participantName = detectedParticipant.displayName || 'Ma campagne Extra Life';
           elements.badgeTeam.textContent = 'Participant Solo';
           elements.badgeTeam.className = 'badge';
-          if (elements.topNavBrandText) elements.topNavBrandText.textContent = "Portail Streamer Extra Life";
-          if (elements.topNavLogo) elements.topNavLogo.src = "assets/logo-extra-life-icon.svg";
+
+          if (elements.topNavBrandLink) {
+            elements.topNavBrandLink.href = `https://www.extra-life.org/participants/${detectedParticipant.participantID}`;
+            elements.topNavBrandLink.target = '_blank';
+            elements.topNavBrandLink.rel = 'noopener noreferrer';
+            elements.topNavBrandLink.title = `Visiter la page de campagne de ${participantName} sur Extra Life (s'ouvre dans un nouvel onglet)`;
+            elements.topNavBrandLink.style.display = 'inline-flex';
+          }
+          if (elements.topNavBrandText) {
+            elements.topNavBrandText.textContent = participantName;
+          }
+          if (elements.topNavLogo) {
+            elements.topNavLogo.src = detectedParticipant.avatarImageURL || 'assets/logo-extra-life-icon.svg';
+          }
+        } else {
+          if (elements.topNavBrandLink) {
+            elements.topNavBrandLink.style.display = 'none';
+          }
         }
 
         elements.badgeMilestones.textContent = `${detectedParticipant.numMilestones} défi(s) / jalons`;

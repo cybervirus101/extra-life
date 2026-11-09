@@ -73,8 +73,12 @@
       flex-wrap: wrap;
     }
 
+    .top-nav:not(:has(.nav-brand:not([style*="display: none"]))) {
+      justify-content: center;
+    }
+
     .nav-brand {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 14px;
       font-weight: 900;
@@ -86,6 +90,14 @@
       padding: 0;
       line-height: 1;
       text-shadow: 0 0 14px rgba(255, 208, 0, 0.35);
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .nav-brand:hover {
+      transform: translateY(-1px);
+      opacity: 0.92;
+      text-decoration: underline;
+      text-decoration-color: rgba(255, 208, 0, 0.5);
     }
 
     .nav-brand img {
@@ -505,9 +517,9 @@
 
     <!-- Barre de navigation principale en onglets bien évidents -->
     <nav class="top-nav">
-      <a href="index.html" class="nav-brand">
+      <a href="#" id="guide-nav-brand-link" class="nav-brand" target="_blank" rel="noopener noreferrer" style="display: none;">
         <img id="nav-brand-img" src="assets/logo-extra-life-icon.svg" alt="Extra Life">
-        <span id="nav-brand-text">Portail Streamer Extra Life</span>
+        <span id="nav-brand-text"></span>
       </a>
       <div class="nav-tabs">
         <a href="index.html" class="nav-tab">
@@ -725,27 +737,52 @@
         if (!res || !res.ok) return;
         const pData = await res.json();
         
-        if (pData && pData.teamName) {
-          const brandText = document.getElementById('nav-brand-text');
-          if (brandText) brandText.textContent = pData.teamName;
-          
-          const hint = document.getElementById('detected-team-hint');
-          const tag = document.getElementById('detected-team-tag');
-          const btn = document.getElementById('btn-copy-detected-team');
-          if (hint && tag) {
-            tag.textContent = pData.teamName;
-            hint.style.display = 'inline-block';
-            if (btn) btn.onclick = () => copyText(pData.teamName);
-          }
+        const brandLink = document.getElementById('guide-nav-brand-link');
+        const brandText = document.getElementById('nav-brand-text');
+        const brandImg = document.getElementById('nav-brand-img');
 
-          if (pData.teamID) {
-            const teamRes = await fetch(`https://dd.extra-life.org/api/teams/${pData.teamID}`).catch(() => null);
-            if (teamRes && teamRes.ok) {
-              const tData = await teamRes.json();
-              const brandImg = document.getElementById('nav-brand-img');
-              if (brandImg && tData.avatarImageURL) {
-                brandImg.src = tData.avatarImageURL;
+        if (pData) {
+          if (pData.teamID && pData.teamName) {
+            if (brandText) brandText.textContent = pData.teamName;
+            if (brandLink) {
+              brandLink.href = `https://www.extra-life.org/team/${pData.teamID}`;
+              brandLink.target = '_blank';
+              brandLink.rel = 'noopener noreferrer';
+              brandLink.title = `Visiter la page de l'équipe ${pData.teamName} sur Extra Life (s'ouvre dans un nouvel onglet)`;
+              brandLink.style.display = 'inline-flex';
+            }
+            const hint = document.getElementById('detected-team-hint');
+            const tag = document.getElementById('detected-team-tag');
+            const btn = document.getElementById('btn-copy-detected-team');
+            if (hint && tag) {
+              tag.textContent = pData.teamName;
+              hint.style.display = 'inline-block';
+              if (btn) btn.onclick = () => copyText(pData.teamName);
+            }
+            if (brandImg) {
+              brandImg.src = pData.teamName.toLowerCase().includes('soleil') ? 'assets/logo-allies-du-soleil.png' : 'assets/logo-extra-life-icon.svg';
+            }
+            try {
+              const teamRes = await fetch(`https://dd.extra-life.org/api/teams/${pData.teamID}`).catch(() => null);
+              if (teamRes && teamRes.ok) {
+                const tData = await teamRes.json();
+                if (brandImg && tData.avatarImageURL) {
+                  brandImg.src = tData.avatarImageURL;
+                }
               }
+            } catch (e) {}
+          } else if (pData.participantID) {
+            // Fallback sur la page de campagne personnelle pour participant solo
+            if (brandText) brandText.textContent = pData.displayName || 'Ma campagne Extra Life';
+            if (brandLink) {
+              brandLink.href = `https://www.extra-life.org/participants/${pData.participantID}`;
+              brandLink.target = '_blank';
+              brandLink.rel = 'noopener noreferrer';
+              brandLink.title = `Visiter la page de campagne de ${pData.displayName} sur Extra Life (s'ouvre dans un nouvel onglet)`;
+              brandLink.style.display = 'inline-flex';
+            }
+            if (brandImg) {
+              brandImg.src = pData.avatarImageURL || 'assets/logo-extra-life-icon.svg';
             }
           }
         }

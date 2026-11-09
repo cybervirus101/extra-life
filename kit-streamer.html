@@ -973,8 +973,12 @@
       flex-wrap: wrap;
     }
 
+    .top-nav:not(:has(.nav-brand:not([style*="display: none"]))) {
+      justify-content: center;
+    }
+
     .nav-brand {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 14px;
       font-weight: 900;
@@ -986,6 +990,14 @@
       padding: 0;
       line-height: 1;
       text-shadow: 0 0 14px rgba(255, 208, 0, 0.35);
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .nav-brand:hover {
+      transform: translateY(-1px);
+      opacity: 0.92;
+      text-decoration: underline;
+      text-decoration-color: rgba(255, 208, 0, 0.5);
     }
 
     .nav-brand img {
@@ -1049,9 +1061,9 @@
 
     <!-- Barre de navigation principale en onglets bien évidents -->
     <nav class="top-nav">
-      <a href="index.html" class="nav-brand">
+      <a href="#" id="kit-nav-brand-link" class="nav-brand" target="_blank" rel="noopener noreferrer" style="display: none;">
         <img id="kit-nav-brand-img" src="assets/logo-extra-life-icon.svg" alt="Extra Life">
-        <span id="kit-nav-brand-text">Portail Streamer Extra Life</span>
+        <span id="kit-nav-brand-text"></span>
       </a>
       <div class="nav-tabs">
         <a href="index.html" class="nav-tab">
@@ -1668,13 +1680,18 @@
       }
 
       function renderProfile() {
+        const brandLink = document.getElementById('kit-nav-brand-link');
+        const brandText = document.getElementById('kit-nav-brand-text');
+        const brandImg = document.getElementById('kit-nav-brand-img');
+
         if (!detectedParticipant) {
           elements.profileCard.style.display = 'none';
           if (elements.promptNotice) elements.promptNotice.style.display = 'block';
-          const brandText = document.getElementById('kit-nav-brand-text');
-          if (brandText) brandText.textContent = 'Portail Streamer Extra Life';
-          const brandImg = document.getElementById('kit-nav-brand-img');
-          if (brandImg) brandImg.src = 'assets/logo-extra-life-icon.svg';
+          if (brandLink) {
+            brandLink.style.display = 'none';
+            brandLink.href = '#';
+          }
+          if (brandText) brandText.textContent = '';
           return;
         }
 
@@ -1709,24 +1726,42 @@
         if (elements.badgeTotal) elements.badgeTotal.textContent = `Total : ${sumDonations.toFixed(2)} $ USD`;
         if (elements.badgeGoal) elements.badgeGoal.textContent = `Objectif : ${goal.toFixed(0)} $ USD`;
 
-        if (detectedParticipant.teamID && detectedParticipant.teamName) {
-          elements.badgeTeam.textContent = `Équipe : ${detectedParticipant.teamName}`;
+        // Gestion de la marque équipe ou fallback campagne personnelle
+        if (detectedParticipant.teamID) {
+          const teamName = detectedParticipant.teamName || 'Mon équipe Extra Life';
+          elements.badgeTeam.textContent = `Équipe : ${teamName}`;
           elements.badgeTeam.className = 'badge badge-gold';
-          const brandText = document.getElementById('kit-nav-brand-text');
-          if (brandText) brandText.textContent = detectedParticipant.teamName;
-          const brandImg = document.getElementById('kit-nav-brand-img');
+
+          if (brandLink) {
+            brandLink.href = `https://www.extra-life.org/team/${detectedParticipant.teamID}`;
+            brandLink.target = '_blank';
+            brandLink.rel = 'noopener noreferrer';
+            brandLink.title = `Visiter la page de l'équipe ${teamName} sur Extra Life (s'ouvre dans un nouvel onglet)`;
+            brandLink.style.display = 'inline-flex';
+          }
+          if (brandText) brandText.textContent = teamName;
           if (brandImg) {
             const teamLogo = detectedParticipant.teamAvatar || 
-              (detectedParticipant.teamName.toLowerCase().includes('soleil') ? 'assets/logo-allies-du-soleil.png' : 'assets/logo-extra-life-icon.svg');
+              (teamName.toLowerCase().includes('soleil') ? 'assets/logo-allies-du-soleil.png' : 'assets/logo-extra-life-icon.svg');
             brandImg.src = teamLogo;
           }
-        } else {
+        } else if (detectedParticipant.participantID) {
+          // Fallback sur la page de campagne personnelle pour participant solo
+          const participantName = detectedParticipant.displayName || 'Ma campagne Extra Life';
           elements.badgeTeam.textContent = 'Participant Solo';
           elements.badgeTeam.className = 'badge';
-          const brandText = document.getElementById('kit-nav-brand-text');
-          if (brandText) brandText.textContent = 'Portail Streamer Extra Life';
-          const brandImg = document.getElementById('kit-nav-brand-img');
-          if (brandImg) brandImg.src = 'assets/logo-extra-life-icon.svg';
+
+          if (brandLink) {
+            brandLink.href = `https://www.extra-life.org/participants/${detectedParticipant.participantID}`;
+            brandLink.target = '_blank';
+            brandLink.rel = 'noopener noreferrer';
+            brandLink.title = `Visiter la page de campagne de ${participantName} sur Extra Life (s'ouvre dans un nouvel onglet)`;
+            brandLink.style.display = 'inline-flex';
+          }
+          if (brandText) brandText.textContent = participantName;
+          if (brandImg) brandImg.src = detectedParticipant.avatarImageURL || 'assets/logo-extra-life-icon.svg';
+        } else {
+          if (brandLink) brandLink.style.display = 'none';
         }
 
         elements.badgeMilestones.textContent = `${detectedParticipant.numMilestones} défi(s) / jalons`;
@@ -2192,8 +2227,13 @@ Durant ce live, nous amassons des dons pour Extra Life afin de soutenir les hôp
         elements.inputParticipant.value = '';
         renderProfile();
         setAlertDurationValue(6);
+        const brandLink = document.getElementById('kit-nav-brand-link');
+        if (brandLink) {
+          brandLink.style.display = 'none';
+          brandLink.href = '#';
+        }
         const brandText = document.getElementById('kit-nav-brand-text');
-        if (brandText) brandText.textContent = 'Portail Streamer Extra Life';
+        if (brandText) brandText.textContent = '';
         const brandImg = document.getElementById('kit-nav-brand-img');
         if (brandImg) brandImg.src = 'assets/logo-extra-life-icon.svg';
         if (elements.savedNotice) elements.savedNotice.style.display = 'none';
