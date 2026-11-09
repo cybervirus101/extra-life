@@ -44,7 +44,7 @@
       color: var(--el-text-main);
       font-family: var(--font-main);
       line-height: 1.6;
-      padding: 24px 20px 80px 20px;
+      padding: 30px 24px 80px 24px;
       background-image: 
         radial-gradient(circle at 50% -10%, rgba(34, 178, 242, 0.22) 0%, transparent 55%),
         linear-gradient(180deg, #182E4D 0%, #11233A 100%);
@@ -52,7 +52,8 @@
     }
 
     .container {
-      max-width: 1100px;
+      width: 100%;
+      max-width: min(1600px, 95vw);
       margin: 0 auto;
     }
 
@@ -597,6 +598,13 @@
               <strong>Votre Objectif de Collecte de Fonds :</strong> Entrez le montant que vous aimeriez atteindre avec votre communauté (ex: <code>100 $</code>, <code>250 $</code>, <code>500 $</code>). Vous pourrez ajuster ce chiffre en tout temps depuis votre tableau de bord !
             </div>
           </li>
+          <li>
+            <span class="check-icon">✓</span>
+            <div>
+              <strong>Hôpital bénéficiaire :</strong> Sélectionnez <span class="tag tag-gold">Enfant Soleil</span>
+              <button class="btn btn-secondary" style="padding: 4px 10px; margin-left: 8px; font-size: 12px;" onclick="copyText('Enfant Soleil')">📋 Copier le nom</button>
+            </div>
+          </li>
         </ul>
 
         <!-- Alerte Hôpital Enfant Soleil -->
@@ -604,7 +612,10 @@
           <div class="alert-icon">⚠️</div>
           <div>
             <strong style="color: #FFD000; font-size: 16px;">ATTENTION : Choix de votre hôpital bénéficiaire</strong><br>
-            Dans le menu déroulant des hôpitaux, choisissez impérativement <strong>Enfant Soleil</strong> (ou <em>Opération Enfant Soleil</em>).<br>
+            Dans le menu déroulant des hôpitaux, choisissez impérativement <span class="tag tag-gold" style="font-size: 14px; background: rgba(255, 208, 0, 0.25); border: 1.5px solid #FFD000;">Enfant Soleil</span>
+            <button class="btn btn-secondary" style="padding: 4px 12px; margin-left: 8px; font-size: 12px; vertical-align: middle;" onclick="copyText('Enfant Soleil')">📋 Copier le nom</button>
+            <br>
+            <span style="font-size: 13.5px; display: inline-block; margin-top: 6px;">(ou <em>Opération Enfant Soleil</em> si le nom complet apparaît).</span><br>
             C'est cette étape clé qui garantit que <strong>100 % des dons amassés sur votre chaîne</strong> seront directement investis dans les hôpitaux et centres pédiatriques au Québec !
           </div>
         </div>
