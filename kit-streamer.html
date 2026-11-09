@@ -253,38 +253,57 @@
       box-shadow: 0 2px 10px rgba(255, 75, 31, 0.5);
     }
 
-    /* Carte de profil détectée */
+    /* Carte de profil détectée — Identique entre Accueil et Kit Streamer */
     .profile-card {
       display: none;
+      flex-direction: column;
+      gap: 16px;
       background: var(--el-navy-input);
       border: 2px solid var(--el-cyan);
-      border-radius: 14px;
-      padding: 16px;
+      border-radius: 16px;
+      padding: 18px 20px;
       margin-top: 16px;
-      gap: 16px;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
+    }
+
+    .profile-card-header {
+      display: flex;
       align-items: center;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      gap: 16px;
+      width: 100%;
     }
 
     .profile-avatar {
-      width: 60px;
-      height: 60px;
+      width: 62px;
+      height: 62px;
       border-radius: 50%;
       border: 3px solid var(--el-cyan);
       object-fit: cover;
+      flex-shrink: 0;
+      box-shadow: 0 0 14px rgba(28, 158, 214, 0.45);
     }
 
-    .profile-info h3 {
-      font-size: 18px;
+    .profile-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .profile-meta h3 {
+      font-size: 20px;
       font-weight: 800;
       color: #FFFFFF;
+      margin: 0;
+      line-height: 1.2;
     }
 
     .profile-badges {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-top: 6px;
+      margin-top: 4px;
     }
 
     .badge {
@@ -295,7 +314,7 @@
       border-radius: 20px;
       background: rgba(28, 158, 214, 0.15);
       color: var(--el-cyan-light);
-      border: 1px solid rgba(28, 158, 214, 0.3);
+      border: 1px solid rgba(28, 158, 214, 0.35);
     }
 
     .badge-gold {
@@ -304,6 +323,107 @@
       border: 1.5px solid #FFD000;
       font-weight: 800;
       box-shadow: 0 0 12px rgba(255, 208, 0, 0.3);
+    }
+
+    /* Barre d'objectif intégrée dans la carte de profil (Marque Overlay OBS) */
+    .profile-progress-box {
+      width: 100%;
+      background: #0A1424;
+      padding: 14px 18px;
+      border-radius: 12px;
+      border: 1.5px solid rgba(28, 158, 214, 0.35);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    .profile-progress-labels {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      width: 100%;
+      gap: 12px;
+    }
+
+    .profile-progress-raised, .profile-progress-goal {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .profile-progress-goal {
+      align-items: flex-end;
+      text-align: right;
+    }
+
+    .profile-progress-box .label-heading {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--el-cyan-light);
+      font-weight: 800;
+      margin-bottom: 2px;
+    }
+
+    .profile-progress-box .amount-highlight {
+      font-size: 22px;
+      font-weight: 900;
+      color: #FFD000;
+      text-shadow: 0 0 10px rgba(255, 208, 0, 0.35);
+      line-height: 1.2;
+      font-family: var(--font-main);
+    }
+
+    .profile-progress-box .amount-sub {
+      font-size: 19px;
+      font-weight: 800;
+      color: #FFFFFF;
+      line-height: 1.2;
+      font-family: var(--font-main);
+    }
+
+    .profile-progress-box .progress-track {
+      width: 100%;
+      height: 26px;
+      background: #070E18;
+      border: 2px solid rgba(28, 158, 214, 0.55);
+      border-radius: 13px;
+      position: relative;
+      overflow: visible;
+      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.6);
+      margin-top: 4px;
+    }
+
+    .profile-progress-box .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #0E7CA2 0%, #1C9ED6 60%, #62AF0F 100%);
+      border-radius: 10px;
+      position: relative;
+      box-shadow: 0 0 12px rgba(28, 158, 214, 0.7);
+      transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+      width: 0%;
+    }
+
+    .profile-progress-box .progress-percent-pin {
+      position: absolute;
+      top: 50%;
+      left: clamp(24px, var(--progress-pct, 0%), calc(100% - 24px));
+      transform: translate(-50%, -50%);
+      z-index: 5;
+      pointer-events: none;
+      transition: left 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .profile-progress-box .progress-percent-badge {
+      background: #070E18;
+      color: #70D3FF;
+      border: 2px solid #1C9ED6;
+      border-radius: 10px;
+      padding: 2px 8px;
+      font-size: 12px;
+      font-weight: 900;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.7), 0 0 8px rgba(28, 158, 214, 0.6);
+      white-space: nowrap;
     }
 
     .tag-gold {
@@ -955,10 +1075,10 @@
       <p>Configurez votre overlay OBS, vos alertes en direct et vos panneaux Twitch en 30 secondes sans aucune installation.</p>
     </header>
 
-    <!-- Étape 1 : Saisie de l'ID Extra Life -->
+    <!-- Section : Votre page Extra Life -->
     <section class="step-card">
       <div class="step-title">
-        <span class="step-number">1</span>
+        <span class="step-number">🔍</span>
         <span>Votre page Extra Life</span>
       </div>
       <p class="step-instruction">
@@ -978,16 +1098,36 @@
         <button id="btn-detect" class="btn btn-primary">🔍 Charger mes infos</button>
       </div>
 
-      <!-- Carte d'informations auto-détectées -->
+      <!-- Carte d'informations auto-détectées — Barre d'objectif style Overlay OBS -->
       <div id="profile-card" class="profile-card">
-        <img id="profile-avatar" class="profile-avatar" src="https://via.placeholder.com/60" alt="Avatar">
-        <div class="profile-info">
-          <h3 id="profile-name">Streamer</h3>
-          <div class="profile-badges">
-            <span id="badge-total" class="badge badge-gold">Total : -- $ USD</span>
-            <span id="badge-goal" class="badge">Objectif : -- $ USD</span>
-            <span id="badge-team" class="badge badge-red">Solo</span>
-            <span id="badge-milestones" class="badge">0 jalon</span>
+        <div class="profile-card-header">
+          <img id="profile-avatar" class="profile-avatar" src="https://via.placeholder.com/60" alt="Avatar">
+          <div class="profile-meta">
+            <h3 id="profile-name">Streamer</h3>
+            <div class="profile-badges">
+              <span id="badge-team" class="badge badge-gold">Solo</span>
+              <span id="badge-milestones" class="badge">0 jalon</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Barre d'objectif de la campagne (Style officiel Overlay OBS) -->
+        <div class="profile-progress-box">
+          <div class="profile-progress-labels">
+            <div class="profile-progress-raised">
+              <span class="label-heading">Total amassé</span>
+              <span id="profile-raised-amount" class="amount-highlight">0.00 $ USD</span>
+            </div>
+            <div class="profile-progress-goal">
+              <span class="label-heading">Objectif</span>
+              <span id="profile-goal-amount" class="amount-sub">1 000 $ USD</span>
+            </div>
+          </div>
+          <div class="progress-track" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+            <div id="profile-bar-fill" class="progress-fill" style="width: 0%;"></div>
+            <div id="profile-percent-pin" class="progress-percent-pin" style="--progress-pct: 0%;">
+              <span id="profile-percent" class="progress-percent-badge">0%</span>
+            </div>
           </div>
         </div>
       </div>
@@ -1007,10 +1147,10 @@
       </p>
     </section>
 
-    <!-- Étape 2 : Options d'affichage -->
+    <!-- Étape 1 : Options d'affichage -->
     <section class="step-card">
       <div class="step-title">
-        <span class="step-number">2</span>
+        <span class="step-number">1</span>
         <span>Personnalisation de l'affichage</span>
       </div>
 
@@ -1144,10 +1284,10 @@
       </div>
     </section>
 
-    <!-- Étape 3 : Liens OBS Studio prêts à l'emploi -->
+    <!-- Étape 2 : Liens OBS Studio prêts à l'emploi -->
     <section class="step-card">
       <div class="step-title">
-        <span class="step-number">3</span>
+        <span class="step-number">2</span>
         <span>Vos liens pour OBS Studio / Streamlabs</span>
       </div>
       <p class="step-instruction">
@@ -1230,10 +1370,10 @@
       </div>
     </section>
 
-    <!-- Étape 4 : Kit Twitch (Liens & Panneaux) -->
+    <!-- Étape 3 : Kit Twitch (Liens & Panneaux) -->
     <section id="section-twitch" class="step-card">
       <div class="step-title">
-        <span class="step-number">4</span>
+        <span class="step-number">3</span>
         <span>Panneau Twitch & Commandes de Chatbot</span>
       </div>
 
@@ -1302,6 +1442,11 @@
         profileCard: document.getElementById('profile-card'),
         profileAvatar: document.getElementById('profile-avatar'),
         profileName: document.getElementById('profile-name'),
+        profileRaisedAmount: document.getElementById('profile-raised-amount'),
+        profileGoalAmount: document.getElementById('profile-goal-amount'),
+        profileBarFill: document.getElementById('profile-bar-fill'),
+        profilePercentPin: document.getElementById('profile-percent-pin'),
+        profilePercent: document.getElementById('profile-percent'),
         badgeTotal: document.getElementById('badge-total'),
         badgeGoal: document.getElementById('badge-goal'),
         badgeTeam: document.getElementById('badge-team'),
@@ -1538,8 +1683,31 @@
 
         elements.profileName.textContent = detectedParticipant.displayName;
         elements.profileAvatar.src = detectedParticipant.avatarImageURL || 'https://via.placeholder.com/60/0C1829/1C9ED6?text=EL';
-        elements.badgeTotal.textContent = `Total : ${detectedParticipant.sumDonations.toFixed(2)} $ USD`;
-        elements.badgeGoal.textContent = `Objectif : ${detectedParticipant.fundraisingGoal.toFixed(0)} $ USD`;
+
+        const sumDonations = Number(detectedParticipant.sumDonations) || 0;
+        const goal = Number(detectedParticipant.fundraisingGoal) || 1000;
+        const pct = goal > 0 ? (sumDonations / goal) * 100 : 0;
+        const pctClamped = Math.min(100, Math.max(0, pct));
+        const pctDisplay = (pct >= 10 ? Math.round(pct) : pct.toFixed(1)) + '%';
+
+        if (elements.profileRaisedAmount) {
+          elements.profileRaisedAmount.textContent = `${sumDonations.toFixed(2)} $ USD`;
+        }
+        if (elements.profileGoalAmount) {
+          elements.profileGoalAmount.textContent = `${goal.toFixed(0)} $ USD`;
+        }
+        if (elements.profileBarFill) {
+          elements.profileBarFill.style.width = pctClamped + '%';
+        }
+        if (elements.profilePercentPin) {
+          elements.profilePercentPin.style.setProperty('--progress-pct', pctClamped + '%');
+        }
+        if (elements.profilePercent) {
+          elements.profilePercent.textContent = pctDisplay;
+        }
+
+        if (elements.badgeTotal) elements.badgeTotal.textContent = `Total : ${sumDonations.toFixed(2)} $ USD`;
+        if (elements.badgeGoal) elements.badgeGoal.textContent = `Objectif : ${goal.toFixed(0)} $ USD`;
 
         if (detectedParticipant.teamID && detectedParticipant.teamName) {
           elements.badgeTeam.textContent = `Équipe : ${detectedParticipant.teamName}`;
