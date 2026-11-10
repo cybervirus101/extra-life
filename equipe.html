@@ -952,8 +952,11 @@
           </div>
         </div>
         <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-          <a id="btn-view-team-page" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+          <a id="btn-view-team-page" href="https://www.extra-life.org/team/75345" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
             🌐 Page Extra Life de l'équipe
+          </a>
+          <a id="btn-view-user-page" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+            👤 Ma page personnelle
           </a>
           <button id="btn-switch-account" class="btn btn-danger">
             🚪 Changer de compte
@@ -1061,45 +1064,45 @@
             </div>
           </div>
 
-          <!-- 4. Logo Extra Life - Couleur Vectoriel SVG -->
+          <!-- 4. Logo Extra Life - Couleur Officielle PNG -->
           <div class="resource-card">
             <div>
               <div class="resource-preview">
-                <span class="resource-tag">SVG Vectoriel</span>
-                <img src="assets/logo-extra-life-color.svg" alt="Logo Extra Life Couleur">
+                <span class="resource-tag">PNG HD</span>
+                <img src="assets/logo-extra-life-color.png" alt="Logo Extra Life Couleur">
               </div>
               <div class="resource-meta">
                 <h4>Extra Life — Couleur Officielle</h4>
-                <p>Format vectoriel SVG redimensionnable à l'infini sans perte.</p>
+                <p>Format transparent haute résolution (1104 × 328 px) pour overlays, bannières et panneaux Twitch.</p>
               </div>
             </div>
             <div class="resource-actions">
-              <a href="assets/logo-extra-life-color.svg" download="logo-extra-life-color.svg" class="btn btn-primary">
+              <a href="assets/logo-extra-life-color.png" download="logo-extra-life-color.png" class="btn btn-primary">
                 📥 Télécharger
               </a>
-              <button class="btn btn-secondary btn-copy-url" data-url="assets/logo-extra-life-color.svg">
+              <button class="btn btn-secondary btn-copy-url" data-url="assets/logo-extra-life-color.png">
                 📋 Lien direct
               </button>
             </div>
           </div>
 
-          <!-- 5. Logo Extra Life - Icône Manette Ailée -->
+          <!-- 5. Logo Extra Life - Icône Manette Ailée PNG -->
           <div class="resource-card">
             <div>
               <div class="resource-preview">
-                <span class="resource-tag">SVG Icône</span>
-                <img src="assets/logo-extra-life-icon.svg" alt="Icône Manette Extra Life">
+                <span class="resource-tag">PNG HD</span>
+                <img src="assets/logo-extra-life-icon.png" alt="Icône Manette Extra Life">
               </div>
               <div class="resource-meta">
                 <h4>Emblème Manette Extra Life</h4>
-                <p>Icône de la manette ailée en couleurs officielles pour badges et boutons.</p>
+                <p>Icône officielle haute résolution avec fond transparent (790 × 672 px) pour badges, alertes et boutons.</p>
               </div>
             </div>
             <div class="resource-actions">
-              <a href="assets/logo-extra-life-icon.svg" download="logo-extra-life-icon.svg" class="btn btn-primary">
+              <a href="assets/logo-extra-life-icon.png" download="logo-extra-life-icon.png" class="btn btn-primary">
                 📥 Télécharger
               </a>
-              <button class="btn btn-secondary btn-copy-url" data-url="assets/logo-extra-life-icon.svg">
+              <button class="btn btn-secondary btn-copy-url" data-url="assets/logo-extra-life-icon.png">
                 📋 Lien direct
               </button>
             </div>
@@ -1499,6 +1502,7 @@
         memberName: document.getElementById('member-name'),
         memberTeamName: document.getElementById('member-team-name'),
         btnViewTeamPage: document.getElementById('btn-view-team-page'),
+        btnViewUserPage: document.getElementById('btn-view-user-page'),
         btnSwitchAccount: document.getElementById('btn-switch-account'),
         teamNavBrandLink: document.getElementById('team-nav-brand-link'),
         teamNavBrandImg: document.getElementById('team-nav-brand-img'),
@@ -1723,6 +1727,15 @@
 
         const teamPageUrl = `https://www.extra-life.org/team/${currentParticipant.teamID}`;
         elements.btnViewTeamPage.href = teamPageUrl;
+
+        // Mise à jour du lien vers la page personnelle du participant
+        const userPageUrl = (currentParticipant.links && currentParticipant.links.page)
+          ? currentParticipant.links.page
+          : `https://www.extra-life.org/participant/${currentParticipant.participantID}`;
+        if (elements.btnViewUserPage) {
+          elements.btnViewUserPage.href = userPageUrl;
+          elements.btnViewUserPage.title = `Ouvrir la page personnelle de ${currentParticipant.displayName || 'votre profil'} sur Extra Life`;
+        }
 
         // Mise à jour de la nav brand en haut
         if (elements.teamNavBrandLink) {
