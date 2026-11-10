@@ -531,7 +531,7 @@
         <a href="kit-streamer.html" class="nav-tab">
           <span>🎮 Kit Streamer</span>
         </a>
-        <a href="equipe.html" class="nav-tab">
+        <a href="equipe.html" class="nav-tab" id="nav-team-tab" style="display: none;">
           <span>🛡️ Espace Équipe</span>
         </a>
       </div>
@@ -728,8 +728,36 @@
       }
     }
 
-    // Détection dynamique si une équipe a été sélectionnée par le visiteur
+    // Détection dynamique si une équipe a été sélectionnée par le visiteur et visibilité de l'Espace Équipe
     (async function() {
+      // Visibilité de l'onglet Espace Équipe : strictement réservé aux membres de Les alliés du soleil
+      const teamTab = document.getElementById('nav-team-tab');
+      const OFFICIAL_TEAM_ID = 75345;
+
+      function checkIsOfficial(p) {
+        if (!p) return false;
+        if (p.teamID && Number(p.teamID) === OFFICIAL_TEAM_ID) return true;
+        if (p.teamName) {
+          const clean = p.teamName.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+          if (clean.includes('allies du soleil')) return true;
+        }
+        return false;
+      }
+
+      try {
+        if (teamTab) {
+          let showTab = localStorage.getItem('oes_is_official_team_member') === 'true';
+          if (!showTab) {
+            const cached = localStorage.getItem('oes_streamer_profile');
+            if (cached) {
+              const p = JSON.parse(cached);
+              showTab = checkIsOfficial(p);
+            }
+          }
+          teamTab.style.display = showTab ? 'inline-flex' : 'none';
+        }
+      } catch (e) {}
+
       try {
         const savedInput = localStorage.getItem('oes_streamer_input');
         if (!savedInput) return;
@@ -745,6 +773,14 @@
         const brandImg = document.getElementById('nav-brand-img');
 
         if (pData) {
+          const isOfficial = checkIsOfficial(pData);
+          if (teamTab) {
+            teamTab.style.display = isOfficial ? 'inline-flex' : 'none';
+          }
+          if (isOfficial) {
+            try { localStorage.setItem('oes_is_official_team_member', 'true'); } catch (e) {}
+          }
+
           if (pData.teamID && pData.teamName) {
             if (brandText) brandText.textContent = pData.teamName;
             if (brandLink) {

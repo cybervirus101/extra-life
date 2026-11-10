@@ -555,34 +555,162 @@
       margin-top: 4px;
     }
 
-    /* Nuancier de couleurs */
-    .color-section-group {
-      margin-bottom: 24px;
+    /* Nuancier de couleurs - Blocs Thématiques Séparés */
+    .theme-palette-block {
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 28px;
+      position: relative;
+      overflow: hidden;
     }
 
-    .color-group-heading {
-      font-size: 15px;
+    .theme-palette-block.theme-enfant-soleil {
+      background: linear-gradient(160deg, rgba(255, 208, 0, 0.08) 0%, rgba(241, 80, 41, 0.05) 50%, rgba(10, 20, 36, 0.98) 100%);
+      border: 2px solid rgba(255, 208, 0, 0.45);
+      box-shadow: 0 8px 32px rgba(255, 208, 0, 0.08);
+    }
+
+    .theme-palette-block.theme-extra-life {
+      background: linear-gradient(160deg, rgba(29, 158, 214, 0.08) 0%, rgba(13, 124, 163, 0.06) 50%, rgba(10, 20, 36, 0.98) 100%);
+      border: 2px solid rgba(29, 158, 214, 0.45);
+      box-shadow: 0 8px 32px rgba(29, 158, 214, 0.1);
+    }
+
+    .theme-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+    }
+
+    .theme-enfant-soleil .theme-header {
+      border-bottom: 2px solid rgba(255, 208, 0, 0.35);
+    }
+
+    .theme-extra-life .theme-header {
+      border-bottom: 2px solid rgba(29, 158, 214, 0.35);
+    }
+
+    .theme-header-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .theme-header-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      flex-shrink: 0;
+    }
+
+    .theme-enfant-soleil .theme-header-icon {
+      background: rgba(255, 208, 0, 0.2);
+      border: 1.5px solid rgba(255, 208, 0, 0.6);
+      box-shadow: 0 0 16px rgba(255, 208, 0, 0.25);
+    }
+
+    .theme-extra-life .theme-header-icon {
+      background: rgba(29, 158, 214, 0.2);
+      border: 1.5px solid rgba(29, 158, 214, 0.6);
+      box-shadow: 0 0 16px rgba(29, 158, 214, 0.25);
+    }
+
+    .theme-title {
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: -0.3px;
+      margin: 0 0 4px 0;
+    }
+
+    .theme-enfant-soleil .theme-title {
+      color: #FFD000;
+    }
+
+    .theme-extra-life .theme-title {
+      color: #1D9ED6;
+    }
+
+    .theme-header-desc {
+      font-size: 13px;
+      color: var(--el-text-sub);
+    }
+
+    .theme-tag {
+      font-size: 11px;
       font-weight: 800;
-      color: #FFFFFF;
-      margin-top: 18px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      align-self: center;
+    }
+
+    .theme-enfant-soleil .theme-tag {
+      background: rgba(255, 208, 0, 0.15);
+      color: #FFD000;
+      border: 1px solid rgba(255, 208, 0, 0.45);
+    }
+
+    .theme-extra-life .theme-tag {
+      background: rgba(29, 158, 214, 0.15);
+      color: #1D9ED6;
+      border: 1px solid rgba(29, 158, 214, 0.45);
+    }
+
+    .badge-subpalette {
+      font-size: 10.5px;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-left: auto;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .theme-enfant-soleil .badge-subpalette {
+      background: rgba(255, 208, 0, 0.12);
+      color: #FFD000;
+      border: 1px solid rgba(255, 208, 0, 0.3);
+    }
+
+    .theme-extra-life .badge-subpalette {
+      background: rgba(29, 158, 214, 0.12);
+      color: #1D9ED6;
+      border: 1px solid rgba(29, 158, 214, 0.3);
+    }
+
+    .theme-enfant-soleil .color-group-heading {
+      font-size: 14.5px;
+      font-weight: 800;
+      color: #FFF2B2;
+      margin-top: 20px;
       margin-bottom: 12px;
       display: flex;
       align-items: center;
       gap: 10px;
       padding-bottom: 6px;
-      border-bottom: 1.5px solid rgba(28, 158, 214, 0.25);
+      border-bottom: 1.5px solid rgba(255, 208, 0, 0.25);
     }
 
-    .color-group-heading .badge-palette {
-      font-size: 11px;
+    .theme-extra-life .color-group-heading {
+      font-size: 14.5px;
       font-weight: 800;
-      padding: 2px 8px;
-      border-radius: 12px;
-      background: rgba(28, 158, 214, 0.2);
-      color: var(--el-cyan-light);
-      border: 1px solid rgba(28, 158, 214, 0.4);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+      color: #BBE7FF;
+      margin-top: 20px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 6px;
+      border-bottom: 1.5px solid rgba(29, 158, 214, 0.25);
     }
 
     .color-grid {
@@ -593,7 +721,6 @@
 
     .color-card {
       background: #0A1526;
-      border: 1.5px solid rgba(28, 158, 214, 0.3);
       border-radius: 12px;
       padding: 12px;
       text-align: left;
@@ -603,10 +730,24 @@
       flex-direction: column;
     }
 
-    .color-card:hover {
+    .theme-enfant-soleil .color-card {
+      border: 1.5px solid rgba(255, 208, 0, 0.25);
+    }
+
+    .theme-extra-life .color-card {
+      border: 1.5px solid rgba(29, 158, 214, 0.25);
+    }
+
+    .theme-enfant-soleil .color-card:hover {
       transform: translateY(-3px);
-      border-color: var(--el-jaune-or);
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+      border-color: #FFD000;
+      box-shadow: 0 6px 20px rgba(255, 208, 0, 0.25);
+    }
+
+    .theme-extra-life .color-card:hover {
+      transform: translateY(-3px);
+      border-color: #1D9ED6;
+      box-shadow: 0 6px 20px rgba(29, 158, 214, 0.25);
     }
 
     .color-swatch {
@@ -631,6 +772,14 @@
       color: var(--el-cyan-light);
       font-family: monospace;
       margin-bottom: 4px;
+    }
+
+    .theme-enfant-soleil .color-hex {
+      color: #FFD000;
+    }
+
+    .theme-extra-life .color-hex {
+      color: #1D9ED6;
     }
 
     .color-meta {
@@ -711,7 +860,7 @@
         <a href="kit-streamer.html" class="nav-tab">
           <span>🎮 Kit Streamer</span>
         </a>
-        <a href="equipe.html" class="nav-tab active">
+        <a href="equipe.html" class="nav-tab active" id="nav-team-tab" style="display: none;">
           <span>🛡️ Espace Équipe</span>
         </a>
       </div>
@@ -724,12 +873,13 @@
       <p>Logos officiels haute définition, visuels, slogans, bannières et overlays réservés aux membres de l'équipe.</p>
     </header>
 
-    <!-- Écran de Verrouillage (Affiché si non connecté ou non membre d'équipe) -->
+    <!-- Écran de Verrouillage (Affiché si non connecté ou non membre officiel) -->
     <div id="gatekeeper-box" class="gatekeeper-card" style="display: none;">
       <div class="gatekeeper-icon">🔒</div>
-      <h2>Espace réservé aux membres de l'équipe</h2>
+      <h2>Espace réservé à l'équipe « Les alliés du soleil »</h2>
       <p>
-        Cette section regroupe les ressources graphiques officielles, slogans et overlays réservés aux créateurs et streamers membres d'une équipe Extra Life.
+        Cet espace est exclusivement réservé aux membres officiels de l'équipe <strong>Les alliés du soleil</strong> inscrits sur DonorDrive / Extra Life.<br>
+        Entrez votre identifiant de participant pour vérifier votre adhésion sur la liste officielle DonorDrive et déverrouiller l'accès.
       </p>
 
       <div class="gatekeeper-input-group">
@@ -1009,19 +1159,26 @@
           <span>Charte Graphique & Couleurs Officielles</span>
         </div>
         <div class="card-subtitle">
-          Références officielles complètes (HEX, CMJN, RVB et Pantone). Cliquez sur une carte pour copier instantanément son code hexadécimal.
+          Références officielles complètes (HEX, CMJN, RVB et Pantone) séparées par univers de marque. Cliquez sur n'importe quelle nuance pour copier instantanément son code hexadécimal.
         </div>
 
-        <!-- ☀️ SOUS-SECTION OPÉRATION ENFANT SOLEIL -->
-        <div class="color-section-group">
-          <h3 class="color-group-heading" style="color: var(--el-jaune-or); font-size: 18px; margin-top: 10px;">
-            <span>☀️ Opération Enfant Soleil</span>
-            <span class="badge-palette">Charte Officielle</span>
-          </h3>
+        <!-- ☀️ THÈME 1 : OPÉRATION ENFANT SOLEIL -->
+        <div class="theme-palette-block theme-enfant-soleil">
+          <div class="theme-header">
+            <div class="theme-header-left">
+              <div class="theme-header-icon">☀️</div>
+              <div>
+                <h3 class="theme-title">Thème Opération Enfant Soleil</h3>
+                <div class="theme-header-desc">Charte graphique officielle québécoise — Pour que nos soleils brillent de santé</div>
+              </div>
+            </div>
+            <span class="theme-tag">Charte Officielle OES</span>
+          </div>
 
-          <!-- Couleurs Principales -->
+          <!-- 1. Couleurs Principales OES -->
           <div class="color-group-heading">
             <span>Couleurs Principales</span>
+            <span class="badge-subpalette">Identité Signature</span>
           </div>
           <div class="color-grid">
 
@@ -1049,9 +1206,10 @@
 
           </div>
 
-          <!-- Palette Complémentaire -->
+          <!-- 2. Palette Complémentaire OES -->
           <div class="color-group-heading">
             <span>Palette Complémentaire</span>
+            <span class="badge-subpalette">Nuances Ensoleillées</span>
           </div>
           <div class="color-grid">
 
@@ -1123,9 +1281,10 @@
 
           </div>
 
-          <!-- Palette Utilitaire -->
+          <!-- 3. Palette Utilitaire OES -->
           <div class="color-group-heading">
             <span>Palette Utilitaire</span>
+            <span class="badge-subpalette">Fonds & Contraste</span>
           </div>
           <div class="color-grid">
 
@@ -1154,16 +1313,23 @@
           </div>
         </div>
 
-        <!-- 🎮 SOUS-SECTION EXTRA LIFE & CMN -->
-        <div class="color-section-group" style="margin-top: 36px;">
-          <h3 class="color-group-heading" style="color: var(--el-cyan-light); font-size: 18px;">
-            <span>🎮 Extra Life & Children's Miracle Network</span>
-            <span class="badge-palette">Charte Officielle</span>
-          </h3>
+        <!-- 🎮 THÈME 2 : EXTRA LIFE & CMN -->
+        <div class="theme-palette-block theme-extra-life">
+          <div class="theme-header">
+            <div class="theme-header-left">
+              <div class="theme-header-icon">🎮</div>
+              <div>
+                <h3 class="theme-title">Thème Extra Life & CMN Hospitals</h3>
+                <div class="theme-header-desc">Charte graphique officielle gaming & réseau hospitalier pédiatrique</div>
+              </div>
+            </div>
+            <span class="theme-tag">Charte Officielle EL & CMN</span>
+          </div>
 
-          <!-- Couleurs Principales Extra Life -->
+          <!-- 1. Couleurs Principales Extra Life -->
           <div class="color-group-heading">
             <span>Couleurs Principales Extra Life</span>
+            <span class="badge-subpalette">Identité Visuelle</span>
           </div>
           <div class="color-grid">
 
@@ -1202,9 +1368,10 @@
 
           </div>
 
-          <!-- Palette Gaming & Secondaire Extra Life -->
+          <!-- 2. Palette Gaming & Secondaire Extra Life -->
           <div class="color-group-heading">
             <span>Palette Gaming & Secondaire Extra Life</span>
+            <span class="badge-subpalette">Overlays & Streaming</span>
           </div>
           <div class="color-grid">
 
@@ -1291,9 +1458,13 @@
     (function() {
       'use strict';
 
+      const OFFICIAL_TEAM_ID = 75345;
+      const OFFICIAL_TEAM_NAME = "Les alliés du soleil";
+
       let currentParticipant = null;
 
       const elements = {
+        navTeamTab: document.getElementById('nav-team-tab'),
         gatekeeperBox: document.getElementById('gatekeeper-box'),
         protectedContent: document.getElementById('protected-content'),
         inputGatekeeperId: document.getElementById('input-gatekeeper-id'),
@@ -1311,6 +1482,28 @@
         cmdDonDisplay: document.getElementById('cmd-don-display'),
         btnCopyCmdDon: document.getElementById('btn-copy-cmd-don')
       };
+
+      function isOfficialTeamMember(participant) {
+        if (!participant) return false;
+        if (participant.teamID && Number(participant.teamID) === OFFICIAL_TEAM_ID) return true;
+        if (participant.teamName) {
+          const clean = participant.teamName.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+          if (clean.includes('allies du soleil')) return true;
+        }
+        return false;
+      }
+
+      async function checkDonorDriveTeamRoster(participantId) {
+        const pId = Number(participantId);
+        if (!pId) return false;
+        try {
+          const roster = await fetchWithFallback(`https://dd.extra-life.org/api/teams/${OFFICIAL_TEAM_ID}/participants`);
+          if (Array.isArray(roster)) {
+            return roster.some(m => Number(m.participantID) === pId);
+          }
+        } catch (e) {}
+        return false;
+      }
 
       function showToast(msg) {
         if (!elements.toast) return;
@@ -1411,9 +1604,19 @@
               } catch (e) {}
             }
 
-            // Vérification de l'appartenance à une équipe
-            if (!currentParticipant.teamID) {
-              alert("⚠️ Vous êtes enregistré en tant que participant Solo.\n\nCet espace est réservé aux streamers membres d'une équipe. Consultez notre guide pour rejoindre une équipe Extra Life !");
+            // Vérification de l'appartenance officielle à Les alliés du soleil
+            let isMember = isOfficialTeamMember(currentParticipant);
+            if (!isMember) {
+              // Vérification via la liste officielle de l'équipe sur DonorDrive
+              isMember = await checkDonorDriveTeamRoster(rawId);
+              if (isMember) {
+                currentParticipant.teamID = OFFICIAL_TEAM_ID;
+                currentParticipant.teamName = OFFICIAL_TEAM_NAME;
+              }
+            }
+
+            if (!isMember) {
+              alert("⚠️ Accès refusé : Cet espace privé est exclusivement réservé aux membres officiels de l'équipe « Les alliés du soleil » inscrits sur DonorDrive / Extra Life.\n\nVotre identifiant n'apparaît pas dans la liste officielle des membres de l'équipe.");
               elements.btnGatekeeperLogin.disabled = false;
               elements.btnGatekeeperLogin.textContent = "🔓 Déverrouiller l'accès";
               return;
@@ -1423,6 +1626,7 @@
             try {
               localStorage.setItem('oes_streamer_input', rawId);
               localStorage.setItem('oes_streamer_profile', JSON.stringify(currentParticipant));
+              localStorage.setItem('oes_is_official_team_member', 'true');
             } catch (e) {}
 
             renderPage();
@@ -1440,19 +1644,27 @@
       }
 
       function renderPage() {
-        if (!currentParticipant || !currentParticipant.teamID) {
+        const isMember = isOfficialTeamMember(currentParticipant);
+        if (!currentParticipant || !isMember) {
           elements.gatekeeperBox.style.display = 'block';
           elements.protectedContent.style.display = 'none';
 
           if (elements.teamNavBrandLink) {
             elements.teamNavBrandLink.style.display = 'none';
           }
+          if (elements.navTeamTab) {
+            elements.navTeamTab.style.display = 'none';
+          }
           return;
         }
 
-        // Déverrouillage réussi
+        // Déverrouillage réussi pour un membre officiel
         elements.gatekeeperBox.style.display = 'none';
         elements.protectedContent.style.display = 'block';
+
+        if (elements.navTeamTab) {
+          elements.navTeamTab.style.display = 'inline-flex';
+        }
 
         // Mise à jour de la bannière membre
         elements.memberName.textContent = currentParticipant.displayName;
@@ -1487,6 +1699,7 @@
         try {
           localStorage.removeItem('oes_streamer_profile');
           localStorage.removeItem('oes_streamer_input');
+          localStorage.removeItem('oes_is_official_team_member');
         } catch (e) {}
         currentParticipant = null;
         renderPage();
@@ -1494,12 +1707,12 @@
       }
 
       // Restauration de session
-      function initAuth() {
+      async function initAuth() {
         const urlParams = new URLSearchParams(window.location.search);
         const urlPid = urlParams.get('participantID') || urlParams.get('pId');
 
         if (urlPid) {
-          verifyAndUnlock(urlPid);
+          await verifyAndUnlock(urlPid);
           return;
         }
 
@@ -1507,7 +1720,7 @@
           const cached = localStorage.getItem('oes_streamer_profile');
           if (cached) {
             const p = JSON.parse(cached);
-            if (p && p.participantID && p.teamID) {
+            if (p && isOfficialTeamMember(p)) {
               currentParticipant = p;
               renderPage();
               return;
@@ -1516,7 +1729,7 @@
           const savedInput = localStorage.getItem('oes_streamer_input');
           if (savedInput) {
             elements.inputGatekeeperId.value = savedInput;
-            verifyAndUnlock(savedInput);
+            await verifyAndUnlock(savedInput);
             return;
           }
         } catch (e) {}

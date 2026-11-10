@@ -724,7 +724,7 @@
         <a href="kit-streamer.html" class="nav-tab">
           <span>🎮 Kit Streamer</span>
         </a>
-        <a href="equipe.html" class="nav-tab">
+        <a href="equipe.html" class="nav-tab" id="nav-team-tab" style="display: none;">
           <span>🛡️ Espace Équipe</span>
         </a>
       </div>
@@ -914,7 +914,10 @@
 
       let detectedParticipant = null;
 
+      const OFFICIAL_TEAM_ID = 75345;
+
       const elements = {
+        navTeamTab: document.getElementById('nav-team-tab'),
         topNavBrandLink: document.getElementById('top-nav-brand-link'),
         topNavLogo: document.getElementById('top-nav-logo'),
         topNavBrandText: document.getElementById('top-nav-brand-text'),
@@ -1121,6 +1124,29 @@
         if (elements.btnOpenMyKit) {
           elements.btnOpenMyKit.href = `kit-streamer.html?participantID=${detectedParticipant.participantID}`;
         }
+
+        // Visibilité de l'onglet Espace Équipe : visible UNIQUEMENT pour les membres officiels de « Les alliés du soleil »
+        const isTeamMember = isOfficialTeamMember(detectedParticipant);
+        if (elements.navTeamTab) {
+          elements.navTeamTab.style.display = isTeamMember ? 'inline-flex' : 'none';
+        }
+        try {
+          if (isTeamMember) {
+            localStorage.setItem('oes_is_official_team_member', 'true');
+          } else {
+            localStorage.removeItem('oes_is_official_team_member');
+          }
+        } catch (e) {}
+      }
+
+      function isOfficialTeamMember(participant) {
+        if (!participant) return false;
+        if (participant.teamID && Number(participant.teamID) === OFFICIAL_TEAM_ID) return true;
+        if (participant.teamName) {
+          const clean = participant.teamName.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+          if (clean.includes('allies du soleil')) return true;
+        }
+        return false;
       }
 
       function saveStreamerMemory() {
@@ -1139,14 +1165,23 @@
         try {
           localStorage.removeItem('oes_streamer_input');
           localStorage.removeItem('oes_streamer_profile');
+          localStorage.removeItem('oes_is_official_team_member');
         } catch (e) {}
         detectedParticipant = null;
         elements.inputParticipant.value = '';
+        if (elements.navTeamTab) {
+          elements.navTeamTab.style.display = 'none';
+        }
         renderProfile();
       }
 
       function restoreSavedStreamer() {
         try {
+          const isOfficial = localStorage.getItem('oes_is_official_team_member') === 'true';
+          if (elements.navTeamTab) {
+            elements.navTeamTab.style.display = isOfficial ? 'inline-flex' : 'none';
+          }
+
           const cachedProfile = localStorage.getItem('oes_streamer_profile');
           if (cachedProfile) {
             try {
