@@ -805,6 +805,11 @@
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
     }
 
+    .obs-card .option-box {
+      background: #0E1A2C;
+      border: 1.5px solid rgba(28, 158, 214, 0.35);
+    }
+
     .obs-card-header {
       display: flex;
       flex-direction: column;
@@ -1457,64 +1462,35 @@
       </p>
     </section>
 
-    <!-- Étape 1 : Options d'affichage -->
+    <!-- Étape 1 : Thème visuel -->
     <section class="step-card">
       <div class="step-title">
         <span class="step-number">1</span>
-        <span>Personnalisation de l'affichage</span>
+        <span>Thème visuel</span>
       </div>
+      <p class="step-instruction">
+        Sélectionnez l'ambiance visuelle qui sera appliquée à vos overlays OBS et vos panneaux Twitch :
+      </p>
 
-      <div class="options-grid">
-        <div class="option-box">
-          <label for="select-layout">Disposition dans OBS</label>
-          <select id="select-layout" class="option-select">
-            <option value="horizontal" selected>Bannière horizontale (Haut / Bas)</option>
-            <option value="two-tier">Format 2 étages (Moyen / Carré)</option>
-            <option value="vertical">Colonne latérale (Verticale)</option>
-          </select>
-        </div>
-
-        <div class="option-box">
-          <label for="select-mode">Mode d'affichage</label>
-          <select id="select-mode" class="option-select">
-            <option value="alternance" selected>☀️ Alternance douce (Solo + Équipe)</option>
-            <option value="participant">Solo uniquement (Mon objectif)</option>
-            <option value="team">Équipe uniquement (Cagnotte globale)</option>
-          </select>
-        </div>
-
-        <div class="option-box">
-          <label for="select-theme">Thème visuel</label>
-          <select id="select-theme" class="option-select">
-            <optgroup label="🎮 Thèmes officiels Extra Life (Prioritaire)">
-              <option value="extralife-sombre" selected>🕹️ Extra Life — Thème sombre (Bleu nuit & Cyan néon)</option>
-              <option value="extralife-clair">🎮 Extra Life — Thème clair (Bleu CMN & Blanc)</option>
-            </optgroup>
-            <optgroup label="☀️ Thèmes alternatifs Enfant Soleil">
-              <option value="clair">☀️ Enfant Soleil — Thème clair (Jaune & Blanc)</option>
-              <option value="sombre">🌙 Enfant Soleil — Thème sombre (Noir velours)</option>
-            </optgroup>
-            <optgroup label="🎨 Thème Personnalisé">
-              <option value="personnalise">🎨 Thème personnalisé (Palette sur mesure)</option>
-            </optgroup>
-          </select>
-        </div>
-
-        <div class="option-box">
-          <label for="input-interval">Vitesse d'alternance</label>
-          <div class="stepper-group">
-            <button type="button" class="btn-stepper" id="btn-interval-minus" title="Diminuer (−5s)">−</button>
-            <div class="stepper-input-wrapper">
-              <input type="number" id="input-interval" class="stepper-input" min="3" max="300" step="1" value="20" title="Entrez le nombre de secondes">
-              <span class="stepper-unit">sec</span>
-            </div>
-            <button type="button" class="btn-stepper" id="btn-interval-plus" title="Augmenter (+5s)">+</button>
-          </div>
-        </div>
+      <div class="option-box" style="max-width: 580px; margin-top: 10px;">
+        <label for="select-theme">Thème visuel</label>
+        <select id="select-theme" class="option-select">
+          <optgroup label="🎮 Thèmes officiels Extra Life (Prioritaire)">
+            <option value="extralife-sombre" selected>🕹️ Extra Life — Thème sombre (Bleu nuit & Cyan néon)</option>
+            <option value="extralife-clair">🎮 Extra Life — Thème clair (Bleu CMN & Blanc)</option>
+          </optgroup>
+          <optgroup label="☀️ Thèmes alternatifs Enfant Soleil">
+            <option value="clair">☀️ Enfant Soleil — Thème clair (Jaune & Blanc)</option>
+            <option value="sombre">🌙 Enfant Soleil — Thème sombre (Noir velours)</option>
+          </optgroup>
+          <optgroup label="🎨 Thème Personnalisé">
+            <option value="personnalise">🎨 Thème personnalisé (Palette sur mesure)</option>
+          </optgroup>
+        </select>
       </div>
 
       <!-- Panneau de personnalisation des couleurs -->
-      <div id="custom-theme-panel" class="custom-palette-box" style="display: none;">
+      <div id="custom-theme-panel" class="custom-palette-box" style="display: none; margin-top: 16px;">
         <div class="custom-palette-header">
           <span class="custom-palette-title">🎨 Palette de couleurs personnalisée (Panneaux & Overlay)</span>
           <button type="button" id="btn-reset-custom-theme" class="btn-palette-reset" title="Réinitialiser aux couleurs par défaut">↺ Réinitialiser</button>
@@ -1608,18 +1584,56 @@
       <div class="obs-card">
         <div class="obs-card-header">
           <h4 class="obs-card-title">📊 1. Overlay Barre de progression & Dons récents</h4>
-          <div id="obs-rec-box" class="obs-rec-box">
-            ✨ Résolution recommandée dans OBS : <span id="obs-rec-val"><strong>1920 × 140 px</strong></span>
+          <p style="font-size: 13.5px; color: var(--el-text-sub); margin: 4px 0 0 0;">
+            Barre animée affichant votre cagnotte, l'objectif et les derniers dons en direct.
+          </p>
+        </div>
+
+        <!-- Options spécifiques de l'overlay -->
+        <div class="options-grid" style="margin-top: 12px; margin-bottom: 16px;">
+          <div class="option-box">
+            <label for="select-layout">Disposition dans OBS</label>
+            <select id="select-layout" class="option-select">
+              <option value="horizontal" selected>Bannière horizontale (Haut / Bas)</option>
+              <option value="two-tier">Format 2 étages (Moyen / Carré)</option>
+              <option value="vertical">Colonne latérale (Verticale)</option>
+            </select>
           </div>
-          <div id="obs-dims-limits" class="obs-dims-limits">
-            📐 <em>Dimensions autorisées : Min 1050 × 135 px • Max 1920 × 150 px</em>
+
+          <div class="option-box">
+            <label for="select-mode">Mode d'affichage</label>
+            <select id="select-mode" class="option-select">
+              <option value="alternance" selected>☀️ Alternance douce (Solo + Équipe)</option>
+              <option value="participant">Solo uniquement (Mon objectif)</option>
+              <option value="team">Équipe uniquement (Cagnotte globale)</option>
+            </select>
           </div>
-          <div id="obs-formats-detail" class="obs-formats-detail">
-            • <strong>Bannière horizontale :</strong> Recommandé 1920 × 140 px (ou 1280 × 140 px) — <em>Idéal en bandeau haut ou bas</em><br>
-            • <strong>Format 2 étages :</strong> Recommandé 850 × 240 px — <em>Idéal au-dessus de la webcam</em><br>
-            • <strong>Colonne latérale :</strong> Recommandé 420 × 700 px — <em>Idéal pour barre latérale</em>
+
+          <div class="option-box">
+            <label for="input-interval">Vitesse d'alternance</label>
+            <div class="stepper-group">
+              <button type="button" class="btn-stepper" id="btn-interval-minus" title="Diminuer (−5s)">−</button>
+              <div class="stepper-input-wrapper">
+                <input type="number" id="input-interval" class="stepper-input" min="3" max="300" step="1" value="20" title="Entrez le nombre de secondes">
+                <span class="stepper-unit">sec</span>
+              </div>
+              <button type="button" class="btn-stepper" id="btn-interval-plus" title="Augmenter (+5s)">+</button>
+            </div>
           </div>
         </div>
+
+        <div id="obs-rec-box" class="obs-rec-box">
+          ✨ Résolution recommandée dans OBS : <span id="obs-rec-val"><strong>1920 × 140 px</strong></span>
+        </div>
+        <div id="obs-dims-limits" class="obs-dims-limits">
+          📐 <em>Dimensions autorisées : Min 1050 × 135 px • Max 1920 × 150 px</em>
+        </div>
+        <div id="obs-formats-detail" class="obs-formats-detail">
+          • <strong>Bannière horizontale :</strong> Recommandé 1920 × 140 px (ou 1280 × 140 px) — <em>Idéal en bandeau haut ou bas</em><br>
+          • <strong>Format 2 étages :</strong> Recommandé 850 × 240 px — <em>Idéal au-dessus de la webcam</em><br>
+          • <strong>Colonne latérale :</strong> Recommandé 420 × 700 px — <em>Idéal pour barre latérale</em>
+        </div>
+
         <div class="url-row">
           <input type="text" id="url-overlay" class="url-input" readonly>
           <button class="btn btn-secondary" onclick="copyInput('url-overlay')">📋 Copier</button>
