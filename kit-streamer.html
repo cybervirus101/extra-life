@@ -1109,7 +1109,7 @@
       </div>
 
       <div class="input-group">
-        <input type="text" id="input-participant" class="input-field" placeholder="Ex: 582063 ou https://www.extra-life.org/participant/582063" value="582063">
+        <input type="text" id="input-participant" class="input-field" placeholder="Ex: 512039 ou https://dd.extra-life.org/participants/512039" value="582063">
         <button id="btn-detect" class="btn btn-primary">🔍 Charger mes infos</button>
       </div>
 
@@ -1604,14 +1604,14 @@
 
       // Requête JSONP résiliente
       function fetchJSONP(url) {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
           const cbName = 'cfg_cb_' + Math.random().toString(36).substring(2, 9);
           const script = document.createElement('script');
           const sep = url.includes('?') ? '&' : '?';
           script.src = `${url}${sep}callback=${cbName}`;
           const timer = setTimeout(() => {
             cleanup();
-            reject(new Error('Timeout JSONP'));
+            resolve(null);
           }, 8000);
           function cleanup() {
             clearTimeout(timer);
@@ -1619,7 +1619,7 @@
             if (script.parentNode) script.remove();
           }
           window[cbName] = (data) => { cleanup(); resolve(data); };
-          script.onerror = () => { cleanup(); reject(new Error('Erreur JSONP')); };
+          script.onerror = () => { cleanup(); resolve(null); };
           document.head.appendChild(script);
         });
       }
@@ -1628,9 +1628,12 @@
         try {
           const res = await fetch(url);
           if (res.ok) return await res.json();
-          throw new Error('Fetch failed');
-        } catch {
+          if (res.status === 404) return null;
+        } catch (e) {}
+        try {
           return await fetchJSONP(url);
+        } catch (e) {
+          return null;
         }
       }
 
@@ -1641,9 +1644,10 @@
         elements.btnDetect.textContent = '⏳ Recherche...';
 
         try {
-          const data = await fetchWithFallback(`https://dd.extra-life.org/api/participants/${idOrSlug}`);
+          const cleanId = extractId(idOrSlug);
+          const data = await fetchWithFallback(`https://dd.extra-life.org/api/participants/${cleanId}`);
           if (data && typeof data.fundraisingGoal !== 'undefined') {
-            const numericId = String(data.participantID || idOrSlug);
+            const numericId = String(data.participantID || cleanId);
             detectedParticipant = {
               participantID: numericId,
               displayName: data.displayName || 'Streamer',
@@ -1674,10 +1678,12 @@
             showToast('Informations Extra Life chargées avec succès ! ☀️');
           } else {
             showToast('Participant introuvable sur Extra Life (vérifiez le lien ou l’ID)');
+            alert(`Participant introuvable sur Extra Life pour "${idOrSlug}".\n\nVeuillez vérifier votre ID ou lien (ex: 582063).`);
           }
         } catch (err) {
           console.warn('Erreur chargement participant:', err);
           showToast('Impossible de contacter l’API Extra Life');
+          alert('Impossible de contacter l’API Extra Life pour le moment. Veuillez vérifier votre connexion.');
         } finally {
           elements.btnDetect.disabled = false;
           elements.btnDetect.textContent = '🔍 Charger mes infos';
