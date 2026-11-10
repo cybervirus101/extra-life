@@ -1044,6 +1044,272 @@
       box-shadow: 0 4px 16px rgba(28, 158, 214, 0.45);
     }
 
+    /* Nuancier de couleurs - Blocs Thématiques Séparés */
+    .theme-palette-block {
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .theme-palette-block.theme-enfant-soleil {
+      background: linear-gradient(160deg, rgba(255, 208, 0, 0.08) 0%, rgba(241, 80, 41, 0.05) 50%, rgba(10, 20, 36, 0.98) 100%);
+      border: 2px solid rgba(255, 208, 0, 0.45);
+      box-shadow: 0 8px 32px rgba(255, 208, 0, 0.08);
+    }
+
+    .theme-palette-block.theme-extra-life {
+      background: linear-gradient(160deg, rgba(29, 158, 214, 0.08) 0%, rgba(13, 124, 163, 0.06) 50%, rgba(10, 20, 36, 0.98) 100%);
+      border: 2px solid rgba(29, 158, 214, 0.45);
+      box-shadow: 0 8px 32px rgba(29, 158, 214, 0.1);
+    }
+
+    .theme-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+    }
+
+    .theme-enfant-soleil .theme-header {
+      border-bottom: 2px solid rgba(255, 208, 0, 0.35);
+    }
+
+    .theme-extra-life .theme-header {
+      border-bottom: 2px solid rgba(29, 158, 214, 0.35);
+    }
+
+    .theme-header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .theme-header-icon {
+      height: 52px;
+      min-width: 52px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 12px;
+      flex-shrink: 0;
+      box-sizing: border-box;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .theme-header-icon:hover {
+      transform: translateY(-2px);
+    }
+
+    .theme-header-icon img {
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.35));
+    }
+
+    .theme-header-icon img.theme-logo-oes {
+      max-height: 44px;
+      max-width: 140px;
+    }
+
+    .theme-header-icon img.theme-logo-el {
+      max-height: 36px;
+      max-width: 130px;
+    }
+
+    .theme-enfant-soleil .theme-header-icon {
+      background: rgba(255, 208, 0, 0.12);
+      border: 1.5px solid rgba(255, 208, 0, 0.5);
+      box-shadow: 0 4px 16px rgba(255, 208, 0, 0.2);
+    }
+
+    .theme-extra-life .theme-header-icon {
+      background: rgba(29, 158, 214, 0.12);
+      border: 1.5px solid rgba(29, 158, 214, 0.5);
+      box-shadow: 0 4px 16px rgba(29, 158, 214, 0.2);
+    }
+
+    .theme-title {
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: -0.3px;
+      margin: 0 0 4px 0;
+    }
+
+    .theme-enfant-soleil .theme-title {
+      color: #FFD000;
+    }
+
+    .theme-extra-life .theme-title {
+      color: #1D9ED6;
+    }
+
+    .theme-header-desc {
+      font-size: 13px;
+      color: var(--el-text-sub);
+    }
+
+    .theme-tag {
+      font-size: 11px;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      align-self: center;
+    }
+
+    .theme-enfant-soleil .theme-tag {
+      background: rgba(255, 208, 0, 0.15);
+      color: #FFD000;
+      border: 1px solid rgba(255, 208, 0, 0.45);
+    }
+
+    .theme-extra-life .theme-tag {
+      background: rgba(29, 158, 214, 0.15);
+      color: #1D9ED6;
+      border: 1px solid rgba(29, 158, 214, 0.45);
+    }
+
+    .badge-subpalette {
+      font-size: 10.5px;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-left: auto;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .theme-enfant-soleil .badge-subpalette {
+      background: rgba(255, 208, 0, 0.12);
+      color: #FFD000;
+      border: 1px solid rgba(255, 208, 0, 0.3);
+    }
+
+    .theme-extra-life .badge-subpalette {
+      background: rgba(29, 158, 214, 0.12);
+      color: #1D9ED6;
+      border: 1px solid rgba(29, 158, 214, 0.3);
+    }
+
+    .theme-enfant-soleil .color-group-heading {
+      font-size: 14.5px;
+      font-weight: 800;
+      color: #FFF2B2;
+      margin-top: 20px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 6px;
+      border-bottom: 1.5px solid rgba(255, 208, 0, 0.25);
+    }
+
+    .theme-extra-life .color-group-heading {
+      font-size: 14.5px;
+      font-weight: 800;
+      color: #BBE7FF;
+      margin-top: 20px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 6px;
+      border-bottom: 1.5px solid rgba(29, 158, 214, 0.25);
+    }
+
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+      gap: 14px;
+    }
+
+    .color-card {
+      background: #0A1526;
+      border-radius: 12px;
+      padding: 12px;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .theme-enfant-soleil .color-card {
+      border: 1.5px solid rgba(255, 208, 0, 0.25);
+    }
+
+    .theme-extra-life .color-card {
+      border: 1.5px solid rgba(29, 158, 214, 0.25);
+    }
+
+    .theme-enfant-soleil .color-card:hover {
+      transform: translateY(-3px);
+      border-color: #FFD000;
+      box-shadow: 0 6px 20px rgba(255, 208, 0, 0.25);
+    }
+
+    .theme-extra-life .color-card:hover {
+      transform: translateY(-3px);
+      border-color: #1D9ED6;
+      box-shadow: 0 6px 20px rgba(29, 158, 214, 0.25);
+    }
+
+    .color-swatch {
+      width: 100%;
+      height: 50px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .color-name {
+      font-size: 13px;
+      font-weight: 800;
+      color: #FFFFFF;
+      margin-bottom: 2px;
+    }
+
+    .color-hex {
+      font-size: 13.5px;
+      font-weight: 900;
+      color: var(--el-cyan-light);
+      font-family: monospace;
+      margin-bottom: 4px;
+    }
+
+    .theme-enfant-soleil .color-hex {
+      color: #FFD000;
+    }
+
+    .theme-extra-life .color-hex {
+      color: #1D9ED6;
+    }
+
+    .color-meta {
+      font-size: 10.5px;
+      color: var(--el-text-dim);
+      line-height: 1.4;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 50px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(28, 158, 214, 0.2);
+      color: var(--el-text-dim);
+      font-size: 13px;
+    }
+
     @media (max-width: 768px) {
       .header { padding: 26px 16px; }
       .hero-logo-el { height: 95px; }
@@ -1052,6 +1318,9 @@
       .nav-brand { font-size: 20px; justify-content: center; }
       .nav-brand img { height: 36px; }
       .nav-tabs { justify-content: center; width: 100%; }
+      .color-grid { grid-template-columns: repeat(2, 1fr); }
+      .theme-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .theme-header-left { width: 100%; }
     }
   </style>
 </head>
@@ -1403,8 +1672,16 @@
         <button class="btn btn-secondary btn-copy-code" onclick="copyTwitchMarkdown()">📋 Copier</button>
       </div>
 
+      <!-- Option Bio / Présentation rapide -->
+      <h4 style="font-size: 15px; margin-top: 24px; margin-bottom: 6px; color: #FFFFFF;">📄 Option B : Texte pour Panneau Twitch / Bio</h4>
+      <p class="step-instruction">Court texte de présentation officiel prêt à insérer dans votre bio Twitch, YouTube ou Kick :</p>
+      <div style="position: relative;">
+        <pre id="twitch-bio" class="code-block" style="white-space: pre-wrap; font-family: inherit; font-size: 13.5px; line-height: 1.5; color: #FFFFFF;">Durant ce stream, nous amassons des dons pour Extra Life afin de soutenir Opération Enfant Soleil : le rêve d'un enfant au bout des doigts ! 100% des dons vont directement aux soins et équipements médicaux pour les enfants malades.</pre>
+        <button class="btn btn-secondary btn-copy-code" onclick="copyTwitchBio()">📋 Copier</button>
+      </div>
+
       <!-- Option Image de bannière Twitch -->
-      <h4 style="font-size: 15px; margin-top: 24px; margin-bottom: 6px; color: #FFFFFF;">🎨 Option B : Image officielle de panneau Twitch</h4>
+      <h4 style="font-size: 15px; margin-top: 24px; margin-bottom: 6px; color: #FFFFFF;">🎨 Option C : Image officielle de panneau Twitch</h4>
       <p class="step-instruction">Pour ceux qui préfèrent une image au-dessus de leur texte, voici la bannière officielle :</p>
       
       <div class="twitch-banner-preview">
@@ -1442,7 +1719,309 @@
         </div>
       </div>
 
+      <!-- Publication Réseaux Sociaux -->
+      <h4 style="font-size: 15px; margin-top: 24px; margin-bottom: 6px; color: #FFFFFF;">📢 Publication Réseaux Sociaux (Twitter / X / Discord)</h4>
+      <p class="step-instruction">Message officiel prêt à copier pour annoncer votre live caritatif et mobiliser votre communauté :</p>
+      <div style="position: relative;">
+        <pre id="social-post-text" class="code-block" style="white-space: pre-wrap; font-family: inherit; font-size: 13.5px; line-height: 1.5; color: #FFFFFF;">🎮 EN LIVE POUR LA BONNE CAUSE ! Aujourd'hui on joue avec notre équipe Les alliés du soleil pour soutenir @EnfantSoleil via @ExtraLife4Kids ! « Le rêve d'un enfant au bout des doigts » 💛 Venez nous encourager !</pre>
+        <button class="btn btn-secondary btn-copy-code" onclick="copySocialPost()">📋 Copier</button>
+      </div>
+
     </section>
+
+    <!-- Étape 4 : Charte Graphique & Couleurs Officielles -->
+    <section id="section-charte" class="step-card">
+      <div class="step-title">
+        <span class="step-number">4</span>
+        <span>Charte Graphique & Couleurs Officielles</span>
+      </div>
+      <p class="step-instruction">
+        Références officielles complètes (HEX, CMJN, RVB et Pantone) séparées par univers de marque. Cliquez sur n'importe quelle nuance pour copier instantanément son code hexadécimal dans vos logiciels de stream (OBS Studio, Photoshop, Canva, etc.).
+      </p>
+
+      <!-- THÈME 1 : OPÉRATION ENFANT SOLEIL -->
+      <div class="theme-palette-block theme-enfant-soleil">
+        <div class="theme-header">
+          <div class="theme-header-left">
+            <div class="theme-header-icon">
+              <img src="assets/logo-enfant-soleil-horizontal.png" alt="Logo Opération Enfant Soleil" class="theme-logo-oes">
+            </div>
+            <div>
+              <h3 class="theme-title">Thème Opération Enfant Soleil</h3>
+              <div class="theme-header-desc">Charte graphique officielle québécoise — Pour que nos soleils brillent de santé</div>
+            </div>
+          </div>
+          <span class="theme-tag">Charte Officielle OES</span>
+        </div>
+
+        <!-- 1. Couleurs Principales OES -->
+        <div class="color-group-heading">
+          <span>Couleurs Principales</span>
+          <span class="badge-subpalette">Identité Signature</span>
+        </div>
+        <div class="color-grid">
+
+          <div class="color-card" data-hex="#FFD000">
+            <div class="color-swatch" style="background: #FFD000;"></div>
+            <div class="color-name">Jaune Soleil</div>
+            <div class="color-hex">#FFD000</div>
+            <div class="color-meta">
+              CMJN: C0 M17 Y100 K0<br>
+              RVB: 255, 208, 0<br>
+              Pantone: 109C / 109U
+            </div>
+          </div>
+
+          <div class="color-card" data-hex="#F15029">
+            <div class="color-swatch" style="background: #F15029;"></div>
+            <div class="color-name">Rouge santé</div>
+            <div class="color-hex">#F15029</div>
+            <div class="color-meta">
+              CMJN: C0 M84 Y95 K0<br>
+              RVB: 241, 80, 41<br>
+              Pantone: 2028C / 2028U
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 2. Palette Complémentaire OES -->
+        <div class="color-group-heading">
+          <span>Palette Complémentaire</span>
+          <span class="badge-subpalette">Nuances Ensoleillées</span>
+        </div>
+        <div class="color-grid">
+
+          <div class="color-card" data-hex="#FAF39B">
+            <div class="color-swatch" style="background: #FAF39B;"></div>
+            <div class="color-name">Jaune matin</div>
+            <div class="color-hex">#FAF39B</div>
+            <div class="color-meta">
+              CMJN: C3 M0 Y48 K0<br>
+              RVB: 250, 243, 155<br>
+              Pantone: 601C / 601U
+            </div>
+          </div>
+
+          <div class="color-card" data-hex="#F7EB24">
+            <div class="color-swatch" style="background: #F7EB24;"></div>
+            <div class="color-name">Jaune étoile</div>
+            <div class="color-hex">#F7EB24</div>
+            <div class="color-meta">
+              CMJN: C6 M0 Y94 K0<br>
+              RVB: 247, 235, 36<br>
+              Pantone: 102C / Yellow
+            </div>
+          </div>
+
+          <div class="color-card" data-hex="#F5AC1C">
+            <div class="color-swatch" style="background: #F5AC1C;"></div>
+            <div class="color-name">Orange</div>
+            <div class="color-hex">#F5AC1C</div>
+            <div class="color-meta">
+              CMJN: C3 M36 Y100 K0<br>
+              RVB: 245, 172, 28<br>
+              Pantone: 130C / 7549U
+            </div>
+          </div>
+
+          <div class="color-card" data-hex="#F58227">
+            <div class="color-swatch" style="background: #F58227;"></div>
+            <div class="color-name">Tangerine</div>
+            <div class="color-hex">#F58227</div>
+            <div class="color-meta">
+              CMJN: C0 M60 Y97 K0<br>
+              RVB: 245, 130, 39<br>
+              Pantone: 6019C / 144U
+            </div>
+          </div>
+
+          <div class="color-card" data-hex="#F48E99">
+            <div class="color-swatch" style="background: #F48E99;"></div>
+            <div class="color-name">Rose</div>
+            <div class="color-hex">#F48E99</div>
+            <div class="color-meta">
+              CMJN: C0 M55 Y24 K0<br>
+              RVB: 244, 142, 153<br>
+              Pantone: 6051C / 6050U
+            </div>
+          </div>
+
+          <div class="color-card" data-hex="#EF6E63">
+            <div class="color-swatch" style="background: #EF6E63;"></div>
+            <div class="color-name">Corail</div>
+            <div class="color-hex">#EF6E63</div>
+            <div class="color-meta">
+              CMJN: C0 M71 Y58 K0<br>
+              RVB: 239, 110, 99<br>
+              Pantone: 2346C / 2345U
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 3. Palette Utilitaire OES -->
+        <div class="color-group-heading">
+          <span>Palette Utilitaire</span>
+          <span class="badge-subpalette">Fonds & Contraste</span>
+        </div>
+        <div class="color-grid">
+
+          <div class="color-card" data-hex="#FAF7F0">
+            <div class="color-swatch" style="background: #FAF7F0; border: 1px solid rgba(255,255,255,0.4);"></div>
+            <div class="color-name">Blanc chaud</div>
+            <div class="color-hex">#FAF7F0</div>
+            <div class="color-meta">
+              CMJN: C1 M2 Y4 K0<br>
+              RVB: 250, 247, 240<br>
+              Pantone: 9100C / 9100U
+            </div>
+          </div>
+
+          <div class="color-card" data-hex="#252625">
+            <div class="color-swatch" style="background: #252625; border: 1px solid rgba(255,255,255,0.2);"></div>
+            <div class="color-name">Noir velours</div>
+            <div class="color-hex">#252625</div>
+            <div class="color-meta">
+              CMJN: C71 M64 Y65 K70<br>
+              RVB: 37, 38, 37<br>
+              Pantone: Black 7C / Black 6U
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- THÈME 2 : EXTRA LIFE & CMN -->
+      <div class="theme-palette-block theme-extra-life">
+        <div class="theme-header">
+          <div class="theme-header-left">
+            <div class="theme-header-icon">
+              <img src="assets/logo-extra-life-color.svg" alt="Logo Extra Life & CMN Hospitals" class="theme-logo-el">
+            </div>
+            <div>
+              <h3 class="theme-title">Thème Extra Life & CMN Hospitals</h3>
+              <div class="theme-header-desc">Charte graphique officielle gaming & réseau hospitalier pédiatrique</div>
+            </div>
+          </div>
+          <span class="theme-tag">Charte Officielle EL & CMN</span>
+        </div>
+
+        <!-- 1. Couleurs Principales Extra Life -->
+        <div class="color-group-heading">
+          <span>Couleurs Principales Extra Life</span>
+          <span class="badge-subpalette">Identité Visuelle</span>
+        </div>
+        <div class="color-grid">
+
+          <div class="color-card" data-hex="#1D9ED6">
+            <div class="color-swatch" style="background: #1D9ED6;"></div>
+            <div class="color-name">Cyan Extra Life</div>
+            <div class="color-hex">#1D9ED6</div>
+            <div class="color-meta">
+              CMJN: C75 M20 Y0 K0<br>
+              RVB: 29, 158, 214<br>
+              Pantone: 299 C
+            </div>
+          </div>
+
+          <div class="color-card" data-hex="#FFCB05">
+            <div class="color-swatch" style="background: #FFCB05;"></div>
+            <div class="color-name">Or Manette Extra Life</div>
+            <div class="color-hex">#FFCB05</div>
+            <div class="color-meta">
+              CMJN: C0 M18 Y98 K0<br>
+              RVB: 255, 203, 5<br>
+              Pantone: 116 C / 1235 C
+            </div>
+          </div>
+
+          <div class="color-card" data-hex="#0D7CA3">
+            <div class="color-swatch" style="background: #0D7CA3;"></div>
+            <div class="color-name">Bleu CMN Hospitals</div>
+            <div class="color-hex">#0D7CA3</div>
+            <div class="color-meta">
+              CMJN: C85 M35 Y15 K5<br>
+              RVB: 13, 124, 163<br>
+              Pantone: 307 C
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 2. Palette Gaming & Secondaire Extra Life -->
+        <div class="color-group-heading">
+          <span>Palette Gaming & Secondaire Extra Life</span>
+          <span class="badge-subpalette">Overlays & Streaming</span>
+        </div>
+        <div class="color-grid">
+
+          <div class="color-card" data-hex="#62AF0F">
+            <div class="color-swatch" style="background: #62AF0F;"></div>
+            <div class="color-name">Vert Manette (Level Up)</div>
+            <div class="color-hex">#62AF0F</div>
+            <div class="color-meta">
+              CMJN: C60 M0 Y100 K0<br>
+              RVB: 98, 175, 15<br>
+              Pantone: 368 C
+            </div>
+          </div>
+
+          <div class="color-card" data-hex="#FA6400">
+            <div class="color-swatch" style="background: #FA6400;"></div>
+            <div class="color-name">Orange Dés Extra Life</div>
+            <div class="color-hex">#FA6400</div>
+            <div class="color-meta">
+              CMJN: C0 M75 Y100 K0<br>
+              RVB: 250, 100, 0<br>
+              Pantone: 1585 C
+            </div>
+          </div>
+
+          <div class="color-card" data-hex="#0C1829">
+            <div class="color-swatch" style="background: #0C1829; border: 1px solid #1D9ED6;"></div>
+            <div class="color-name">Bleu Nuit Extra Life</div>
+            <div class="color-hex">#0C1829</div>
+            <div class="color-meta">
+              CMJN: C88 M74 Y48 K60<br>
+              RVB: 12, 24, 41<br>
+              Fond OBS & Portail
+            </div>
+          </div>
+
+          <div class="color-card" data-hex="#F4CD30">
+            <div class="color-swatch" style="background: #F4CD30;"></div>
+            <div class="color-name">Jaune CMN Signature</div>
+            <div class="color-hex">#F4CD30</div>
+            <div class="color-meta">
+              CMJN: C5 M18 Y90 K0<br>
+              RVB: 244, 205, 48<br>
+              Pantone: 7406 C
+            </div>
+          </div>
+
+          <div class="color-card" data-hex="#B31943">
+            <div class="color-swatch" style="background: #B31943;"></div>
+            <div class="color-name">Rouge CMN Signature</div>
+            <div class="color-hex">#B31943</div>
+            <div class="color-meta">
+              CMJN: C15 M100 Y65 K10<br>
+              RVB: 179, 25, 67<br>
+              Pantone: 193 C
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Pied de page -->
+    <footer class="footer">
+      <p>
+        <strong>Portail Créateurs Extra Life</strong> • Soutien officiel à <strong>Opération Enfant Soleil</strong>.<br>
+        Le rêve d'un enfant au bout des doigts
+      </p>
+    </footer>
 
   </div>
 
@@ -1518,6 +2097,8 @@
         customLogoUrlBox: document.getElementById('custom-logo-url-box'),
         inputCustomLogoUrl: document.getElementById('input-custom-logo-url'),
         toast: document.getElementById('toast'),
+        socialPostText: document.getElementById('social-post-text'),
+        twitchBio: document.getElementById('twitch-bio')
       };
 
       // Gestion des boutons incrémentaux et de la saisie manuelle pour l'intervalle d'alternance
@@ -1994,9 +2575,9 @@ Durant ce live, nous amassons des dons pour Extra Life afin de soutenir les hôp
 
 *(Reçu fiscal officiel émis instantanément par courriel pour chaque don)*`;
 
-        elements.cmdDon.value = `🎮 Soutenez notre campagne caritative Extra Life ! Don sécurisé avec reçu fiscal ici 👉 ${donateLink}`;
+        elements.cmdDon.value = `💛 Soutenez notre campagne Extra Life & Opération Enfant Soleil pour les enfants malades ! Don sécurisé avec reçu fiscal ici 👉 ${donateLink}`;
         if (elements.cmdEvent) {
-          elements.cmdEvent.value = `🎮 $(user) soutient la campagne caritative Extra Life pour les enfants malades ! Jouons ensemble pour guérir ! 💖🎮`;
+          elements.cmdEvent.value = `🎮 $(user) soutient la campagne caritative Extra Life & Opération Enfant Soleil pour les enfants malades ! Jouons ensemble pour guérir ! 💖🎮`;
           if (elements.cmdEventLabel) elements.cmdEventLabel.textContent = '!extralife';
         }
         if (detectedParticipant && detectedParticipant.teamID) {
@@ -2006,6 +2587,14 @@ Durant ce live, nous amassons des dons pour Extra Life afin de soutenir les hôp
         }
 
         elements.twitchMarkdown.textContent = markdownText;
+
+        if (elements.twitchBio) {
+          elements.twitchBio.textContent = `Durant ce stream, nous amassons des dons pour Extra Life afin de soutenir Opération Enfant Soleil : le rêve d'un enfant au bout des doigts ! 100% des dons vont directement aux soins et équipements médicaux pour les enfants malades. Donnez ici 👉 ${donateLink}`;
+        }
+
+        if (elements.socialPostText) {
+          elements.socialPostText.textContent = `🎮 EN LIVE POUR LA BONNE CAUSE ! Aujourd'hui on joue avec notre équipe Les alliés du soleil pour soutenir @EnfantSoleil via @ExtraLife4Kids ! « Le rêve d'un enfant au bout des doigts » 💛 Venez nous encourager ! 👉 ${donateLink}`;
+        }
 
         // Redessiner la bannière Twitch sans déformation
         drawTwitchBanner(theme);
@@ -2177,6 +2766,20 @@ Durant ce live, nous amassons des dons pour Extra Life afin de soutenir les hôp
       window.copyTwitchMarkdown = function () {
         navigator.clipboard.writeText(elements.twitchMarkdown.textContent).then(() => {
           showToast('Markdown copié pour Twitch ! 📋');
+        });
+      };
+
+      window.copyTwitchBio = function () {
+        const text = elements.twitchBio ? elements.twitchBio.textContent : "Durant ce stream, nous amassons des dons pour Extra Life afin de soutenir Opération Enfant Soleil : le rêve d'un enfant au bout des doigts ! 100% des dons vont directement aux soins et équipements médicaux pour les enfants malades.";
+        navigator.clipboard.writeText(text).then(() => {
+          showToast('Texte pour Bio Twitch copié ! 📄');
+        });
+      };
+
+      window.copySocialPost = function () {
+        const text = elements.socialPostText ? elements.socialPostText.textContent : "🎮 EN LIVE POUR LA BONNE CAUSE ! Aujourd'hui on joue avec notre équipe Les alliés du soleil pour soutenir @EnfantSoleil via @ExtraLife4Kids ! « Le rêve d'un enfant au bout des doigts » 💛 Venez nous encourager !";
+        navigator.clipboard.writeText(text).then(() => {
+          showToast('Publication réseaux sociaux copiée ! 📢');
         });
       };
 
@@ -2443,6 +3046,18 @@ Durant ce live, nous amassons des dons pour Extra Life afin de soutenir les hôp
           showToast('Palette réinitialisée aux couleurs par défaut ! ↺');
         });
       }
+
+      // Copier le code couleur en cliquant sur les cartes de la charte graphique
+      document.querySelectorAll('.color-card').forEach(card => {
+        card.addEventListener('click', () => {
+          const hex = card.getAttribute('data-hex');
+          if (hex) {
+            navigator.clipboard.writeText(hex).then(() => {
+              showToast(`Code couleur ${hex} copié ! 🎨`);
+            });
+          }
+        });
+      });
 
       // Initialisation des données et mémoires
       loadCustomPaletteMemory();
