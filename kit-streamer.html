@@ -1100,8 +1100,8 @@
         Entrez votre <strong>ID de participant</strong> ou collez le lien direct de votre page Extra Life :
       </p>
 
-      <!-- Bannière d'invitation pour nouveaux streamers -->
-      <div style="background: rgba(28, 158, 214, 0.12); border: 1.5px solid var(--el-cyan); border-radius: 12px; padding: 12px 16px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
+      <!-- Bannière d'invitation pour nouveaux streamers (masquée si connecté) -->
+      <div id="new-participant-banner" style="background: rgba(28, 158, 214, 0.12); border: 1.5px solid var(--el-cyan); border-radius: 12px; padding: 12px 16px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
         <span style="font-size: 13.5px; color: #E0F2FE;">
           👋 <strong>Pas encore inscrit sur Extra Life ?</strong> Consultez notre guide d'inscription pour créer votre profil et rejoindre votre équipe !
         </span>
@@ -1474,6 +1474,7 @@
         badgeMilestones: document.getElementById('badge-milestones'),
         promptNotice: document.getElementById('prompt-notice'),
         savedNotice: document.getElementById('saved-notice'),
+        newParticipantBanner: document.getElementById('new-participant-banner'),
         btnForget: document.getElementById('btn-forget'),
         selectMode: document.getElementById('select-mode'),
         selectTheme: document.getElementById('select-theme'),
@@ -1703,6 +1704,7 @@
         if (!detectedParticipant) {
           elements.profileCard.style.display = 'none';
           if (elements.promptNotice) elements.promptNotice.style.display = 'block';
+          if (elements.newParticipantBanner) elements.newParticipantBanner.style.display = 'flex';
           if (brandLink) {
             brandLink.style.display = 'none';
             brandLink.href = '#';
@@ -1713,6 +1715,7 @@
 
         elements.profileCard.style.display = 'flex';
         if (elements.promptNotice) elements.promptNotice.style.display = 'none';
+        if (elements.newParticipantBanner) elements.newParticipantBanner.style.display = 'none';
 
         elements.profileName.textContent = detectedParticipant.displayName;
         elements.profileAvatar.src = detectedParticipant.avatarImageURL || 'https://via.placeholder.com/60/0C1829/1C9ED6?text=EL';
@@ -2267,6 +2270,9 @@ Durant ce live, nous amassons des dons pour Extra Life afin de soutenir les hôp
         elements.inputParticipant.value = '';
         if (elements.navTeamTab) {
           elements.navTeamTab.style.display = 'none';
+        }
+        if (elements.newParticipantBanner) {
+          elements.newParticipantBanner.style.display = 'flex';
         }
         renderProfile();
         setAlertDurationValue(6);
