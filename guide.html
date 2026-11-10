@@ -761,8 +761,11 @@
       try {
         const savedInput = localStorage.getItem('oes_streamer_input');
         if (!savedInput) return;
-        const match = savedInput.match(/participant\/(\d+)/i) || savedInput.match(/^(\d+)$/);
-        const pId = match ? match[1] : savedInput;
+        let cleanInput = String(savedInput).trim().replace(/[#?].*$/, '').replace(/\/+$/, '');
+        const match = String(savedInput).match(/participantID[=:](\d+)/i) || 
+                      cleanInput.match(/participants?\/([a-zA-Z0-9_\-]+)/i) || 
+                      cleanInput.match(/^([a-zA-Z0-9_\-]+)$/);
+        const pId = match ? match[1] : cleanInput;
         
         const res = await fetch(`https://dd.extra-life.org/api/participants/${pId}`).catch(() => null);
         if (!res || !res.ok) return;

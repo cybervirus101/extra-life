@@ -887,13 +887,16 @@
           type="text" 
           id="input-gatekeeper-id" 
           class="input-field" 
-          placeholder="Ex: 512039 ou https://dd.extra-life.org/participants/512039"
+          placeholder="Ex: 582063, cybervirus_101 ou https://dd.extra-life.org/participants/cybervirus_101"
           autocomplete="off"
         >
         <button id="btn-gatekeeper-login" class="btn btn-gold">
           🔓 Déverrouiller l'accès
         </button>
       </div>
+      <p style="font-size: 12.5px; color: var(--el-text-dim); margin-top: 6px; margin-bottom: 14px;">
+        💡 <em>Formats acceptés :</em> ID numérique (ex: <code>582063</code>), pseudo (ex: <code>cybervirus_101</code>) ou lien complet de votre page Extra Life.
+      </p>
 
       <div style="font-size: 13.5px; color: var(--el-text-dim);">
         👋 Pas encore membre de l'équipe ? 
@@ -1493,13 +1496,19 @@
         return false;
       }
 
-      async function checkDonorDriveTeamRoster(participantId) {
-        const pId = Number(participantId);
-        if (!pId) return false;
+      async function checkDonorDriveTeamRoster(idOrSlug) {
+        if (!idOrSlug) return false;
+        const needle = String(idOrSlug).toLowerCase().trim();
+        const pIdNum = parseInt(idOrSlug, 10);
         try {
           const roster = await fetchWithFallback(`https://dd.extra-life.org/api/teams/${OFFICIAL_TEAM_ID}/participants`);
           if (Array.isArray(roster)) {
-            return roster.some(m => Number(m.participantID) === pId);
+            return roster.some(m => {
+              if (!isNaN(pIdNum) && Number(m.participantID) === pIdNum) return true;
+              if (m.displayName && m.displayName.toLowerCase().trim() === needle) return true;
+              if (m.links && m.links.page && m.links.page.toLowerCase().includes(needle)) return true;
+              return false;
+            });
           }
         } catch (e) {}
         return false;
@@ -1530,16 +1539,21 @@
 
       function extractId(input) {
         if (!input) return null;
-        const str = String(input).trim();
-        // Cas 1 : Paramètre d'URL ?participantID=123456
-        const paramMatch = str.match(/participantID[=:](\d+)/i);
+        let str = String(input).trim();
+        str = str.replace(/[#?].*$/, '').replace(/\/+$/, '');
+
+        // Cas 1 : Paramètre d'URL ?participantID=123456 ou &participantID=123456
+        const paramMatch = String(input).match(/participantID[=:](\d+)/i);
         if (paramMatch) return paramMatch[1];
-        // Cas 2 : URL avec /participants/ ou /participant/
+
+        // Cas 2 : URL complète avec /participants/ ou /participant/ (ID numérique ou slug/pseudo)
         const pathMatch = str.match(/participants?\/([a-zA-Z0-9_\-]+)/i);
         if (pathMatch) return pathMatch[1];
-        // Cas 3 : ID direct ou pseudo
+
+        // Cas 3 : ID direct ou pseudo direct (lettres, chiffres, tirets, underscores)
         const directMatch = str.match(/^([a-zA-Z0-9_\-]+)$/);
         if (directMatch) return directMatch[1];
+
         return str;
       }
 
@@ -1589,7 +1603,7 @@
       async function verifyAndUnlock(participantId) {
         const rawId = extractId(participantId);
         if (!rawId) {
-          alert("Veuillez entrer un ID de participant valide (ex: 582063).");
+          alert("Veuillez entrer un identifiant ou lien valide (ex: 582063 ou cybervirus_101).");
           return;
         }
 
@@ -1598,7 +1612,7 @@
 
         try {
           const data = await fetchWithFallback(`https://dd.extra-life.org/api/participants/${rawId}`);
-          if (data && data.participantID) {
+          if (data && (data.participantID || typeof data.fundraisingGoal !== 'undefined')) {
             currentParticipant = {
               participantID: data.participantID,
               displayName: data.displayName,
@@ -1621,8 +1635,9 @@
             // Vérification de l'appartenance officielle à Les alliés du soleil
             let isMember = isOfficialTeamMember(currentParticipant);
             if (!isMember) {
-              // Vérification via la liste officielle de l'équipe sur DonorDrive
-              isMember = await checkDonorDriveTeamRoster(rawId);
+              // Vérification via la liste officielle de l'équipe sur DonorDrive (ID numérique ET pseudo)
+              isMember = await checkDonorDriveTeamRoster(currentParticipant.participantID) || 
+                         await checkDonorDriveTeamRoster(rawId);
               if (isMember) {
                 currentParticipant.teamID = OFFICIAL_TEAM_ID;
                 currentParticipant.teamName = OFFICIAL_TEAM_NAME;
@@ -1646,7 +1661,7 @@
             renderPage();
             showToast(`Bienvenue ${currentParticipant.displayName} ! 🛡️`);
           } else {
-            alert(`Participant introuvable sur Extra Life pour "${rawId}".\n\nVeuillez vérifier votre identifiant ou votre lien de page (ex: 582063).`);
+            alert(`Participant introuvable sur Extra Life pour "${rawId}".\n\nVeuillez vérifier votre ID, pseudo ou lien de page (ex: 582063 ou cybervirus_101).`);
           }
         } catch (err) {
           console.warn('Erreur vérification:', err);

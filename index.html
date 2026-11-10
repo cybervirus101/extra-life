@@ -766,10 +766,13 @@
           type="text" 
           id="input-participant" 
           class="input-field" 
-          placeholder="Ex: 512039 ou https://dd.extra-life.org/participants/512039"
+          placeholder="Ex: 582063, cybervirus_101 ou https://dd.extra-life.org/participants/cybervirus_101"
         >
         <button id="btn-detect" class="btn btn-primary">🔍 Charger mes infos</button>
       </div>
+      <p style="font-size: 12.5px; color: var(--el-text-dim); margin-top: 6px; margin-bottom: 12px;">
+        💡 <em>Formats acceptés :</em> ID numérique (ex: <code>582063</code>), pseudo (ex: <code>cybervirus_101</code>) ou lien complet de votre page Extra Life.
+      </p>
 
       <!-- Carte d'informations auto-détectées — Barre d'objectif style Overlay OBS -->
       <div id="profile-card" class="profile-card">
@@ -978,16 +981,21 @@
 
       function extractId(input) {
         if (!input) return null;
-        const str = String(input).trim();
-        // Cas 1 : Paramètre d'URL ?participantID=123456
-        const paramMatch = str.match(/participantID[=:](\d+)/i);
+        let str = String(input).trim();
+        str = str.replace(/[#?].*$/, '').replace(/\/+$/, '');
+
+        // Cas 1 : Paramètre d'URL ?participantID=123456 ou &participantID=123456
+        const paramMatch = String(input).match(/participantID[=:](\d+)/i);
         if (paramMatch) return paramMatch[1];
+
         // Cas 2 : URL avec /participants/ ou /participant/ (supporte ID numérique ou slug)
         const pathMatch = str.match(/participants?\/([a-zA-Z0-9_\-]+)/i);
         if (pathMatch) return pathMatch[1];
+
         // Cas 3 : ID numérique ou pseudo seul
         const directMatch = str.match(/^([a-zA-Z0-9_\-]+)$/);
         if (directMatch) return directMatch[1];
+
         return str;
       }
 
