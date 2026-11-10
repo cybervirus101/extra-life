@@ -3,11 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <title>Kit Streamer Extra Life — Overlays & Alertes OBS</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
     :root {
       /* Couleurs officielles Extra Life & CMN */
       --el-navy-deep: #070E18;
@@ -1344,6 +1351,9 @@
         <a href="kit-streamer.html" class="nav-tab active">
           <span>🎮 Kit Streamer</span>
         </a>
+        <a href="#section-charte" class="nav-tab" style="border-color: rgba(255, 208, 0, 0.5); background: rgba(255, 208, 0, 0.12); color: #FFD000;">
+          <span>🎨 Charte & Couleurs</span>
+        </a>
         <a href="equipe.html" class="nav-tab" id="nav-team-tab" style="display: none;">
           <span>🛡️ Espace Équipe</span>
         </a>
@@ -1356,7 +1366,20 @@
         <img class="hero-logo-el" src="assets/logo-extra-life-white.svg" alt="Extra Life">
       </div>
       <h1>🎮 Kit Streamer Extra Life</h1>
-      <p>Configurez votre overlay OBS, vos alertes en direct et vos panneaux Twitch en 30 secondes sans aucune installation.</p>
+      <p>Configurez votre overlay OBS, vos alertes en direct, vos panneaux Twitch et consultez la charte graphique officielle.</p>
+
+      <!-- Raccourcis rapides vers les sections -->
+      <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 18px;">
+        <a href="#section-obs" class="btn btn-secondary" style="font-size: 13px; text-decoration: none; padding: 8px 16px;">
+          📺 1. Liens OBS Studio
+        </a>
+        <a href="#section-twitch" class="btn btn-secondary" style="font-size: 13px; text-decoration: none; padding: 8px 16px;">
+          💬 2. Panneaux Twitch & Chatbot
+        </a>
+        <a href="#section-charte" class="btn btn-primary" style="font-size: 13px; text-decoration: none; padding: 8px 18px; background: linear-gradient(135deg, #FFD000 0%, #F15029 100%); color: #0A1526; font-weight: 800; border-color: #FFD000; box-shadow: 0 4px 16px rgba(255, 208, 0, 0.35);">
+          🎨 3. Charte Graphique & Couleurs Officielles ↓
+        </a>
+      </div>
     </header>
 
     <!-- Section : Votre page Extra Life -->
@@ -1572,7 +1595,7 @@
     </section>
 
     <!-- Étape 2 : Liens OBS Studio prêts à l'emploi -->
-    <section class="step-card">
+    <section id="section-obs" class="step-card">
       <div class="step-title">
         <span class="step-number">2</span>
         <span>Vos liens pour OBS Studio / Streamlabs</span>
