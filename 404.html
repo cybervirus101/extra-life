@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Redirection Extra Life</title>
+  <script>
+    (function () {
+      try {
+        var pathname = window.location.pathname;
+        var search = window.location.search || '';
+        var hash = window.location.hash || '';
+
+        // 1. Rétrocompatibilité : URLs erronées contenant /kit-streamer.html/overlay.html ou /alert.html
+        if (/\/[^/]+\.html\/(overlay|alert)\.html$/i.test(pathname)) {
+          var correctedPath = pathname.replace(/\/[^/]+\.html\/(overlay|alert)\.html$/i, function(match, page) {
+            return '/' + page + '.html';
+          });
+          window.location.replace(window.location.origin + correctedPath + search + hash);
+          return;
+        }
+
+        // 2. Trailing slash sur kit-streamer.html/
+        if (/\/kit-streamer\.html\/+$/i.test(pathname)) {
+          var cleanPath = pathname.replace(/\/+$/, '');
+          window.location.replace(window.location.origin + cleanPath + search + hash);
+          return;
+        }
+
+        // 3. URLs sans extension .html (ex: /overlay ou /alert ou /kit-streamer)
+        if (/\/(overlay|alert|kit-streamer|guide|equipe)$/i.test(pathname)) {
+          var withExt = pathname.replace(/\/(overlay|alert|kit-streamer|guide|equipe)$/i, '/$1.html');
+          window.location.replace(window.location.origin + withExt + search + hash);
+          return;
+        }
+
+        // 4. Ancien dossier KitStreameur
+        if (/\/KitStreameur\/?$/i.test(pathname)) {
+          var kitPath = pathname.replace(/\/KitStreameur\/?$/i, '/kit-streamer.html');
+          window.location.replace(window.location.origin + kitPath + search + hash);
+          return;
+        }
+      } catch (err) {
+        console.error('Erreur redirection 404:', err);
+      }
+    })();
+  </script>
+  <style>
+    body {
+      background: #0C1829;
+      color: #FFFFFF;
+      font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      box-sizing: border-box;
+      text-align: center;
+    }
+    .card {
+      background: #132238;
+      border: 2px solid rgba(28, 158, 214, 0.4);
+      border-radius: 16px;
+      padding: 36px 28px;
+      max-width: 480px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    h1 {
+      font-size: 24px;
+      color: #FFD000;
+      margin: 0 0 12px 0;
+    }
+    p {
+      color: #D3E7F8;
+      font-size: 15px;
+      line-height: 1.5;
+      margin: 0 0 24px 0;
+    }
+    .btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #1C9ED6, #0E7CA2);
+      color: #FFFFFF;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 12px 24px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div style="font-size: 42px; margin-bottom: 12px;">🔄</div>
+    <h1>Redirection en cours...</h1>
+    <p>Nous vous redirigeons automatiquement vers votre overlay Extra Life.</p>
+    <a id="btn-redirect" href="kit-streamer.html" class="btn">Accéder directement</a>
+  </div>
+  <script>
+    (function () {
+      try {
+        var pathname = window.location.pathname;
+        var search = window.location.search || '';
+        var hash = window.location.hash || '';
+        var target = null;
+        if (/\/[^/]+\.html\/(overlay|alert)\.html$/i.test(pathname)) {
+          target = pathname.replace(/\/[^/]+\.html\/(overlay|alert)\.html$/i, function(m, p) { return '/' + p + '.html'; }) + search + hash;
+        } else if (/\/(overlay|alert|kit-streamer|guide|equipe)$/i.test(pathname)) {
+          target = pathname.replace(/\/(overlay|alert|kit-streamer|guide|equipe)$/i, '/$1.html') + search + hash;
+        }
+        if (target) {
+          var btn = document.getElementById('btn-redirect');
+          if (btn) btn.href = target;
+        }
+      } catch (e) {}
+    })();
+  </script>
+</body>
+</html>

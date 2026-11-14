@@ -2527,9 +2527,17 @@
           }
         }
 
-        const overlayUrlObj = new URL('overlay.html', window.location.href);
-        overlayUrlObj.search = overlayParams.toString();
-        const overlayFullUrl = overlayUrlObj.href;
+        // Résolution robuste de l'URL racine du projet (immunisée contre trailing slashes et sous-chemins)
+        function getProjectBaseUrl() {
+          if (window.location.origin && window.location.origin !== 'null' && window.location.protocol.startsWith('http')) {
+            const cleanPath = window.location.pathname.replace(/\/[^/]*\.html(\/.*)?$/i, '').replace(/\/+$/, '');
+            return window.location.origin + cleanPath;
+          }
+          return window.location.href.split(/[?#]/)[0].replace(/\/[^/]*\.html(\/.*)?$/i, '').replace(/\/+$/, '');
+        }
+
+        const projectBase = getProjectBaseUrl();
+        const overlayFullUrl = `${projectBase}/overlay.html?${overlayParams.toString()}`;
         elements.urlOverlay.value = overlayFullUrl;
         elements.linkPreviewOverlay.href = overlayFullUrl;
 
@@ -2556,9 +2564,7 @@
           }
         }
 
-        const alertUrlObj = new URL('alert.html', window.location.href);
-        alertUrlObj.search = alertParams.toString();
-        const alertFullUrl = alertUrlObj.href;
+        const alertFullUrl = `${projectBase}/alert.html?${alertParams.toString()}`;
         elements.urlAlert.value = alertFullUrl;
         elements.linkPreviewAlert.href = alertFullUrl;
 
