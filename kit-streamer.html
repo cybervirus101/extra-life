@@ -2495,7 +2495,6 @@
 
       // Mise à jour dynamique des URLs OBS
       function updateGeneratedUrls() {
-        const baseUrl = window.location.origin + window.location.pathname.replace(/\/index\.html$/i, '').replace(/\/$/, '');
         const id = detectedParticipant ? detectedParticipant.participantID : (extractId(elements.inputParticipant.value) || 'VOTRE_ID');
         const mode = elements.selectMode.value;
         const theme = elements.selectTheme.value;
@@ -2528,7 +2527,9 @@
           }
         }
 
-        const overlayFullUrl = `${baseUrl}/overlay.html?${overlayParams.toString()}`;
+        const overlayUrlObj = new URL('overlay.html', window.location.href);
+        overlayUrlObj.search = overlayParams.toString();
+        const overlayFullUrl = overlayUrlObj.href;
         elements.urlOverlay.value = overlayFullUrl;
         elements.linkPreviewOverlay.href = overlayFullUrl;
 
@@ -2555,7 +2556,9 @@
           }
         }
 
-        const alertFullUrl = `${baseUrl}/alert.html?${alertParams.toString()}`;
+        const alertUrlObj = new URL('alert.html', window.location.href);
+        alertUrlObj.search = alertParams.toString();
+        const alertFullUrl = alertUrlObj.href;
         elements.urlAlert.value = alertFullUrl;
         elements.linkPreviewAlert.href = alertFullUrl;
 
