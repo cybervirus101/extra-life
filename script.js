@@ -551,6 +551,16 @@
       elements.milestoneBadge.style.display = 'none';
       return;
     }
+
+    const isTeamView = (CONFIG.mode === 'team') || 
+      (CONFIG.mode === 'alternance' && state.currentAlternanceView === 'team' && (state.team || CONFIG.isDemo));
+
+    // Si on est en vue d'équipe, on masque le jalon personnel du participant pour laisser l'espace au total équipe et éviter les collisions
+    if (isTeamView) {
+      elements.milestoneBadge.style.display = 'none';
+      return;
+    }
+
     const currentRaised = (state.participant ? state.participant.sumDonations : 0);
     const nextMilestone = state.milestones
       .filter(m => (m.fundraisingGoal > currentRaised && !m.isComplete))
@@ -583,9 +593,10 @@
       if (elements.labelRaisedHeading) {
         const teamName = teamData && teamData.name ? teamData.name : 'Équipe';
         elements.labelRaisedHeading.textContent = `Équipe : ${teamName}`;
+        elements.labelRaisedHeading.title = `Équipe : ${teamName}`;
       }
       if (elements.labelGoalHeading) {
-        elements.labelGoalHeading.textContent = 'Objectif Équipe';
+        elements.labelGoalHeading.textContent = 'Objectif';
       }
     } else {
       raisedUSD = state.participant ? (state.participant.sumDonations || 0) : 0;
@@ -593,6 +604,7 @@
 
       if (elements.labelRaisedHeading) {
         elements.labelRaisedHeading.textContent = (CONFIG.mode === 'alternance') ? 'Mon total' : 'Total amassé';
+        elements.labelRaisedHeading.title = '';
       }
       if (elements.labelGoalHeading) {
         elements.labelGoalHeading.textContent = (CONFIG.mode === 'alternance') ? 'Mon objectif' : 'Objectif';

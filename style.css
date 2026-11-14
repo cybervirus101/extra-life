@@ -171,28 +171,50 @@ body {
   min-width: 0;
 }
 
-.progress-raised, .progress-goal {
+.progress-raised {
   display: flex;
   flex-direction: column;
   min-width: 0;
   flex: 1 1 auto;
+  overflow: hidden;
 }
 
 .progress-goal {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 0 0 auto;
   align-items: flex-end;
   text-align: right;
+  white-space: nowrap;
 }
 
 .label-heading {
   font-family: var(--font-heading);
-  font-size: 16px;
+  font-size: clamp(12px, 1.05vw, 16px);
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.8px;
   color: var(--es-noir-velours);
   opacity: 0.95;
   line-height: 1.2;
+}
+
+.progress-raised .label-heading,
+#label-raised-heading {
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.progress-goal .label-heading,
+#label-goal-heading {
+  display: block;
+  white-space: nowrap;
+  text-align: right;
+  flex-shrink: 0;
 }
 
 .theme-dark .label-heading {
@@ -771,23 +793,44 @@ body {
 }
 
 .overlay-container.layout-two-tier .progress-labels {
-  gap: 8px !important;
+  gap: 10px !important;
   min-width: 0 !important;
   display: flex !important;
   align-items: flex-end !important;
   justify-content: space-between !important;
 }
 
-.overlay-container.layout-two-tier .progress-raised,
-.overlay-container.layout-two-tier .progress-goal {
+.overlay-container.layout-two-tier .progress-raised {
   min-width: 0 !important;
   flex: 1 1 auto !important;
+  overflow: hidden !important;
 }
 
-.overlay-container.layout-two-tier .label-heading {
+.overlay-container.layout-two-tier .progress-goal {
+  min-width: 0 !important;
+  flex: 0 0 auto !important;
+  text-align: right !important;
+  white-space: nowrap !important;
+}
+
+.overlay-container.layout-two-tier .progress-raised .label-heading,
+.overlay-container.layout-two-tier #label-raised-heading {
   font-size: 15px !important;
   font-weight: 800 !important;
   white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  max-width: 100% !important;
+  display: block !important;
+}
+
+.overlay-container.layout-two-tier .progress-goal .label-heading,
+.overlay-container.layout-two-tier #label-goal-heading {
+  font-size: 15px !important;
+  font-weight: 800 !important;
+  white-space: nowrap !important;
+  display: block !important;
+  text-align: right !important;
 }
 
 .overlay-container.layout-two-tier .amount-highlight {
@@ -945,16 +988,37 @@ body {
     min-width: 0 !important;
   }
 
-  .overlay-container:not(.layout-vertical):not(.layout-horizontal) .progress-raised,
-  .overlay-container:not(.layout-vertical):not(.layout-horizontal) .progress-goal {
+  .overlay-container:not(.layout-vertical):not(.layout-horizontal) .progress-raised {
     min-width: 0 !important;
     flex: 1 1 auto !important;
+    overflow: hidden !important;
   }
 
-  .overlay-container:not(.layout-vertical):not(.layout-horizontal) .label-heading {
-    font-size: 15px !important;
+  .overlay-container:not(.layout-vertical):not(.layout-horizontal) .progress-goal {
+    min-width: 0 !important;
+    flex: 0 0 auto !important;
+    text-align: right !important;
+    white-space: nowrap !important;
+  }
+
+  .overlay-container:not(.layout-vertical):not(.layout-horizontal) .progress-raised .label-heading,
+  .overlay-container:not(.layout-vertical):not(.layout-horizontal) #label-raised-heading {
+    font-size: 14px !important;
     font-weight: 800 !important;
     white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-width: 100% !important;
+    display: block !important;
+  }
+
+  .overlay-container:not(.layout-vertical):not(.layout-horizontal) .progress-goal .label-heading,
+  .overlay-container:not(.layout-vertical):not(.layout-horizontal) #label-goal-heading {
+    font-size: 14px !important;
+    font-weight: 800 !important;
+    white-space: nowrap !important;
+    display: block !important;
+    text-align: right !important;
   }
 
   .overlay-container:not(.layout-vertical):not(.layout-horizontal) .amount-highlight {
@@ -1155,26 +1219,48 @@ body {
 
   .progress-labels {
     width: 100% !important;
-    gap: 6px !important;
+    gap: 8px !important;
     display: flex !important;
     justify-content: space-between !important;
     align-items: flex-end !important;
     min-width: 0 !important;
     margin-bottom: 2px !important;
-    overflow: visible !important;
+    overflow: hidden !important;
   }
 
-  .progress-labels .label-heading {
-    font-size: 15px !important;
-    font-weight: 800 !important;
-    line-height: 1.25 !important;
+  .progress-raised {
+    min-width: 0 !important;
+    flex: 1 1 auto !important;
+    overflow: hidden !important;
+  }
+
+  .progress-goal {
+    min-width: 0 !important;
+    flex: 0 0 auto !important;
+    text-align: right !important;
     white-space: nowrap !important;
   }
 
-  .progress-raised, .progress-goal {
-    min-width: 0 !important;
-    flex: 1 1 auto !important;
-    overflow: visible !important;
+  .progress-labels .progress-raised .label-heading,
+  .progress-labels #label-raised-heading {
+    font-size: 14px !important;
+    font-weight: 800 !important;
+    line-height: 1.25 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-width: 100% !important;
+    display: block !important;
+  }
+
+  .progress-labels .progress-goal .label-heading,
+  .progress-labels #label-goal-heading {
+    font-size: 14px !important;
+    font-weight: 800 !important;
+    line-height: 1.25 !important;
+    white-space: nowrap !important;
+    display: block !important;
+    text-align: right !important;
   }
 
   .amount-highlight .cur-cad {
@@ -1393,27 +1479,48 @@ body {
 
 .overlay-container.layout-vertical .progress-labels {
   width: 100% !important;
-  gap: 6px !important;
+  gap: 8px !important;
   display: flex !important;
   justify-content: space-between !important;
   align-items: flex-end !important;
   min-width: 0 !important;
   margin-bottom: 2px !important;
-  overflow: visible !important;
+  overflow: hidden !important;
 }
 
-.overlay-container.layout-vertical .progress-labels .label-heading {
-  font-size: 15px !important;
-  font-weight: 800 !important;
-  line-height: 1.25 !important;
+.overlay-container.layout-vertical .progress-raised {
+  min-width: 0 !important;
+  flex: 1 1 auto !important;
+  overflow: hidden !important;
+}
+
+.overlay-container.layout-vertical .progress-goal {
+  min-width: 0 !important;
+  flex: 0 0 auto !important;
+  text-align: right !important;
   white-space: nowrap !important;
 }
 
-.overlay-container.layout-vertical .progress-raised,
-.overlay-container.layout-vertical .progress-goal {
-  min-width: 0 !important;
-  flex: 1 1 auto !important;
-  overflow: visible !important;
+.overlay-container.layout-vertical .progress-labels .progress-raised .label-heading,
+.overlay-container.layout-vertical #label-raised-heading {
+  font-size: 14px !important;
+  font-weight: 800 !important;
+  line-height: 1.25 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  max-width: 100% !important;
+  display: block !important;
+}
+
+.overlay-container.layout-vertical .progress-labels .progress-goal .label-heading,
+.overlay-container.layout-vertical #label-goal-heading {
+  font-size: 14px !important;
+  font-weight: 800 !important;
+  line-height: 1.25 !important;
+  white-space: nowrap !important;
+  display: block !important;
+  text-align: right !important;
 }
 
 .overlay-container.layout-vertical .amount-highlight .cur-cad {
@@ -1430,9 +1537,6 @@ body {
   font-weight: 800 !important;
   line-height: 1.25 !important;
   white-space: nowrap !important;
-  padding: 0 !important;
-  display: block !important;
-}
   padding: 0 !important;
   display: block !important;
 }
